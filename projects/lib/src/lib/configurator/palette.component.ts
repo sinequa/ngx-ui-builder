@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges } from '@angular/core';
+import { Component, Input, OnChanges, TemplateRef } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { Configurable } from '../configurable/configurable.service';
 import {
@@ -53,7 +53,8 @@ Component palette (drag & drop):
 export class PaletteComponent implements OnChanges {
   @Input() palette?: PaletteItem[];
   @Input() config: ContainerConfig;
-  @Input() context: Configurable;
+  @Input() context?: Configurable;
+  @Input() configurators: Record<string,TemplateRef<any>> = {}; 
 
   _palette: PaletteItem[];
 
@@ -69,18 +70,18 @@ export class PaletteComponent implements OnChanges {
 
   generateAutoPalette() {
     this._palette = [];
-    if (this.context.enableContainers) {
+    if (this.context?.enableContainers) {
       this._palette.push({
         type: 'container',
         display: 'Container',
         createConfig: (id: string) => of({ type: 'container', id }),
       });
     }
-    if (this.context.templates) {
+    if (this.context?.templates) {
       Object.keys(this.context.templates).forEach((type) =>
         this._palette.push({
           type,
-          createConfig: (id: string) => of({ type, id }),
+          createConfig: (id: string) => this.createConfig(id, type, this.configurators[type]),
         })
       );
     }
@@ -92,5 +93,12 @@ export class PaletteComponent implements OnChanges {
 
   onDndEnd() {
     this.dragDropService.draggedCreator = undefined;
+  }
+
+  createConfig(id: string, type: string, configurator?: TemplateRef<any>): Observable<ComponentConfig> {
+    if(configurator) {
+      // TODO: Popup that shows the configurator before insertion
+    }
+    return of({ type, id });
   }
 }

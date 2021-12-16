@@ -7,10 +7,7 @@ import {
 } from '@angular/core';
 import { switchMap, Observable, map } from 'rxjs';
 import { Configurable, ConfigurableService } from '../configurable/configurable.service';
-import {
-  ComponentConfig,
-  ConfigService,
-} from '../configuration/config.service';
+import { ComponentConfig, ConfigService } from '../configuration/config.service';
 import { TemplateNameDirective } from '../template-name/template-name.directive';
 
 @Component({

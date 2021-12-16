@@ -6,7 +6,7 @@
   <ng-container
     *ngTemplateOutlet="
       templates[edited.config.type];
-      context: { $implicit: edited.config, context: edited.context }
+      context: { $implicit: edited.config, context: edited.context, configurators: templates }
     "
   >
   </ng-container>

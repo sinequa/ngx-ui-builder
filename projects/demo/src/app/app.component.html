@@ -1,3 +1,6 @@
+
+<!-- HEADER -->
+
 <uib-zone id="header">
   <ng-template uib-template="title" let-config>
     <h1>{{ config.title }}</h1>
@@ -32,7 +35,10 @@
   </ng-template>
 </uib-zone>
 
+
 <hr />
+
+<!-- FILTERS -->
 
 <div class="d-flex flex-row">
   <div style="max-width: 200px">
@@ -60,6 +66,9 @@
     </uib-zone>
   </div>
 
+
+  <!-- RESULTS -->
+
   <div style="max-width: 600px">
     <uib-zone id="results" [data]="results$ | async">
       <ng-template uib-template="image" let-data="data">
@@ -76,8 +85,7 @@
       </ng-template>
 
       <ng-template uib-template="metadata" let-data="data" let-config>
-        <strong>{{ config.field }}: </strong
-        ><span>{{ data[config.field] }}</span>
+        <strong *ngIf="!config.hideField">{{ config.field }}: </strong><span>{{ data[config.field] }}</span>
       </ng-template>
     </uib-zone>
   </div>
@@ -102,6 +110,8 @@
       </ul>
     </div>
 
+    <!-- CONFIGURATOR -->
+
     <uib-configurator>
       <ng-template uib-template="title" let-config>
         Title:
@@ -111,8 +121,20 @@
           (ngModelChange)="setConfigProp(config, 'title', $event)"
         />
       </ng-template>
+      
+      <ng-template uib-template="metadata" let-config>
+        Metadata:
+        <select [ngModel]="config.field" (ngModelChange)="setConfigProp(config, 'field', $event)">
+          <option value="name">Name</option>
+          <option value="weight">Weight</option>
+          <option value="experience">Experience</option>
+          <option value="abilities">Abilities</option>
+        </select>
+        <input type="checkbox" id="hideField" [ngModel]="!!config.hideField" (ngModelChange)="setConfigProp(config, 'hideField', $event)">
+        <label for="hideField">Hide field</label>
+      </ng-template>
 
-      <ng-template uib-template="container" let-config let-context="context">
+      <ng-template uib-template="container" let-config let-context="context" >
         <uib-code-editor
           [config]="config"
           [codeFactory]="codeFactory"
