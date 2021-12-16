@@ -1,0 +1,13 @@
+<div
+  *ngIf="edited$ | async as edited"
+  style="border-radius: 20px; border: 3px solid black; padding: 20px"
+>
+  <uib-class-editor [config]="edited.config"></uib-class-editor>
+  <ng-container
+    *ngTemplateOutlet="
+      templates[edited.config.type];
+      context: { $implicit: edited.config, context: edited.context }
+    "
+  >
+  </ng-container>
+</div>

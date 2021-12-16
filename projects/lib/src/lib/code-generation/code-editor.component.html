@@ -1,0 +1,11 @@
+<div class="d-flex flex-column align-items-start">
+  Template editor:
+  <textarea
+    [(ngModel)]="templateCode"
+    style="align-self: stretch; height:200px"
+  ></textarea>
+  <div>
+    <button (click)="convert()">Render</button>
+    <button (click)="reset()" *ngIf="config.template">Reset</button>
+  </div>
+</div>

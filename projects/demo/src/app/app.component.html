@@ -1,0 +1,125 @@
+<uib-zone id="header">
+  <ng-template uib-template="title" let-config>
+    <h1>{{ config.title }}</h1>
+  </ng-template>
+
+  <ng-template uib-template="searchbar">
+    <input
+      type="text"
+      [(ngModel)]="search"
+      (ngModelChange)="searchPokemons()"
+      placeholder="Search for a Pokemon..."
+    />
+  </ng-template>
+
+  <ng-template uib-template="breadcrumbs">
+    <span *ngIf="selectedAbilities.length">
+      {{ selectedAbilities.join(', ') }}
+    </span>
+    <span *ngIf="selectedWeight"> Weight &lt; {{ selectedWeight }} </span>
+    <span *ngIf="selectedExperience"> XP &lt; {{ selectedExperience }} </span>
+    <button
+      *ngIf="
+        search ||
+        selectedAbilities.length ||
+        selectedWeight ||
+        selectedExperience
+      "
+      (click)="clear()"
+    >
+      Clear search criteria
+    </button>
+  </ng-template>
+</uib-zone>
+
+<hr />
+
+<div class="d-flex flex-row">
+  <div style="max-width: 200px">
+    <h3>Filters</h3>
+    <uib-zone id="filters" [enableContainers]="false">
+      <ng-template uib-template="range" let-config>
+        <strong>{{ config.field }}: {{ this[config.field] }}</strong>
+        <input
+          type="range"
+          min="0"
+          max="200"
+          [(ngModel)]="this[config.field]"
+          (ngModelChange)="searchPokemons()"
+        />
+      </ng-template>
+
+      <ng-template uib-template="abilities">
+        <strong>Abilities</strong>
+        <ng-container *ngFor="let a of abilities">
+          <div *ngIf="!selectedAbilities.includes(a)">
+            <a href="#" (click)="selectAbility(a)">{{ a }}</a>
+          </div>
+        </ng-container>
+      </ng-template>
+    </uib-zone>
+  </div>
+
+  <div style="max-width: 600px">
+    <uib-zone id="results" [data]="results$ | async">
+      <ng-template uib-template="image" let-data="data">
+        <img
+          src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/{{
+            data.id
+          }}.png"
+          [title]="data.name"
+        />
+      </ng-template>
+
+      <ng-template uib-template="description" let-data="data">
+        <p [innerHTML]="data.description"></p>
+      </ng-template>
+
+      <ng-template uib-template="metadata" let-data="data" let-config>
+        <strong>{{ config.field }}: </strong
+        ><span>{{ data[config.field] }}</span>
+      </ng-template>
+    </uib-zone>
+  </div>
+  <div
+    style="position: fixed; right: 0; top: 0; height: 100vh; min-width: 300px; background-color: #CCE; padding: 20px"
+  >
+    <button (click)="configService.undo()">Undo</button>
+    <button (click)="configService.redo()">Redo</button>
+    <div>Hovered id: {{ configurableService.hoveredId }}</div>
+    <div *ngIf="configurableService.edited$ | async as configurable">
+      Edited component:
+      <ul>
+        <li>id: {{ configurable.id }}</li>
+        <li>zone: {{ configurable.zone }}</li>
+        <li>enableContainers: {{ configurable.enableContainers }}</li>
+        <li>
+          templates:
+          <span *ngFor="let t of configurable.templates | keyvalue"
+            >{{ t.key }},
+          </span>
+        </li>
+      </ul>
+    </div>
+
+    <uib-configurator>
+      <ng-template uib-template="title" let-config>
+        Title:
+        <input
+          type="text"
+          [ngModel]="config.title"
+          (ngModelChange)="setConfigProp(config, 'title', $event)"
+        />
+      </ng-template>
+
+      <ng-template uib-template="container" let-config let-context="context">
+        <uib-code-editor
+          [config]="config"
+          [codeFactory]="codeFactory"
+          [codeModules]="codeModules"
+        ></uib-code-editor>
+        <uib-palette [config]="config" [context]="context"></uib-palette>
+      </ng-template>
+    </uib-configurator>
+  </div>
+</div>

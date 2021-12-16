@@ -1,0 +1,32 @@
+<ng-container *ngIf="config.type === 'container' && !config['template']">
+  <div class="dragPlaceholder" dndPlaceholderRef>+</div>
+
+  <ng-container
+    *ngFor="let item of config.items; let i = index"
+    [uib-code]="item"
+    [data]="data"
+  >
+    <div
+      *ngIf="!isTemplate(item)"
+      [id]="item"
+      [uib-item]="item"
+      configurable
+      [enableContainers]="enableContainers"
+      [data]="data"
+      [dataIndex]="dataIndex"
+      [templates]="templates"
+      [zone]="zone"
+      [dndDraggable]="{item, index: i, container: id}"
+      [dndEffectAllowed]="'move'"
+      [dndDropzone]="[]"
+      [dndDisableDropIf]="!isContainer(item) || dataIndex > 0"
+      (dndDrop)="onDndDrop(item, $event)"
+    ></div>
+  </ng-container>
+</ng-container>
+
+<ng-container
+  *ngIf="config.type !== 'container'"
+  [ngTemplateOutlet]="templates[config.type || id]"
+  [ngTemplateOutletContext]="{ $implicit: config, data: data, id: id }"
+></ng-container>
