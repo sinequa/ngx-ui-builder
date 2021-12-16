@@ -1,0 +1,27 @@
+@import './configurable/configurable';
+
+// Configuration
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+@import "~bootstrap/scss/mixins";
+@import "~bootstrap/scss/utilities";
+
+// Helpers
+@import "~bootstrap/scss/helpers";
+
+// Utilities
+@import "~bootstrap/scss/utilities/api";
+
+
+.bootstrap {
+
+    @import "~bootstrap/scss/root";
+    @import "~bootstrap/scss/reboot";
+    @import "~bootstrap/scss/forms";
+    @import "~bootstrap/scss/buttons";
+    @import "~bootstrap/scss/button-group";
+    @import "~bootstrap/scss/alert";
+    @import "~bootstrap/scss/modal";
+    @import "~bootstrap/scss/tooltip";
+    
+}
