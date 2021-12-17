@@ -3,6 +3,7 @@ Component palette (drag & drop):
   <div *ngFor="let item of _palette"
     [dndDraggable]="item.type"
     [dndEffectAllowed]="'copy'"
+    [dndType]="context?.zone"
     (dndStart)="onDndStart(item)"
     (dndEnd)="onDndEnd()"
     class="palette-item">

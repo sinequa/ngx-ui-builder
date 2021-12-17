@@ -8,17 +8,23 @@
   >
     <div
       *ngIf="!isTemplate(item)"
-      [id]="item"
+      #ref
+
+      uib-configurable
       [uib-item]="item"
-      configurable
+      [id]="item"
+      [zone]="zone"
       [enableContainers]="enableContainers"
+      [templates]="templates"
+
       [data]="data"
       [dataIndex]="dataIndex"
-      [templates]="templates"
-      [zone]="zone"
+
       [dndDraggable]="{item, index: i, container: id}"
       [dndEffectAllowed]="'move'"
-      [dndDropzone]="[]"
+      [dndType]="zone"
+      [dndDropzone]="[zone]"
+      [dndHorizontal]="ref.isHorizontal()"
       [dndDisableDropIf]="!isContainer(item) || dataIndex > 0"
       (dndDrop)="onDndDrop(item, $event)"
     ></div>

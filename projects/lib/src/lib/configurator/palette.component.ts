@@ -100,7 +100,7 @@ export class PaletteComponent implements OnChanges, AfterViewInit {
     if(this.configurators[type]) {
       this.modal = {
         configurator: this.configurators[type],
-        modal: Modal.getOrCreateInstance(this.configModal.nativeElement, {}),
+        modal: Modal.getOrCreateInstance(this.configModal.nativeElement),
         config: {type, id},
         close: new Subject<ComponentConfig|undefined>(),
         configChanged: () => {}

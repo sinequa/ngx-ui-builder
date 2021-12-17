@@ -13,7 +13,7 @@ import { Subscription } from 'rxjs';
 import { Configurable, ConfigurableService } from './configurable.service';
 
 @Directive({
-  selector: '[configurable]',
+  selector: '[uib-configurable]',
 })
 export class ConfigurableDirective implements OnDestroy, Configurable {
   @Input() id: string;
