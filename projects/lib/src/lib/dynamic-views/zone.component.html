@@ -18,15 +18,20 @@
   <ng-container [uib-code]="id" [data]="data">
     <div
       *ngIf="!isTemplate(id)"
+      #ref
+
+      uib-configurable
       [uib-item]="id"
-      [zone]="id"
       [id]="id"
+      [zone]="id"
+      [templates]="templates"
+      [enableContainers]="enableContainers"
+
       [data]="data"
       [dataIndex]="index"
-      [templates]="templates"
-      configurable
-      [enableContainers]="enableContainers"
-      [dndDropzone]="[]"
+
+      [dndDropzone]="[id]"
+      [dndHorizontal]="ref.isHorizontal()"
       [dndDisableDropIf]="index > 0"
       (dndDrop)="onDndDrop($event)"
     ></div>

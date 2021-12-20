@@ -13,7 +13,7 @@ export interface ContainerIndex {
 
 export interface ComponentCreator {
   type: string;
-  createConfig: (id: string, creator?: ComponentCreator) => Observable<ComponentConfig>;
+  createConfig: (id: string, creator?: ComponentCreator) => Observable<ComponentConfig|undefined>;
 }
 
 @Injectable({ providedIn: 'root' })
@@ -51,10 +51,12 @@ export class DragDropService {
   private insertNew(
     container: ContainerConfig,
     index: number,
-    component: ComponentConfig
+    component: ComponentConfig|undefined
   ) {
-    container.items.splice(index, 0, component.id);
-    this.configService.updateConfig([container, component]); // addEntities might be needed
+    if(component) {
+      container.items.splice(index, 0, component.id);
+      this.configService.updateConfig([container, component]); // addEntities might be needed
+    }
   }
 
   private moveBetween(

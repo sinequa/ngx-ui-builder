@@ -1,5 +1,5 @@
 import { Component, VERSION } from '@angular/core';
-import { ConfigurableService, ComponentConfig, ConfigService } from '@sinequa/ui-builder';
+import { ConfigurableService, ConfigService } from '@sinequa/ui-builder';
 import { CommonModule } from '@angular/common';
 import { pokemons } from './pokemons';
 import { BehaviorSubject } from 'rxjs';
@@ -21,10 +21,12 @@ export class AppComponent {
   selectedExperience?: number;
 
   codeFactory = {
-    title: (config) => `<h1>Pokestore</h1>`,
+    title: (config) =>
+      `<h1>Pokestore</h1>`,
     metadata: (config) =>
       `<strong>${config.field}: </strong><span>{{ data['${config.field}'] }}</span>`,
-    description: (config) => `<p [innerHTML]="data.description"></p>`,
+    description: (config) =>
+      `<p [innerHTML]="data.description"></p>`,
     image: (config) =>
       `<img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/{{ data.id }}.png" [title]="data.name" />`,
   };
@@ -129,8 +131,4 @@ export class AppComponent {
     this.searchPokemons();
   }
 
-  setConfigProp(config: ComponentConfig, prop: string, value: any) {
-    config[prop] = value;
-    this.configService.updateConfig(config);
-  }
 }

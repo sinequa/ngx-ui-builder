@@ -10,6 +10,17 @@ import { Configurable, ConfigurableService } from '../configurable/configurable.
 import { ComponentConfig, ConfigService } from '../configuration/config.service';
 import { TemplateNameDirective } from '../template-name/template-name.directive';
 
+export interface ConfiguratorContext {
+  /** Object storing the configuration of the component */
+  config: ComponentConfig;
+  /** Register of all the components configurators  */
+  configurators?: Record<string, TemplateRef<any>>;
+  /** Context of the zone of the edited component */
+  context?: Configurable;
+  /** Callback that the configurator should call to update the configuration */
+  configChanged: () => void;
+};
+
 @Component({
   selector: 'uib-configurator',
   templateUrl: './configurator.component.html',
@@ -21,7 +32,7 @@ export class ConfiguratorComponent {
   children: QueryList<TemplateNameDirective>;
   templates: Record<string, TemplateRef<any>> = {};
 
-  edited$: Observable<{context: Configurable, config: ComponentConfig}>;
+  edited$: Observable<ConfiguratorContext>;
 
   constructor(
     public configurableService: ConfigurableService,
@@ -30,7 +41,12 @@ export class ConfiguratorComponent {
     this.edited$ = configurableService.edited$.pipe(
       switchMap((context) => 
         configService.watchConfig(context.id).pipe(
-          map(config => ({context, config}))
+          map(config => ({
+            context,
+            config,
+            configurators: this.templates,
+            configChanged: () => this.updateConfig(config)
+          }))
         )
       )
     );
@@ -43,5 +59,9 @@ export class ConfiguratorComponent {
     this.children.forEach(
       (instance) => (this.templates[instance.templateName] = instance.template)
     );
+  }
+
+  updateConfig(config: ComponentConfig) {
+    this.configService.updateConfig(config);
   }
 }

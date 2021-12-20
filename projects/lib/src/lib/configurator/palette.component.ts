@@ -1,5 +1,5 @@
-import { Component, Input, OnChanges, TemplateRef } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { AfterViewInit, Component, ElementRef, Input, OnChanges, TemplateRef, ViewChild } from '@angular/core';
+import { Observable, of, Subject } from 'rxjs';
 import { Configurable } from '../configurable/configurable.service';
 import {
   ComponentConfig,
@@ -9,33 +9,26 @@ import {
   ComponentCreator,
   DragDropService,
 } from '../dynamic-views/drag-drop.service';
+import { Modal } from 'bootstrap';
 
-export interface PaletteItem extends ComponentCreator {
+declare interface PaletteItem extends ComponentCreator {
   type: string;
   display?: string;
   iconClass?: string;
-  createConfig: (
-    id: string,
-    creator?: ComponentCreator
-  ) => Observable<ComponentConfig>;
+  createConfig: (id: string, creator?: ComponentCreator) => Observable<ComponentConfig|undefined>;
+}
+
+declare interface ConfigModal {
+  modal: Modal;
+  configurator: TemplateRef<any>;
+  config: ComponentConfig;
+  configChanged: () => void;
+  close: Subject<ComponentConfig|undefined>;
 }
 
 @Component({
   selector: 'uib-palette',
-  template: `
-Component palette (drag & drop):
-<div>
-  <div *ngFor="let item of _palette"
-    [dndDraggable]="item.type"
-    [dndEffectAllowed]="'copy'"
-    (dndStart)="onDndStart(item)"
-    (dndEnd)="onDndEnd()"
-    class="palette-item">
-    <span [ngClass]="item.iconClass"></span>
-    {{item.display || item.type}}
-  </div>
-</div>
-  `,
+  templateUrl: './palette.component.html',
   styles: [
     `
 .palette-item {
@@ -50,13 +43,17 @@ Component palette (drag & drop):
   `,
   ],
 })
-export class PaletteComponent implements OnChanges {
+export class PaletteComponent implements OnChanges, AfterViewInit {
   @Input() palette?: PaletteItem[];
   @Input() config: ContainerConfig;
   @Input() context?: Configurable;
   @Input() configurators: Record<string,TemplateRef<any>> = {}; 
 
+  @ViewChild('configModal') configModal: ElementRef;
+
   _palette: PaletteItem[];
+
+  modal?: ConfigModal;
 
   constructor(public dragDropService: DragDropService) {}
 
@@ -66,6 +63,10 @@ export class PaletteComponent implements OnChanges {
     } else {
       this.generateAutoPalette();
     }
+  }
+
+  ngAfterViewInit() {
+    this.configModal.nativeElement.addEventListener('hidden.bs.modal', event => this.onModalClose(false)); 
   }
 
   generateAutoPalette() {
@@ -81,7 +82,7 @@ export class PaletteComponent implements OnChanges {
       Object.keys(this.context.templates).forEach((type) =>
         this._palette.push({
           type,
-          createConfig: (id: string) => this.createConfig(id, type, this.configurators[type]),
+          createConfig: (id: string) => this.createConfig(id, type),
         })
       );
     }
@@ -95,10 +96,28 @@ export class PaletteComponent implements OnChanges {
     this.dragDropService.draggedCreator = undefined;
   }
 
-  createConfig(id: string, type: string, configurator?: TemplateRef<any>): Observable<ComponentConfig> {
-    if(configurator) {
-      // TODO: Popup that shows the configurator before insertion
+  createConfig(id: string, type: string, configurator?: TemplateRef<any>): Observable<ComponentConfig|undefined> {
+    if(this.configurators[type]) {
+      this.modal = {
+        configurator: this.configurators[type],
+        modal: Modal.getOrCreateInstance(this.configModal.nativeElement),
+        config: {type, id},
+        close: new Subject<ComponentConfig|undefined>(),
+        configChanged: () => {}
+      }
+      this.modal.modal.show();
+      return this.modal.close;
     }
     return of({ type, id });
   }
+
+  onModalClose(success: boolean) {
+    if(this.modal?.close) {
+      this.modal.close.next(success? this.modal.config : undefined);
+      this.modal.close.complete();
+      this.modal.modal.hide();
+      this.modal = undefined;
+    }
+  }
+
 }

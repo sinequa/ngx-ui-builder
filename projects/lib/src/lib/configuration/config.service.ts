@@ -88,7 +88,12 @@ export class ConfigService {
     //console.log('new config', value);
     if(!Array.isArray(value)) value = [value];
     this.store.update(
-      ...value.map(v => updateEntities([v.id], () => v))
+      ...value.map(v => {
+        if(!this._getConfig(v.id)){
+          return addEntities(v)
+        }
+        return updateEntities([v.id], () => v)}
+      )
     );
   }
 

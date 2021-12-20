@@ -1,0 +1,32 @@
+Component palette (drag & drop):
+<div>
+  <div *ngFor="let item of _palette"
+    [dndDraggable]="item.type"
+    [dndEffectAllowed]="'copy'"
+    [dndType]="context?.zone"
+    (dndStart)="onDndStart(item)"
+    (dndEnd)="onDndEnd()"
+    class="palette-item">
+    <span [ngClass]="item.iconClass"></span>
+    {{item.display || item.type}}
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" #configModal tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Create new {{modal?.config.type}} component</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div *ngTemplateOutlet="modal?.configurator; context: { $implicit: modal }"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" (click)="onModalClose(true)">Create</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -113,34 +113,36 @@
     <!-- CONFIGURATOR -->
 
     <uib-configurator>
-      <ng-template uib-template="title" let-config>
+      <ng-template uib-template="title" let-context>
         Title:
         <input
           type="text"
-          [ngModel]="config.title"
-          (ngModelChange)="setConfigProp(config, 'title', $event)"
+          [(ngModel)]="context.config.title"
+          (ngModelChange)="context.configChanged()"
         />
       </ng-template>
       
-      <ng-template uib-template="metadata" let-config>
+      <ng-template uib-template="metadata" let-context>
         Metadata:
-        <select [ngModel]="config.field" (ngModelChange)="setConfigProp(config, 'field', $event)">
+        <select [(ngModel)]="context.config.field"
+          (ngModelChange)="context.configChanged()">
           <option value="name">Name</option>
           <option value="weight">Weight</option>
           <option value="experience">Experience</option>
           <option value="abilities">Abilities</option>
         </select>
-        <input type="checkbox" id="hideField" [ngModel]="!!config.hideField" (ngModelChange)="setConfigProp(config, 'hideField', $event)">
+        <input type="checkbox" id="hideField" [(ngModel)]="!!context.config.hideField"
+          (ngModelChange)="context.configChanged()">
         <label for="hideField">Hide field</label>
       </ng-template>
 
-      <ng-template uib-template="container" let-config let-context="context" >
+      <ng-template uib-template="container" let-context>
         <uib-code-editor
-          [config]="config"
+          [config]="context.config"
           [codeFactory]="codeFactory"
           [codeModules]="codeModules"
         ></uib-code-editor>
-        <uib-palette [config]="config" [context]="context"></uib-palette>
+        <uib-palette [config]="context.config" [context]="context.context" [configurators]="context.configurators"></uib-palette>
       </ng-template>
     </uib-configurator>
   </div>

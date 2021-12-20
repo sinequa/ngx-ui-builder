@@ -4,10 +4,6 @@
 >
   <uib-class-editor [config]="edited.config"></uib-class-editor>
   <ng-container
-    *ngTemplateOutlet="
-      templates[edited.config.type];
-      context: { $implicit: edited.config, context: edited.context, configurators: templates }
-    "
-  >
+    *ngTemplateOutlet="templates[edited.config.type]; context: { $implicit: edited }">
   </ng-container>
 </div>

@@ -2,6 +2,7 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
+  ElementRef,
   HostBinding,
   Input,
   OnDestroy,
@@ -49,7 +50,8 @@ export class ItemComponent implements OnInit, OnDestroy {
   constructor(
     public configService: ConfigService,
     public dragDropService: DragDropService,
-    public cdr: ChangeDetectorRef
+    public cdr: ChangeDetectorRef,
+    public element: ElementRef
   ) {}
 
   ngOnInit() {
@@ -92,5 +94,12 @@ export class ItemComponent implements OnInit, OnDestroy {
 
   isTemplate(id: string) {
     return !!this.configService.isTemplate(id);
+  }
+
+  isHorizontal() {
+    if(this.element.nativeElement.classList.contains('d-flex')) {
+      return !this.element.nativeElement.classList.contains('flex-column');
+    }
+    return false;
   }
 }
