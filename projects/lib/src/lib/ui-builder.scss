@@ -38,16 +38,27 @@ uib-toolbar {
 @import "~bootstrap/scss/utilities/api";
 
 @import "~bootstrap/scss/root";
-@import "~bootstrap/scss/reboot";
 
 .uib-bootstrap {
 
-    @import "~bootstrap/scss/forms";
-    @import "~bootstrap/scss/buttons";
-    @import "~bootstrap/scss/button-group";
-    @import "~bootstrap/scss/alert";
-    @import "~bootstrap/scss/modal";
-    @import "~bootstrap/scss/offcanvas";
-    @import "~bootstrap/scss/tooltip";
-    
+  // Styles from reboot normally applied to the <body> element
+  font-family: var(--#{$variable-prefix}body-font-family);
+  @include font-size(var(--#{$variable-prefix}body-font-size));
+  font-weight: var(--#{$variable-prefix}body-font-weight);
+  line-height: var(--#{$variable-prefix}body-line-height);
+  color: var(--#{$variable-prefix}body-color);
+  text-align: var(--#{$variable-prefix}body-text-align);
+  background-color: var(--#{$variable-prefix}body-bg); // 2
+  -webkit-text-size-adjust: 100%; // 3
+  -webkit-tap-highlight-color: rgba($black, 0); // 4
+
+  @import "~bootstrap/scss/reboot";
+  @import "~bootstrap/scss/forms";
+  @import "~bootstrap/scss/buttons";
+  @import "~bootstrap/scss/button-group";
+  @import "~bootstrap/scss/alert";
+  @import "~bootstrap/scss/modal";
+  @import "~bootstrap/scss/offcanvas";
+  @import "~bootstrap/scss/tooltip";
+
 }
