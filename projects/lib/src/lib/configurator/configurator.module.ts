@@ -2,22 +2,25 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { DndModule } from 'ngx-drag-drop';
-import { TemplateNameModule } from '../template-name/template-name.module';
+import { UtilsModule } from '../utils/utils.module';
 import { ClassEditorComponent } from './class-editor.component';
 import { ConfiguratorComponent } from './configurator.component';
 import { PaletteComponent } from './palette.component';
+import { ToolbarComponent } from './toolbar.component';
 
 @NgModule({
-  imports: [CommonModule, FormsModule, TemplateNameModule, DndModule],
+  imports: [CommonModule, FormsModule, UtilsModule, DndModule],
   declarations: [
     ConfiguratorComponent,
     ClassEditorComponent,
     PaletteComponent,
+    ToolbarComponent
   ],
   exports: [
-    TemplateNameModule,
+    UtilsModule,
     ConfiguratorComponent,
     PaletteComponent,
+    ToolbarComponent
   ],
 })
 export class ConfiguratorModule {}

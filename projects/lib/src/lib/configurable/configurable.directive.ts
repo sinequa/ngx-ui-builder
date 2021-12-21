@@ -43,7 +43,7 @@ export class ConfigurableDirective implements OnDestroy, Configurable {
 
   @HostBinding('class')
   get _class() {
-    return `sq-configurable ${this.highlight() ? 'highlight' : ''}`;
+    return `uib-configurable ${this.highlight() ? 'highlight' : ''}`;
   }
 
   @HostListener('mouseover', ['$event'])

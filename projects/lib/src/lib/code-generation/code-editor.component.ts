@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnChanges } from '@angular/core';
 import { CodeGenerationService } from '../code-generation/code-generation.service';
 import {
   ConfigService,
@@ -8,6 +8,7 @@ import {
 @Component({
   selector: 'uib-code-editor',
   templateUrl: './code-editor.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CodeEditorComponent implements OnChanges {
   @Input() config: ContainerConfig;

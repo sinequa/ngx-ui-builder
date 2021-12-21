@@ -11,7 +11,7 @@ import {
   OnInit,
 } from '@angular/core';
 import { DndDropEvent } from 'ngx-drag-drop';
-import { TemplateNameDirective } from '../template-name/template-name.directive';
+import { TemplateNameDirective } from '../utils/template-name.directive';
 import { ConfigService } from '../configuration/config.service';
 import { Subscription } from 'rxjs';
 import { DragDropService } from './drag-drop.service';

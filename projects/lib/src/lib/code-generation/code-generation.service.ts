@@ -95,7 +95,7 @@ export class CodeGenerationService {
     factory?: Record<string, (config: any) => string>
   ): string {
     let code;
-    if (config.type === 'container') {
+    if (this.configService.isContainerConfig(config)) {
       code = this.generateCode(config as ContainerConfig, factory);
     } else {
       code =

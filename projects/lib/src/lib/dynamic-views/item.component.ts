@@ -77,6 +77,9 @@ export class ItemComponent implements OnInit, OnDestroy {
   updateConfig(config: ComponentConfig) {
     this.config = config;
     this.classes = this.config.classes;
+    if(this.configService.isContainerConfig(config)) {
+      this.classes = (this.classes || '') + ' uib-container';
+    }
   }
 
   // Drag & Drop

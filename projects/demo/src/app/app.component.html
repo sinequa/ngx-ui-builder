@@ -38,9 +38,12 @@
 
 <hr />
 
-<!-- FILTERS -->
 
 <div class="d-flex flex-row">
+  
+
+  <!-- FILTERS -->
+
   <div style="max-width: 200px">
     <h3>Filters</h3>
     <uib-zone id="filters" [enableContainers]="false">
@@ -89,61 +92,48 @@
       </ng-template>
     </uib-zone>
   </div>
-  <div class="bootstrap"
-    style="position: fixed; right: 0; top: 0; height: 100vh; min-width: 300px; background-color: #CCE; padding: 20px"
-  >
-    <button (click)="configService.undo()">Undo</button>
-    <button (click)="configService.redo()">Redo</button>
-    <div>Hovered id: {{ configurableService.hoveredId }}</div>
-    <div *ngIf="configurableService.edited$ | async as configurable">
-      Edited component:
-      <ul>
-        <li>id: {{ configurable.id }}</li>
-        <li>zone: {{ configurable.zone }}</li>
-        <li>enableContainers: {{ configurable.enableContainers }}</li>
-        <li>
-          templates:
-          <span *ngFor="let t of configurable.templates | keyvalue"
-            >{{ t.key }},
-          </span>
-        </li>
-      </ul>
-    </div>
 
-    <!-- CONFIGURATOR -->
+</div>
 
-    <uib-configurator>
-      <ng-template uib-template="title" let-context>
-        Title:
-        <input
-          type="text"
-          [(ngModel)]="context.config.title"
-          (ngModelChange)="context.configChanged()"
-        />
-      </ng-template>
-      
-      <ng-template uib-template="metadata" let-context>
-        Metadata:
-        <select [(ngModel)]="context.config.field"
-          (ngModelChange)="context.configChanged()">
-          <option value="name">Name</option>
-          <option value="weight">Weight</option>
-          <option value="experience">Experience</option>
-          <option value="abilities">Abilities</option>
-        </select>
-        <input type="checkbox" id="hideField" [(ngModel)]="!!context.config.hideField"
-          (ngModelChange)="context.configChanged()">
-        <label for="hideField">Hide field</label>
-      </ng-template>
+<!-- EDITOR -->
 
-      <ng-template uib-template="container" let-context>
-        <uib-code-editor
-          [config]="context.config"
-          [codeFactory]="codeFactory"
-          [codeModules]="codeModules"
-        ></uib-code-editor>
-        <uib-palette [config]="context.config" [context]="context.context" [configurators]="context.configurators"></uib-palette>
-      </ng-template>
-    </uib-configurator>
-  </div>
+<div class="uib-bootstrap">
+  
+  <uib-toolbar></uib-toolbar>
+
+  <!-- CONFIGURATOR -->
+
+  <uib-configurator>
+    <ng-template uib-template="title" let-context>
+      Title:
+      <input
+        type="text"
+        [(ngModel)]="context.config.title"
+        (ngModelChange)="context.configChanged()"
+      />
+    </ng-template>
+    
+    <ng-template uib-template="metadata" let-context>
+      Metadata:
+      <select [(ngModel)]="context.config.field"
+        (ngModelChange)="context.configChanged()">
+        <option value="name">Name</option>
+        <option value="weight">Weight</option>
+        <option value="experience">Experience</option>
+        <option value="abilities">Abilities</option>
+      </select>
+      <input type="checkbox" id="hideField" [(ngModel)]="!!context.config.hideField"
+        (ngModelChange)="context.configChanged()">
+      <label for="hideField">Hide field</label>
+    </ng-template>
+
+    <ng-template uib-template="container" let-context>
+      <uib-code-editor
+        [config]="context.config"
+        [codeFactory]="codeFactory"
+        [codeModules]="codeModules"
+      ></uib-code-editor>
+      <uib-palette [config]="context.config" [context]="context.context" [configurators]="context.configurators"></uib-palette>
+    </ng-template>
+  </uib-configurator>
 </div>
