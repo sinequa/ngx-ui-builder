@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, Input, OnChanges, TemplateRef, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnChanges, TemplateRef } from '@angular/core';
 import { Observable, of, Subject } from 'rxjs';
 import { Configurable } from '../configurable/configurable.service';
 import {
@@ -9,7 +9,6 @@ import {
   ComponentCreator,
   DragDropService,
 } from '../dynamic-views/drag-drop.service';
-import { Modal } from 'bootstrap';
 
 declare interface PaletteItem extends ComponentCreator {
   type: string;
@@ -19,10 +18,10 @@ declare interface PaletteItem extends ComponentCreator {
 }
 
 declare interface ConfigModal {
-  modal: Modal;
   configurator: TemplateRef<any>;
   config: ComponentConfig;
   configChanged: () => void;
+  title: string;
   close: Subject<ComponentConfig|undefined>;
 }
 
@@ -40,16 +39,15 @@ declare interface ConfigModal {
   cursor: pointer;
   margin-right: 5px;
 }
-  `,
+  `
   ],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class PaletteComponent implements OnChanges, AfterViewInit {
+export class PaletteComponent implements OnChanges {
   @Input() palette?: PaletteItem[];
   @Input() config: ContainerConfig;
   @Input() context?: Configurable;
   @Input() configurators: Record<string,TemplateRef<any>> = {}; 
-
-  @ViewChild('configModal') configModal: ElementRef;
 
   _palette: PaletteItem[];
 
@@ -65,24 +63,20 @@ export class PaletteComponent implements OnChanges, AfterViewInit {
     }
   }
 
-  ngAfterViewInit() {
-    this.configModal.nativeElement.addEventListener('hidden.bs.modal', event => this.onModalClose(false)); 
-  }
-
   generateAutoPalette() {
     this._palette = [];
     if (this.context?.enableContainers) {
       this._palette.push({
         type: 'container',
         display: 'Container',
-        createConfig: (id: string) => of({ type: 'container', id }),
+        createConfig: (id: string) => of({ type: 'container', id, items: [] }),
       });
     }
     if (this.context?.templates) {
       Object.keys(this.context.templates).forEach((type) =>
         this._palette.push({
           type,
-          createConfig: (id: string) => this.createConfig(id, type),
+          createConfig: (id: string) => this.openModal(id, type, this.configurators[type]),
         })
       );
     }
@@ -96,26 +90,25 @@ export class PaletteComponent implements OnChanges, AfterViewInit {
     this.dragDropService.draggedCreator = undefined;
   }
 
-  createConfig(id: string, type: string, configurator?: TemplateRef<any>): Observable<ComponentConfig|undefined> {
-    if(this.configurators[type]) {
+  openModal(id: string, type: string, configurator?: TemplateRef<any>): Observable<ComponentConfig|undefined> {
+    const config = {type, id};
+    if(configurator) {
       this.modal = {
-        configurator: this.configurators[type],
-        modal: Modal.getOrCreateInstance(this.configModal.nativeElement),
-        config: {type, id},
-        close: new Subject<ComponentConfig|undefined>(),
-        configChanged: () => {}
+        configurator,
+        config,
+        configChanged: () => {}, // do nothing when the configurator changes the config (before user presses 'OK')
+        title: `Create new ${type} component`,
+        close: new Subject<ComponentConfig|undefined>()
       }
-      this.modal.modal.show();
       return this.modal.close;
     }
-    return of({ type, id });
+    return of(config);
   }
 
   onModalClose(success: boolean) {
     if(this.modal?.close) {
       this.modal.close.next(success? this.modal.config : undefined);
       this.modal.close.complete();
-      this.modal.modal.hide();
       this.modal = undefined;
     }
   }

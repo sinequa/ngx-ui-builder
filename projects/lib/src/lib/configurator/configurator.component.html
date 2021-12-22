@@ -1,9 +1,16 @@
-<div
-  *ngIf="edited$ | async as edited"
-  style="border-radius: 20px; border: 3px solid black; padding: 20px"
->
-  <uib-class-editor [config]="edited.config"></uib-class-editor>
-  <ng-container
-    *ngTemplateOutlet="templates[edited.config.type]; context: { $implicit: edited }">
+<div #offcanvas class="offcanvas offcanvas-end" tabindex="-1" id="offcanvas">
+  <ng-container *ngIf="edited$ | async as edited">
+    <div class="offcanvas-header bg-light border-bottom">
+      <h5 class="offcanvas-title"><strong>{{edited.config.id}}</strong> (Type: <strong>{{edited.config.type}}</strong>)</h5>
+      <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+      <div>
+        <uib-class-editor [config]="edited.config"></uib-class-editor>
+        <ng-container
+          *ngTemplateOutlet="configurators[edited.config.type]; context: { $implicit: edited }">
+        </ng-container>
+      </div>
+    </div>
   </ng-container>
 </div>

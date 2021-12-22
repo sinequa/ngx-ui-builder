@@ -13,20 +13,6 @@ Component palette (drag & drop):
 </div>
 
 <!-- Modal -->
-<div class="modal fade" #configModal tabindex="-1" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Create new {{modal?.config.type}} component</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <div *ngTemplateOutlet="modal?.configurator; context: { $implicit: modal }"></div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" (click)="onModalClose(true)">Create</button>
-      </div>
-    </div>
-  </div>
-</div>
+<uib-modal [title]="modal?.title" [show]="!!modal" (close)="onModalClose($event)">
+    <div *ngTemplateOutlet="modal?.configurator; context: { $implicit: modal }"></div>
+</uib-modal>

@@ -2,13 +2,16 @@ import {
   ChangeDetectionStrategy,
   Component,
   ContentChildren,
+  ElementRef,
   QueryList,
   TemplateRef,
+  ViewChild,
 } from '@angular/core';
-import { switchMap, Observable, map } from 'rxjs';
+import { Offcanvas } from 'bootstrap';
+import { switchMap, Observable, map, tap } from 'rxjs';
 import { Configurable, ConfigurableService } from '../configurable/configurable.service';
 import { ComponentConfig, ConfigService } from '../configuration/config.service';
-import { TemplateNameDirective } from '../template-name/template-name.directive';
+import { TemplateNameDirective } from '../utils/template-name.directive';
 
 export interface ConfiguratorContext {
   /** Object storing the configuration of the component */
@@ -30,7 +33,10 @@ export class ConfiguratorComponent {
   // Capture configurator templates
   @ContentChildren(TemplateNameDirective)
   children: QueryList<TemplateNameDirective>;
-  templates: Record<string, TemplateRef<any>> = {};
+  configurators: Record<string, TemplateRef<any>> = {};
+
+  @ViewChild('offcanvas') offcanvasEl: ElementRef;
+  offcanvas: Offcanvas;
 
   edited$: Observable<ConfiguratorContext>;
 
@@ -39,13 +45,14 @@ export class ConfiguratorComponent {
     public configService: ConfigService
   ) {
     this.edited$ = configurableService.edited$.pipe(
+      tap(() => this.offcanvas.show()),
       switchMap((context) => 
         configService.watchConfig(context.id).pipe(
           map(config => ({
             context,
             config,
-            configurators: this.templates,
-            configChanged: () => this.updateConfig(config)
+            configurators: this.configurators,
+            configChanged: () => this.configService.updateConfig(config)
           }))
         )
       )
@@ -53,15 +60,22 @@ export class ConfiguratorComponent {
   }
 
   /**
+   * Create Bootstrap OffCanvas component
+   */
+  ngAfterViewInit() {
+    this.offcanvas = Offcanvas.getOrCreateInstance(this.offcanvasEl.nativeElement, {
+      backdrop: false,
+      scroll: true
+    });
+  }
+
+  /**
    * Extract list of configuration editors
    */
   ngAfterContentInit() {
     this.children.forEach(
-      (instance) => (this.templates[instance.templateName] = instance.template)
+      tpl => (this.configurators[tpl.templateName] = tpl.template)
     );
   }
 
-  updateConfig(config: ComponentConfig) {
-    this.configService.updateConfig(config);
-  }
 }

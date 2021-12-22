@@ -67,20 +67,24 @@ export class ConfigService {
   }
 
   public getContainer(id: string): ContainerConfig {
-    const config = this.getConfig(id) as ContainerConfig;
-    if (config.type !== 'container') {
+    const config = this.getConfig(id);
+    if (!this.isContainerConfig(config)) {
       throw `${id} is not a container`;
     }
     return config;
   }
 
   public isContainer(id: string): boolean {
-    return this._getConfig(id)?.type === 'container';
+    return this.isContainerConfig(this._getConfig(id));
+  }
+
+  public isContainerConfig(conf: ComponentConfig|undefined): conf is ContainerConfig {
+    return conf?.type === 'container';
   }
 
   public isTemplate(id: string): boolean {
     const conf = this._getConfig(id);
-    return conf && conf.type === 'container' && conf.template;
+    return this.isContainerConfig(conf) && !!conf.template;
   }
 
   public updateConfig(value: ComponentConfig | ComponentConfig[]) {
@@ -104,6 +108,14 @@ export class ConfigService {
       id = `${type}-${idx++}`;
     }
     return id;
+  }
+
+  public canUndo$(){
+    return this.historyState.hasPast$;
+  }
+
+  public canRedo$(){
+    return this.historyState.hasFuture$;
   }
 
   public undo() {
