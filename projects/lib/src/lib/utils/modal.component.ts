@@ -26,7 +26,7 @@ import { Modal } from "bootstrap";
 })
 export class ModalComponent implements AfterViewInit, OnChanges, OnDestroy {
 
-  @ViewChild('modal') el: ElementRef;
+  @ViewChild('modal', {static: true}) el: ElementRef;
   @Input() title: string;
   @Input() show: boolean;
   @Output() close = new EventEmitter<boolean>();
