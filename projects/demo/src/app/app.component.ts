@@ -1,12 +1,13 @@
 import { Component, VERSION } from '@angular/core';
-import { ConfigurableService, ConfigService } from '@sinequa/ui-builder';
 import { CommonModule } from '@angular/common';
-import { pokemons } from './pokemons';
 import { BehaviorSubject } from 'rxjs';
 
+import { ConfigurableService, ConfigService } from '@sinequa/ui-builder';
+import { pokemons } from './pokemons';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
+  styleUrls: ["app.component.scss"]
 })
 export class AppComponent {
   name = 'Angular ' + VERSION.major;
@@ -42,24 +43,30 @@ export class AppComponent {
         id: 'header',
         type: 'container',
         items: ['title', 'searchform'],
+        classes: "flex flex-col justify-center items-center"
       },
       {
         id: 'title',
         type: 'title',
         title: 'Pokestore',
+        classes: "text-4xl font-semibold tracking-wider"
       },
       {
         id: 'searchform',
         type: 'container',
         items: ['searchbar', 'breadcrumbs'],
-        classes: 'd-flex flex-row',
+        classes: 'flex flex-col w-1/4',
       },
-
+      {
+        id: "searchbar",
+        type: "searchbar",
+        classes: "pt-2"
+      },
       {
         id: 'results',
         type: 'container',
         items: ['image', 'metas'],
-        classes: 'd-flex flex-row',
+        classes: 'py-8 px-8 max-w-sm bg-white rounded-xl shadow-lg space-y-2 sm:py-4 sm:flex sm:flex-col sm:items-center sm:space-y-0 sm:space-x-6',
       },
       {
         id: 'metas',
@@ -68,7 +75,7 @@ export class AppComponent {
       },
       {
         id: 'ability',
-        type: 'metadata',
+        type: 'metadata-badge',
         field: 'abilities',
       },
       {
@@ -86,6 +93,7 @@ export class AppComponent {
         id: 'filters',
         type: 'container',
         items: ['abilities', 'weightFilter', 'xpFilter'],
+        classes: "space-y-4"
       },
       {
         id: 'weightFilter',
@@ -97,6 +105,16 @@ export class AppComponent {
         type: 'range',
         field: 'selectedExperience',
       },
+      {
+        id: "image",
+        type: "image",
+        classes: "rounded-full border border-purple-200"
+      },
+      {
+        id: "description",
+        type: "description",
+        classes: "mb-2"
+      }
     ]);
   }
 

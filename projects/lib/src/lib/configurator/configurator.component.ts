@@ -27,6 +27,7 @@ export interface ConfiguratorContext {
 @Component({
   selector: 'uib-configurator',
   templateUrl: './configurator.component.html',
+  styleUrls: ['configurator.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ConfiguratorComponent {

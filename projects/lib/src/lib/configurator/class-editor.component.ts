@@ -7,13 +7,12 @@ import {
 @Component({
   selector: 'uib-class-editor',
   template: `
-<div class="d-flex">
-  <label for="classes">Classes:</label>
-  <input
+<div class="mb-3 pe-4">
+  <label class="form-label" for="classes">Classes</label>
+  <input class="form-control" id="classes"
     type="text"
     id="classes"
     name="classes"
-    class="flex-grow-1"
     [ngModel]="config.classes"
     (ngModelChange)="setClasses($event)"
   />

@@ -1,4 +1,3 @@
-
 <!-- HEADER -->
 
 <uib-zone id="header">
@@ -8,6 +7,7 @@
 
   <ng-template uib-template="searchbar">
     <input
+      class="w-full h-12 px-4 mb-2 text-lg text-gray-700 placeholder-gray-600 border rounded-lg focus:shadow-outline"
       type="text"
       [(ngModel)]="search"
       (ngModelChange)="searchPokemons()"
@@ -16,12 +16,15 @@
   </ng-template>
 
   <ng-template uib-template="breadcrumbs">
-    <span *ngIf="selectedAbilities.length">
-      {{ selectedAbilities.join(', ') }}
-    </span>
-    <span *ngIf="selectedWeight"> Weight &lt; {{ selectedWeight }} </span>
-    <span *ngIf="selectedExperience"> XP &lt; {{ selectedExperience }} </span>
+    <div>
+      <span *ngFor="let ability of selectedAbilities" class="inline-flex items-center justify-center px-2 py-1 mr-2 text-xs font-bold leading-none text-amber-600 bg-amber-200 rounded">
+        {{ ability }}
+      </span>
+      <span *ngIf="selectedWeight" class="inline-flex items-center justify-center px-2 py-1 mr-2 text-xs font-bold leading-none text-red-100 bg-red-600 rounded">Weight &lt; {{ selectedWeight }}</span>
+      <span *ngIf="selectedExperience" class="inline-flex items-center justify-center px-2 py-1 mr-2 text-xs font-bold leading-none text-red-100 bg-red-600 rounded">XP &lt; {{ selectedExperience }}</span>
+    </div>
     <button
+      class="mt-2 px-4 py-1 text-sm text-purple-600 font-semibold rounded-full border border-purple-200 hover:text-white hover:bg-purple-600 hover:border-transparent focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-offset-2"
       *ngIf="
         search ||
         selectedAbilities.length ||
@@ -39,12 +42,14 @@
 <hr />
 
 
-<div class="d-flex flex-row">
-  
+<!-- ici le theme bootstrap n'est pas pris en compte -->
+<button class="btn btn-primary m-6 px-4 py-1 text-sm text-purple-600 font-semibold rounded-full border border-purple-200 hover:text-white hover:bg-purple-600 hover:border-transparent focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-offset-2">Click Me!</button>
+
+<div class="flex">
 
   <!-- FILTERS -->
 
-  <div style="max-width: 200px">
+  <div style="padding: 2rem;">
     <h3>Filters</h3>
     <uib-zone id="filters" [enableContainers]="false">
       <ng-template uib-template="range" let-config>
@@ -60,11 +65,11 @@
 
       <ng-template uib-template="abilities">
         <strong>Abilities</strong>
-        <ng-container *ngFor="let a of abilities">
-          <div *ngIf="!selectedAbilities.includes(a)">
-            <a href="#" (click)="selectAbility(a)">{{ a }}</a>
-          </div>
-        </ng-container>
+        <ul class="list-disc list-inside">
+          <ng-container *ngFor="let a of abilities">
+              <li *ngIf="!selectedAbilities.includes(a)"><a href="#" (click)="selectAbility(a)">{{ a }}</a></li>
+          </ng-container>
+        </ul>
       </ng-template>
     </uib-zone>
   </div>
@@ -72,32 +77,35 @@
 
   <!-- RESULTS -->
 
-  <div style="max-width: 600px">
-    <uib-zone id="results" [data]="results$ | async">
-      <ng-template uib-template="image" let-data="data">
-        <img
-          src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/{{
-            data.id
-          }}.png"
-          [title]="data.name"
-        />
-      </ng-template>
+  <uib-zone id="results" [data]="results$ | async" class="card-list">
+    <ng-template uib-template="image" let-data="data">
+      <img
+        src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/{{
+          data.id
+        }}.png"
+        [title]="data.name"
+      />
+    </ng-template>
 
-      <ng-template uib-template="description" let-data="data">
-        <p [innerHTML]="data.description"></p>
-      </ng-template>
-
-      <ng-template uib-template="metadata" let-data="data" let-config>
-        <strong *ngIf="!config.hideField">{{ config.field }}: </strong><span>{{ data[config.field] }}</span>
-      </ng-template>
-    </uib-zone>
-  </div>
+    <ng-template uib-template="description" let-data="data" let-config>
+        {{data.description}}
+    </ng-template>
+    
+    <ng-template uib-template="metadata" let-data="data" let-config>
+      <strong *ngIf="!config.hideField">{{ config.field }}: </strong><span>{{ data[config.field] }}</span>
+    </ng-template>
+    
+    <ng-template uib-template="metadata-badge" let-data="data" let-config>
+      <strong *ngIf="!config.hideField">{{ config.field }}: </strong><span *ngFor="let ability of data[config.field]" class="inline-flex items-center justify-center px-2 py-1 mr-2 text-xs font-bold leading-none text-purple-100 bg-purple-600 rounded">{{ ability }}</span>
+    </ng-template>
+  </uib-zone>
 
 </div>
 
 <!-- EDITOR -->
 
 <div class="uib-bootstrap">
+  <!-- les classe bootstrap sont autorisées ici -->
   
   <uib-toolbar></uib-toolbar>
 
@@ -105,26 +113,30 @@
 
   <uib-configurator>
     <ng-template uib-template="title" let-context>
-      Title:
-      <input
-        type="text"
-        [(ngModel)]="context.config.title"
-        (ngModelChange)="context.configChanged()"
-      />
+      <div class="mb-3 pe-4">
+        <label class="form-label" for="title">Title</label>
+        <input class="form-control" id="title"
+          type="text"
+          [(ngModel)]="context.config.title"
+          (ngModelChange)="context.configChanged()"
+        />
+      </div>
     </ng-template>
     
     <ng-template uib-template="metadata" let-context>
-      Metadata:
-      <select [(ngModel)]="context.config.field"
-        (ngModelChange)="context.configChanged()">
-        <option value="name">Name</option>
-        <option value="weight">Weight</option>
-        <option value="experience">Experience</option>
-        <option value="abilities">Abilities</option>
-      </select>
-      <input type="checkbox" id="hideField" [(ngModel)]="!!context.config.hideField"
-        (ngModelChange)="context.configChanged()">
-      <label for="hideField">Hide field</label>
+      <div class="mb-3">
+        <label for="metadata" class="form-label">Metadata</label>
+        <select [(ngModel)]="context.config.field" id="metadata" class="form-select" (ngModelChange)="context.configChanged()">
+          <option value="name">Name</option>
+          <option value="weight">Weight</option>
+          <option value="experience">Experience</option>
+          <option value="abilities">Abilities</option>
+        </select>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" id="hideField" [(ngModel)]="!!context.config.hideField" (ngModelChange)="context.configChanged()">
+        <label class="form-check-label" for="hideField">Hide field</label>
+      </div>
     </ng-template>
 
     <ng-template uib-template="container" let-context>

@@ -1,58 +1,15 @@
-.uib-configurable {
-    display: block;
-    margin: 2px;
-    
-    &,
-    & .cursor-default {
-        cursor: pointer !important;
-    }
-
-    &.highlight:not(.dndDragging, .dndDragover) {
-        outline: 1px dashed red;
-    }
-
-    /* display current edited element */
-    &.edited {
-        background-color: lightblue !important;
-        outline: 2px dashed blue !important;
-    }
-}
-
-uib-toolbar {
-    position: fixed;
-    bottom: 50px;
-    right: 50px;
-    z-index: 1046; // just above the configurator
-}
-  
-// Configuration
-@import "~bootstrap/scss/functions";
-@import "~bootstrap/scss/variables";
-@import "~bootstrap/scss/mixins";
-@import "~bootstrap/scss/utilities";
-
-// Helpers
-@import "~bootstrap/scss/helpers";
-
-// Utilities
-@import "~bootstrap/scss/utilities/api";
-
-@import "~bootstrap/scss/root";
-
 .uib-bootstrap {
-
-  // Styles from reboot normally applied to the <body> element
-  font-family: var(--#{$variable-prefix}body-font-family);
-  @include font-size(var(--#{$variable-prefix}body-font-size));
-  font-weight: var(--#{$variable-prefix}body-font-weight);
-  line-height: var(--#{$variable-prefix}body-line-height);
-  color: var(--#{$variable-prefix}body-color);
-  text-align: var(--#{$variable-prefix}body-text-align);
-  background-color: var(--#{$variable-prefix}body-bg); // 2
-  -webkit-text-size-adjust: 100%; // 3
-  -webkit-tap-highlight-color: rgba($black, 0); // 4
-
-  @import "~bootstrap/scss/reboot";
+  @import "~bootstrap/scss/functions";
+  @import "~bootstrap/scss/variables";
+  @import "~bootstrap/scss/mixins";
+  @import "~bootstrap/scss/utilities";
+  
+  // Helpers
+  @import "~bootstrap/scss/helpers";
+  
+  // Utilities
+  @import "~bootstrap/scss/utilities/api";
+  
   @import "~bootstrap/scss/forms";
   @import "~bootstrap/scss/buttons";
   @import "~bootstrap/scss/button-group";
@@ -61,5 +18,31 @@ uib-toolbar {
   @import "~bootstrap/scss/modal";
   @import "~bootstrap/scss/offcanvas";
   @import "~bootstrap/scss/tooltip";
+}
 
+.uib-configurable {
+  display: block;
+  margin: 2px;
+
+  &,
+  & .cursor-default {
+    cursor: pointer !important;
+  }
+
+  &.highlight:not(.dndDragging, .dndDragover) {
+    outline: 1px dashed red;
+  }
+
+  /* display current edited element */
+  &.edited {
+    background-color: lightblue !important;
+    outline: 2px dashed blue !important;
+  }
+}
+
+uib-toolbar {
+  position: fixed;
+  bottom: 50px;
+  right: 50px;
+  z-index: 1046; // just above the configurator
 }
