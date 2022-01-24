@@ -43,30 +43,30 @@ export class AppComponent {
         id: 'header',
         type: 'container',
         items: ['title', 'searchform'],
-        classes: "flex flex-col justify-center items-center"
+        classes: ""
       },
       {
         id: 'title',
         type: 'title',
         title: 'Pokestore',
-        classes: "text-4xl font-semibold tracking-wider"
+        classes: ""
       },
       {
         id: 'searchform',
         type: 'container',
         items: ['searchbar', 'breadcrumbs'],
-        classes: 'flex flex-col w-1/4',
+        classes: '',
       },
       {
         id: "searchbar",
         type: "searchbar",
-        classes: "pt-2"
+        classes: ""
       },
       {
         id: 'results',
         type: 'container',
         items: ['image', 'metas'],
-        classes: 'py-8 px-8 max-w-sm bg-white rounded-xl shadow-lg space-y-2 sm:py-4 sm:flex sm:flex-col sm:items-center sm:space-y-0 sm:space-x-6',
+        classes: '',
       },
       {
         id: 'metas',
@@ -93,7 +93,7 @@ export class AppComponent {
         id: 'filters',
         type: 'container',
         items: ['abilities', 'weightFilter', 'xpFilter'],
-        classes: "space-y-4"
+        classes: ""
       },
       {
         id: 'weightFilter',
@@ -108,12 +108,12 @@ export class AppComponent {
       {
         id: "image",
         type: "image",
-        classes: "rounded-full border border-purple-200"
+        classes: ""
       },
       {
         id: "description",
         type: "description",
-        classes: "mb-2"
+        classes: ""
       }
     ]);
   }
