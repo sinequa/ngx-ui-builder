@@ -21,16 +21,7 @@ import { DragDropService } from './drag-drop.service';
   selector: '[uib-item]',
   templateUrl: './item.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  styles: [
-    `
-  .dragPlaceholder {
-    padding: 20px;
-    text-align:center;
-    font-size: 20px;
-    background-color: lightgrey;
-  }
-  `,
-  ],
+  styleUrls: ['item.component.scss']
 })
 export class ItemComponent implements OnInit, OnDestroy {
   @Input('uib-item') id: string;
