@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input, OnChanges } from '@angular/core';
-import { CodeGenerationService } from '../code-generation/code-generation.service';
+import { CodeGenerationService } from './code-generation.service';
 import {
   ConfigService,
   ContainerConfig,

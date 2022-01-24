@@ -1,0 +1,19 @@
+<div class="content">
+  <ng-container
+    [ngTemplateOutlet]="tree"
+    [ngTemplateOutletContext]="{ root }"
+  ></ng-container>
+</div>
+
+<ng-template #tree let-id let-root="root">
+  <ul [ngClass]="{ tree: root }">
+    <li *ngFor="let el of root || children(id)">
+      <a>{{ el.id }}</a>
+      <ng-container
+        *ngIf="el.items"
+        [ngTemplateOutlet]="tree"
+        [ngTemplateOutletContext]="{ $implicit: el.id }"
+      ></ng-container>
+    </li>
+  </ul>
+</ng-template>

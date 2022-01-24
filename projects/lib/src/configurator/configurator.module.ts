@@ -7,6 +7,7 @@ import { ClassEditorComponent } from './class-editor.component';
 import { ConfiguratorComponent } from './configurator.component';
 import { PaletteComponent } from './palette.component';
 import { ToolbarComponent } from './toolbar.component';
+import { TreeComponent } from './tree/tree.componant';
 
 @NgModule({
   imports: [CommonModule, FormsModule, UtilsModule, DndModule],
@@ -14,7 +15,8 @@ import { ToolbarComponent } from './toolbar.component';
     ConfiguratorComponent,
     ClassEditorComponent,
     PaletteComponent,
-    ToolbarComponent
+    ToolbarComponent,
+    TreeComponent
   ],
   exports: [
     UtilsModule,

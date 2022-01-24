@@ -9,7 +9,7 @@ import {
   selectAll,
 } from '@ngneat/elf-entities';
 import { stateHistory } from '@ngneat/elf-state-history';
-import { map, Observable } from 'rxjs';
+import { filter, map, Observable } from 'rxjs';
 
 export interface ComponentConfig {
   id: string;
@@ -29,7 +29,7 @@ export interface ContainerConfig extends ComponentConfig {
 export class ConfigService {
   store: Store;
   historyState: any;
-
+  
   init(initialValue: ComponentConfig[]) {
     const { state, config } = createState(
       withEntities<ComponentConfig>({ initialValue })
@@ -37,6 +37,7 @@ export class ConfigService {
     this.store = new Store({ name: 'config', state, config });
     this.historyState = stateHistory(this.store, { maxAge: Infinity });
     this.store.subscribe(console.log);
+    
   }
 
   public watchAllConfig() {
@@ -48,6 +49,7 @@ export class ConfigService {
     this.getConfig(id); // Ensure a value exists (if 'id' has no config)
     return this.store.pipe(
       selectEntity(id),
+      filter(config => config !== undefined),
       //tap((config) => console.log('change:', config)),
       map((config) => JSON.parse(JSON.stringify(config)))
     );

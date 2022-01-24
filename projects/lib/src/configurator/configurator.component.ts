@@ -1,5 +1,6 @@
 import {
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   ContentChildren,
   ElementRef,
@@ -27,7 +28,6 @@ export interface ConfiguratorContext {
 @Component({
   selector: 'uib-configurator',
   templateUrl: './configurator.component.html',
-  styleUrls: ['configurator.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ConfiguratorComponent {
@@ -40,11 +40,15 @@ export class ConfiguratorComponent {
   offcanvas: Offcanvas;
 
   edited$: Observable<ConfiguratorContext>;
+  
+  configuration: ComponentConfig[] = [];
 
   constructor(
+    private cdr: ChangeDetectorRef,
     public configurableService: ConfigurableService,
     public configService: ConfigService
   ) {
+    
     this.edited$ = configurableService.edited$.pipe(
       tap(() => this.offcanvas.show()),
       switchMap((context) => 
@@ -58,6 +62,13 @@ export class ConfiguratorComponent {
         )
       )
     );
+    
+    // subscribe to configuration events
+    this.configService.watchAllConfig().subscribe(config => {
+      this.configuration = config;
+      this.cdr.markForCheck();
+    });
+    
   }
 
   /**
