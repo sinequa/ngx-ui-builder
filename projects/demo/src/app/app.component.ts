@@ -42,31 +42,26 @@ export class AppComponent {
       {
         id: 'header',
         type: 'container',
-        items: ['title', 'searchform'],
-        classes: ""
+        items: ['title', 'searchform']
       },
       {
         id: 'title',
         type: 'title',
-        title: 'Pokestore',
-        classes: ""
+        title: 'Pokestore'
       },
       {
         id: 'searchform',
         type: 'container',
-        items: ['searchbar', 'breadcrumbs'],
-        classes: '',
+        items: ['searchbar', 'breadcrumbs']
       },
       {
         id: "searchbar",
-        type: "searchbar",
-        classes: ""
+        type: "searchbar"
       },
       {
         id: 'results',
         type: 'container',
-        items: ['image', 'metas'],
-        classes: '',
+        items: ['image', 'metas']
       },
       {
         id: 'metas',
@@ -92,8 +87,7 @@ export class AppComponent {
       {
         id: 'filters',
         type: 'container',
-        items: ['abilities', 'weightFilter', 'xpFilter'],
-        classes: ""
+        items: ['abilities', 'weightFilter', 'xpFilter']
       },
       {
         id: 'weightFilter',
@@ -104,16 +98,6 @@ export class AppComponent {
         id: 'xpFilter',
         type: 'range',
         field: 'selectedExperience',
-      },
-      {
-        id: "image",
-        type: "image",
-        classes: ""
-      },
-      {
-        id: "description",
-        type: "description",
-        classes: ""
       }
     ]);
   }
