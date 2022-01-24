@@ -15,7 +15,7 @@ import { Modal } from "bootstrap";
           <ng-content></ng-content>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
           <button type="button" class="btn btn-primary" (click)="onModalClose(true)">OK</button>
         </div>
       </div>

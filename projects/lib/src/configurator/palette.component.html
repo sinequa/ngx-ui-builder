@@ -1,16 +1,18 @@
-Component palette (drag & drop):
-<div>
-  <div *ngFor="let item of _palette"
-    [dndDraggable]="item.type"
-    [dndEffectAllowed]="'copy'"
-    [dndType]="context?.zone"
-    (dndStart)="onDndStart(item)"
-    (dndEnd)="onDndEnd()"
-    class="palette-item">
-    <span [ngClass]="item.iconClass"></span>
-    {{item.display || item.type}}
+<details open>
+  <summary>Component palette (drag & drop)</summary>
+  <div class="d-flex flex-wrap gap-1 p-2 ps-1">
+    <div *ngFor="let item of _palette"
+      [dndDraggable]="item.type"
+      [dndEffectAllowed]="'copy'"
+      [dndType]="context?.zone"
+      (dndStart)="onDndStart(item)"
+      (dndEnd)="onDndEnd()"
+      class="palette-item">
+      <span [ngClass]="item.iconClass"></span>
+      {{item.display || item.type}}
+    </div>
   </div>
-</div>
+</details>
 
 <!-- Modal -->
 <uib-modal [title]="modal?.title" [show]="!!modal" (close)="onModalClose($event)">
