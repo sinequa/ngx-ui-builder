@@ -1,11 +1,9 @@
-<div class="d-flex flex-column align-items-start">
-  Template editor:
-  <textarea
+<details>
+  <summary>Template editor</summary>
+  <textarea class="w-100"
     [(ngModel)]="templateCode"
-    style="align-self: stretch; height:200px; font-family: monospace;"
+    style="height:200px; font-family: monospace;"
   ></textarea>
-  <div>
-    <button (click)="convert()">Render</button>
-    <button (click)="reset()" *ngIf="config.template">Reset</button>
-  </div>
-</div>
+    <button class="btn btn-primary me-1" (click)="convert()">Render</button>
+    <button class="btn btn-outline-secondary" (click)="reset()" *ngIf="config.template">Reset</button>
+</details>
