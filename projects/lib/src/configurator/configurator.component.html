@@ -5,12 +5,15 @@
       <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
     <div class="offcanvas-body">
-      <div>
         <uib-class-editor [config]="edited.config"></uib-class-editor>
         <ng-container
           *ngTemplateOutlet="configurators[edited.config.type]; context: { $implicit: edited }">
         </ng-container>
-      </div>
+        <details>
+          <summary>Components</summary>
+          <uib-tree [configuration]="configuration"></uib-tree>
+        </details>
     </div>
   </ng-container>
+  
 </div>

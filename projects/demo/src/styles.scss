@@ -1,1 +1,5 @@
-@import '../../lib/src/lib/ui-builder';
+/* bootstrap's utilities only */
+@import "~bootstrap/dist/css/bootstrap-utilities.min";
+
+/* specific import used by the ui builder lib */
+@import '../../lib/src/ui-builder';

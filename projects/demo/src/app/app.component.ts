@@ -1,12 +1,13 @@
 import { Component, VERSION } from '@angular/core';
-import { ConfigurableService, ConfigService } from '@sinequa/ui-builder';
 import { CommonModule } from '@angular/common';
-import { pokemons } from './pokemons';
 import { BehaviorSubject } from 'rxjs';
 
+import { ConfigurableService, ConfigService } from '@sinequa/ui-builder';
+import { pokemons } from './pokemons';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
+  styleUrls: ["app.component.scss"]
 })
 export class AppComponent {
   name = 'Angular ' + VERSION.major;
@@ -41,25 +42,26 @@ export class AppComponent {
       {
         id: 'header',
         type: 'container',
-        items: ['title', 'searchform'],
+        items: ['title', 'searchform']
       },
       {
         id: 'title',
         type: 'title',
-        title: 'Pokestore',
+        title: 'Pokestore'
       },
       {
         id: 'searchform',
         type: 'container',
-        items: ['searchbar', 'breadcrumbs'],
-        classes: 'd-flex flex-row',
+        items: ['searchbar', 'breadcrumbs']
       },
-
+      {
+        id: "searchbar",
+        type: "searchbar"
+      },
       {
         id: 'results',
         type: 'container',
-        items: ['image', 'metas'],
-        classes: 'd-flex flex-row',
+        items: ['image', 'metas']
       },
       {
         id: 'metas',
@@ -68,7 +70,7 @@ export class AppComponent {
       },
       {
         id: 'ability',
-        type: 'metadata',
+        type: 'metadata-badge',
         field: 'abilities',
       },
       {
@@ -85,7 +87,7 @@ export class AppComponent {
       {
         id: 'filters',
         type: 'container',
-        items: ['abilities', 'weightFilter', 'xpFilter'],
+        items: ['abilities', 'weightFilter', 'xpFilter']
       },
       {
         id: 'weightFilter',
@@ -96,7 +98,7 @@ export class AppComponent {
         id: 'xpFilter',
         type: 'range',
         field: 'selectedExperience',
-      },
+      }
     ]);
   }
 
