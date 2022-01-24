@@ -1,11 +1,12 @@
 .dragPlaceholder {
+  --color: hsl(0, 0%, 43%);
   padding: 20px;
   
   text-align:center;
   font-size: 20px;
   font-weight: bold;
-  color: hsl(0, 0%, 53%);
+  color: var(--color);
   
-  border: 2px dashed hsl(0, 0%, 83%);
-  background-color: hsl(0, 0%, 96%);
+  border: 2px dashed var(--color);
+
 }
