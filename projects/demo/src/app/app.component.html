@@ -76,7 +76,7 @@
 
   <!-- RESULTS -->
 
-  <uib-zone id="results" [data]="results$ | async">
+  <uib-zone id="results" [data]="results$ | async" style="display: flex; flex-direction: row; flex-wrap: wrap; justify-content: flex-start; align-items: flex-start; gap: 2rem;">
     <ng-template uib-template="image" let-data="data">
       <img
         src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/{{

@@ -1,0 +1,61 @@
+.editor-line {
+  display: grid;
+  grid-template-columns: 105px 1fr;
+  align-items: center;
+}
+
+/* ================ RADIO BUTTONS ================= */
+
+.radio-group {
+  // --rotate: 90deg;
+  --icon-width: 22px;
+  --icon-height: 25px;
+  --bg-checked: hsl(80, 73%, 75%);
+  --bg-hover: hsl(80, 61%, 50%);
+
+  display: flex;
+  align-items: center;
+  gap: 0.2rem;
+}
+
+.radio-group label {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+  > svg {
+    width: var(--icon-width);
+    height: var(--icon-height);
+
+    transform: rotate(var(--rotate, 0deg));
+    transition: transform 0.2s ease-in-out;
+  }
+}
+
+.radio-group input[type='radio'] {
+  display: none;
+}
+
+.radio-group input[type='radio'] + label {
+  padding: 0.3rem 0.5rem;
+  border-radius: 4px;
+  border: 1px dashed #ccc;
+  transition: background-color 0.4s ease-out;
+}
+
+.radio-group input[type='radio']:checked + label {
+  border: 1px solid #000;
+  background-color: var(--bg-checked);
+  transition: background-color 0.4s ease-in;
+}
+
+.radio-group input[type='radio'] + label:hover {
+  cursor: pointer;
+  padding: 0.3rem 0.5rem;
+  color: white;
+  fill: white;
+  border-radius: 4px;
+  background-color: var(--bg-hover);
+  transition: background-color 0.2s ease-in, fill 0.2s ease-in, color 0.2s ease-in;
+}

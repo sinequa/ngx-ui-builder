@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 
 import { DynamicViewsModule, ConfiguratorModule, CodeGenerationModule } from '@sinequa/ui-builder';
 import { AppComponent } from './app.component';
+import {CommonModule} from '@angular/common';
 
 export function createCompiler(compilerFactory: CompilerFactory) {
   return compilerFactory.createCompiler();
@@ -14,6 +15,7 @@ export function createCompiler(compilerFactory: CompilerFactory) {
 @NgModule({
   imports: [
     BrowserModule,
+    CommonModule,
     FormsModule,
     HttpClientModule,
 
