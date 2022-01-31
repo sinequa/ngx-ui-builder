@@ -31,6 +31,11 @@ export class TreeComponent implements OnChanges {
     this.root = [...this.configurationMap.values()].filter((el) => el.parent_id === undefined);
   }
 
+  /**
+   * Given an id, return all the children of that id.
+   * @param {string} id - string - The id of the component.
+   * @returns The children of the component with the given id.
+   */
   children(id: string): Partial<ComponentConfig>[] {
     return [...this.configurationMap.values()].filter((el) => el.parent_id === id).sort((a, b) => a.order - b.order);
   }

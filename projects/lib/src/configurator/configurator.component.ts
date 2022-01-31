@@ -89,5 +89,10 @@ export class ConfiguratorComponent {
       tpl => (this.configurators[tpl.templateName] = tpl.template)
     );
   }
+  
+  flexChanges(edited: ConfiguratorContext, flex: any) {
+    edited.config.classes = Object.keys(flex).map(k => flex[k]).join(' ');
+    this.configService.updateConfig(edited.config);
+  }
 
 }
