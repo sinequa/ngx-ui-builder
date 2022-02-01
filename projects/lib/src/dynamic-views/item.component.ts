@@ -82,6 +82,11 @@ export class ItemComponent implements OnInit, OnDestroy {
     }
   }
 
+  onDndCanceled(item: string, index: number) {
+    console.log('cancelled', item, this.id);
+    this.dragDropService.handleCancel(index, this.id);
+  }
+
   isContainer(id: string) {
     return this.configService.isContainer(id);
   }

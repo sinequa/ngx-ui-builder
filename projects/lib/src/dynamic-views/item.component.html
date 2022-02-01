@@ -21,6 +21,7 @@
       [dndHorizontal]="ref.isHorizontal()"
       [dndDisableDropIf]="!isContainer(item) || dataIndex > 0"
       (dndDrop)="onDndDrop(item, $event)"
+      (dndCanceled)="onDndCanceled(item, i)"
     ></div>
   </ng-container>
 </ng-container>

@@ -50,6 +50,15 @@ export class DragDropService {
     }
   }
 
+  public handleCancel(
+    index: number,
+    containerId: string
+  ) {
+    const container = this.configService.getContainer(containerId);
+    container.items.splice(index, 1);
+    this.configService.updateConfig([container]);
+  }
+
   private insertNew(
     container: ContainerConfig,
     index: number,
