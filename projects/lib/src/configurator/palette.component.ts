@@ -1,8 +1,9 @@
-import { ChangeDetectionStrategy, Component, Input, OnChanges, TemplateRef } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnChanges, OnInit, TemplateRef } from '@angular/core';
 import { Observable, of, Subject } from 'rxjs';
 import { Configurable } from '../configurable/configurable.service';
 import {
   ComponentConfig,
+  ConfigService,
   ContainerConfig,
 } from '../configuration/config.service';
 import {
@@ -43,30 +44,40 @@ declare interface ConfigModal {
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class PaletteComponent implements OnChanges {
+export class PaletteComponent implements OnInit, OnChanges {
   @Input() palette?: PaletteItem[];
   @Input() config: ContainerConfig;
   @Input() context?: Configurable;
   @Input() configurators: Record<string,TemplateRef<any>> = {}; 
 
-  _palette: PaletteItem[];
+  standardPalette: PaletteItem[];
+  existingPalette: PaletteItem[];
 
   modal?: ConfigModal;
 
-  constructor(public dragDropService: DragDropService) {}
+  constructor(
+    public dragDropService: DragDropService,
+    public configService: ConfigService
+  ) {}
+
+  ngOnInit() {
+    // The palette of existing components is constructed from the complete configuration
+    this.configService.watchAllConfig()
+      .subscribe(configs => this.generateExistingPalette(configs));
+  }
 
   ngOnChanges() {
     if (this.palette) {
-      this._palette = this.palette;
+      this.standardPalette = this.palette;
     } else {
       this.generateAutoPalette();
     }
   }
 
   generateAutoPalette() {
-    this._palette = [];
+    this.standardPalette = [];
     if (this.context?.enableContainers) {
-      this._palette.push({
+      this.standardPalette.push({
         type: 'container',
         display: 'Container',
         createConfig: (id: string) => of({ type: 'container', id, items: [] }),
@@ -74,12 +85,26 @@ export class PaletteComponent implements OnChanges {
     }
     if (this.context?.templates) {
       Object.keys(this.context.templates).forEach((type) =>
-        this._palette.push({
+        this.standardPalette.push({
           type,
           createConfig: (id: string) => this.openModal(id, type, this.configurators[type]),
         })
       );
     }
+    // The existing palette must be update when the standard palette changes
+    this.generateExistingPalette(this.configService.getAllConfig());
+  }
+
+  generateExistingPalette(configs: ComponentConfig[]) {    
+    this.existingPalette = configs.filter(c =>
+      // Add any non-container config whose type is compatible with the standard palette
+      this.standardPalette.find(p => p.type !== 'container' && p.type === c.type))
+        .map(c => ({
+          type: c.type,
+          display: c.id,
+          createConfig: _ => of(undefined) // The config already exists
+        })
+    )
   }
 
   onDndStart(item: PaletteItem) {
