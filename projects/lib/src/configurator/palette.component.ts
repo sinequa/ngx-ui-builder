@@ -102,7 +102,7 @@ export class PaletteComponent implements OnInit, OnChanges {
         .map(c => ({
           type: c.type,
           display: c.id,
-          createConfig: _ => of(undefined) // The config already exists
+          createConfig: _ => of(c) // The config already exists
         })
     )
   }

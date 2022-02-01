@@ -28,6 +28,7 @@ export class DragDropService {
     dropped: ContainerIndex | string
   ) {
     const container = this.configService.getContainer(containerId);
+    // Drop a component from a container to another container
     if ((dropped as ContainerIndex).container) {
       dropped = dropped as ContainerIndex;
       const og = this.configService.getContainer(dropped.container);
@@ -37,6 +38,7 @@ export class DragDropService {
         this.moveBetween(container, index, og, dropped.index);
       }
     }
+    // Drag a component creator (from a palette)
     else if (this.draggedCreator?.type === dropped) {
       const newId = this.configService.generateId(dropped);
       this.draggedCreator
