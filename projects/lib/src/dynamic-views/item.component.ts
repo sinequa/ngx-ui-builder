@@ -86,10 +86,6 @@ export class ItemComponent implements OnInit, OnDestroy {
     return this.configService.isContainer(id);
   }
 
-  isTemplate(id: string) {
-    return !!this.configService.isTemplate(id);
-  }
-
   isHorizontal() {
     if(this.element.nativeElement.classList.contains('d-flex')) {
       return !this.element.nativeElement.classList.contains('flex-column');

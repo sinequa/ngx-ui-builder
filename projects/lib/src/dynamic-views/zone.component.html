@@ -15,25 +15,21 @@
 
 <!-- data is a single object -->
 <ng-template #single let-data let-index="index">
-  <ng-container [uib-code]="id" [data]="data">
-    <div
-      *ngIf="!isTemplate(id)"
-      #ref
+  <div #ref
 
-      uib-configurable
-      [uib-item]="id"
-      [id]="id"
-      [zone]="id"
-      [templates]="templates"
-      [enableContainers]="enableContainers"
+    uib-configurable
+    [uib-item]="id"
+    [id]="id"
+    [zone]="id"
+    [templates]="templates"
+    [enableContainers]="enableContainers"
 
-      [data]="data"
-      [dataIndex]="index"
+    [data]="data"
+    [dataIndex]="index"
 
-      [dndDropzone]="[id]"
-      [dndHorizontal]="ref.isHorizontal()"
-      [dndDisableDropIf]="index > 0"
-      (dndDrop)="onDndDrop($event)"
-    ></div>
-  </ng-container>
+    [dndDropzone]="[id]"
+    [dndHorizontal]="ref.isHorizontal()"
+    [dndDisableDropIf]="index > 0"
+    (dndDrop)="onDndDrop($event)"
+  ></div>
 </ng-template>

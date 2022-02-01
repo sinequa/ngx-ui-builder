@@ -1,14 +1,8 @@
 <ng-container *ngIf="config.type === 'container' && !config['template']">
   <div class="dragPlaceholder" dndPlaceholderRef>+</div>
 
-  <ng-container
-    *ngFor="let item of config.items; let i = index"
-    [uib-code]="item"
-    [data]="data"
-  >
-    <div
-      *ngIf="!isTemplate(item)"
-      #ref
+  <ng-container *ngFor="let item of config.items; let i = index">
+    <div #ref
 
       uib-configurable
       [uib-item]="item"

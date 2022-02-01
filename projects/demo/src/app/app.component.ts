@@ -1,9 +1,9 @@
 import { Component, VERSION } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { BehaviorSubject } from 'rxjs';
 
 import { ConfigurableService, ConfigService } from '@sinequa/ui-builder';
 import { pokemons } from './pokemons';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -20,19 +20,6 @@ export class AppComponent {
   selectedAbilities: string[] = [];
   selectedWeight?: number;
   selectedExperience?: number;
-
-  codeFactory = {
-    title: (config) =>
-      `<h1>Pokestore</h1>`,
-    metadata: (config) =>
-      `<strong>${config.field}: </strong><span>{{ data['${config.field}'] }}</span>`,
-    description: (config) =>
-      `<p [innerHTML]="data.description"></p>`,
-    image: (config) =>
-      `<img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/{{ data.id }}.png" [title]="data.name" />`,
-  };
-
-  codeModules = [CommonModule];
 
   constructor(
     public configService: ConfigService,

@@ -140,11 +140,6 @@
     </ng-template>
 
     <ng-template uib-template="container" let-context>
-      <uib-code-editor
-        [config]="context.config"
-        [codeFactory]="codeFactory"
-        [codeModules]="codeModules"
-      ></uib-code-editor>
       <uib-palette [config]="context.config" [context]="context.context" [configurators]="context.configurators"></uib-palette>
     </ng-template>
   </uib-configurator>

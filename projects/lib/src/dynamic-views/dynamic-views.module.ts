@@ -6,10 +6,9 @@ import { DndModule } from 'ngx-drag-drop';
 
 import { ZoneComponent } from './zone.component';
 import { ItemComponent } from './item.component';
-import { CodeGenerationModule } from '../code-generation/code.module';
 
 @NgModule({
-  imports: [CommonModule, DndModule, ConfigurableModule, UtilsModule, CodeGenerationModule],
+  imports: [CommonModule, DndModule, ConfigurableModule, UtilsModule],
   declarations: [ZoneComponent, ItemComponent],
   exports: [UtilsModule, ZoneComponent],
 })

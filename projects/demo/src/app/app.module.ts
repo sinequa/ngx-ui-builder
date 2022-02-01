@@ -1,16 +1,11 @@
-import { Compiler, CompilerFactory, COMPILER_OPTIONS, NgModule } from '@angular/core';
-import { JitCompilerFactory } from '@angular/platform-browser-dynamic';
+import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 
-import { DynamicViewsModule, ConfiguratorModule, CodeGenerationModule } from '@sinequa/ui-builder';
+import { DynamicViewsModule, ConfiguratorModule } from '@sinequa/ui-builder';
 import { AppComponent } from './app.component';
 import {CommonModule} from '@angular/common';
-
-export function createCompiler(compilerFactory: CompilerFactory) {
-  return compilerFactory.createCompiler();
-}
 
 @NgModule({
   imports: [
@@ -20,15 +15,9 @@ export function createCompiler(compilerFactory: CompilerFactory) {
     HttpClientModule,
 
     DynamicViewsModule,
-    ConfiguratorModule,
-    CodeGenerationModule
+    ConfiguratorModule
   ],
   declarations: [AppComponent],
-  bootstrap: [AppComponent],
-  providers: [
-    {provide: COMPILER_OPTIONS, useValue: {useJit: true}, multi: true},
-    {provide: CompilerFactory, useClass: JitCompilerFactory, deps: [COMPILER_OPTIONS]},
-    {provide: Compiler, useFactory: createCompiler, deps: [CompilerFactory]},    
-  ]
+  bootstrap: [AppComponent]
 })
 export class AppModule {}
