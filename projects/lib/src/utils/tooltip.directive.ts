@@ -7,6 +7,7 @@ import { Tooltip } from "bootstrap";
 export class TooltipDirective implements OnChanges, OnDestroy {
   @Input('uib-tooltip') html: string;
   @Input() placement: 'auto' | 'top' | 'bottom' | 'left' | 'right' = 'auto';
+  @Input() container?: string | Element;
 
   tooltip?: Tooltip;
 
@@ -19,7 +20,7 @@ export class TooltipDirective implements OnChanges, OnDestroy {
         placement: this.placement,
         sanitize: false,
         title: this.html,
-        container: this.el.nativeElement
+        container: this.container || this.el.nativeElement
       });
     }
     else {

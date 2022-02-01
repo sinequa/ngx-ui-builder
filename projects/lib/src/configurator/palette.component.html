@@ -31,6 +31,14 @@
     class="palette-item">
     <span [ngClass]="item.iconClass"></span>
     {{item.display || item.type}}
+    <button *ngIf="item.removeable"
+      type="button"
+      class="btn-close"
+      uib-tooltip="Remove from palette"
+      placement="bottom"
+      container=".uib-bootstrap"
+      (click)="removeItem(item)">
+    </button>
   </div>
 </ng-template>
 

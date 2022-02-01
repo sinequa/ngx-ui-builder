@@ -1,10 +1,9 @@
-import { ChangeDetectionStrategy, Component, Input, OnChanges, OnInit, TemplateRef } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnChanges, OnInit, TemplateRef } from '@angular/core';
 import { Observable, of, Subject } from 'rxjs';
 import { Configurable } from '../configurable/configurable.service';
 import {
   ComponentConfig,
-  ConfigService,
-  ContainerConfig,
+  ConfigService
 } from '../configuration/config.service';
 import {
   ComponentCreator,
@@ -15,6 +14,7 @@ declare interface PaletteItem extends ComponentCreator {
   type: string;
   display?: string;
   iconClass?: string;
+  removeable?: boolean;
   createConfig: (id: string, creator?: ComponentCreator) => Observable<ComponentConfig|undefined>;
 }
 
@@ -40,14 +40,15 @@ declare interface ConfigModal {
   cursor: pointer;
   margin-right: 5px;
 }
+.btn-close {
+  font-size: 0.7em;
+}
   `
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PaletteComponent implements OnInit, OnChanges {
-  @Input() palette?: PaletteItem[];
-  @Input() config: ContainerConfig;
-  @Input() context?: Configurable;
+  @Input() context: Configurable;
   @Input() configurators: Record<string,TemplateRef<any>> = {}; 
 
   standardPalette: PaletteItem[];
@@ -57,33 +58,35 @@ export class PaletteComponent implements OnInit, OnChanges {
 
   constructor(
     public dragDropService: DragDropService,
-    public configService: ConfigService
+    public configService: ConfigService,
+    public cdRef: ChangeDetectorRef
   ) {}
 
   ngOnInit() {
     // The palette of existing components is constructed from the complete configuration
     this.configService.watchAllConfig()
-      .subscribe(configs => this.generateExistingPalette(configs));
+      .subscribe(configs => {
+        this.generateExistingPalette(configs)
+        this.cdRef.markForCheck();
+      });
   }
 
   ngOnChanges() {
-    if (this.palette) {
-      this.standardPalette = this.palette;
-    } else {
-      this.generateAutoPalette();
-    }
+    this.generateAutoPalette();
+    // The existing palette must be update when the standard palette changes
+    this.generateExistingPalette(this.configService.getAllConfig());
   }
 
   generateAutoPalette() {
     this.standardPalette = [];
-    if (this.context?.enableContainers) {
+    if (this.context.enableContainers) {
       this.standardPalette.push({
         type: 'container',
         display: 'Container',
         createConfig: (id: string) => of({ type: 'container', id, items: [] }),
       });
     }
-    if (this.context?.templates) {
+    if (this.context.templates) {
       Object.keys(this.context.templates).forEach((type) =>
         this.standardPalette.push({
           type,
@@ -91,17 +94,17 @@ export class PaletteComponent implements OnInit, OnChanges {
         })
       );
     }
-    // The existing palette must be update when the standard palette changes
-    this.generateExistingPalette(this.configService.getAllConfig());
   }
 
   generateExistingPalette(configs: ComponentConfig[]) {    
     this.existingPalette = configs.filter(c =>
       // Add any non-container config whose type is compatible with the standard palette
-      this.standardPalette.find(p => p.type !== 'container' && p.type === c.type))
+      this.standardPalette
+        .find(p => p.type !== 'container' && p.type === c.type))
         .map(c => ({
           type: c.type,
           display: c.id,
+          removeable: !this.configService.isUsedWithin(c.id, this.context.zone),
           createConfig: _ => of(c) // The config already exists
         })
     )
@@ -138,4 +141,8 @@ export class PaletteComponent implements OnInit, OnChanges {
     }
   }
 
+  removeItem(item: PaletteItem) {
+    console.log("remove", item);
+    this.configService.removeConfig(item.display!); // The display is the component id
+  }
 }
