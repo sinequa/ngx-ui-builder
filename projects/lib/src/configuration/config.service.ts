@@ -21,7 +21,6 @@ export interface ComponentConfig {
 export interface ContainerConfig extends ComponentConfig {
   type: 'container';
   items: string[];
-  template?: string;
 }
 
 
@@ -82,11 +81,6 @@ export class ConfigService {
 
   public isContainerConfig(conf: ComponentConfig|undefined): conf is ContainerConfig {
     return conf?.type === 'container';
-  }
-
-  public isTemplate(id: string): boolean {
-    const conf = this._getConfig(id);
-    return this.isContainerConfig(conf) && !!conf.template;
   }
 
   public updateConfig(value: ComponentConfig | ComponentConfig[]) {

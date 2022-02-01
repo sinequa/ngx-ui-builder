@@ -58,10 +58,6 @@ export class ZoneComponent implements AfterContentInit, OnInit, OnDestroy {
     return Array.isArray(this.data);
   }
 
-  isTemplate(id: string) {
-    return !!this.configService.isTemplate(id);
-  }
-
   onDndDrop(event: DndDropEvent) {
     console.log('dropped', event);
     if(typeof event.index === 'number') {
