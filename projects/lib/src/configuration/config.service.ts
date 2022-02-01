@@ -7,6 +7,7 @@ import {
   updateEntities,
   selectEntity,
   selectAll,
+  getEntities,
 } from '@ngneat/elf-entities';
 import { stateHistory } from '@ngneat/elf-state-history';
 import { filter, map, Observable } from 'rxjs';
@@ -39,8 +40,12 @@ export class ConfigService {
     
   }
 
-  public watchAllConfig() {
+  public watchAllConfig(): Observable<ComponentConfig[]> {
     return this.store.pipe(selectAll());
+  }
+
+  public getAllConfig(): ComponentConfig[] {
+    return this.store.query(getEntities());
   }
 
   public watchConfig(id: string): Observable<ComponentConfig> {
