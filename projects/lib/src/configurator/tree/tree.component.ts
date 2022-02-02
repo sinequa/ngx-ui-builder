@@ -20,15 +20,18 @@ export class TreeComponent implements OnChanges {
 
     // set children parent_id and order
     this.configuration
-      .filter((el) => el.items && el.items.length > 0)
-      .forEach((el) =>
-        el.items.forEach((id, index) =>
-          this.configurationMap.set(id, { ...this.configurationMap.get(id), id: id, parent_id: el.id, order: index })
-        )
-      );
+      .filter((parent) => parent.items && parent.items.length > 0)
+      .forEach((parent) =>
+        parent.items.forEach((id: string, index: number) => {
+          // a child could have multiple parents
+          // get child's parents
+          const {parents = [], orders = {}} = this.configurationMap.get(id) || {};
+          this.configurationMap.set(id, {...this.configurationMap.get(id), id: id, parents: [...parents, parent.id], orders: {...orders, [parent.id]: index }} )
+        })
+    );
 
     // items without parent_id (root level)
-    this.root = [...this.configurationMap.values()].filter((el) => el.parent_id === undefined);
+    this.root = [...this.configurationMap.values()].filter((el) => el.parents === undefined);
   }
 
   /**
@@ -37,6 +40,6 @@ export class TreeComponent implements OnChanges {
    * @returns The children of the component with the given id.
    */
   children(id: string): Partial<ComponentConfig>[] {
-    return [...this.configurationMap.values()].filter((el) => el.parent_id === id).sort((a, b) => a.order - b.order);
+    return [...this.configurationMap.values()].filter((el) => el.parents ? el.parents.includes(id) : false).sort((a, b) => a.orders[id] - b.orders[id]);
   }
 }
