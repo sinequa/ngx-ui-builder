@@ -39,9 +39,10 @@ declare interface ConfigModal {
   background: rgb(0,0,0,0.1);
   cursor: pointer;
   margin-right: 5px;
-}
-.btn-close {
-  font-size: 0.7em;
+  
+  .btn-close {
+    font-size: 0.7em;
+  }
 }
   `
   ],
