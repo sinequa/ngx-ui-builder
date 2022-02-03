@@ -8,6 +8,7 @@ import {
   selectEntity,
   selectAll,
   getEntities,
+  deleteEntities,
 } from '@ngneat/elf-entities';
 import { stateHistory } from '@ngneat/elf-state-history';
 import { filter, map, Observable } from 'rxjs';
@@ -37,7 +38,6 @@ export class ConfigService {
     this.store = new Store({ name: 'config', state, config });
     this.historyState = stateHistory(this.store, { maxAge: Infinity });
     this.store.subscribe(console.log);
-    
   }
 
   public watchAllConfig(): Observable<ComponentConfig[]> {
@@ -67,7 +67,9 @@ export class ConfigService {
     let config = this._getConfig(id);
     if (!config) {
       config = { id, type: id };
+      this.historyState.pause();
       this.store.update(addEntities(config));
+      this.historyState.resume();
     }
     return JSON.parse(JSON.stringify(config)); // Deep copy
   }
@@ -88,6 +90,24 @@ export class ConfigService {
     return conf?.type === 'container';
   }
 
+  /**
+   * Test whether a given component id is used within the hierarchy of a container
+   */
+  public isUsedWithin(id: string, containerId: string) {
+    const conf = this._getConfig(containerId);
+    if(conf?.type === 'container') {
+      for(let item of (conf as ContainerConfig).items) {
+        if(item === id) {
+          return true;
+        }
+        if(this.isUsedWithin(id, item)) {
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+
   public updateConfig(value: ComponentConfig | ComponentConfig[]) {
     //console.log('update config', this._getConfig(value.id));
     //console.log('new config', value);
@@ -100,6 +120,10 @@ export class ConfigService {
         return updateEntities([v.id], () => v)}
       )
     );
+  }
+
+  public removeConfig(id: string) {
+    this.store.update(deleteEntities(id));
   }
 
   public generateId(type: string) {
