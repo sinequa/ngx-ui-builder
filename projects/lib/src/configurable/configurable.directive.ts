@@ -8,7 +8,6 @@ import {
   Renderer2,
   TemplateRef,
 } from '@angular/core';
-import { Subscription } from 'rxjs';
 
 import { Configurable, ConfigurableService } from './configurable.service';
 
@@ -21,24 +20,14 @@ export class ConfigurableDirective implements OnDestroy, Configurable {
   @Input() enableContainers?: boolean;
   @Input() templates?: Record<string, TemplateRef<any>>;
 
-  sub: Subscription;
-
   constructor(
     private configurableService: ConfigurableService,
     private el: ElementRef,
     private renderer: Renderer2
   ) {
-    this.sub = this.configurableService.edited$.subscribe((configurable) => {
-      if (configurable.id === this.id) {
-        this.renderer.addClass(this.el.nativeElement, 'edited');
-      } else {
-        this.renderer.removeClass(this.el.nativeElement, 'edited');
-      }
-    });
   }
 
   ngOnDestroy() {
-    this.sub.unsubscribe();
   }
 
   @HostBinding('class')
@@ -64,7 +53,22 @@ export class ConfigurableDirective implements OnDestroy, Configurable {
   @HostListener('click', ['$event'])
   click(event: MouseEvent) {
     event.stopPropagation();
+    
+    // before to set 'edited' class to current element
+    // send it to configurableService to update the previous element and call it's removeEdited() method
     this.configurableService.clickConfigurable(this);
+    
+    // now, previous 'edited' class should be correct,
+    // we can safely set the 'edited' class to the current element
+    if (this.el.nativeElement.classList.contains('edited')) {
+      this.removeEdited();
+    } else {
+      this.renderer.addClass(this.el.nativeElement, 'edited');
+    }
+  }
+  
+  removeEdited() {
+    this.renderer.removeClass(this.el.nativeElement, 'edited');
   }
 
   highlight() {
