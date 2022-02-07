@@ -130,10 +130,11 @@ export class AppComponent {
     );
   }
 
-  selectAbility(a: string) {
+  selectAbility(a: string, event: Event) {
     this.selectedAbilities.push(a);
     this.searchPokemons();
-    return false;
+    event.stopPropagation();
+    event.preventDefault();
   }
 
   clear() {

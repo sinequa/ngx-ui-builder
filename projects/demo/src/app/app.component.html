@@ -16,11 +16,11 @@
 
   <ng-template uib-template="breadcrumbs">
     <div>
-      <span *ngFor="let ability of selectedAbilities">
+      <span *ngFor="let ability of selectedAbilities" class="metadata">
         {{ ability }}
       </span>
-      <span *ngIf="selectedWeight">Weight &lt; {{ selectedWeight }}</span>
-      <span *ngIf="selectedExperience">XP &lt; {{ selectedExperience }}</span>
+      <span *ngIf="selectedWeight" class="metadata">Weight &lt; {{ selectedWeight }}</span>
+      <span *ngIf="selectedExperience" class="metadata">XP &lt; {{ selectedExperience }}</span>
     </div>
     <button
       *ngIf="
@@ -60,11 +60,9 @@
 
       <ng-template uib-template="abilities">
         <h4>Abilities</h4>
-        <ul>
-          <ng-container *ngFor="let a of abilities">
-              <li *ngIf="!selectedAbilities.includes(a)"><a href="#" (click)="selectAbility(a)">{{ a }}</a></li>
-          </ng-container>
-        </ul>
+        <div *ngFor="let a of abilities">
+          <a *ngIf="!selectedAbilities.includes(a)" href="#" (click)="selectAbility(a, $event)" class="metadata">{{ a }}</a>
+        </div>
       </ng-template>
     </uib-zone>
   </div>
@@ -72,7 +70,7 @@
 
   <!-- RESULTS -->
 
-  <uib-zone id="results" [data]="results$ | async" class="d-flex flex-row flex-wrap justify-content-start align-items-start">
+  <uib-zone id="results" [data]="results$ | async" class="d-flex flex-row flex-wrap justify-content-start align-items-start align-content-start">
     <ng-template uib-template="image" let-data="data">
       <img
         src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/{{
