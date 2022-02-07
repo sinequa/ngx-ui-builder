@@ -16,11 +16,11 @@
 
   <ng-template uib-template="breadcrumbs">
     <div>
-      <span *ngFor="let ability of selectedAbilities">
+      <span *ngFor="let ability of selectedAbilities" class="metadata">
         {{ ability }}
       </span>
-      <span *ngIf="selectedWeight">Weight &lt; {{ selectedWeight }}</span>
-      <span *ngIf="selectedExperience">XP &lt; {{ selectedExperience }}</span>
+      <span *ngIf="selectedWeight" class="metadata">Weight &lt; {{ selectedWeight }}</span>
+      <span *ngIf="selectedExperience" class="metadata">XP &lt; {{ selectedExperience }}</span>
     </div>
     <button
       *ngIf="
@@ -29,7 +29,7 @@
         selectedWeight ||
         selectedExperience
       "
-      (click)="clear()"
+      (click)="clear($event)"
     >
       Clear search criteria
     </button>
@@ -40,19 +40,15 @@
 <hr />
 
 
-<!-- ici le theme bootstrap n'est pas pris en compte -->
-<!-- ici seuls les utilities de bootstrap sont reconnus -->
-<button class="btn btn-primary m-6 px-4 py-1 text-sm text-purple-600 font-semibold rounded-full border border-purple-200 hover:text-white hover:bg-purple-600 hover:border-transparent focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-offset-2">Click Me!</button>
-
 <div class="d-flex">
 
   <!-- FILTERS -->
 
-  <div style="padding: 2rem;">
+  <div class="p-1">
     <h3>Filters</h3>
     <uib-zone id="filters" [enableContainers]="false">
       <ng-template uib-template="range" let-config>
-        <strong>{{ config.field }}: {{ this[config.field] }}</strong>
+        <h4>{{ config.field }}: {{ this[config.field] }}</h4>
         <input
           type="range"
           min="0"
@@ -63,12 +59,10 @@
       </ng-template>
 
       <ng-template uib-template="abilities">
-        <strong>Abilities</strong>
-        <ul>
-          <ng-container *ngFor="let a of abilities">
-              <li *ngIf="!selectedAbilities.includes(a)"><a href="#" (click)="selectAbility(a)">{{ a }}</a></li>
-          </ng-container>
-        </ul>
+        <h4>Abilities</h4>
+        <div *ngFor="let a of abilities">
+          <a *ngIf="!selectedAbilities.includes(a)" href="#" (click)="selectAbility(a, $event)" class="metadata">{{ a }}</a>
+        </div>
       </ng-template>
     </uib-zone>
   </div>
@@ -76,7 +70,7 @@
 
   <!-- RESULTS -->
 
-  <uib-zone id="results" [data]="results$ | async" style="display: flex; flex-direction: row; flex-wrap: wrap; justify-content: flex-start; align-items: flex-start; gap: 2rem;">
+  <uib-zone id="results" [data]="results$ | async" class="flex-grow-1 d-flex flex-row flex-wrap justify-content-start align-items-start align-content-start">
     <ng-template uib-template="image" let-data="data">
       <img
         src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/{{
@@ -91,13 +85,10 @@
     </ng-template>
     
     <ng-template uib-template="metadata" let-data="data" let-config>
-      <strong *ngIf="!config.hideField">{{ config.field }}: </strong><span>{{ data[config.field] }}</span>
+      <strong *ngIf="!config.hideField">{{ config.field }}: </strong>
+      <span *ngFor="let meta of asArray(data[config.field])" class="metadata">{{meta}}</span>
     </ng-template>
     
-    <ng-template uib-template="metadata-badge" let-data="data" let-config>
-      <strong *ngIf="!config.hideField">{{ config.field }}: </strong>
-      <span *ngFor="let ability of data[config.field]">{{ ability }}</span>
-    </ng-template>
   </uib-zone>
 
 </div>
@@ -140,7 +131,18 @@
     </ng-template>
 
     <ng-template uib-template="container" let-context>
+
+      <!-- Custom pre-defined layouts -->
+      <div *ngIf="context.context.id === 'results'">
+        <h6>Results layout</h6>
+        <div class="form-check" *ngFor="let layout of layouts">
+          <input class="form-check-input" type="radio" [id]="layout.id" [value]="layout.id" [(ngModel)]="selectedLayout" (ngModelChange)="selectLayout(layout)">
+          <label class="form-check-label" [for]="layout.id">{{layout.name}}</label>
+        </div>
+      </div>
+
       <uib-palette [context]="context.context" [configurators]="context.configurators"></uib-palette>
+
     </ng-template>
   </uib-configurator>
 </div>

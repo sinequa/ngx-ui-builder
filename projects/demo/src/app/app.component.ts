@@ -4,6 +4,13 @@ import { BehaviorSubject } from 'rxjs';
 import { ConfigurableService, ConfigService } from '@sinequa/ui-builder';
 import { pokemons } from './pokemons';
 
+declare interface Layout {
+  name: string;
+  id: string;
+  items: string[];
+  classes?: string;
+}
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -12,6 +19,7 @@ import { pokemons } from './pokemons';
 export class AppComponent {
   name = 'Angular ' + VERSION.major;
 
+  // Pokestore state
   results$ = new BehaviorSubject(pokemons);
   abilities = pokemons
     .map((p) => p.abilities)
@@ -21,10 +29,17 @@ export class AppComponent {
   selectedWeight?: number;
   selectedExperience?: number;
 
+  layouts: Layout[] = [
+    {name: "List view", id: "list-view", items: ['image', 'metas'], classes: 'd-flex flex-row mb-3'},
+    {name: "Tile view", id: "tile-view", items: ['name', 'image'], classes: 'd-flex flex-column align-items-center p-3 w-25'}
+  ]
+  selectedLayout = "list-view";
+
   constructor(
     public configService: ConfigService,
     public configurableService: ConfigurableService
   ) {
+    // Initial state of the UI builder
     this.configService.init([
       {
         id: 'header',
@@ -48,7 +63,8 @@ export class AppComponent {
       {
         id: 'results',
         type: 'container',
-        items: ['image', 'metas']
+        items: ['image', 'metas'],
+        classes: 'd-flex flex-row mb-3'
       },
       {
         id: 'metas',
@@ -56,8 +72,14 @@ export class AppComponent {
         items: ['description', 'ability', 'weight', 'experience'],
       },
       {
+        id: 'name',
+        type: 'metadata',
+        field: 'name',
+        hideField: true
+      },
+      {
         id: 'ability',
-        type: 'metadata-badge',
+        type: 'metadata',
         field: 'abilities',
       },
       {
@@ -89,6 +111,8 @@ export class AppComponent {
     ]);
   }
 
+  // Pokestore functionalities
+
   searchPokemons() {
     this.results$.next(
       pokemons.filter((p) => {
@@ -106,18 +130,36 @@ export class AppComponent {
     );
   }
 
-  selectAbility(a: string) {
+  selectAbility(a: string, event: Event) {
     this.selectedAbilities.push(a);
     this.searchPokemons();
-    return false;
+    event.stopPropagation();
+    event.preventDefault();
   }
 
-  clear() {
+  clear(event: Event) {
     this.search = undefined;
     this.selectedAbilities = [];
     this.selectedExperience = undefined;
     this.selectedWeight = undefined;
     this.searchPokemons();
+    event.stopPropagation();
+  }
+
+
+  // Custom configurators
+
+  selectLayout(layout: Layout) {
+    const config = this.configService.getContainer('results');
+    config.classes = layout.classes;
+    config.items = layout.items;
+    this.configService.updateConfig(config);
+  }
+
+  // Utilities
+
+  asArray(value: any) {
+    return Array.isArray(value)? value : [value];
   }
 
 }
