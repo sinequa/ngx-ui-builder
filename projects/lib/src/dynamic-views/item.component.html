@@ -1,4 +1,4 @@
-<ng-container *ngIf="config.type === 'container' && !config['template']">
+<ng-container *ngIf="config.type === 'container'">
   <div class="dragPlaceholder" dndPlaceholderRef>+</div>
 
   <ng-container *ngFor="let item of config.items; let i = index">
