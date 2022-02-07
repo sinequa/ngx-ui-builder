@@ -6,6 +6,7 @@ import { iconsLibrary } from '../svg/icons-library';
 import { SvgIconsModule } from '../utils/svg-icon/svg-icon.module';
 import { UtilsModule } from '../utils/utils.module';
 import { ClassEditorComponent } from './class-editor.component';
+import { ConditionEditorComponent } from './conditions/condition-editor.component';
 import { ConfiguratorComponent } from './configurator.component';
 import { FlexEditorComponent } from './flex-editor/flex-editor.component';
 import { PaletteComponent } from './palette.component';
@@ -21,7 +22,8 @@ import { TreeComponent } from './tree/tree.component';
     PaletteComponent,
     ToolbarComponent,
     TreeComponent,
-    FlexEditorComponent
+    FlexEditorComponent,
+    ConditionEditorComponent
   ],
   exports: [
     UtilsModule,

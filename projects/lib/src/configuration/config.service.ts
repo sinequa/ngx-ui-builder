@@ -18,6 +18,7 @@ export interface ComponentConfig {
   type: string;
   classes?: string;
   [key: string]: any;
+  condition?: {field: string, value: string};
 }
 
 export interface ContainerConfig extends ComponentConfig {

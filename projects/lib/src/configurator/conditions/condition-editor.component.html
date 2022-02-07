@@ -1,0 +1,20 @@
+<div>
+  <label class="form-label" for="field">Field</label>
+  <input class="form-control"
+    type="text"
+    id="field"
+    name="field"
+    [(ngModel)]="field"
+    (ngModelChange)="updateCondition()"
+  />
+</div>
+<div>
+  <label class="form-label" for="value">Value</label>
+  <input class="form-control"
+    type="text"
+    id="value"
+    name="value"
+    [(ngModel)]="value"
+    (ngModelChange)="updateCondition()"
+  />
+</div>

@@ -1,4 +1,4 @@
-<ng-container *ngIf="config.type === 'container' && !config['template']">
+<ng-container *ngIf="config.type === 'container' && (!config.condition || data[config.condition.field] === config.condition.value)">
   <div class="dragPlaceholder" dndPlaceholderRef>+</div>
 
   <ng-container *ngFor="let item of config.items; let i = index">
@@ -27,7 +27,7 @@
 </ng-container>
 
 <ng-container
-  *ngIf="config.type !== 'container'"
+  *ngIf="config.type !== 'container' && (!config.condition || data[config.condition.field] === config.condition.value)"
   [ngTemplateOutlet]="templates[config.type || id]"
   [ngTemplateOutletContext]="{ $implicit: config, data: data, id: id }"
 ></ng-container>

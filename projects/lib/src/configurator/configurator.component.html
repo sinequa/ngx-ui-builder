@@ -12,6 +12,11 @@
         <ng-container
           *ngTemplateOutlet="configurators[edited.config.type]; context: { $implicit: edited }">
         </ng-container>
+
+        <details [attr.open]="edited.config.condition? '' : undefined">
+          <summary>Conditional display</summary>
+          <uib-condition-editor [config]="edited.config"></uib-condition-editor>
+        </details>
         
         <details *ngIf="edited.config.type === 'container'" open>
           <summary>Layout</summary>
