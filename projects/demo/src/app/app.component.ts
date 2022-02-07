@@ -137,12 +137,13 @@ export class AppComponent {
     event.preventDefault();
   }
 
-  clear() {
+  clear(event: Event) {
     this.search = undefined;
     this.selectedAbilities = [];
     this.selectedExperience = undefined;
     this.selectedWeight = undefined;
     this.searchPokemons();
+    event.stopPropagation();
   }
 
 

@@ -29,7 +29,7 @@
         selectedWeight ||
         selectedExperience
       "
-      (click)="clear()"
+      (click)="clear($event)"
     >
       Clear search criteria
     </button>
@@ -70,7 +70,7 @@
 
   <!-- RESULTS -->
 
-  <uib-zone id="results" [data]="results$ | async" class="d-flex flex-row flex-wrap justify-content-start align-items-start align-content-start">
+  <uib-zone id="results" [data]="results$ | async" class="flex-grow-1 d-flex flex-row flex-wrap justify-content-start align-items-start align-content-start">
     <ng-template uib-template="image" let-data="data">
       <img
         src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/{{
