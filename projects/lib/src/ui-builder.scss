@@ -104,6 +104,10 @@
   }  
 }
 
+.uib-container {
+  display: flex;
+}
+
 /* highlight each uib-zone and only first .uib-configurable element */
 uib-zone > .uib-configurable:first-of-type {
   @include configurable;

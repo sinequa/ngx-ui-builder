@@ -30,8 +30,8 @@ export class AppComponent {
   selectedExperience?: number;
 
   layouts: Layout[] = [
-    {name: "List view", id: "list-view", items: ['image', 'metas'], classes: 'd-flex flex-row mb-3'},
-    {name: "Tile view", id: "tile-view", items: ['name', 'image'], classes: 'd-flex flex-column align-items-center p-3 w-25'}
+    {name: "List view", id: "list-view", items: ['image', 'metas'], classes: 'flex-row mb-3 w-100'},
+    {name: "Tile view", id: "tile-view", items: ['name', 'image'], classes: 'flex-column align-items-center p-3 w-25'}
   ]
   selectedLayout = "list-view";
 
@@ -44,7 +44,8 @@ export class AppComponent {
       {
         id: 'header',
         type: 'container',
-        items: ['title', 'searchform']
+        items: ['title', 'searchform'],
+        classes: 'flex-column'
       },
       {
         id: 'title',
@@ -54,7 +55,8 @@ export class AppComponent {
       {
         id: 'searchform',
         type: 'container',
-        items: ['searchbar', 'breadcrumbs']
+        items: ['searchbar', 'breadcrumbs'],
+        classes: 'flex-column'
       },
       {
         id: "searchbar",
@@ -64,7 +66,7 @@ export class AppComponent {
         id: 'results',
         type: 'container',
         items: ['image', 'metas'],
-        classes: 'd-flex flex-row mb-3'
+        classes: 'flex-row mb-3 w-100'
       },
       {
         id: 'metas',
@@ -98,7 +100,8 @@ export class AppComponent {
       {
         id: 'filters',
         type: 'container',
-        items: ['abilities', 'weightFilter', 'xpFilter']
+        items: ['abilities', 'weightFilter', 'xpFilter'],
+        classes: 'flex-column'
       },
       {
         id: 'weightFilter',
