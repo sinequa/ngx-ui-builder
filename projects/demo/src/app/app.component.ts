@@ -72,6 +72,7 @@ export class AppComponent {
         id: 'metas',
         type: 'container',
         items: ['description', 'ability', 'weight', 'experience'],
+        //condition: {field: "name", value: "slowpoke"}, // For testing
         classes: 'flex-column'
       },
       {

@@ -11,7 +11,6 @@ import {
   <label class="form-label" for="classes">Classes</label>
   <input class="form-control" id="classes"
     type="text"
-    id="classes"
     name="classes"
     [ngModel]="config.classes"
     (ngModelChange)="setClasses($event)"
