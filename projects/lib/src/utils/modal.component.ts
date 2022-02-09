@@ -35,7 +35,7 @@ export class ModalComponent implements AfterViewInit, OnChanges, OnDestroy {
 
   ngOnChanges() {
     if(this.show && !this.modal) {
-      this.modal = Modal.getOrCreateInstance(this.el.nativeElement);
+      this.modal = Modal.getOrCreateInstance(this.el.nativeElement, {backdrop: false}); // Backdrop causes issues when the modal is embedded in a fixed container
       this.modal.show();
     }
   }

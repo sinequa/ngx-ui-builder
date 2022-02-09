@@ -9,7 +9,8 @@ import {
   ViewChild,
 } from '@angular/core';
 import { Offcanvas } from 'bootstrap';
-import { switchMap, Observable, map, tap } from 'rxjs';
+import { switchMap, map, tap } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 import { Configurable, ConfigurableService } from '../configurable/configurable.service';
 import { ComponentConfig, ConfigService } from '../configuration/config.service';
 import { TemplateNameDirective } from '../utils/template-name.directive';
