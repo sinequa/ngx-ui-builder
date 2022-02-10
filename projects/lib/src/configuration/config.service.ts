@@ -11,7 +11,8 @@ import {
   deleteEntities,
 } from '@ngneat/elf-entities';
 import { stateHistory } from '@ngneat/elf-state-history';
-import { filter, map, Observable } from 'rxjs';
+import { filter, map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 export interface ComponentConfig {
   id: string;
