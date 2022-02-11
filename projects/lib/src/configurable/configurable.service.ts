@@ -6,6 +6,8 @@ export interface Configurable {
   zone: string;
   enableContainers?: boolean;
   templates?: Record<string, TemplateRef<any>>;
+  data?: any;
+  dataIndex?: number;
   removeEdited: () => void;
 }
 
