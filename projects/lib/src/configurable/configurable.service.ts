@@ -1,5 +1,6 @@
 import { Injectable, TemplateRef } from '@angular/core';
-import { Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
+import { filter } from 'rxjs/operators';
 
 export interface Configurable {
   id: string;
@@ -16,7 +17,7 @@ export class ConfigurableService {
   private _hoveredId?: string;
 
   // currently edited element'id
-  edited$ = new Subject<Configurable>();
+  private edited$ = new Subject<Configurable|undefined>();
   
   // previous edited element
   previousConfigurableElement?: Configurable;
@@ -55,5 +56,19 @@ export class ConfigurableService {
     }
     
     this.edited$.next(configurable);
+  }
+
+  stopEditing() {
+    this.previousConfigurableElement?.removeEdited();
+    this.previousConfigurableElement = undefined;
+    this.edited$.next();
+  }
+
+  watchEdited(): Observable<Configurable> {
+    return this.edited$.pipe(filter(this.isConfigurable));
+  }
+
+  isConfigurable = (configurable: Configurable | undefined): configurable is Configurable => {
+    return !!configurable;
   }
 }
