@@ -50,10 +50,10 @@ export class ConfiguratorComponent {
     public configService: ConfigService
   ) {
     
-    this.edited$ = configurableService.edited$.pipe(
+    this.edited$ = configurableService.watchEdited().pipe(
       tap(() => this.offcanvas.show()),
       switchMap((context) => 
-        configService.watchConfig(context.id).pipe(
+        configService.watchConfig(context!.id).pipe(
           map(config => ({
             context,
             config,
@@ -79,6 +79,9 @@ export class ConfiguratorComponent {
     this.offcanvas = Offcanvas.getOrCreateInstance(this.offcanvasEl.nativeElement, {
       backdrop: false,
       scroll: true
+    });
+    this.offcanvasEl.nativeElement.addEventListener('hide.bs.offcanvas', _ => {
+      this.configurableService.stopEditing();
     });
   }
 
