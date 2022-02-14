@@ -27,7 +27,7 @@ export class ZoneComponent implements AfterContentInit, OnInit, OnDestroy {
   templates: Record<string, TemplateRef<any>> = {};
 
   @Input() id: string;
-  @Input() data: any;
+  @Input() data?: any;
   @Input() enableContainers = true;
 
   sub: Subscription;

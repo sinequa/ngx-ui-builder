@@ -26,8 +26,8 @@ import { DragDropService } from './drag-drop.service';
 export class ItemComponent implements OnInit, OnDestroy {
   @Input('uib-item') id: string;
   @Input() zone: string;
-  @Input() data: any;
-  @Input() dataIndex: number;
+  @Input() data?: any;
+  @Input() dataIndex?: number;
   @Input() templates: Record<string, TemplateRef<any>>;
   @Input() enableContainers = true;
 

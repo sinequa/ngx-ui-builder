@@ -19,6 +19,8 @@ export class ConfigurableDirective implements OnDestroy, Configurable {
   @Input() zone: string;
   @Input() enableContainers?: boolean;
   @Input() templates?: Record<string, TemplateRef<any>>;
+  @Input() data?: any;
+  @Input() dataIndex?: number;
 
   constructor(
     private configurableService: ConfigurableService,

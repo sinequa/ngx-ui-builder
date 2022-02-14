@@ -20,7 +20,7 @@
         [dndType]="zone"
         [dndDropzone]="[zone]"
         [dndHorizontal]="ref.isHorizontal()"
-        [dndDisableDropIf]="!isContainer(item) || dataIndex > 0"
+        [dndDisableDropIf]="!isContainer(item) || dataIndex"
         (dndDrop)="onDndDrop(item, $event)"
         (dndCanceled)="onDndCanceled(item, i)"
       ></div>
