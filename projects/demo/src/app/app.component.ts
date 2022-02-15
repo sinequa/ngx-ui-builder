@@ -55,8 +55,8 @@ export class AppComponent {
       {
         id: 'searchform',
         type: 'container',
-        items: ['searchbar', 'breadcrumbs'],
-        classes: 'flex-column'
+        items: ['searchbar','applied-filters','clear-filters'],
+        classes: 'flex-row'
       },
       {
         id: "searchbar",
