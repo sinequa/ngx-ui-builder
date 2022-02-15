@@ -1,44 +1,37 @@
-<div #offcanvas class="offcanvas offcanvas-end" tabindex="-1" id="offcanvas">
-  <ng-container *ngIf="!_showTree && (edited$ | async) as edited">
-    <!-- HEADER -->
-    <div class="offcanvas-header bg-light border-bottom">
-      <h5 class="offcanvas-title"><strong>{{edited.config.id}}</strong> (Type: <strong>{{edited.config.type}}</strong>)</h5>
-      <button type="button" class="btn ms-auto" (click)="showTree()">Tree</button>
-      <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-    </div>
-    <div class="offcanvas-body">
+<div #offcanvas class="offcanvas offcanvas-end" tabindex="-1" id="offcanvas" *ngIf="{edited: (edited$ | async)} as _">
+  <!-- HEADER -->
+  <div class="offcanvas-header bg-light border-bottom">
+    <h5 class="offcanvas-title" *ngIf="!_showTree && _.edited"><strong>{{_.edited.config.id}}</strong> (Type: <strong>{{_.edited.config.type}}</strong>)</h5>
+    <h5 class="offcanvas-title" *ngIf="_showTree">Configuration Tree</h5>
 
-        <!-- CONFIGURATOR -->
+    <button type="button" class="btn ms-auto" [ngClass]="_showTree? 'btn-secondary' : 'btn-outline-secondary'" (click)="showTree(!_showTree)">Tree</button>
+    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body">
+
+    <ng-container *ngIf="!_showTree && _.edited">
+      <!-- CONFIGURATOR -->
+    
+      <ng-container
+        *ngTemplateOutlet="configurators[_.edited.config.type]; context: { $implicit: _.edited }">
+      </ng-container>
+  
+      <hr *ngIf="configurators[_.edited.config.type]"/>
+  
+      <details *ngIf="_.edited.config.type === 'container'" open>
+        <summary>Layout</summary>
+        <uib-flex-editor [config]="_.edited.config" (onChanges)="flexChanges(_.edited, $event)"></uib-flex-editor>
+      </details>
+  
+      <uib-class-editor [config]="_.edited.config" *ngIf="cssClasses"></uib-class-editor>
+  
+      <details [attr.open]="_.edited.config.condition? '' : undefined" *ngIf="conditionalDisplay && _.edited.context.data">
+        <summary uib-tooltip="Display this component only if the data validates a rule">Conditional display</summary>
+        <uib-condition-editor [config]="_.edited.config"></uib-condition-editor>
+      </details>
+    </ng-container>
+    
+    <uib-tree [configuration]="configuration" *ngIf="_showTree"></uib-tree>
       
-        <ng-container
-          *ngTemplateOutlet="configurators[edited.config.type]; context: { $implicit: edited }">
-        </ng-container>
-
-        <hr *ngIf="configurators[edited.config.type]"/>
-
-        <details *ngIf="edited.config.type === 'container'" open>
-          <summary>Layout</summary>
-          <uib-flex-editor [config]="edited.config" (onChanges)="flexChanges(edited, $event)"></uib-flex-editor>
-        </details>
-
-        <uib-class-editor [config]="edited.config" *ngIf="cssClasses"></uib-class-editor>
-
-        <details [attr.open]="edited.config.condition? '' : undefined" *ngIf="conditionalDisplay && edited.context.data">
-          <summary uib-tooltip="Display this component only if the data validates a rule">Conditional display</summary>
-          <uib-condition-editor [config]="edited.config"></uib-condition-editor>
-        </details>
-        
-    </div>
-  </ng-container>
-
-  <ng-container *ngIf="_showTree"><!-- HEADER -->
-    <div class="offcanvas-header bg-light border-bottom">
-      <h5 class="offcanvas-title">Configuration Tree</h5>
-      <button type="button" class="btn btn-secondary ms-auto" (click)="showTree(false)">Tree</button>
-      <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-    </div>
-    <div class="offcanvas-body">
-      <uib-tree [configuration]="configuration"></uib-tree>
-    </div>
-  </ng-container>
+  </div>
 </div>

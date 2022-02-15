@@ -58,7 +58,7 @@ export class ConfiguratorComponent {
     
     this.edited$ = configurableService.watchEdited().pipe(
       tap(() => this.offcanvas.show()),
-      tap(() => this._showTree = false),
+      tap(() => this.showTree(false)),
       switchMap((context) => 
         configService.watchConfig(context!.id).pipe(
           map(config => ({

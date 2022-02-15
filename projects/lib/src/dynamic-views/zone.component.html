@@ -33,5 +33,7 @@
     [dndHorizontal]="ref.isHorizontal()"
     [dndDisableDropIf]="index"
     (dndDrop)="onDndDrop($event)"
+
+    (click)="onItemClicked($event, data, index)"
   ></div>
 </ng-template>
