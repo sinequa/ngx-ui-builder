@@ -6,6 +6,8 @@
       <div #ref
   
         uib-configurable
+        [uib-disable-if]="dataIndex"
+
         [uib-item]="item"
         [id]="item"
         [zone]="zone"
@@ -16,6 +18,7 @@
         [dataIndex]="dataIndex"
   
         [dndDraggable]="{item, index: i, container: id}"
+        [dndDisableIf]="dataIndex"
         [dndEffectAllowed]="'move'"
         [dndType]="zone"
         [dndDropzone]="[zone]"

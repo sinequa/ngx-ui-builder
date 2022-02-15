@@ -17,7 +17,9 @@
 <ng-template #single let-data let-index="index">
   <div #ref
 
-    uib-configurable
+    uib-configurable    
+    [uib-disable-if]="index"
+
     [uib-item]="id"
     [id]="id"
     [zone]="id"
@@ -29,7 +31,7 @@
 
     [dndDropzone]="[id]"
     [dndHorizontal]="ref.isHorizontal()"
-    [dndDisableDropIf]="index > 0"
+    [dndDisableDropIf]="index"
     (dndDrop)="onDndDrop($event)"
   ></div>
 </ng-template>
