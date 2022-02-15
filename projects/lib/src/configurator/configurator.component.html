@@ -1,8 +1,9 @@
 <div #offcanvas class="offcanvas offcanvas-end" tabindex="-1" id="offcanvas">
-  <ng-container *ngIf="(edited$ | async) as edited">
+  <ng-container *ngIf="!_showTree && (edited$ | async) as edited">
     <!-- HEADER -->
     <div class="offcanvas-header bg-light border-bottom">
       <h5 class="offcanvas-title"><strong>{{edited.config.id}}</strong> (Type: <strong>{{edited.config.type}}</strong>)</h5>
+      <button type="button" class="btn ms-auto" (click)="showTree()">Tree</button>
       <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
     <div class="offcanvas-body">
@@ -13,22 +14,31 @@
           *ngTemplateOutlet="configurators[edited.config.type]; context: { $implicit: edited }">
         </ng-container>
 
-        <details [attr.open]="edited.config.condition? '' : undefined">
-          <summary>Conditional display</summary>
-          <uib-condition-editor [config]="edited.config"></uib-condition-editor>
-        </details>
-        
+        <hr *ngIf="configurators[edited.config.type]"/>
+
         <details *ngIf="edited.config.type === 'container'" open>
           <summary>Layout</summary>
           <uib-flex-editor [config]="edited.config" (onChanges)="flexChanges(edited, $event)"></uib-flex-editor>
-          <uib-class-editor [config]="edited.config"></uib-class-editor>
         </details>
-                
-        <details>
-          <summary>Components</summary>
-          <uib-tree [configuration]="configuration"></uib-tree>
+
+        <uib-class-editor [config]="edited.config" *ngIf="cssClasses"></uib-class-editor>
+
+        <details [attr.open]="edited.config.condition? '' : undefined" *ngIf="conditionalDisplay && edited.context.data">
+          <summary uib-tooltip="Display this component only if the data validates a rule">Conditional display</summary>
+          <uib-condition-editor [config]="edited.config"></uib-condition-editor>
         </details>
+        
     </div>
   </ng-container>
-  
+
+  <ng-container *ngIf="_showTree"><!-- HEADER -->
+    <div class="offcanvas-header bg-light border-bottom">
+      <h5 class="offcanvas-title">Configuration Tree</h5>
+      <button type="button" class="btn btn-secondary ms-auto" (click)="showTree(false)">Tree</button>
+      <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+      <uib-tree [configuration]="configuration"></uib-tree>
+    </div>
+  </ng-container>
 </div>
