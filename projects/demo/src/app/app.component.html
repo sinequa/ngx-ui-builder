@@ -14,7 +14,7 @@
     />
   </ng-template>
 
-  <ng-template uib-template="breadcrumbs">
+  <ng-template uib-template="applied-filters">
     <div>
       <span *ngFor="let ability of selectedAbilities" class="metadata">
         {{ ability }}
@@ -22,15 +22,11 @@
       <span *ngIf="selectedWeight" class="metadata">Weight &lt; {{ selectedWeight }}</span>
       <span *ngIf="selectedExperience" class="metadata">XP &lt; {{ selectedExperience }}</span>
     </div>
-    <button
-      *ngIf="
-        search ||
-        selectedAbilities.length ||
-        selectedWeight ||
-        selectedExperience
-      "
-      (click)="clear($event)"
-    >
+  </ng-template>
+
+  <ng-template uib-template="clear-filters">    
+    <button *ngIf="search || selectedAbilities.length || selectedWeight || selectedExperience"
+      (click)="clear($event)">
       Clear search criteria
     </button>
   </ng-template>
@@ -139,6 +135,7 @@
           <input class="form-check-input" type="radio" [id]="layout.id" [value]="layout.id" [(ngModel)]="selectedLayout" (ngModelChange)="selectLayout(layout)">
           <label class="form-check-label" [for]="layout.id">{{layout.name}}</label>
         </div>
+        <hr />
       </div>
 
       <uib-palette [context]="context.context" [configurators]="context.configurators"></uib-palette>

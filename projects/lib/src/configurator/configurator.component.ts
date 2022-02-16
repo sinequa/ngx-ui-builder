@@ -4,6 +4,7 @@ import {
   Component,
   ContentChildren,
   ElementRef,
+  Input,
   QueryList,
   TemplateRef,
   ViewChild,
@@ -40,9 +41,14 @@ export class ConfiguratorComponent {
   @ViewChild('offcanvas') offcanvasEl: ElementRef;
   offcanvas: Offcanvas;
 
+  @Input() cssClasses = true;
+  @Input() conditionalDisplay = true;
+
   edited$: Observable<ConfiguratorContext>;
   
   configuration: ComponentConfig[] = [];
+
+  _showTree: boolean;
 
   constructor(
     private cdr: ChangeDetectorRef,
@@ -52,6 +58,7 @@ export class ConfiguratorComponent {
     
     this.edited$ = configurableService.watchEdited().pipe(
       tap(() => this.offcanvas.show()),
+      tap(() => this.showTree(false)),
       switchMap((context) => 
         configService.watchConfig(context!.id).pipe(
           map(config => ({
@@ -97,6 +104,10 @@ export class ConfiguratorComponent {
   flexChanges(edited: ConfiguratorContext, flex: any) {
     edited.config.classes = Object.keys(flex).map(k => flex[k]).join(' ');
     this.configService.updateConfig(edited.config);
+  }
+
+  showTree(showTree = true) {
+    this._showTree = showTree;
   }
 
 }

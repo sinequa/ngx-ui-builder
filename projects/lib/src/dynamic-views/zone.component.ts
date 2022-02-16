@@ -9,6 +9,8 @@ import {
   TemplateRef,
   OnDestroy,
   OnInit,
+  Output,
+  EventEmitter,
 } from '@angular/core';
 import { DndDropEvent } from 'ngx-drag-drop';
 import { TemplateNameDirective } from '../utils/template-name.directive';
@@ -29,6 +31,8 @@ export class ZoneComponent implements AfterContentInit, OnInit, OnDestroy {
   @Input() id: string;
   @Input() data?: any;
   @Input() enableContainers = true;
+
+  @Output() itemClicked = new EventEmitter<{data: any, index?: number, event: Event}>();
 
   sub: Subscription;
 
@@ -67,5 +71,9 @@ export class ZoneComponent implements AfterContentInit, OnInit, OnDestroy {
         event.data
       );
     }
+  }
+
+  onItemClicked(event: Event, data?: any, index?: number) {
+    this.itemClicked.next({data, index, event});
   }
 }

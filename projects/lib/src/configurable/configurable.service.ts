@@ -61,7 +61,7 @@ export class ConfigurableService {
   stopEditing() {
     this.previousConfigurableElement?.removeEdited();
     this.previousConfigurableElement = undefined;
-    this.edited$.next();
+    this.edited$.next(undefined);
   }
 
   watchEdited(): Observable<Configurable> {

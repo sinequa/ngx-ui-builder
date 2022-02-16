@@ -1,14 +1,11 @@
-import { Component, Input } from '@angular/core';
-import {
-  ComponentConfig,
-  ConfigService,
-} from '../configuration/config.service';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ComponentConfig, ConfigService } from '../configuration/config.service';
 
 @Component({
   selector: 'uib-class-editor',
   template: `
 <div class="mb-3 pe-4">
-  <label class="form-label" for="classes">Classes</label>
+  <label class="form-label" for="classes">CSS Classes</label>
   <input class="form-control" id="classes"
     type="text"
     name="classes"
@@ -17,6 +14,7 @@ import {
   />
 </div>
   `,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ClassEditorComponent {
   @Input() config: ComponentConfig;
