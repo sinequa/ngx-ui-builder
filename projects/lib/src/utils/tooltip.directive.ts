@@ -14,6 +14,7 @@ export class TooltipDirective implements OnChanges, OnDestroy {
   constructor(public el: ElementRef){}
 
   ngOnChanges() {
+    this.tooltip?.dispose(); // Force the creation of a new tooltip, or else the content is not updated
     if(this.html) {
       this.tooltip = Tooltip.getOrCreateInstance(this.el.nativeElement, {
         html: true,
@@ -22,9 +23,6 @@ export class TooltipDirective implements OnChanges, OnDestroy {
         title: this.html,
         container: this.container || this.el.nativeElement
       });
-    }
-    else {
-      this.tooltip?.dispose();
     }
   }
 
