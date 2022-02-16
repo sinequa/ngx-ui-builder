@@ -5,8 +5,12 @@ import { ConfigService } from "../configuration";
   selector: 'uib-toolbar',
   template: `
 <div class="btn-group">
-  <button class="btn btn-primary" (click)="configService.undo()" [disabled]="!(configService.canUndo$()| async)">Undo</button>
-  <button class="btn btn-primary" (click)="configService.redo()" [disabled]="!(configService.canRedo$()| async)">Redo</button>
+  <button class="btn btn-primary" (click)="configService.undo()" [disabled]="!(configService.canUndo$()| async)" uib-tooltip="Undo" placement="top">
+    <svg-icon key="undo" width="22px" height="25px"></svg-icon>
+  </button>
+  <button class="btn btn-primary" (click)="configService.redo()" [disabled]="!(configService.canRedo$()| async)" uib-tooltip="Redo" placement="top">
+    <svg-icon key="redo" width="22px" height="25px"></svg-icon>
+  </button>
 </div>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush

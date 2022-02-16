@@ -22,7 +22,7 @@
   
       <details *ngIf="obs.edited.config.type === 'container'" open>
         <summary>Layout</summary>
-        <uib-flex-editor [config]="obs.edited.config" (onChanges)="flexChanges(obs.edited, $event)"></uib-flex-editor>
+        <uib-flex-editor [config]="obs.edited.config"></uib-flex-editor>
       </details>
   
       <uib-class-editor [config]="obs.edited.config" *ngIf="cssClasses"></uib-class-editor>

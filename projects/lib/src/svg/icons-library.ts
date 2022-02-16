@@ -12,7 +12,9 @@ import {
   UIBuilderIconAlignYStretch,
   UIBuilderIconArrowDown,
   UIBuilderIconArrowForward,
-  UIBuilderIconTree
+  UIBuilderIconTree,
+  UIBuilderIconUndo,
+  UIBuilderIconRedo
 } from "./svg-icons";
 
 export const iconsLibrary = [
@@ -29,5 +31,7 @@ export const iconsLibrary = [
   UIBuilderIconAlignYStretch,
   UIBuilderIconArrowDown,
   UIBuilderIconArrowForward,
-  UIBuilderIconTree
+  UIBuilderIconTree,
+  UIBuilderIconUndo,
+  UIBuilderIconRedo
 ]
