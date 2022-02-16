@@ -30,6 +30,11 @@ export interface ConfiguratorContext {
 @Component({
   selector: 'uib-configurator',
   templateUrl: './configurator.component.html',
+  styles:[`
+.offcanvas-body {
+  padding-bottom: 90px; // avoid toolbar hiding bottom of configurator
+}
+  `],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ConfiguratorComponent {
@@ -101,11 +106,6 @@ export class ConfiguratorComponent {
     );
   }
   
-  flexChanges(edited: ConfiguratorContext, flex: any) {
-    edited.config.classes = Object.keys(flex).map(k => flex[k]).join(' ');
-    this.configService.updateConfig(edited.config);
-  }
-
   showTree(showTree = true) {
     this._showTree = showTree;
   }
