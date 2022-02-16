@@ -1,7 +1,7 @@
-<div #offcanvas class="offcanvas offcanvas-end" tabindex="-1" id="offcanvas" *ngIf="{edited: (edited$ | async)} as _">
+<div #offcanvas class="offcanvas offcanvas-end" tabindex="-1" id="offcanvas" *ngIf="{edited: (edited$ | async)} as obs">
   <!-- HEADER -->
   <div class="offcanvas-header bg-light border-bottom">
-    <h5 class="offcanvas-title" *ngIf="!_showTree && _.edited"><strong>{{_.edited.config.id}}</strong> (Type: <strong>{{_.edited.config.type}}</strong>)</h5>
+    <h5 class="offcanvas-title" *ngIf="!_showTree && obs.edited"><strong>{{obs.edited.config.id}}</strong> (Type: <strong>{{obs.edited.config.type}}</strong>)</h5>
     <h5 class="offcanvas-title" *ngIf="_showTree">Configuration Tree</h5>
 
     <button type="button" class="btn ms-auto" [ngClass]="_showTree? 'btn-secondary' : 'btn-light'" uib-tooltip="{{_showTree? 'Hide' : 'Show'}} configuration tree" (click)="showTree(!_showTree)">
@@ -11,25 +11,25 @@
   </div>
   <div class="offcanvas-body">
 
-    <ng-container *ngIf="!_showTree && _.edited">
+    <ng-container *ngIf="!_showTree && obs.edited">
       <!-- CONFIGURATOR -->
     
       <ng-container
-        *ngTemplateOutlet="configurators[_.edited.config.type]; context: { $implicit: _.edited }">
+        *ngTemplateOutlet="configurators[obs.edited.config.type]; context: { $implicit: obs.edited }">
       </ng-container>
   
-      <hr *ngIf="configurators[_.edited.config.type]"/>
+      <hr *ngIf="configurators[obs.edited.config.type]"/>
   
-      <details *ngIf="_.edited.config.type === 'container'" open>
+      <details *ngIf="obs.edited.config.type === 'container'" open>
         <summary>Layout</summary>
-        <uib-flex-editor [config]="_.edited.config" (onChanges)="flexChanges(_.edited, $event)"></uib-flex-editor>
+        <uib-flex-editor [config]="obs.edited.config" (onChanges)="flexChanges(obs.edited, $event)"></uib-flex-editor>
       </details>
   
-      <uib-class-editor [config]="_.edited.config" *ngIf="cssClasses"></uib-class-editor>
+      <uib-class-editor [config]="obs.edited.config" *ngIf="cssClasses"></uib-class-editor>
   
-      <details [attr.open]="_.edited.config.condition? '' : undefined" *ngIf="conditionalDisplay && _.edited.context.data">
+      <details [attr.open]="obs.edited.config.condition? '' : undefined" *ngIf="conditionalDisplay && obs.edited.context.data">
         <summary uib-tooltip="Display this component only if the data validates a rule">Conditional display</summary>
-        <uib-condition-editor [config]="_.edited.config"></uib-condition-editor>
+        <uib-condition-editor [config]="obs.edited.config"></uib-condition-editor>
       </details>
     </ng-container>
     
