@@ -7,7 +7,7 @@ import {
   Input,
   OnDestroy,
   OnInit,
-  TemplateRef,
+  TemplateRef
 } from '@angular/core';
 import { DndDropEvent } from 'ngx-drag-drop';
 import { Subscription } from 'rxjs';
@@ -101,8 +101,21 @@ export class ItemComponent implements OnInit, OnDestroy {
     return false;
   }
   
-  remove(event: Event) {
+  /**
+   * It removes the item from the parent container.
+   * @param {Event} event - Event
+   */
+  removeMe(event: Event) {
     event.stopImmediatePropagation();
-    this.dragDropService.handleCancelByName(this.id, this.parentId!);
+    
+    // only uib-zone cannot self remove
+    if (this.parentId) {
+      const container = this.configService.getContainer(this.parentId);
+      const index = container.items.findIndex(item => item === this.id);
+      if (index !== -1) {
+        container.items.splice(index, 1);
+        this.configService.updateConfig([container]);
+      }
+    }
   }
 }

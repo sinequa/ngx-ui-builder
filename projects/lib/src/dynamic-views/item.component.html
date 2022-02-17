@@ -3,8 +3,8 @@
 
   <ng-container *ngIf="!config.condition || data[config.condition.field] === config.condition.value">
     <div #ref *ngFor="let item of config.items; let i = index"
-        class="action-buttons"
-        
+        class="uib-action-buttons"
+
         uib-configurable
         [uib-disable-if]="dataIndex"
 
@@ -38,5 +38,5 @@
 ></ng-container>
 
 <div class="uib-menu" *ngIf="id !== zone">
-  <svg-icon (click)="remove($event)" key="trash" width="16px" height="16px"></svg-icon>
+  <svg-icon (click)="removeMe($event)" key="trash" width="16px" height="16px"></svg-icon>
 </div>
