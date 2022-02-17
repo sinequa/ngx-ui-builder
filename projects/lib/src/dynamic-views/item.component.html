@@ -2,15 +2,16 @@
   <div class="dragPlaceholder" dndPlaceholderRef>+</div>
 
   <ng-container *ngIf="!config.condition || data[config.condition.field] === config.condition.value">
-    <ng-container *ngFor="let item of config.items; let i = index">
-      <div #ref
-  
+    <div #ref *ngFor="let item of config.items; let i = index"
+        class="action-buttons"
+        
         uib-configurable
         [uib-disable-if]="dataIndex"
 
         [uib-item]="item"
         [id]="item"
         [zone]="zone"
+        [parentId]="config.id"
         [enableContainers]="enableContainers"
         [templates]="templates"
   
@@ -27,7 +28,6 @@
         (dndDrop)="onDndDrop(item, $event)"
         (dndCanceled)="onDndCanceled(item, i)"
       ></div>
-    </ng-container>
   </ng-container>
 </ng-container>
 
@@ -36,3 +36,7 @@
   [ngTemplateOutlet]="templates[config.type || id]"
   [ngTemplateOutletContext]="{ $implicit: config, data: data, id: id }"
 ></ng-container>
+
+<div class="uib-menu" *ngIf="id !== zone">
+  <svg-icon (click)="remove($event)" key="trash" width="16px" height="16px"></svg-icon>
+</div>

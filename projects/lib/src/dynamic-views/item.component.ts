@@ -30,6 +30,9 @@ export class ItemComponent implements OnInit, OnDestroy {
   @Input() dataIndex?: number;
   @Input() templates: Record<string, TemplateRef<any>>;
   @Input() enableContainers = true;
+  
+  // parent's container id or zone's id
+  @Input() parentId?: string;
 
   @HostBinding('class')
   classes?: string;
@@ -96,5 +99,10 @@ export class ItemComponent implements OnInit, OnDestroy {
       return !this.element.nativeElement.classList.contains('flex-column');
     }
     return false;
+  }
+  
+  remove(event: Event) {
+    event.stopImmediatePropagation();
+    this.dragDropService.handleCancelByName(this.id, this.parentId!);
   }
 }
