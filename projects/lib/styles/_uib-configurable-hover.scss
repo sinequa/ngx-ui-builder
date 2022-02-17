@@ -12,12 +12,12 @@ uib-zone > .uib-configurable:first-of-type:hover {
     @include edited;
     
     outline: 1px dashed yellowgreen;
-    // padding: var(--padding);
+    padding: var(--padding);
     margin: var(--margin);
 
     &.uib-container {
       outline: 1px dashed steelblue;
-      // padding: var(--padding);
+      padding: var(--padding);
       margin: var(--margin);
     }
   }
@@ -27,7 +27,7 @@ uib-zone > .uib-configurable:first-of-type:hover {
     @include edited;
     
     outline: 1px dashed red;
-    // padding: var(--padding);
+    padding: var(--padding);
     margin: var(--margin);
   }
 }

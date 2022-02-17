@@ -1,6 +1,6 @@
 :root {
   --padding: 6px;
-  --margin: 12px;
+  --margin: 6px;
 }
 
 .uib-bootstrap {
@@ -133,32 +133,5 @@ uib-zone > .uib-configurable:first-of-type {
   &.edited,
   .edited {
     @include edited;
-  }
-}
-
-/* actions button styles */
-.action-buttons {
-  position: relative;
-
-  > .uib-menu {
-    display: none;
-    position: absolute;
-    top: -18px;
-    left: 0;
-
-    svg-icon {
-      opacity: 0;
-      top: 0;
-      left: 0;
-
-      display: flex;
-      justify-content: center;
-      align-items: center;
-
-      &:not(:first-child) {
-        border: 1px dotted yellowgreen;
-      }
-
-    }
   }
 }
