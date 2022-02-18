@@ -1,6 +1,8 @@
 :root {
   --padding: 6px;
   --margin: 6px;
+  --menu-top: -18px;
+  --menu-left: 0px;
 }
 
 .uib-bootstrap {
@@ -94,10 +96,18 @@ uib-toolbar {
   display: flex;
 }
 
+@mixin white-stripes {
+	--stripes-color: hsla(0,0%,100%,0.4);
+	background-color: #f2f2f2;
+	background-image: linear-gradient(45deg, var(--stripes-color) 12.5%, transparent 12.5%, transparent 50%, var(--stripes-color) 50%, var(--stripes-color) 62.5%, transparent 62.5%, transparent 100%);
+	background-size: 5.66px 5.66px;
+}
+
 /* when an element have 'edited' state */
 @mixin edited {
   /* display current edited element */
   &.edited {
+    @include white-stripes;
     background-color: lightblue;
     outline: 1px dashed blue;
 
@@ -116,19 +126,22 @@ uib-toolbar {
   }
 }
 
-@import '_uib-configurable-with-animations';
-@import '_uib-configurable-hover';
+@import '_animations';
 
-@mixin white-stripes {
-	--stripes-color: hsla(0,0%,100%,0.4);
-	background-color: #f2f2f2;
-	background-image: linear-gradient(45deg, var(--stripes-color) 12.5%, transparent 12.5%, transparent 50%, var(--stripes-color) 50%, var(--stripes-color) 62.5%, transparent 62.5%, transparent 100%);
-	background-size: 5.66px 5.66px;
-}
+/* selection behavior, choose one or both */
+// @import '_hover';
+@import '_selected';
 
 /* default zone styles */
 uib-zone > .uib-configurable:first-of-type {
-  @include white-stripes;
+  outline: 1px dashed lightsteelblue;
+  border-radius: 2px;
+  padding: 2px;
+  
+  &,
+  & .cursor-default {
+    cursor: pointer;
+  }
 
   &.edited,
   .edited {
@@ -143,8 +156,8 @@ uib-zone > .uib-configurable:first-of-type {
   > .uib-menu {
     display: none;
     position: absolute;
-    top: -18px;
-    left: 0;
+    top: calc(var(--menu-top) + var(--menu-top-offset, 0px));
+    left: calc(var(--menu-left) + var(--menu-left-offset, 0px));
 
     svg-icon {
       opacity: 0;

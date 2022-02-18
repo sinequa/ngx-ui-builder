@@ -1,11 +1,5 @@
 /* styles when hovering a zone */
 uib-zone > .uib-configurable:first-of-type:hover {
-  outline: 1px dashed lightsteelblue;
-
-  &,
-  & .cursor-default {
-    cursor: pointer;
-  }
 
   &:not(.highlight),
   .uib-configurable:not(.highlight) {
@@ -24,7 +18,7 @@ uib-zone > .uib-configurable:first-of-type:hover {
   .uib-configurable.highlight {
     @include edited;
     
-    outline: 1px dashed red;
+    outline: 2px dashed red;
     padding: var(--padding);
     margin: var(--margin);
   }

@@ -10,6 +10,7 @@ export interface Configurable {
   data?: any;
   dataIndex?: number;
   removeEdited: () => void;
+  removeSelected: () => void;
 }
 
 @Injectable({ providedIn: 'root' })
@@ -46,11 +47,16 @@ export class ConfigurableService {
     if (!this.previousConfigurableElement) {
       // previous is undefined
       this.previousConfigurableElement = configurable;
-    } else if (this.previousConfigurableElement.id !== configurable.id || (this.previousConfigurableElement.id === configurable.id && this.previousConfigurableElement.zone !== configurable.zone)) {
+    }
+    else if (this.previousConfigurableElement.id !== configurable.id
+      || (this.previousConfigurableElement.id === configurable.id && this.previousConfigurableElement.zone !== configurable.zone)) {
       // previous exist and it's id don't match with the new configurable element
+            
       this.previousConfigurableElement.removeEdited();
+      this.previousConfigurableElement.removeSelected();
       this.previousConfigurableElement = configurable;
-    }else if (this.previousConfigurableElement.id === configurable.id && this.previousConfigurableElement.zone === configurable.zone) {
+    }
+    else if (this.previousConfigurableElement.id === configurable.id && this.previousConfigurableElement.zone === configurable.zone) {
       // same id and same zone
       this.previousConfigurableElement = undefined;
     }
@@ -60,6 +66,7 @@ export class ConfigurableService {
 
   stopEditing() {
     this.previousConfigurableElement?.removeEdited();
+    this.previousConfigurableElement?.removeSelected();
     this.previousConfigurableElement = undefined;
     this.edited$.next(undefined);
   }

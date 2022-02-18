@@ -1,0 +1,38 @@
+uib-zone * {
+  transition: margin ease .3s, padding ease .3s;
+}
+
+uib-zone[selected] > .uib-configurable:first-of-type {
+  &, *:not(.uib-menu) {
+      margin: 6px;
+      padding: 4px;
+  }
+}
+
+uib-zone > .uib-configurable:first-of-type:hover {
+  &,
+  .uib-configurable:not(.highlight) {
+    @include edited;
+    
+    outline: 1px dashed yellowgreen;
+    border-radius: 2px;
+
+    &.uib-container {
+      outline: 1px dashed steelblue;
+      border-radius: 2px;
+    }
+  }
+  
+  &.highlight,
+  .uib-configurable.highlight {
+    @include edited;
+    
+    outline: 1px dashed red;
+    border-radius: 2px;
+  }
+}
+
+.uib-menu {
+  --menu-top-offset: -10px;
+  --menu-left-offset: -20px;
+}

@@ -1,8 +1,10 @@
+import {DOCUMENT} from '@angular/common';
 import {
   Directive,
   ElementRef,
   HostBinding,
   HostListener,
+  Inject,
   Input,
   Renderer2,
   TemplateRef,
@@ -25,7 +27,8 @@ export class ConfigurableDirective implements Configurable {
   constructor(
     private configurableService: ConfigurableService,
     private el: ElementRef,
-    private renderer: Renderer2
+    private renderer: Renderer2,
+    @Inject(DOCUMENT) private document: Document
   ) {
   }
 
@@ -66,13 +69,25 @@ export class ConfigurableDirective implements Configurable {
     // we can safely set the 'edited' class to the current element
     if (this.el.nativeElement.classList.contains('edited')) {
       this.removeEdited();
+      this.removeSelected();
     } else {
+      if (this.zone) {
+        // hopefully each zone have an "id" attribute
+        this.document.getElementById(this.zone)?.setAttribute("selected", "");
+      }
+  
       this.renderer.addClass(this.el.nativeElement, 'edited');
     }
   }
   
   removeEdited() {
     this.renderer.removeClass(this.el.nativeElement, 'edited');
+  }
+  
+  removeSelected() {
+    if (this.zone) {
+      this.document.getElementById(this.zone)?.removeAttribute("selected");
+    }
   }
 
   highlight() {
