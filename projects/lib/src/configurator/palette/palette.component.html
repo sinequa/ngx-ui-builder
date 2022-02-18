@@ -29,6 +29,7 @@
     (dndStart)="onDndStart(item)"
     (dndEnd)="onDndEnd()"
     class="palette-item">
+    <svg-icon class="grip" key="grip" height="1em"></svg-icon>
     <span [ngClass]="item.iconClass"></span>
     {{item.display || item.type}}
     <button *ngIf="item.removeable"
