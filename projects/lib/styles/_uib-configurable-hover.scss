@@ -7,7 +7,7 @@ uib-zone > .uib-configurable:first-of-type:hover {
     cursor: pointer;
   }
 
-  &,
+  &:not(.highlight),
   .uib-configurable:not(.highlight) {
     @include edited;
     
@@ -17,8 +17,6 @@ uib-zone > .uib-configurable:first-of-type:hover {
 
     &.uib-container {
       outline: 1px dashed steelblue;
-      padding: var(--padding);
-      margin: var(--margin);
     }
   }
   

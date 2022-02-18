@@ -7,7 +7,7 @@ import {
   Input,
   OnDestroy,
   OnInit,
-  TemplateRef,
+  TemplateRef
 } from '@angular/core';
 import { DndDropEvent } from 'ngx-drag-drop';
 import { Subscription } from 'rxjs';
@@ -30,6 +30,9 @@ export class ItemComponent implements OnInit, OnDestroy {
   @Input() dataIndex?: number;
   @Input() templates: Record<string, TemplateRef<any>>;
   @Input() enableContainers = true;
+  
+  // parent's container id or zone's id
+  @Input() parentId?: string;
 
   @HostBinding('class')
   classes?: string;
@@ -96,5 +99,23 @@ export class ItemComponent implements OnInit, OnDestroy {
       return !this.element.nativeElement.classList.contains('flex-column');
     }
     return false;
+  }
+  
+  /**
+   * It removes the item from the parent container.
+   * @param {Event} event - Event
+   */
+  removeMe(event: Event) {
+    event.stopImmediatePropagation();
+    
+    // only uib-zone cannot self remove
+    if (this.parentId) {
+      const container = this.configService.getContainer(this.parentId);
+      const index = container.items.findIndex(item => item === this.id);
+      if (index !== -1) {
+        container.items.splice(index, 1);
+        this.configService.updateConfig([container]);
+      }
+    }
   }
 }
