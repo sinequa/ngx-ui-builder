@@ -1,38 +1,46 @@
-uib-zone * {
-  transition: margin ease .3s, padding ease .3s;
+uib-zone .uib-configurable {
+  transition: margin ease 0.3s, padding ease 0.3s;
 }
 
-uib-zone[selected] > .uib-configurable:first-of-type {
-  &, *:not(.uib-menu) {
-      margin: 6px;
-      padding: 4px;
+/* when zone is selected apply this style */
+.uib-configurable[selected] {
+  padding: var(--padding);
+
+  .uib-configurable {
+    margin: var(--margin);
   }
-}
+  .uib-container {
+    padding: var(--padding);
+  }
 
-uib-zone > .uib-configurable:first-of-type:hover {
-  &,
-  .uib-configurable:not(.highlight) {
-    @include edited;
-    
+  .uib-configurable:not(.highlight, .edited) {
     outline: 1px dashed yellowgreen;
     border-radius: 2px;
+  }
+  .uib-container:not(.highlight) {
+    outline: 1px dashed steelblue;
+    border-radius: 2px;
+  }
+}
 
-    &.uib-container {
-      outline: 1px dashed steelblue;
-      border-radius: 2px;
-    }
+/* when hovering a zone or a zone's element */
+uib-zone > .uib-configurable:first-of-type:hover {
+  &:not([selected]) {
+    padding: calc(var(--padding) * 2);
   }
   
-  &.highlight,
-  .uib-configurable.highlight {
-    @include edited;
-    
-    outline: 1px dashed red;
+  .uib-configurable:not(.highlight) {
+    outline: 1px dashed yellowgreen;
+    border-radius: 2px;
+  }
+
+  .uib-container:not(.highlight) {
+    outline: 1px dashed steelblue;
     border-radius: 2px;
   }
 }
 
 .uib-menu {
-  --menu-top-offset: -10px;
-  --menu-left-offset: -20px;
+  --menu-top-offset: 0px;
+  --menu-left-offset: -6px;
 }

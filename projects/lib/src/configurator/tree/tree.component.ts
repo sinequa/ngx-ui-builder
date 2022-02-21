@@ -1,4 +1,5 @@
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import {ConfigurableService} from '../../configurable';
 import { ComponentConfig } from '../../configuration';
 
 @Component({
@@ -12,6 +13,8 @@ export class TreeComponent implements OnChanges {
   root: Partial<ComponentConfig>[];
   
   private configurationMap: Map<string, Partial<ComponentConfig>>;
+  
+  constructor(private configurableService: ConfigurableService) {}
   
   ngOnChanges(changes: SimpleChanges) {
     // set our Map object,
@@ -41,5 +44,25 @@ export class TreeComponent implements OnChanges {
    */
   children(id: string): Partial<ComponentConfig>[] {
     return [...this.configurationMap.values()].filter((el) => el.parents ? el.parents.includes(id) : false).sort((a, b) => a.orders[id] - b.orders[id]);
+  }
+  
+  select(id: string) {
+    const el = this.configurableService.configurableDirectiveMap.get(id);
+    el?.click(new MouseEvent("click"));
+    el?.nativeElement.scrollIntoView({behavior: 'smooth', inline: 'nearest', block: 'center'});
+  }
+  
+  hover(id: string) {
+    const hoveredId = this.configurableService.hoveredId;
+    if (hoveredId) {
+      const prev = this.configurableService.configurableDirectiveMap.get(hoveredId);
+      prev?.removeHighlight();
+    }
+    
+    this.configurableService.hoveredId = id;
+    const el = this.configurableService.configurableDirectiveMap.get(id);
+    el?.addHighlight();
+    
+    el?.nativeElement.scrollIntoView({behavior: 'smooth', inline: 'nearest', block: 'center'});
   }
 }

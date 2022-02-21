@@ -1,6 +1,6 @@
 :root {
-  --padding: 6px;
-  --margin: 6px;
+  --padding: 4px;
+  --margin: 4px;
   --menu-top: -18px;
   --menu-left: 0px;
 }
@@ -97,10 +97,19 @@ uib-toolbar {
 }
 
 @mixin white-stripes {
-	--stripes-color: hsla(0,0%,100%,0.4);
-	background-color: #f2f2f2;
-	background-image: linear-gradient(45deg, var(--stripes-color) 12.5%, transparent 12.5%, transparent 50%, var(--stripes-color) 50%, var(--stripes-color) 62.5%, transparent 62.5%, transparent 100%);
-	background-size: 5.66px 5.66px;
+  --stripes-color: hsla(0, 0%, 100%, 0.4);
+  background-color: #f2f2f2;
+  background-image: linear-gradient(
+    45deg,
+    var(--stripes-color) 12.5%,
+    transparent 12.5%,
+    transparent 50%,
+    var(--stripes-color) 50%,
+    var(--stripes-color) 62.5%,
+    transparent 62.5%,
+    transparent 100%
+  );
+  background-size: 5.66px 5.66px;
 }
 
 /* when an element have 'edited' state */
@@ -113,7 +122,7 @@ uib-toolbar {
 
     > .uib-menu {
       display: inline-flex;
-      gap: .5rem;
+      gap: 0.5rem;
 
       svg-icon {
         opacity: 1;
@@ -126,28 +135,42 @@ uib-toolbar {
   }
 }
 
-@import '_animations';
-
-/* selection behavior, choose one or both */
-// @import '_hover';
-@import '_selected';
-
 /* default zone styles */
 uib-zone > .uib-configurable:first-of-type {
   outline: 1px dashed lightsteelblue;
   border-radius: 2px;
-  padding: 2px;
-  
+
+  /* elements within zone are clickable */
   &,
   & .cursor-default {
     cursor: pointer;
   }
 
+  /* edited styles */
   &.edited,
   .edited {
     @include edited;
   }
+
+  &.uib-container,
+  .uib-container {
+    min-width: 32px;
+    min-height: 32px;
+    width: auto;
+  }
+
+  /* highlight styles */
+  &.highlight,
+  .uib-configurable.highlight {
+    outline: 1px dashed red;
+    border-radius: 2px;
+  }
 }
+
+@import "_animations";
+/* selection behavior, choose one or both */
+// @import '_hover';
+@import "_selected";
 
 /* actions button styles */
 .uib-action-buttons {
@@ -171,7 +194,6 @@ uib-zone > .uib-configurable:first-of-type {
       &:not(:first-child) {
         border: 1px dotted yellowgreen;
       }
-
     }
   }
 }

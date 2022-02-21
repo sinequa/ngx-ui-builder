@@ -8,7 +8,7 @@
 <ng-template #tree let-id let-root="root">
   <ul [ngClass]="{ tree: root }">
     <li *ngFor="let el of root || children(id)">
-      <a>{{ el.id }}</a>
+      <a (mouseover)="hover(el.id)" (click)="select(el.id)">{{ el.id }}</a>
       <ng-container
         *ngIf="el.items"
         [ngTemplateOutlet]="tree"

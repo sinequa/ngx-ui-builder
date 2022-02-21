@@ -1,11 +1,10 @@
-import {DOCUMENT} from '@angular/common';
 import {
   Directive,
   ElementRef,
   HostBinding,
   HostListener,
-  Inject,
   Input,
+  OnInit,
   Renderer2,
   TemplateRef,
 } from '@angular/core';
@@ -15,7 +14,7 @@ import { Configurable, ConfigurableService } from './configurable.service';
 @Directive({
   selector: '[uib-configurable]',
 })
-export class ConfigurableDirective implements Configurable {
+export class ConfigurableDirective implements Configurable, OnInit {
   @Input() id: string;
   @Input() zone: string;
   @Input() enableContainers?: boolean;
@@ -23,13 +22,19 @@ export class ConfigurableDirective implements Configurable {
   @Input() data?: any;
   @Input() dataIndex?: number;
   @Input("uib-disable-if") disableIf?: any;
+  
+  nativeElement: HTMLElement;
 
   constructor(
     private configurableService: ConfigurableService,
     private el: ElementRef,
-    private renderer: Renderer2,
-    @Inject(DOCUMENT) private document: Document
+    private renderer: Renderer2
   ) {
+    this.nativeElement = this.el.nativeElement;
+  }
+
+  ngOnInit(): void {
+    this.configurableService.configurableDirectiveMap.set(this.id, this);
   }
 
   @HostBinding('class')
@@ -72,8 +77,8 @@ export class ConfigurableDirective implements Configurable {
       this.removeSelected();
     } else {
       if (this.zone) {
-        // hopefully each zone have an "id" attribute
-        this.document.getElementById(this.zone)?.setAttribute("selected", "");
+        const el = this.configurableService.configurableDirectiveMap.get(this.zone);
+        el?.nativeElement.setAttribute("selected","")
       }
   
       this.renderer.addClass(this.el.nativeElement, 'edited');
@@ -86,8 +91,17 @@ export class ConfigurableDirective implements Configurable {
   
   removeSelected() {
     if (this.zone) {
-      this.document.getElementById(this.zone)?.removeAttribute("selected");
+      const el = this.configurableService.configurableDirectiveMap.get(this.zone);
+      el?.nativeElement.removeAttribute("selected");
     }
+  }
+  
+  removeHighlight() {
+    this.renderer.removeClass(this.el.nativeElement, 'highlight');
+  }
+  
+  addHighlight() {
+    this.renderer.addClass(this.el.nativeElement, 'highlight');
   }
 
   highlight() {

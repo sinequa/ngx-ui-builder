@@ -31,6 +31,8 @@ export class ItemComponent implements OnInit, OnDestroy {
   @Input() templates: Record<string, TemplateRef<any>>;
   @Input() enableContainers = true;
   
+  @Input() configurable: boolean = true;
+  
   // parent's container id or zone's id
   @Input() parentId?: string;
 
@@ -45,26 +47,18 @@ export class ItemComponent implements OnInit, OnDestroy {
     public configService: ConfigService,
     public dragDropService: DragDropService,
     public cdr: ChangeDetectorRef,
-    public element: ElementRef
+    public el: ElementRef
   ) {}
 
   ngOnInit() {
-    //console.log('subscribed to ', this.id);
-    this.subs.push(
-      this.configService.watchConfig(this.id).subscribe((config) => {
-        this.updateConfig(config);
-      })
-    );
-    this.subs.push(
-      this.configService
-        .watchAllConfig()
-        .subscribe((_) => this.cdr.markForCheck())
-    );
+    const configChanges$ = this.configService.watchConfig(this.id).subscribe((config) => this.updateConfig(config));
+    const allConfigChanges$ = this.configService.watchAllConfig().subscribe(() => this.cdr.markForCheck())
+    
+    this.subs.push(configChanges$, allConfigChanges$)
     this.updateConfig(this.configService.getConfig(this.id));
   }
 
   ngOnDestroy() {
-    //console.log('destroyed sub to ', this.id);
     this.subs.forEach((s) => s.unsubscribe());
   }
 
@@ -95,8 +89,8 @@ export class ItemComponent implements OnInit, OnDestroy {
   }
 
   isHorizontal() {
-    if(this.element.nativeElement.classList.contains('d-flex')) {
-      return !this.element.nativeElement.classList.contains('flex-column');
+    if(this.el.nativeElement.classList.contains('d-flex')) {
+      return !this.el.nativeElement.classList.contains('flex-column');
     }
     return false;
   }
