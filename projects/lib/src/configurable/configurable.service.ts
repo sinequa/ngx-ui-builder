@@ -1,6 +1,7 @@
 import { Injectable, TemplateRef } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { filter } from 'rxjs/operators';
+import {ConfigurableDirective} from './configurable.directive';
 
 export interface Configurable {
   id: string;
@@ -10,6 +11,7 @@ export interface Configurable {
   data?: any;
   dataIndex?: number;
   removeEdited: () => void;
+  removeSelected: () => void;
 }
 
 @Injectable({ providedIn: 'root' })
@@ -21,7 +23,13 @@ export class ConfigurableService {
   
   // previous edited element
   previousConfigurableElement?: Configurable;
+  
+  // configurable service must subscribe to store'changes events (config service)
+  configurableDirectiveMap: Map<string, ConfigurableDirective> = new Map<string, ConfigurableDirective>();
 
+  set hoveredId(id: string | undefined) {
+    this._hoveredId = id;
+  }
   get hoveredId(): string | undefined {
     return this._hoveredId;
   }
@@ -46,11 +54,16 @@ export class ConfigurableService {
     if (!this.previousConfigurableElement) {
       // previous is undefined
       this.previousConfigurableElement = configurable;
-    } else if (this.previousConfigurableElement.id !== configurable.id || (this.previousConfigurableElement.id === configurable.id && this.previousConfigurableElement.zone !== configurable.zone)) {
+    }
+    else if (this.previousConfigurableElement.id !== configurable.id
+      || (this.previousConfigurableElement.id === configurable.id && this.previousConfigurableElement.zone !== configurable.zone)) {
       // previous exist and it's id don't match with the new configurable element
+            
       this.previousConfigurableElement.removeEdited();
+      this.previousConfigurableElement.removeSelected();
       this.previousConfigurableElement = configurable;
-    }else if (this.previousConfigurableElement.id === configurable.id && this.previousConfigurableElement.zone === configurable.zone) {
+    }
+    else if (this.previousConfigurableElement.id === configurable.id && this.previousConfigurableElement.zone === configurable.zone) {
       // same id and same zone
       this.previousConfigurableElement = undefined;
     }
@@ -60,6 +73,7 @@ export class ConfigurableService {
 
   stopEditing() {
     this.previousConfigurableElement?.removeEdited();
+    this.previousConfigurableElement?.removeSelected();
     this.previousConfigurableElement = undefined;
     this.edited$.next(undefined);
   }

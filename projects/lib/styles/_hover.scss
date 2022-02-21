@@ -1,0 +1,26 @@
+/* styles when hovering a zone */
+
+uib-zone > .uib-configurable:first-of-type {
+  &.highlight,
+  .uib-configurable.highlight {
+    @include edited;
+
+    padding: var(--padding);
+    margin: var(--margin);
+  }
+}
+
+uib-zone > .uib-configurable:first-of-type:hover {
+  &:not(.highlight),
+  .uib-configurable:not(.highlight) {
+    @include edited;
+
+    outline: 1px dashed yellowgreen;
+    padding: var(--padding);
+    margin: var(--margin);
+
+    &.uib-container {
+      outline: 1px dashed steelblue;
+    }
+  }
+}

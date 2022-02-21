@@ -1,33 +1,48 @@
 <ng-container *ngIf="config.type === 'container'">
-  <div class="dragPlaceholder" dndPlaceholderRef>+</div>
+  <div *ngIf="configurable" class="dragPlaceholder" dndPlaceholderRef>+</div>
 
   <ng-container *ngIf="!config.condition || data[config.condition.field] === config.condition.value">
-    <div #ref *ngFor="let item of config.items; let i = index"
-        class="uib-action-buttons"
+    <ng-container *ngIf="!configurable">
+      <div #ref *ngFor="let item of config.items; let i = index"
 
-        uib-configurable
-        [uib-disable-if]="dataIndex"
+      [uib-item]="item"
+      [id]="item"
+      [templates]="templates"
+      [configurable]="configurable"
 
-        [uib-item]="item"
-        [id]="item"
-        [zone]="zone"
-        [parentId]="config.id"
-        [enableContainers]="enableContainers"
-        [templates]="templates"
-  
-        [data]="data"
-        [dataIndex]="dataIndex"
-  
-        [dndDraggable]="{item, index: i, container: id}"
-        [dndDisableIf]="dataIndex"
-        [dndEffectAllowed]="'move'"
-        [dndType]="zone"
-        [dndDropzone]="[zone]"
-        [dndHorizontal]="ref.isHorizontal()"
-        [dndDisableDropIf]="!isContainer(item) || dataIndex"
-        (dndDrop)="onDndDrop(item, $event)"
-        (dndCanceled)="onDndCanceled(item, i)"
-      ></div>
+      [data]="data"
+      [dataIndex]="dataIndex"
+      ></div>    
+    </ng-container>
+    <ng-container *ngIf="configurable">
+      <div #ref *ngFor="let item of config.items; let i = index"
+          class="uib-action-buttons"
+
+          uib-configurable
+          [uib-disable-if]="dataIndex"
+
+          [uib-item]="item"
+          [id]="item"
+          [zone]="zone"
+          [parentId]="config.id"
+          [enableContainers]="enableContainers"
+          [templates]="templates"
+          [configurable]="configurable"
+    
+          [data]="data"
+          [dataIndex]="dataIndex"
+    
+          [dndDraggable]="{item, index: i, container: id}"
+          [dndDisableIf]="dataIndex"
+          [dndEffectAllowed]="'move'"
+          [dndType]="zone"
+          [dndDropzone]="[zone]"
+          [dndHorizontal]="ref.isHorizontal()"
+          [dndDisableDropIf]="!isContainer(item) || dataIndex"
+          (dndDrop)="onDndDrop(item, $event)"
+          (dndCanceled)="onDndCanceled(item, i)"
+        ></div>
+    </ng-container>
   </ng-container>
 </ng-container>
 
@@ -37,6 +52,6 @@
   [ngTemplateOutletContext]="{ $implicit: config, data: data, id: id }"
 ></ng-container>
 
-<div class="uib-menu" *ngIf="id !== zone">
-  <svg-icon (click)="removeMe($event)" key="trash" width="16px" height="16px"></svg-icon>
+<div class="uib-menu" *ngIf="id !== zone && configurable">
+  <svg-icon (click)="removeMe($event)" key="trash" height="16px"></svg-icon>
 </div>
