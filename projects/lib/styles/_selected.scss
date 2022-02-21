@@ -1,38 +1,36 @@
-uib-zone * {
+uib-zone .uib-configurable {
   transition: margin ease .3s, padding ease .3s;
 }
 
+/* when zone is selected apply this style */
 uib-zone[selected] > .uib-configurable:first-of-type {
-  &, *:not(.uib-menu) {
-      margin: 6px;
-      padding: 4px;
+  // &, :not(.uib-menu, img) {
+  // }
+  
+  .uib-configurable {
+    margin: 6px;
+    padding: 4px;  
   }
 }
 
+/* when hovering a zone or a zone's element */
 uib-zone > .uib-configurable:first-of-type:hover {
+  padding: 8px;
+
   &,
   .uib-configurable:not(.highlight) {
-    @include edited;
     
     outline: 1px dashed yellowgreen;
     border-radius: 2px;
 
     &.uib-container {
       outline: 1px dashed steelblue;
-      border-radius: 2px;
+      border-radius: 2px;  
     }
-  }
-  
-  &.highlight,
-  .uib-configurable.highlight {
-    @include edited;
-    
-    outline: 1px dashed red;
-    border-radius: 2px;
   }
 }
 
 .uib-menu {
-  --menu-top-offset: -10px;
-  --menu-left-offset: -20px;
+  --menu-top-offset: 0px;
+  --menu-left-offset: -6px;
 }

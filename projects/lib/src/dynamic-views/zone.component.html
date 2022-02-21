@@ -1,22 +1,33 @@
 <ng-container
-  *ngTemplateOutlet="isArray ? array : single; context: { $implicit: data }"
+  *ngTemplateOutlet="isArray ? array : single; context: { $implicit: data, first: 'true' }"
 ></ng-container>
 
 <!-- data is an array -->
 <ng-template #array let-data>
-  <ng-container *ngFor="let d of data; let i = index" 
+  <ng-container *ngFor="let d of data; let index = index; let first = first" 
     [ngTemplateOutlet]="single"
-    [ngTemplateOutletContext]="{ $implicit: d, index: i }">
+    [ngTemplateOutletContext]="{ $implicit: d, index, first }">
   </ng-container>
 </ng-template>
 
 <!-- data is a single object -->
-<ng-template #single let-data let-index="index">
-  <div #ref
+<ng-template #single let-data let-index="index" let-first="first">
+  <div *ngIf="!first"
+    [uib-item]="id"
+    [id]="id"
+    [configurable]="false"
+
+    [templates]="templates"
+    
+    [data]="data"
+    [dataIndex]="index"
+
+  ></div>
+  <div #ref *ngIf="first"
   
     class="uib-action-buttons"
 
-    uib-configurable    
+    uib-configurable
     [uib-disable-if]="index"
 
     [uib-item]="id"

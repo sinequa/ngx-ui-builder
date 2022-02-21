@@ -1,6 +1,7 @@
 import { Injectable, TemplateRef } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { filter } from 'rxjs/operators';
+import {ConfigurableDirective} from './configurable.directive';
 
 export interface Configurable {
   id: string;
@@ -22,7 +23,13 @@ export class ConfigurableService {
   
   // previous edited element
   previousConfigurableElement?: Configurable;
+  
+  // configurable service must subscribe to store'changes events (config service)
+  configurableDirectiveMap: Map<string, ConfigurableDirective> = new Map<string, ConfigurableDirective>();
 
+  set hoveredId(id: string | undefined) {
+    this._hoveredId = id;
+  }
   get hoveredId(): string | undefined {
     return this._hoveredId;
   }

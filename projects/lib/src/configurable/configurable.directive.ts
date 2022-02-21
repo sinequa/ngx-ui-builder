@@ -6,6 +6,7 @@ import {
   HostListener,
   Inject,
   Input,
+  OnInit,
   Renderer2,
   TemplateRef,
 } from '@angular/core';
@@ -15,7 +16,7 @@ import { Configurable, ConfigurableService } from './configurable.service';
 @Directive({
   selector: '[uib-configurable]',
 })
-export class ConfigurableDirective implements Configurable {
+export class ConfigurableDirective implements Configurable, OnInit {
   @Input() id: string;
   @Input() zone: string;
   @Input() enableContainers?: boolean;
@@ -23,6 +24,8 @@ export class ConfigurableDirective implements Configurable {
   @Input() data?: any;
   @Input() dataIndex?: number;
   @Input("uib-disable-if") disableIf?: any;
+  
+  nativeElement: HTMLElement;
 
   constructor(
     private configurableService: ConfigurableService,
@@ -30,6 +33,11 @@ export class ConfigurableDirective implements Configurable {
     private renderer: Renderer2,
     @Inject(DOCUMENT) private document: Document
   ) {
+    this.nativeElement = this.el.nativeElement;
+  }
+
+  ngOnInit(): void {
+    this.configurableService.configurableDirectiveMap.set(this.id, this);
   }
 
   @HostBinding('class')
@@ -88,6 +96,14 @@ export class ConfigurableDirective implements Configurable {
     if (this.zone) {
       this.document.getElementById(this.zone)?.removeAttribute("selected");
     }
+  }
+  
+  removeHighlight() {
+    this.renderer.removeClass(this.el.nativeElement, 'highlight');
+  }
+  
+  addHighlight() {
+    this.renderer.addClass(this.el.nativeElement, 'highlight');
   }
 
   highlight() {
