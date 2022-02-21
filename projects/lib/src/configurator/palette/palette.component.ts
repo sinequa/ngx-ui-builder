@@ -1,14 +1,8 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnChanges, OnInit, TemplateRef } from '@angular/core';
 import { Observable, of, Subject } from 'rxjs';
-import { Configurable } from '../configurable/configurable.service';
-import {
-  ComponentConfig,
-  ConfigService
-} from '../configuration/config.service';
-import {
-  ComponentCreator,
-  DragDropService,
-} from '../dynamic-views/drag-drop.service';
+import { Configurable } from '../../configurable/configurable.service';
+import { ComponentConfig, ConfigService } from '../../configuration/config.service';
+import { ComponentCreator, DragDropService } from '../../dynamic-views/drag-drop.service';
 
 declare interface PaletteItem extends ComponentCreator {
   type: string;
@@ -39,10 +33,16 @@ declare interface ConfigModal {
   background: rgb(0,0,0,0.1);
   cursor: pointer;
   margin-right: 5px;
-  
-  .btn-close {
-    font-size: 0.7em;
-  }
+  margin-bottom: 5px;
+}
+.palette-item .btn-close {
+  font-size: 0.7em;
+}
+.palette-item .grip {
+  position: relative;
+  top: -2px;
+  color: #7c7c7c;
+  margin-right: 3px;
 }
   `
   ],

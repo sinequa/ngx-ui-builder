@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { ComponentConfig, ConfigService } from '../configuration/config.service';
+import { ComponentConfig, ConfigService } from '../../configuration/config.service';
 
 @Component({
   selector: 'uib-class-editor',
