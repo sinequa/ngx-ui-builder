@@ -17,6 +17,7 @@ import { Configurable, ConfigurableService } from './configurable.service';
 export class ConfigurableDirective implements Configurable, OnInit {
   @Input() id: string;
   @Input() zone: string;
+  @Input() parentId: string;
   @Input() enableContainers?: boolean;
   @Input() templates?: Record<string, TemplateRef<any>>;
   @Input() data?: any;

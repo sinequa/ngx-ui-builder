@@ -110,4 +110,24 @@ export class ConfiguratorComponent {
     this._showTree = showTree;
   }
 
+  /**
+   * It removes the item from the parent container.
+   * @param {Event} event - Event
+   */
+   remove(edited: ConfiguratorContext, event: Event) {
+     event.stopImmediatePropagation();
+    
+     const {id, parentId} = edited.context || {};
+     
+    // only uib-zone cannot self remove
+    if (parentId) {
+      const container = this.configService.getContainer(parentId);
+      const index = container.items.findIndex(item => item === id);
+      if (index !== -1) {
+        container.items.splice(index, 1);
+        this.configService.updateConfig([container]);
+        this.offcanvas.toggle();
+      }
+    }
+  }
 }

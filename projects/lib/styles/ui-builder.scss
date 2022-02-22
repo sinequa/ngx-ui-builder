@@ -117,26 +117,16 @@ uib-toolbar {
   /* display current edited element */
   &.edited {
     @include white-stripes;
+    
+    padding: var(--padding);
+    
     background-color: lightblue;
     outline: 1px dashed blue;
-
-    > .uib-menu {
-      display: inline-flex;
-      gap: 0.5rem;
-
-      svg-icon {
-        opacity: 1;
-
-        &:hover {
-          transform: scale(1.5);
-        }
-      }
-    }
   }
 }
 
 /* default zone styles */
-uib-zone > .uib-configurable:first-of-type {
+.uib-zone {
   outline: 1px dashed lightsteelblue;
   border-radius: 2px;
 
@@ -171,29 +161,3 @@ uib-zone > .uib-configurable:first-of-type {
 /* selection behavior, choose one or both */
 // @import '_hover';
 @import "_selected";
-
-/* actions button styles */
-.uib-action-buttons {
-  position: relative;
-
-  > .uib-menu {
-    display: none;
-    position: absolute;
-    top: calc(var(--menu-top) + var(--menu-top-offset, 0px));
-    left: calc(var(--menu-left) + var(--menu-left-offset, 0px));
-
-    svg-icon {
-      opacity: 0;
-      top: 0;
-      left: 0;
-
-      display: flex;
-      justify-content: center;
-      align-items: center;
-
-      &:not(:first-child) {
-        border: 1px dotted yellowgreen;
-      }
-    }
-  }
-}

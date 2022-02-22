@@ -5,6 +5,7 @@ import {ConfigurableDirective} from './configurable.directive';
 
 export interface Configurable {
   id: string;
+  parentId: string;
   zone: string;
   enableContainers?: boolean;
   templates?: Record<string, TemplateRef<any>>;
