@@ -16,15 +16,14 @@
     </ng-container>
     <ng-container *ngIf="configurable">
       <div #ref *ngFor="let item of config.items; let i = index"
-          class="uib-action-buttons"
 
           uib-configurable
+          [parentId]="config.id"
           [uib-disable-if]="dataIndex"
 
           [uib-item]="item"
           [id]="item"
           [zone]="zone"
-          [parentId]="config.id"
           [enableContainers]="enableContainers"
           [templates]="templates"
           [configurable]="configurable"
@@ -51,7 +50,3 @@
   [ngTemplateOutlet]="templates[config.type || id]"
   [ngTemplateOutletContext]="{ $implicit: config, data: data, id: id }"
 ></ng-container>
-
-<div class="uib-menu" *ngIf="id !== zone && configurable">
-  <svg-icon (click)="removeMe($event)" key="trash" height="16px"></svg-icon>
-</div>

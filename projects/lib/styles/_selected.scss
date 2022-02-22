@@ -1,5 +1,13 @@
 uib-zone .uib-configurable {
   transition: margin ease 0.3s, padding ease 0.3s;
+  width: auto;
+}
+
+.uib-zone:hover {
+  .uib-configurable {
+    margin: var(--margin);
+    padding: var(--padding);
+  }
 }
 
 /* when zone is selected apply this style */
@@ -24,11 +32,11 @@ uib-zone .uib-configurable {
 }
 
 /* when hovering a zone or a zone's element */
-uib-zone > .uib-configurable:first-of-type:hover {
+.uib-zone:hover {
   &:not([selected]) {
     padding: calc(var(--padding) * 2);
   }
-  
+
   .uib-configurable:not(.highlight) {
     outline: 1px dashed yellowgreen;
     border-radius: 2px;
@@ -38,9 +46,4 @@ uib-zone > .uib-configurable:first-of-type:hover {
     outline: 1px dashed steelblue;
     border-radius: 2px;
   }
-}
-
-.uib-menu {
-  --menu-top-offset: 0px;
-  --menu-left-offset: -6px;
 }

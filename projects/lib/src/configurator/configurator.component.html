@@ -1,7 +1,11 @@
 <div #offcanvas class="offcanvas offcanvas-end" tabindex="-1" id="offcanvas" *ngIf="{edited: (edited$ | async)} as obs">
   <!-- HEADER -->
   <div class="offcanvas-header bg-light border-bottom">
-    <h5 class="offcanvas-title" *ngIf="!_showTree && obs.edited"><strong>{{obs.edited.config.id}}</strong> (Type: <strong>{{obs.edited.config.type}}</strong>)</h5>
+    <h5 class="offcanvas-title" *ngIf="!_showTree && obs.edited">
+      <strong>{{obs.edited.config.id}}</strong>
+      <br/>
+      <h6>(Type: <strong>{{obs.edited.config.type}}</strong>)</h6>
+    </h5>
     <h5 class="offcanvas-title" *ngIf="_showTree">Configuration Tree</h5>
 
     <button type="button" class="btn ms-auto" [ngClass]="_showTree? 'btn-secondary' : 'btn-light'" uib-tooltip="{{_showTree? 'Hide' : 'Show'}} configuration tree" (click)="showTree(!_showTree)">
@@ -11,6 +15,10 @@
   </div>
   <div class="offcanvas-body">
 
+    <div class="d-flex justify-content-start mb-1" *ngIf="obs?.edited?.context.parentId">
+      <button class="btn btn-outline-danger" (click)="remove(obs.edited, $event)">Remove</button>
+    </div>
+    
     <ng-container *ngIf="!_showTree && obs.edited">
       <!-- CONFIGURATOR -->
     
