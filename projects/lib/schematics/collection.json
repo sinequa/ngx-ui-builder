@@ -1,0 +1,14 @@
+{
+  "$schema": "../../../node_modules/@angular-devkit/schematics/collection-schema.json",
+  "schematics": {
+    "ng-add": {
+      "description": "Add ngx-ui-builder to the project",
+      "factory": "./ng-add/index#ngAdd"
+    },
+    "make-static": {
+      "description": "Turn a UI Builder application into a static application",
+      "factory": "./make-static/index#makeStatic",
+      "schema": "./make-static/schema.json"
+    }
+  }
+}
