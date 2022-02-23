@@ -1,0 +1,23 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "$id": "SchematicsMakeStatic",
+  "title": "Make Static Schema",
+  "type": "object",
+  "properties": {
+    "config": {
+      "description": "The path to the configuration (.json) of the application.",
+      "type": "string",
+      "format": "path"
+    },
+    "project": {
+      "type": "string",
+      "description": "The name of the project.",
+      "$default": {
+        "$source": "projectName"
+      }
+    }
+   },
+  "required": [
+    "config"
+  ]
+}
