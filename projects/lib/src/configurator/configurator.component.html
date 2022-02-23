@@ -14,10 +14,6 @@
     <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
   </div>
   <div class="offcanvas-body">
-
-    <div class="d-flex justify-content-start mb-1" *ngIf="obs?.edited?.context.parentId">
-      <button class="btn btn-outline-danger" (click)="remove(obs.edited, $event)">Remove</button>
-    </div>
     
     <ng-container *ngIf="!_showTree && obs.edited">
       <!-- CONFIGURATOR -->
@@ -28,17 +24,23 @@
   
       <hr *ngIf="configurators[obs.edited.config.type]"/>
   
-      <details *ngIf="obs.edited.config.type === 'container'" open>
+      <details *ngIf="obs.edited.config.type === 'container'" class="mb-3" open>
         <summary>Layout</summary>
         <uib-flex-editor [config]="obs.edited.config"></uib-flex-editor>
       </details>
   
-      <uib-class-editor [config]="obs.edited.config" *ngIf="cssClasses"></uib-class-editor>
+      <div class="mb-3 pe-4" *ngIf="cssClasses">
+        <uib-class-editor [config]="obs.edited.config"></uib-class-editor>
+      </div>
   
-      <details [attr.open]="obs.edited.config.condition? '' : undefined" *ngIf="conditionalDisplay && obs.edited.context.data">
+      <details [attr.open]="obs.edited.config.condition? '' : undefined" class="mb-3" *ngIf="conditionalDisplay && obs.edited.context.data">
         <summary uib-tooltip="Display this component only if the data validates a rule">Conditional display</summary>
         <uib-condition-editor [config]="obs.edited.config"></uib-condition-editor>
       </details>
+      
+      <div class="d-flex justify-content-start mb-1" *ngIf="obs.edited.context.parentId">
+        <button class="btn btn-outline-danger" (click)="remove(obs.edited, $event)">Remove</button>
+      </div>
     </ng-container>
     
     <uib-tree [configuration]="configuration" *ngIf="_showTree"></uib-tree>

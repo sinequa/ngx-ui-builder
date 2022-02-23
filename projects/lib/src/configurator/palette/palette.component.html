@@ -24,7 +24,6 @@
 <ng-template #paletteItem let-item>
   <div
     [dndDraggable]="item.type"
-    [dndEffectAllowed]="'copy'"
     [dndType]="context?.zone"
     (dndStart)="onDndStart(item)"
     (dndEnd)="onDndEnd()"
