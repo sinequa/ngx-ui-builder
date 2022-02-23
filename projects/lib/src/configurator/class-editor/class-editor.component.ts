@@ -4,7 +4,6 @@ import { ComponentConfig, ConfigService } from '../../configuration/config.servi
 @Component({
   selector: 'uib-class-editor',
   template: `
-<div class="mb-3 pe-4">
   <label class="form-label" for="classes">CSS Classes</label>
   <input class="form-control" id="classes"
     type="text"
@@ -12,7 +11,6 @@ import { ComponentConfig, ConfigService } from '../../configuration/config.servi
     [ngModel]="config.classes"
     (ngModelChange)="setClasses($event)"
   />
-</div>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
