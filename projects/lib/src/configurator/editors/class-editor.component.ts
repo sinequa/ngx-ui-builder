@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { ConfiguratorContext } from '..';
+import { ConfiguratorContext } from '../configurator.models';
 
 @Component({
   selector: 'uib-class-editor',

@@ -27,8 +27,6 @@ import { TreeComponent } from './tree/tree.component';
   exports: [
     UtilsModule,
     ConfiguratorComponent,
-    PaletteComponent,
-    HtmlEditorComponent,
     ToolbarComponent
   ],
 })

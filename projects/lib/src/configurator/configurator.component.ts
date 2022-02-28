@@ -14,17 +14,8 @@ import { Observable } from 'rxjs';
 import { Configurable, ConfigurableService } from '../configurable/configurable.service';
 import { ComponentConfig, ConfigService, ContainerConfig } from '../configuration/config.service';
 import { TemplateNameDirective } from '../utils/template-name.directive';
-import { defaultPaletteOptions, PaletteOptions } from './palette/palette.component';
-
-export interface ConfiguratorOptions {
-  paletteOptions?: PaletteOptions;
-  showFlexEditor?: boolean;
-  showHtmlEditor?: boolean;
-  showCssClasses?: boolean;
-  showConditionalDisplay?: boolean;
-  showRemove?: boolean;
-  showDuplicate?: boolean;
-}
+import { defaultPaletteOptions } from './palette/palette.component';
+import { ConfiguratorContext, ConfiguratorOptions } from './configurator.models';
 
 export const defaultConfiguratorOptions: ConfiguratorOptions = {
   paletteOptions: defaultPaletteOptions,
@@ -35,19 +26,6 @@ export const defaultConfiguratorOptions: ConfiguratorOptions = {
   showRemove: true,
   showDuplicate: true
 }
-
-export interface ConfiguratorContext {
-  /** Object storing the configuration of the component */
-  config: ComponentConfig;
-  /** Options of the configurators (may change depending on zone) */
-  options: ConfiguratorOptions;
-  /** Register of all the components configurators  */
-  configurators: Record<string, TemplateNameDirective>;
-  /** Context of the zone of the edited component */
-  context: Configurable;
-  /** Callback that the configurator should call to update the configuration */
-  configChanged: () => void;
-};
 
 @Component({
   selector: 'uib-configurator',

@@ -4,6 +4,7 @@ import { Configurable } from '../../configurable/configurable.service';
 import { ComponentConfig, ConfigService } from '../../configuration/config.service';
 import { ComponentCreator, DragDropService } from '../../dynamic-views/drag-drop.service';
 import { TemplateNameDirective } from '../../utils';
+import { PaletteOptions } from '../configurator.models';
 
 declare interface PaletteItem extends ComponentCreator {
   type: string;
@@ -20,14 +21,6 @@ declare interface ConfigModal {
   configChanged: () => void;
   title: string;
   close: Subject<ComponentConfig|undefined>;
-}
-
-export interface PaletteOptions {
-  enableSubcontainers?: boolean;
-  enableRawHtml?: boolean;
-  rawHtmlPlaceholder?: string;
-  showStandardPalette?: boolean;
-  showExistingPalette?: boolean;
 }
 
 export const defaultPaletteOptions: PaletteOptions = {
