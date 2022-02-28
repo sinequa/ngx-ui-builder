@@ -11,6 +11,7 @@ import { ConfigService } from "../configuration";
   <button class="btn btn-primary" (click)="configService.redo()" [disabled]="!(configService.canRedo$()| async)" uib-tooltip="Redo" placement="top">
     <svg-icon key="redo" width="22px" height="25px"></svg-icon>
   </button>
+  <ng-content></ng-content>
 </div>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush
