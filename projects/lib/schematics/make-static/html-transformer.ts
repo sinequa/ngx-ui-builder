@@ -135,7 +135,7 @@ function generateHtml(conf: ComponentConfig, templates: HTMLElement[], config: C
   else {
     let innerHtml = '';
     if(conf.type === '_raw-html') {
-      innerHtml = conf.rawHtml || '';
+      innerHtml = `\r\n<div>\r\n${conf.rawHtml || ''}\r\n</div>\r\n`;
     }
     else {
       const template = templates.find(t => t.attribs?.['uib-template'] === conf.type);
