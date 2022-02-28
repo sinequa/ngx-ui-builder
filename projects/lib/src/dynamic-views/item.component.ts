@@ -6,15 +6,12 @@ import {
   HostBinding,
   Input,
   OnDestroy,
-  OnInit,
-  TemplateRef
+  OnInit
 } from '@angular/core';
 import { DndDropEvent } from 'ngx-drag-drop';
 import { Subscription } from 'rxjs';
-import {
-  ComponentConfig,
-  ConfigService,
-} from '../configuration/config.service';
+import { ComponentConfig, ConfigService } from '../configuration/config.service';
+import { TemplateNameDirective } from '../utils';
 import { DragDropService } from './drag-drop.service';
 
 @Component({
@@ -28,8 +25,9 @@ export class ItemComponent implements OnInit, OnDestroy {
   @Input() zone: string;
   @Input() data?: any;
   @Input() dataIndex?: number;
-  @Input() templates: Record<string, TemplateRef<any>>;
+  @Input() templates: Record<string, TemplateNameDirective>;
   @Input() enableContainers = true;
+  @Input() enableRawHtml = true;
   
   @Input() configurable: boolean = true;
   

@@ -36,7 +36,7 @@
 <hr />
 
 
-<div class="d-flex">
+<div class="d-flex w-75">
 
   <!-- FILTERS -->
 
@@ -67,7 +67,7 @@
   <!-- RESULTS -->
 
   <uib-zone id="results" [data]="results$ | async" class="flex-grow-1 d-flex flex-row flex-wrap justify-content-start align-items-start align-content-start">
-    <ng-template uib-template="image" let-data="data">
+    <ng-template uib-template="image" display="Image" title="A component to display the picture of a Pokemon" let-data="data">
       <img
         src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/{{
           data.id
@@ -76,11 +76,11 @@
       />
     </ng-template>
 
-    <ng-template uib-template="description" let-data="data" let-config>
+    <ng-template uib-template="description" display="Description" let-data="data" let-config>
         {{data.description}}
     </ng-template>
     
-    <ng-template uib-template="metadata" let-data="data" let-config>
+    <ng-template uib-template="metadata" display="Metadata" let-data="data" let-config>
       <strong *ngIf="!config.hideField">{{ config.field }}: </strong>
       <span *ngFor="let meta of asArray(data[config.field])" class="metadata">{{meta}}</span>
     </ng-template>
@@ -100,14 +100,13 @@
 
   <uib-configurator>
     <ng-template uib-template="title" let-context>
-      <div class="mb-3 pe-4">
-        <label class="form-label" for="title">Title</label>
-        <input class="form-control" id="title"
-          type="text"
-          [(ngModel)]="context.config.title"
-          (ngModelChange)="context.configChanged()"
-        />
-      </div>
+      <label class="form-label" for="title">Title</label>
+      <input class="form-control" id="title"
+        type="text"
+        [(ngModel)]="context.config.title"
+        (ngModelChange)="context.configChanged()"
+      />
+      <hr />
     </ng-template>
     
     <ng-template uib-template="metadata" let-context>
@@ -124,9 +123,10 @@
         <input class="form-check-input" type="checkbox" id="hideField" [(ngModel)]="!!context.config.hideField" (ngModelChange)="context.configChanged()">
         <label class="form-check-label" for="hideField">Hide field</label>
       </div>
+      <hr />
     </ng-template>
 
-    <ng-template uib-template="container" let-context>
+    <ng-template uib-template="_container" let-context>
 
       <!-- Custom pre-defined layouts -->
       <div *ngIf="context.context.id === 'results'">
@@ -137,8 +137,6 @@
         </div>
         <hr />
       </div>
-
-      <uib-palette [context]="context.context" [configurators]="context.configurators"></uib-palette>
 
     </ng-template>
   </uib-configurator>

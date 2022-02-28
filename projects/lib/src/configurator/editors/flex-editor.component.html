@@ -1,0 +1,48 @@
+<!-- direction -->
+<div class="editor-line">
+  <div>Direction</div>
+  <div class="radio-group">
+    <ng-container *ngFor="let item of directions">
+     <input type="radio" name="direction" [id]="item.key" (click)="toggleClass(item.bootstrap, directions)" [checked]="direction === item.value"/>
+     <label [for]="item.key" [uib-tooltip]="item.text" [placement]="placement">
+       <svg-icon [key]="item.key" width="22px" height="25px"></svg-icon>
+     </label>
+    </ng-container>
+  </div>
+</div>
+
+<!-- justify -->
+<div class="editor-line">
+  <div>Justify</div>
+  <div
+    class="radio-group"
+    [style.--rotate]="direction === 'column' ? '90deg' : ''"
+  >
+    <ng-container *ngFor="let item of justify">
+      <input type="radio" name="justify" [id]="item.key" (click)="toggleClass(item.bootstrap, justify)" [checked]="classes.includes(item.bootstrap)"/>
+      <label [for]="item.key" [uib-tooltip]="item.text" [placement]="placement">
+        <svg-icon [key]="item.key" width="22px" height="25px"></svg-icon>
+      </label>        
+    </ng-container>
+  </div>
+</div>
+
+<!-- alignment -->
+<div class="editor-line">
+  <div>Alignment</div>
+  <!-- horizontal -->
+  <div class="radio-group">
+    <ng-container *ngFor="let item of alignment">
+      <input type="radio" name="alignment" id="alignment-{{item.key}}" (click)="toggleClass(item.bootstrap, alignment)" [checked]="classes.includes(item.bootstrap)"/>
+      <label for="alignment-{{item.key}}" [uib-tooltip]="item.text" [placement]="placement">
+        <svg-icon [key]="item.key" width="22px" height="25px"></svg-icon>
+      </label>
+    </ng-container>
+  </div>
+</div>
+
+<div class="editor-line">
+  <label class="form-check-label" for="wrap">Wrap</label>
+  <input class="form-check-input" type="checkbox" id="wrap" (change)="toggleClass('flex-wrap')" [checked]="classes.includes('flex-wrap')">
+</div>
+

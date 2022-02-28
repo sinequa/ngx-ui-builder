@@ -1,6 +1,7 @@
-import { Injectable, TemplateRef } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { filter } from 'rxjs/operators';
+import { TemplateNameDirective } from '../utils';
 import {ConfigurableDirective} from './configurable.directive';
 
 export interface Configurable {
@@ -8,7 +9,8 @@ export interface Configurable {
   parentId: string;
   zone: string;
   enableContainers?: boolean;
-  templates?: Record<string, TemplateRef<any>>;
+  enableRawHtml?: boolean;
+  templates?: Record<string, TemplateNameDirective>;
   data?: any;
   dataIndex?: number;
   removeEdited: () => void;

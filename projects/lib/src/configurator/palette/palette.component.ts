@@ -1,19 +1,21 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnChanges, OnInit, TemplateRef } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnChanges, OnInit } from '@angular/core';
 import { Observable, of, Subject } from 'rxjs';
 import { Configurable } from '../../configurable/configurable.service';
 import { ComponentConfig, ConfigService } from '../../configuration/config.service';
 import { ComponentCreator, DragDropService } from '../../dynamic-views/drag-drop.service';
+import { TemplateNameDirective } from '../../utils';
 
 declare interface PaletteItem extends ComponentCreator {
   type: string;
   display?: string;
   iconClass?: string;
+  title?: string;
   removeable?: boolean;
   createConfig: (id: string, creator?: ComponentCreator) => Observable<ComponentConfig|undefined>;
 }
 
 declare interface ConfigModal {
-  configurator: TemplateRef<any>;
+  configurator: TemplateNameDirective;
   config: ComponentConfig;
   configChanged: () => void;
   title: string;
@@ -50,7 +52,7 @@ declare interface ConfigModal {
 })
 export class PaletteComponent implements OnInit, OnChanges {
   @Input() context: Configurable;
-  @Input() configurators: Record<string,TemplateRef<any>> = {}; 
+  @Input() configurators: Record<string,TemplateNameDirective> = {}; 
 
   standardPalette: PaletteItem[];
   existingPalette: PaletteItem[];
@@ -82,18 +84,31 @@ export class PaletteComponent implements OnInit, OnChanges {
     this.standardPalette = [];
     if (this.context.enableContainers) {
       this.standardPalette.push({
-        type: 'container',
+        type: '_container',
         display: 'Container',
-        createConfig: (id: string) => of({ type: 'container', id, items: [] }),
+        title: 'A component to arrange various sub-components',
+        createConfig: (id: string) => of({ type: '_container', id, items: [] }),
       });
     }
+    if (this.context.enableRawHtml) {
+      this.standardPalette.push({
+        type: '_raw-html',
+        display: 'Raw HTML',
+        title: 'A component to write HTML freely',
+        createConfig: (id: string) => of({ type: '_raw-html', id, rawHtml: '<h1>Edit me</h1>'})
+      })
+    }
     if (this.context.templates) {
-      Object.keys(this.context.templates).forEach((type) =>
+      Object.keys(this.context.templates).forEach((type) => {
+        let template = this.context.templates![type];
         this.standardPalette.push({
           type,
+          display: template.display || type,
+          iconClass: template.iconClass,
+          title: template.title,
           createConfig: (id: string) => this.openModal(id, type, this.configurators[type]),
-        })
-      );
+        });
+      });
     }
   }
 
@@ -101,10 +116,11 @@ export class PaletteComponent implements OnInit, OnChanges {
     this.existingPalette = configs.filter(c =>
       // Add any non-container config whose type is compatible with the standard palette
       this.standardPalette
-        .find(p => p.type !== 'container' && p.type === c.type))
+        .find(p => p.type !== '_container' && p.type === c.type))
         .map(c => ({
           type: c.type,
           display: c.id,
+          title: `Type: ${this.context.templates?.[c.type]?.display || c.type}`,
           removeable: !this.configService.isUsedWithin(c.id, this.context.zone),
           createConfig: _ => of(c) // The config already exists
         })
@@ -119,7 +135,7 @@ export class PaletteComponent implements OnInit, OnChanges {
     this.dragDropService.draggedCreator = undefined;
   }
 
-  openModal(id: string, type: string, configurator?: TemplateRef<any>): Observable<ComponentConfig|undefined> {
+  openModal(id: string, type: string, configurator?: TemplateNameDirective): Observable<ComponentConfig|undefined> {
     const config = {type, id};
     if(configurator) {
       this.modal = {

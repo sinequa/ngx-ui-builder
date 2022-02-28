@@ -43,7 +43,7 @@ export class AppComponent {
     this.configService.init([
       {
         id: 'header',
-        type: 'container',
+        type: '_container',
         items: ['title', 'searchform'],
         classes: 'flex-column'
       },
@@ -54,7 +54,7 @@ export class AppComponent {
       },
       {
         id: 'searchform',
-        type: 'container',
+        type: '_container',
         items: ['searchbar','applied-filters','clear-filters'],
         classes: 'flex-row'
       },
@@ -64,13 +64,13 @@ export class AppComponent {
       },
       {
         id: 'results',
-        type: 'container',
+        type: '_container',
         items: ['image', 'metas'],
         classes: 'flex-row mb-3 w-100'
       },
       {
         id: 'metas',
-        type: 'container',
+        type: '_container',
         items: ['description', 'ability', 'weight', 'experience'],
         //condition: {field: "name", value: "slowpoke"}, // For testing
         classes: 'flex-column'
@@ -99,7 +99,7 @@ export class AppComponent {
 
       {
         id: 'filters',
-        type: 'container',
+        type: '_container',
         items: ['abilities', 'weightFilter', 'xpFilter'],
         classes: 'flex-column'
       },

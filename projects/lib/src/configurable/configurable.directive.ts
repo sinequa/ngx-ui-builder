@@ -5,9 +5,9 @@ import {
   HostListener,
   Input,
   OnInit,
-  Renderer2,
-  TemplateRef,
+  Renderer2
 } from '@angular/core';
+import { TemplateNameDirective } from '../utils';
 
 import { Configurable, ConfigurableService } from './configurable.service';
 
@@ -19,7 +19,8 @@ export class ConfigurableDirective implements Configurable, OnInit {
   @Input() zone: string;
   @Input() parentId: string;
   @Input() enableContainers?: boolean;
-  @Input() templates?: Record<string, TemplateRef<any>>;
+  @Input() enableRawHtml?: boolean;
+  @Input() templates?: Record<string, TemplateNameDirective>;
   @Input() data?: any;
   @Input() dataIndex?: number;
   @Input("uib-disable-if") disableIf?: any;

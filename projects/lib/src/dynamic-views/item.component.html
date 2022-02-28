@@ -1,4 +1,4 @@
-<ng-container *ngIf="config.type === 'container'">
+<ng-container *ngIf="config.type === '_container'">
   <div *ngIf="configurable" class="dragPlaceholder" dndPlaceholderRef>+</div>
 
   <ng-container *ngIf="!config.condition || data[config.condition.field] === config.condition.value">
@@ -25,6 +25,7 @@
           [id]="item"
           [zone]="zone"
           [enableContainers]="enableContainers"
+          [enableRawHtml]="enableRawHtml"
           [templates]="templates"
           [configurable]="configurable"
     
@@ -44,8 +45,13 @@
   </ng-container>
 </ng-container>
 
+<div
+  *ngIf="config.type === '_raw-html' && (!config.condition || data[config.condition.field] === config.condition.value)"
+  [innerHTML]="config.rawHtml">
+</div>
+
 <ng-container
-  *ngIf="config.type !== 'container' && (!config.condition || data[config.condition.field] === config.condition.value)"
-  [ngTemplateOutlet]="templates[config.type || id]"
+  *ngIf="config.type[0] !== '_' && (!config.condition || data[config.condition.field] === config.condition.value)"
+  [ngTemplateOutlet]="templates[config.type || id]?.template"
   [ngTemplateOutletContext]="{ $implicit: config, data: data, id: id }"
 ></ng-container>
