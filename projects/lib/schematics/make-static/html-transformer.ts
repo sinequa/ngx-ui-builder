@@ -7,6 +7,7 @@ declare interface ComponentConfig extends Record<string,any> {
   type: string;
   id: string;
   items?: string[];
+  rawHtml?: string;
 }
 
 declare interface HTMLElement {
@@ -133,9 +134,14 @@ function generateHtml(conf: ComponentConfig, templates: HTMLElement[], config: C
   }
   else {
     let innerHtml = '';
-    const template = templates.find(t => t.attribs?.['uib-template'] === conf.type);
-    if(template) {
-      innerHtml = getInnerHtml(template.children, conf);
+    if(conf.type === '_raw-html') {
+      innerHtml = conf.rawHtml || '';
+    }
+    else {
+      const template = templates.find(t => t.attribs?.['uib-template'] === conf.type);
+      if(template) {
+        innerHtml = getInnerHtml(template.children, conf);
+      }
     }
     return `<div${attr}>${innerHtml}</div>`;
   }
