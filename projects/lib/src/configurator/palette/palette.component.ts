@@ -22,6 +22,22 @@ declare interface ConfigModal {
   close: Subject<ComponentConfig|undefined>;
 }
 
+export interface PaletteOptions {
+  enableSubcontainers?: boolean;
+  enableRawHtml?: boolean;
+  rawHtmlPlaceholder?: string;
+  showStandardPalette?: boolean;
+  showExistingPalette?: boolean;
+}
+
+export const defaultPaletteOptions: PaletteOptions = {
+  enableSubcontainers: true,
+  enableRawHtml: true,
+  rawHtmlPlaceholder: "<h1>Edit me</h1>",
+  showStandardPalette: true,
+  showExistingPalette: true
+};
+
 @Component({
   selector: 'uib-palette',
   templateUrl: './palette.component.html',
@@ -53,6 +69,7 @@ declare interface ConfigModal {
 export class PaletteComponent implements OnInit, OnChanges {
   @Input() context: Configurable;
   @Input() configurators: Record<string,TemplateNameDirective> = {}; 
+  @Input() options = defaultPaletteOptions;
 
   standardPalette: PaletteItem[];
   existingPalette: PaletteItem[];
@@ -75,6 +92,8 @@ export class PaletteComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges() {
+    // Initialize options with default, then custom
+    this.options = Object.assign({}, defaultPaletteOptions, this.options);
     this.generateAutoPalette();
     // The existing palette must be update when the standard palette changes
     this.generateExistingPalette(this.configService.getAllConfig());
@@ -82,7 +101,10 @@ export class PaletteComponent implements OnInit, OnChanges {
 
   generateAutoPalette() {
     this.standardPalette = [];
-    if (this.context.enableContainers) {
+    if(!this.options.showStandardPalette) {
+      return;
+    }
+    if (this.options.enableSubcontainers) {
       this.standardPalette.push({
         type: '_container',
         display: 'Container',
@@ -90,12 +112,12 @@ export class PaletteComponent implements OnInit, OnChanges {
         createConfig: (id: string) => of({ type: '_container', id, items: [] }),
       });
     }
-    if (this.context.enableRawHtml) {
+    if (this.options.enableRawHtml) {
       this.standardPalette.push({
         type: '_raw-html',
         display: 'Raw HTML',
         title: 'A component to write HTML freely',
-        createConfig: (id: string) => of({ type: '_raw-html', id, rawHtml: '<h1>Edit me</h1>'})
+        createConfig: (id: string) => of({ type: '_raw-html', id, rawHtml: this.options.rawHtmlPlaceholder})
       })
     }
     if (this.context.templates) {
@@ -113,6 +135,10 @@ export class PaletteComponent implements OnInit, OnChanges {
   }
 
   generateExistingPalette(configs: ComponentConfig[]) {    
+    if(!this.options.showExistingPalette) {
+      this.existingPalette = [];
+      return;
+    }
     this.existingPalette = configs.filter(c =>
       // Add any non-container config whose type is compatible with the standard palette
       this.standardPalette

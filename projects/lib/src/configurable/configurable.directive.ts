@@ -18,8 +18,6 @@ export class ConfigurableDirective implements Configurable, OnInit {
   @Input() id: string;
   @Input() zone: string;
   @Input() parentId: string;
-  @Input() enableContainers?: boolean;
-  @Input() enableRawHtml?: boolean;
   @Input() templates?: Record<string, TemplateNameDirective>;
   @Input() data?: any;
   @Input() dataIndex?: number;

@@ -8,8 +8,6 @@ export interface Configurable {
   id: string;
   parentId: string;
   zone: string;
-  enableContainers?: boolean;
-  enableRawHtml?: boolean;
   templates?: Record<string, TemplateNameDirective>;
   data?: any;
   dataIndex?: number;

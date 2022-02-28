@@ -26,8 +26,6 @@ export class ItemComponent implements OnInit, OnDestroy {
   @Input() data?: any;
   @Input() dataIndex?: number;
   @Input() templates: Record<string, TemplateNameDirective>;
-  @Input() enableContainers = true;
-  @Input() enableRawHtml = true;
   
   @Input() configurable: boolean = true;
   

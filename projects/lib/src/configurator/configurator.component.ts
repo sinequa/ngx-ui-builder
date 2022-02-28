@@ -14,14 +14,37 @@ import { Observable } from 'rxjs';
 import { Configurable, ConfigurableService } from '../configurable/configurable.service';
 import { ComponentConfig, ConfigService, ContainerConfig } from '../configuration/config.service';
 import { TemplateNameDirective } from '../utils/template-name.directive';
+import { defaultPaletteOptions, PaletteOptions } from './palette/palette.component';
+
+export interface ConfiguratorOptions {
+  paletteOptions?: PaletteOptions;
+  showFlexEditor?: boolean;
+  showHtmlEditor?: boolean;
+  showCssClasses?: boolean;
+  showConditionalDisplay?: boolean;
+  showRemove?: boolean;
+  showDuplicate?: boolean;
+}
+
+export const defaultConfiguratorOptions: ConfiguratorOptions = {
+  paletteOptions: defaultPaletteOptions,
+  showFlexEditor: true,
+  showHtmlEditor: true,
+  showCssClasses: true,
+  showConditionalDisplay: true,
+  showRemove: true,
+  showDuplicate: true
+}
 
 export interface ConfiguratorContext {
   /** Object storing the configuration of the component */
   config: ComponentConfig;
+  /** Options of the configurators (may change depending on zone) */
+  options: ConfiguratorOptions;
   /** Register of all the components configurators  */
-  configurators?: Record<string, TemplateNameDirective>;
+  configurators: Record<string, TemplateNameDirective>;
   /** Context of the zone of the edited component */
-  context?: Configurable;
+  context: Configurable;
   /** Callback that the configurator should call to update the configuration */
   configChanged: () => void;
 };
@@ -47,13 +70,8 @@ export class ConfiguratorComponent {
 
   @ViewChild('offcanvasBody') offcanvasBodyEl: ElementRef;
 
-  @Input() showPalette = true;
-  @Input() showFlexEditor = true;
-  @Input() showHtmlEditor = true;
-  @Input() showCssClasses = true;
-  @Input() showConditionalDisplay = true;
-  @Input() showRemove = true;
-  @Input() showDuplicate = true;
+  @Input() options = defaultConfiguratorOptions;
+  @Input() zoneOptions: Record<string, ConfiguratorOptions> = {};
 
   edited$: Observable<ConfiguratorContext>;
   
@@ -75,6 +93,7 @@ export class ConfiguratorComponent {
           map(config => ({
             context,
             config,
+            options: this.resolveOptions(context.zone),
             configurators: this.configurators,
             configChanged: () => this.configService.updateConfig(config)
           }))
@@ -115,6 +134,14 @@ export class ConfiguratorComponent {
   showTree(showTree = true) {
     this._showTree = showTree;
     this.offcanvasBodyEl.nativeElement.scroll(0, 0);
+  }
+
+  resolveOptions(zone: string) {
+    // First set defaults, then the configurator options, then zone-specific options
+    const options = Object.assign({}, defaultConfiguratorOptions, this.options, this.zoneOptions[zone] || {});
+    // Same thing for the nested palette options
+    options.paletteOptions = Object.assign({}, defaultPaletteOptions, this.options.paletteOptions, this.zoneOptions[zone]?.paletteOptions || {});
+    return options;
   }
 
   /**

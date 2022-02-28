@@ -42,7 +42,7 @@
 
   <div class="p-1">
     <h3>Filters</h3>
-    <uib-zone id="filters" [enableContainers]="false">
+    <uib-zone id="filters">
       <ng-template uib-template="range" let-config>
         <h4>{{ config.field }}: {{ this[config.field] }}</h4>
         <input

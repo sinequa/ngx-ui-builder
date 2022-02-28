@@ -16,51 +16,59 @@
 
   <div #offcanvasBody class="offcanvas-body">
     
-    <ng-container *ngIf="!_showTree && obs.edited">
+    <ng-container *ngIf="!_showTree && obs.edited as edited">
       <!-- CONFIGURATOR -->
     
       <ng-container
-        *ngTemplateOutlet="configurators[obs.edited.config.type]?.template; context: { $implicit: obs.edited }">
+        *ngTemplateOutlet="configurators[edited.config.type]?.template; context: { $implicit: edited }">
       </ng-container>
   
-      <ng-container *ngIf="showPalette && obs.edited.config.type === '_container'">
-        <details class="mb-3" open>
+      <ng-container *ngIf="edited.config.type === '_container'">
+        <details class="mb-3" open *ngIf="edited.options.paletteOptions">
           <summary>Component palette (drag & drop)</summary>
-          <uib-palette [context]="obs.edited.context" [configurators]="obs.edited.configurators"></uib-palette>
+          <uib-palette
+            [context]="edited.context"
+            [options]="edited.options.paletteOptions"
+            [configurators]="edited.configurators"
+            >
+          </uib-palette>
         </details>
     
-        <details class="mb-3" open *ngIf="showFlexEditor">
+        <details class="mb-3" open *ngIf="edited.options.showFlexEditor">
           <summary>Layout</summary>
-          <uib-flex-editor [config]="obs.edited.config"></uib-flex-editor>
+          <uib-flex-editor [config]="edited.config"></uib-flex-editor>
         </details>
       </ng-container>      
       
-      <uib-html-editor *ngIf="showHtmlEditor && obs.edited.config.type === '_raw-html'"
-        [context]="obs.edited"
+      <uib-html-editor *ngIf="edited.options.showHtmlEditor && edited.config.type === '_raw-html'"
+        [context]="edited"
         class="d-block mb-3">
       </uib-html-editor>
   
-      <div class="mb-3" *ngIf="showCssClasses">
-        <uib-class-editor [context]="obs.edited"></uib-class-editor>
+      <div class="mb-3" *ngIf="edited.options.showCssClasses">
+        <uib-class-editor [context]="edited"></uib-class-editor>
       </div>
   
-      <details [attr.open]="obs.edited.config.condition? '' : undefined" class="mb-3" *ngIf="showConditionalDisplay && obs.edited.context.data">
+      <details [attr.open]="edited.config.condition? '' : undefined"
+        class="mb-3"
+        *ngIf="edited.options.showConditionalDisplay && edited.context.data"
+      >
         <summary uib-tooltip="Display this component only if the data validates a rule">Conditional display</summary>
-        <uib-condition-editor [config]="obs.edited.config"></uib-condition-editor>
+        <uib-condition-editor [config]="edited.config"></uib-condition-editor>
       </details>
       
       <div class="d-flex justify-content-start mb-1">
         <button class="btn btn-outline-danger me-2"
-          (click)="remove(obs.edited.context)"
+          (click)="remove(edited.context)"
           uib-tooltip="Remove this component from its parent"
-          *ngIf="showRemove && obs.edited.context.parentId"
+          *ngIf="edited.options.showRemove && edited.context.parentId"
         >
           Remove
         </button>
         <button class="btn btn-outline-secondary"
-          (click)="duplicate(obs.edited.context)"
+          (click)="duplicate(edited.context)"
           uib-tooltip="Duplicate this component within its parent"
-          *ngIf="showDuplicate"
+          *ngIf="edited.options.showDuplicate"
         >
           Duplicate
         </button>
