@@ -1,6 +1,7 @@
 
 import * as htmlparser from 'htmlparser';
 import * as prettify from 'html-prettify';
+import { SchematicsException } from '@angular-devkit/schematics';
 
 declare interface ComponentConfig extends Record<string,any> {
   type: string;
@@ -17,9 +18,14 @@ declare interface HTMLElement {
   $html?: string;
 }
 
+export interface HtmlModifications {
+  staticHtml: string;
+  modifications: string[];
+}
 
-export async function makeStaticHtml(html: string, config: ComponentConfig[]): Promise<{staticHtml: string, modified: boolean}> {
-  return new Promise<{staticHtml: string, modified: boolean}>((resolve, reject) => {
+
+export async function makeStaticHtml(html: string, config: ComponentConfig[]): Promise<HtmlModifications> {
+  return new Promise<HtmlModifications>((resolve, reject) => {
     var handler = new htmlparser.DefaultHandler((error: string, dom: HTMLElement[]) => {
       if (error)
         reject(`Failed to parse the HTML template: ${error}`);
@@ -33,28 +39,24 @@ export async function makeStaticHtml(html: string, config: ComponentConfig[]): P
 
 // HTML template processing
 
-function processTemplate(dom: HTMLElement[], config: ComponentConfig[]): {staticHtml: string, modified: boolean} {
+function processTemplate(dom: HTMLElement[], config: ComponentConfig[]): HtmlModifications {
+  const modifications: string[] = [];
+
   const zones = getZones(dom);
-
-  if(zones.length === 0) {
-    // console.log("No uib-zone element in template");
-    return {staticHtml: '', modified: false};
-  }
-
   for(let zone of zones) {
     const id = zone.attribs['id'];
     if(!id) {
-      throw `Found uib-zone element with no id`;
+      throw new SchematicsException(`Found uib-zone element with no id`);
     }
 
     const templates = zone.children?.filter(t => t.type === 'tag' && t.name === 'ng-template');;
     if(!templates?.length) {
-      throw `No template found in zone ${id}`;
+      throw new SchematicsException(`No template found in zone ${id}`);
     }
 
     const conf = config.find(c => c.id === id);
     if(!conf) {
-      throw `No configuration for zone ${id}`;
+      throw new SchematicsException(`No configuration for zone ${id}`);
     }
 
     //console.log(`Generating zone ${id}`,zone);
@@ -62,8 +64,8 @@ function processTemplate(dom: HTMLElement[], config: ComponentConfig[]): {static
 
     // Manage special attributes of the uib-zone component
     let attr = `id="${id}"`;
+    let dataName = "data";
     if(zone.attribs['[data]']) {
-      let dataName = "data";
       // Try to guess the right data name (eg. "record" instead of "data")
       if(templates?.[0]?.attribs) {
         for(const [key, value] of Object.entries(templates[0].attribs)) {
@@ -80,17 +82,23 @@ function processTemplate(dom: HTMLElement[], config: ComponentConfig[]): {static
     }
 
     if(zone.attribs['(itemClicked)']){
-      innerHtml = innerHtml.replace("<div", `<div (click)="${zone.attribs['(itemClicked)']}"`);
+      let action = zone.attribs['(itemClicked)']; // eg. onDocumentClicked($event.data, $event.event)
+      action = action.replace(/\$event\.data/, dataName);
+      action = action.replace(/\$event\.event/, "$event");
+      innerHtml = innerHtml.replace("<div", `<div (click)="${action}"`);
     }
 
     zone.$html = `<div ${attr}>\r\n${innerHtml}\r\n</div>`;
+
+    modifications.push(`Made uib-zone '${id}' static`);
   }
 
   // Remove configurator and toolbar if found
-  dom = removeElements(dom, ['uib-toolbar', 'uib-configurator']);
-  const staticHtml = prettify(getInnerHtml(dom));
+  dom = removeElements(dom, ['uib-toolbar', 'uib-configurator'], modifications);
 
-  return {staticHtml, modified: true};
+  const staticHtml = modifications.length > 0? prettify(getInnerHtml(dom)) : '';
+
+  return {staticHtml, modifications};
 }
   
 // Find uib-zone elements within the template
@@ -111,11 +119,11 @@ function getZones(dom: HTMLElement[]): HTMLElement[] {
 // Generate the HTML of a UI Builder component, based on its configuration and templates
 function generateHtml(conf: ComponentConfig, templates: HTMLElement[], config: ComponentConfig[]): string {
   let classes = conf.classes || '';
-  if(conf.type === 'container') {
-    classes += " uib-container";
+  if(conf.type === '_container') {
+    classes += " d-flex"; // Necessary to replace the display: flex from the .uib-container class
   }
   const attr = classes? ` class="${classes.trim()}"`: '';
-  if(conf.type === 'container') {
+  if(conf.type === '_container') {
     const content = (conf.items as string[])
       .map(c => config.find(cc => cc.id === c))       // For each item, map its config
       .filter(c => c)                                 // Keep the configs that exist
@@ -173,10 +181,19 @@ function getInnerHtml(elements?: HTMLElement[], config?: ComponentConfig): strin
   return text;
 }
   
-function removeElements(dom: HTMLElement[], elements: string[]) {
+function removeElements(dom: HTMLElement[], elements: string[], modifications: string[]) {
   dom.forEach(el => {
     if(el.children)
-      el.children = removeElements(el.children, elements)
+      el.children = removeElements(el.children, elements, modifications);
   });
-  return dom.filter(el => el.type !== 'tag' || !elements.includes(el.name));
+  const filtered: HTMLElement[] = [];
+  dom.forEach(el => {
+    if(el.type !== 'tag' || !elements.includes(el.name)) {
+      filtered.push(el);
+    }
+    else {
+      modifications.push(`Removed '${el.name}' element`);
+    }
+  });
+  return filtered;
 }

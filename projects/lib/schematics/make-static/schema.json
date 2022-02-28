@@ -9,6 +9,21 @@
       "type": "string",
       "format": "path"
     },
+    "override": {
+      "description": "If true, will override the source code of the HTML templated rather than generating alternate .static.html files.",
+      "type": "boolean",
+      "default": false
+    },
+    "updateTemplateUrls": {
+      "description": "If true (and if 'override' is false), update the component .ts files to use the .static.html templates",
+      "type": "boolean",
+      "default": true
+    },
+    "commentScssImport": {
+      "description": "If true, comment out the import of the UI Builder stylesheet in the project's stylesheet",
+      "type": "boolean",
+      "default": true
+    },
     "project": {
       "type": "string",
       "description": "The name of the project.",
