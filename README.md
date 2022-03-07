@@ -136,11 +136,6 @@ Like for the zones, the custom configurators are passed by transclusion.
             <option value="USD">Dollar</option>
         </select>
     </ng-template>
-    
-    <ng-template uib-template="_container">
-        <!-- Standard palette of components for containers -->
-        <uib-palette [context]="context.context" [configurators]="context.configurators"></uib-palette>
-    </ng-template>
 
 </uib-configurator>
 ```
