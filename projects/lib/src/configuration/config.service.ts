@@ -13,13 +13,14 @@ import {
 import { stateHistory } from '@ngneat/elf-state-history';
 import { filter, map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
+import { Condition } from './conditions.service';
 
 export interface ComponentConfig {
   id: string;
   type: string;
   classes?: string;
   [key: string]: any;
-  condition?: {field: string, value: string};
+  condition?: Condition;
 }
 
 export interface ContainerConfig extends ComponentConfig {

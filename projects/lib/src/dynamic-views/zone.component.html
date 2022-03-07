@@ -21,6 +21,7 @@
     
     [data]="data"
     [dataIndex]="index"
+    [conditionsData]="conditionsData"
     
     (click)="onItemClicked($event, data, index)"
   ></div>
@@ -38,6 +39,7 @@
 
     [data]="data"
     [dataIndex]="index"
+    [conditionsData]="conditionsData"
 
     [dndDropzone]="[id]"
     [dndHorizontal]="ref.isHorizontal()"

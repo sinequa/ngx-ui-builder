@@ -54,7 +54,7 @@
         *ngIf="edited.options.showConditionalDisplay && edited.context.data"
       >
         <summary uib-tooltip="Display this component only if the data validates a rule">Conditional display</summary>
-        <uib-condition-editor [config]="edited.config"></uib-condition-editor>
+        <uib-condition-editor [context]="edited"></uib-condition-editor>
       </details>
       
       <div class="d-flex justify-content-start mb-1">
