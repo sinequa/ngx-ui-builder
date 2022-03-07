@@ -101,7 +101,7 @@ export class MyComponent implements OnInit {
     ngOnInit() {
         this.configService.init([{
             id: 'products',
-            type: 'container',
+            type: '_container',
             items: ['name', 'description', 'image', 'price']
         },{
             id: 'price',
@@ -136,11 +136,6 @@ Like for the zones, the custom configurators are passed by transclusion.
             <option value="USD">Dollar</option>
         </select>
     </ng-template>
-    
-    <ng-template uib-template="container">
-        <!-- Standard palette of components for containers -->
-        <uib-palette [context]="context.context" [configurators]="context.configurators"></uib-palette>
-    </ng-template>
 
 </uib-configurator>
 ```
@@ -164,7 +159,7 @@ A container is a built-in type of component that displays sub-components (whose 
 ```js
 {
     id: 'products',
-    type: 'container',
+    type: '_container',
     items: ['name', 'description', 'image', 'price']
 }
 ```

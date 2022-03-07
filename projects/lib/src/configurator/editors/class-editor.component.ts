@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { ComponentConfig, ConfigService } from '../../configuration/config.service';
+import { ConfiguratorContext } from '../configurator.models';
 
 @Component({
   selector: 'uib-class-editor',
@@ -8,19 +8,13 @@ import { ComponentConfig, ConfigService } from '../../configuration/config.servi
   <input class="form-control" id="classes"
     type="text"
     name="classes"
-    [ngModel]="config.classes"
-    (ngModelChange)="setClasses($event)"
+    [(ngModel)]="context.config.classes"
+    (ngModelChange)="context.configChanged()"
   />
   `,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ClassEditorComponent {
-  @Input() config: ComponentConfig;
+  @Input() context: ConfiguratorContext;
 
-  constructor(public configService: ConfigService) {}
-
-  setClasses(value: string) {
-    this.config.classes = value;
-    this.configService.updateConfig(this.config);
-  }
 }

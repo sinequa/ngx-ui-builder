@@ -1,14 +1,14 @@
-import { Injectable, TemplateRef } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { filter } from 'rxjs/operators';
+import { TemplateNameDirective } from '../utils';
 import {ConfigurableDirective} from './configurable.directive';
 
 export interface Configurable {
   id: string;
   parentId: string;
   zone: string;
-  enableContainers?: boolean;
-  templates?: Record<string, TemplateRef<any>>;
+  templates?: Record<string, TemplateNameDirective>;
   data?: any;
   dataIndex?: number;
   removeEdited: () => void;

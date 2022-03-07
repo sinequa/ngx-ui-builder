@@ -6,26 +6,26 @@ import {
   ElementRef,
   Input,
   QueryList,
-  TemplateRef,
   ViewChild,
 } from '@angular/core';
 import { Offcanvas } from 'bootstrap';
 import { switchMap, map, tap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { Configurable, ConfigurableService } from '../configurable/configurable.service';
-import { ComponentConfig, ConfigService } from '../configuration/config.service';
+import { ComponentConfig, ConfigService, ContainerConfig } from '../configuration/config.service';
 import { TemplateNameDirective } from '../utils/template-name.directive';
+import { defaultPaletteOptions } from './palette/palette.component';
+import { ConfiguratorContext, ConfiguratorOptions } from './configurator.models';
 
-export interface ConfiguratorContext {
-  /** Object storing the configuration of the component */
-  config: ComponentConfig;
-  /** Register of all the components configurators  */
-  configurators?: Record<string, TemplateRef<any>>;
-  /** Context of the zone of the edited component */
-  context?: Configurable;
-  /** Callback that the configurator should call to update the configuration */
-  configChanged: () => void;
-};
+export const defaultConfiguratorOptions: ConfiguratorOptions = {
+  paletteOptions: defaultPaletteOptions,
+  showFlexEditor: true,
+  showHtmlEditor: true,
+  showCssClasses: true,
+  showConditionalDisplay: true,
+  showRemove: true,
+  showDuplicate: true
+}
 
 @Component({
   selector: 'uib-configurator',
@@ -41,13 +41,15 @@ export class ConfiguratorComponent {
   // Capture configurator templates
   @ContentChildren(TemplateNameDirective)
   children: QueryList<TemplateNameDirective>;
-  configurators: Record<string, TemplateRef<any>> = {};
+  configurators: Record<string, TemplateNameDirective> = {};
 
   @ViewChild('offcanvas') offcanvasEl: ElementRef;
   offcanvas: Offcanvas;
 
-  @Input() cssClasses = true;
-  @Input() conditionalDisplay = true;
+  @ViewChild('offcanvasBody') offcanvasBodyEl: ElementRef;
+
+  @Input() options = defaultConfiguratorOptions;
+  @Input() zoneOptions: Record<string, ConfiguratorOptions> = {};
 
   edited$: Observable<ConfiguratorContext>;
   
@@ -69,6 +71,7 @@ export class ConfiguratorComponent {
           map(config => ({
             context,
             config,
+            options: this.resolveOptions(context.zone),
             configurators: this.configurators,
             configChanged: () => this.configService.updateConfig(config)
           }))
@@ -102,32 +105,65 @@ export class ConfiguratorComponent {
    */
   ngAfterContentInit() {
     this.children.forEach(
-      tpl => (this.configurators[tpl.templateName] = tpl.template)
+      tpl => (this.configurators[tpl.templateName] = tpl)
     );
   }
   
   showTree(showTree = true) {
     this._showTree = showTree;
+    this.offcanvasBodyEl.nativeElement.scroll(0, 0);
+  }
+
+  resolveOptions(zone: string) {
+    // First set defaults, then the configurator options, then zone-specific options
+    const options = Object.assign({}, defaultConfiguratorOptions, this.options, this.zoneOptions[zone] || {});
+    // Same thing for the nested palette options
+    options.paletteOptions = Object.assign({}, defaultPaletteOptions, this.options.paletteOptions, this.zoneOptions[zone]?.paletteOptions || {});
+    return options;
   }
 
   /**
    * It removes the item from the parent container.
    * @param {Event} event - Event
    */
-   remove(edited: ConfiguratorContext, event: Event) {
-     event.stopImmediatePropagation();
-    
-     const {id, parentId} = edited.context || {};
-     
+  remove(context: Configurable) {    
     // only uib-zone cannot self remove
-    if (parentId) {
-      const container = this.configService.getContainer(parentId);
-      const index = container.items.findIndex(item => item === id);
+    if (context.parentId) {
+      const container = this.configService.getContainer(context.parentId);
+      const index = container.items.findIndex(item => item === context.id);
       if (index !== -1) {
         container.items.splice(index, 1);
         this.configService.updateConfig([container]);
         this.offcanvas.toggle();
       }
+    }
+  }
+
+  duplicate(context: Configurable) {
+    const config = this.configService.getConfig(context.id);
+    config.id = this.configService.generateId(config.id); // Generate a new config id
+    if(context.parentId) {
+      const container = this.configService.getContainer(context.parentId);
+      const index = container.items.findIndex(item => item === context.id);
+      if (index !== -1) {
+        container.items.splice(index+1, 0, config.id);
+        this.configService.updateConfig([config, container]);
+      }
+    }
+    // Special case of a zone
+    else if(context.zone === context.id) {
+      // Create another copy
+      const config2 = this.configService.getConfig(context.id);
+      config2.id = this.configService.generateId(config.id);
+      
+      const container: ContainerConfig = {
+        id: context.id,
+        type: '_container',
+        items: [config.id, config2.id],
+        classes: "flex-column",
+      };
+
+      this.configService.updateConfig([config, config2, container]);
     }
   }
 }

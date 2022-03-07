@@ -6,7 +6,6 @@ import {
   ContentChildren,
   Input,
   QueryList,
-  TemplateRef,
   OnDestroy,
   OnInit,
   Output,
@@ -26,11 +25,10 @@ import { DragDropService } from './drag-drop.service';
 export class ZoneComponent implements AfterContentInit, OnInit, OnDestroy {
   @ContentChildren(TemplateNameDirective)
   children: QueryList<TemplateNameDirective>;
-  templates: Record<string, TemplateRef<any>> = {};
+  templates: Record<string, TemplateNameDirective> = {};
 
   @Input() id: string;
   @Input() data?: any;
-  @Input() enableContainers = true;
 
   @Output() itemClicked = new EventEmitter<{data: any, index?: number, event: Event}>();
 
@@ -50,7 +48,7 @@ export class ZoneComponent implements AfterContentInit, OnInit, OnDestroy {
 
   ngAfterContentInit() {
     this.children.forEach(
-      (instance) => (this.templates[instance.templateName] = instance.template)
+      (tpl) => (this.templates[tpl.templateName] = tpl)
     );
   }
 

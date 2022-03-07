@@ -23,7 +23,7 @@ export interface ComponentConfig {
 }
 
 export interface ContainerConfig extends ComponentConfig {
-  type: 'container';
+  type: '_container';
   items: string[];
 }
 
@@ -89,7 +89,7 @@ export class ConfigService {
   }
 
   public isContainerConfig(conf: ComponentConfig|undefined): conf is ContainerConfig {
-    return conf?.type === 'container';
+    return conf?.type === '_container';
   }
 
   /**
@@ -97,7 +97,7 @@ export class ConfigService {
    */
   public isUsedWithin(id: string, containerId: string) {
     const conf = this._getConfig(containerId);
-    if(conf?.type === 'container') {
+    if(conf?.type === '_container') {
       for(let item of (conf as ContainerConfig).items) {
         if(item === id) {
           return true;
@@ -130,10 +130,16 @@ export class ConfigService {
 
   public generateId(type: string) {
     let idx = 1;
-    let id = type;
-    while (this._getConfig(id)) {
-      id = `${type}-${idx++}`;
+    let root = type.startsWith("_")? type.slice(1) : type;
+    const tokens = type.split("-");
+    if(tokens[tokens.length-1].match(/\d+/)) {
+      idx = +tokens[tokens.length-1];
+      root = tokens.slice(0, tokens.length-1).join('-');
     }
+    let id = root;
+    do {
+      id = `${root}-${idx++}`;
+    } while (this._getConfig(id) || id === type);
     return id;
   }
 

@@ -5,10 +5,8 @@ import { DndModule } from 'ngx-drag-drop';
 import { iconsLibrary } from '../svg/icons-library';
 import { SvgIconsModule } from '../utils/svg-icon/svg-icon.module';
 import { UtilsModule } from '../utils/utils.module';
-import { ClassEditorComponent } from './class-editor/class-editor.component';
-import { ConditionEditorComponent } from './conditions/condition-editor.component';
+import { ClassEditorComponent, ConditionEditorComponent, FlexEditorComponent, HtmlEditorComponent } from './editors';
 import { ConfiguratorComponent } from './configurator.component';
-import { FlexEditorComponent } from './flex-editor/flex-editor.component';
 import { PaletteComponent } from './palette/palette.component';
 import { ToolbarComponent } from './toolbar.component';
 import { TreeComponent } from './tree/tree.component';
@@ -20,6 +18,7 @@ import { TreeComponent } from './tree/tree.component';
     ConfiguratorComponent,
     ClassEditorComponent,
     PaletteComponent,
+    HtmlEditorComponent,
     ToolbarComponent,
     TreeComponent,
     FlexEditorComponent,
@@ -28,7 +27,6 @@ import { TreeComponent } from './tree/tree.component';
   exports: [
     UtilsModule,
     ConfiguratorComponent,
-    PaletteComponent,
     ToolbarComponent
   ],
 })

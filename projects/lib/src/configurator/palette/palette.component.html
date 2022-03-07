@@ -1,7 +1,7 @@
-<details open>
-  <summary>Component palette (drag & drop)</summary>
-  <div class="d-flex flex-wrap gap-1 p-2 ps-1">    
-    <h6>New components</h6>
+
+<div class="p-2 ps-1">
+  <ng-container *ngIf="options.showStandardPalette">
+    <h6 class="mb-0">New components</h6>
     <small class="text-muted">Create and configure a new component</small>
     <div>
       <ng-container *ngFor="let item of standardPalette"
@@ -9,17 +9,19 @@
         [ngTemplateOutletContext]="{$implicit: item}">
       </ng-container>
     </div>
+  </ng-container>
 
-    <h6 class="mt-3">Existing components</h6>
+  <ng-container *ngIf="options.showExistingPalette">
+    <h6 class="mt-3 mb-0">Existing components</h6>
     <small class="text-muted">Insert a pre-configured conponent</small>
     <div>
       <ng-container *ngFor="let item of existingPalette"
         [ngTemplateOutlet]="paletteItem"
         [ngTemplateOutletContext]="{$implicit: item}">
       </ng-container>
-    </div>
-  </div>
-</details>
+    </div>    
+  </ng-container>
+</div>
 
 <ng-template #paletteItem let-item>
   <div
@@ -27,6 +29,9 @@
     [dndType]="context?.zone"
     (dndStart)="onDndStart(item)"
     (dndEnd)="onDndEnd()"
+    [uib-tooltip]="item.title"
+    container=".uib-bootstrap"
+    placement="bottom"
     class="palette-item">
     <svg-icon class="grip" key="grip" height="1em"></svg-icon>
     <span [ngClass]="item.iconClass"></span>
@@ -44,5 +49,5 @@
 
 <!-- Modal -->
 <uib-modal [title]="modal?.title" [show]="!!modal" (close)="onModalClose($event)">
-  <div *ngTemplateOutlet="modal?.configurator; context: { $implicit: modal }"></div>
+  <div *ngTemplateOutlet="modal?.configurator.template; context: { $implicit: modal }"></div>
 </uib-modal>

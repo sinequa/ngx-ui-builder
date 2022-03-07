@@ -21,7 +21,8 @@
     
     [data]="data"
     [dataIndex]="index"
-
+    
+    (click)="onItemClicked($event, data, index)"
   ></div>
   <div #ref *ngIf="first"
   
@@ -34,7 +35,6 @@
     [id]="id"
     [zone]="id"
     [templates]="templates"
-    [enableContainers]="enableContainers"
 
     [data]="data"
     [dataIndex]="index"
