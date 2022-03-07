@@ -6,11 +6,21 @@
 }
 
 .tree li {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: flex-start;
+  
   list-style-type: none;
   margin: 10px;
   position: relative;
   width: 100%;
 }
+
+.tree li:not(.section) {
+  max-width: max-content;
+}
+
 
 .tree li::before {
   content: "";
@@ -100,7 +110,8 @@ ul.tree > li:first-child::after {
 }
 
 .section label + a {
-  margin-left: -15px;
+  margin-left: -35px;
+  padding-left: 22px;
   text-decoration: none;
   color: #000;
 }
@@ -108,8 +119,8 @@ ul.tree > li:first-child::after {
 .section label:before {
   content: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='rgba%280,0,0,.5%29' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M5 14l6-6-6-6'/%3e%3c/svg%3e");
   position: absolute;
-  top: 2px;
-  left: 0;
+  top: 4px;
+  left: 2px;
   text-align: center;
   color: black;
   display: inline-block;
