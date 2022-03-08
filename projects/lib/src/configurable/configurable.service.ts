@@ -11,6 +11,7 @@ export interface Configurable {
   templates?: Record<string, TemplateNameDirective>;
   data?: any;
   dataIndex?: number;
+  conditionsData?: Record<string, any>;
   removeEdited: () => void;
   removeSelected: () => void;
 }

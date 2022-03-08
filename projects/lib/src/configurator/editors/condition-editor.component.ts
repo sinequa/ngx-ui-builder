@@ -1,33 +1,38 @@
-import { ChangeDetectionStrategy, Component, Input, OnChanges } from "@angular/core";
-import { ComponentConfig, ConfigService } from "../../configuration";
+import { ChangeDetectionStrategy, Component, Input } from "@angular/core";
+import { ConfiguratorContext } from "../configurator.models";
 
 @Component({
   selector: 'uib-condition-editor',
   templateUrl: './condition-editor.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ConditionEditorComponent implements OnChanges {
-  @Input() config: ComponentConfig;
+export class ConditionEditorComponent {
+  @Input() context: ConfiguratorContext;
 
-  field: string;
-  value: string;
-
-  constructor(
-    public configService: ConfigService
-  ){}
-
-  ngOnChanges() {
-    this.field = this.config.condition?.field || '';
-    this.value = this.config.condition?.value || '';
+  get activate(): boolean {
+    return !!this.context.config.condition;
   }
 
-  updateCondition() {
-    if(this.field) {
-      this.config.condition = {field: this.field, value: this.value};
+  set activate(value: boolean) {
+    if(value) {
+      this.context.config.condition = {data: '', type: 'equals', field: '', values: [{value: ''}]};
     }
     else {
-      delete this.config.condition;
+      delete this.context.config.condition;
     }
-    this.configService.updateConfig(this.config);
+    this.context.configChanged();
+  }
+
+  addValue() {
+    this.context.config.condition?.values.push({value: ''});
+  }
+
+  removeValue(i: number) {
+    this.context.config.condition?.values.splice(i, 1);
+    this.context.configChanged();
+  }
+
+  trackByFn(index, item) {
+    return index;
   }
 }

@@ -21,6 +21,7 @@ export class ConfigurableDirective implements Configurable, OnInit {
   @Input() templates?: Record<string, TemplateNameDirective>;
   @Input() data?: any;
   @Input() dataIndex?: number;
+  @Input() conditionsData?: Record<string, any>;
   @Input("uib-disable-if") disableIf?: any;
   
   nativeElement: HTMLElement;

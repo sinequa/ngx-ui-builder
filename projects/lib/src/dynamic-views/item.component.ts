@@ -5,11 +5,14 @@ import {
   ElementRef,
   HostBinding,
   Input,
+  OnChanges,
   OnDestroy,
-  OnInit
+  OnInit,
+  SimpleChanges
 } from '@angular/core';
 import { DndDropEvent } from 'ngx-drag-drop';
 import { Subscription } from 'rxjs';
+import { ConditionsService } from '../configuration';
 import { ComponentConfig, ConfigService } from '../configuration/config.service';
 import { TemplateNameDirective } from '../utils';
 import { DragDropService } from './drag-drop.service';
@@ -20,11 +23,13 @@ import { DragDropService } from './drag-drop.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrls: ['item.component.scss']
 })
-export class ItemComponent implements OnInit, OnDestroy {
+export class ItemComponent implements OnInit, OnChanges, OnDestroy {
   @Input('uib-item') id: string;
   @Input() zone: string;
   @Input() data?: any;
   @Input() dataIndex?: number;
+  @Input() conditionsData?: Record<string,any>;
+
   @Input() templates: Record<string, TemplateNameDirective>;
   
   @Input() configurable: boolean = true;
@@ -33,15 +38,23 @@ export class ItemComponent implements OnInit, OnDestroy {
   classes?: string;
 
   config: ComponentConfig;
+  condition = true;
 
   subs: Subscription[] = [];
 
   constructor(
     public configService: ConfigService,
+    public conditionsService: ConditionsService,
     public dragDropService: DragDropService,
     public cdr: ChangeDetectorRef,
     public el: ElementRef
   ) {}
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if(changes.data) {
+      this.updateCondition();
+    }
+  }
 
   ngOnInit() {
     const configChanges$ = this.configService.watchConfig(this.id).subscribe((config) => this.updateConfig(config));
@@ -61,6 +74,11 @@ export class ItemComponent implements OnInit, OnDestroy {
     if(this.configService.isContainerConfig(config)) {
       this.classes = (this.classes || '') + ' uib-container';
     }
+    this.updateCondition();
+  }
+
+  updateCondition() {
+    this.condition = this.config?.condition? this.conditionsService.check(this.config.condition, this.conditionsData, this.data) : true;
   }
 
   // Drag & Drop

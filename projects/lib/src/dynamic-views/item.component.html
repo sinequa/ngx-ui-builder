@@ -1,7 +1,7 @@
 <ng-container *ngIf="config.type === '_container'">
   <div *ngIf="configurable" class="dragPlaceholder" dndPlaceholderRef>+</div>
 
-  <ng-container *ngIf="!config.condition || data[config.condition.field] === config.condition.value">
+  <ng-container *ngIf="condition">
     <ng-container *ngIf="!configurable">
       <div #ref *ngFor="let item of config.items; let i = index"
 
@@ -12,6 +12,7 @@
 
       [data]="data"
       [dataIndex]="dataIndex"
+      [conditionsData]="conditionsData"
       ></div>    
     </ng-container>
     <ng-container *ngIf="configurable">
@@ -29,6 +30,7 @@
     
           [data]="data"
           [dataIndex]="dataIndex"
+          [conditionsData]="conditionsData"
     
           [dndDraggable]="{item, index: i, container: id}"
           [dndDisableIf]="dataIndex"
@@ -44,12 +46,12 @@
 </ng-container>
 
 <div
-  *ngIf="config.type === '_raw-html' && (!config.condition || data[config.condition.field] === config.condition.value)"
+  *ngIf="config.type === '_raw-html' && condition"
   [innerHTML]="config.rawHtml">
 </div>
 
 <ng-container
-  *ngIf="config.type[0] !== '_' && (!config.condition || data[config.condition.field] === config.condition.value)"
+  *ngIf="config.type[0] !== '_' && condition"
   [ngTemplateOutlet]="templates[config.type || id]?.template"
   [ngTemplateOutletContext]="{ $implicit: config, data: data, id: id }"
 ></ng-container>
