@@ -7,13 +7,22 @@
 
 <ng-template #tree let-id let-root="root">
   <ul [ngClass]="{ tree: root }">
-    <li *ngFor="let el of root || children(id)">
-      <a (mouseover)="hover(el.id)" (click)="select(el.id)">{{ el.id }}</a>
-      <ng-container
-        *ngIf="el.items"
-        [ngTemplateOutlet]="tree"
-        [ngTemplateOutletContext]="{ $implicit: el.id }"
-      ></ng-container>
+    <li *ngFor="let el of root || children(id)" [ngClass]="{ 'section': el.items }">
+      <ng-container [ngTemplateOutlet]="el.items ? parent : single" [ngTemplateOutletContext]="{ $implicit: el.id }"></ng-container>
     </li>
   </ul>
+</ng-template>
+
+<ng-template #single let-id>
+  <a (mouseover)="hover(id)" (click)="select(id)">{{ id }}</a>
+</ng-template>
+
+<ng-template #parent let-id>
+  <input type="checkbox" checked [id]="'menu-' + id">
+  <label [for]="'menu-' + id"></label>
+  <a (mouseover)="hover(id)" (click)="select(id)">{{ id }}</a>
+  <ng-container
+    [ngTemplateOutlet]="tree"
+    [ngTemplateOutletContext]="{ $implicit: id }"
+  ></ng-container>
 </ng-template>

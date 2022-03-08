@@ -1,82 +1,135 @@
-body {
-  font-family:'Arial', sans-serif;
-}
-*{margin:0;padding: 0;}
-
-h1 {
-  color:#FA9A39;
-}
-
-p { padding-bottom:50px;}
-
-.content {
-  margin-left: 1rem;
-}
-.tree ul {
-  margin-left: 20px;
+.tree,
+.section ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
 .tree li {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: flex-start;
+  
   list-style-type: none;
-  margin:10px;
+  margin: 10px;
   position: relative;
+  width: 100%;
 }
+
+.tree li:not(.section) {
+  max-width: max-content;
+}
+
 
 .tree li::before {
   content: "";
   position: absolute;
-  top:-7px;
-  left:-20px;
+  top: -9px;
+  left: -20px;
   border-left: 1px solid #ccc;
-  border-bottom:1px solid #ccc;
-  border-radius:0 0 0 0px;
-  width:20px;
-  height:15px;
+  border-bottom: 1px solid #ccc;
+  border-radius: 0 0 0 0px;
+  width: 20px;
+  height: 22px;
 }
 
 .tree li::after {
-  position:absolute;
-  content:"";
-  top:8px;
-  left:-20px;
+  position: absolute;
+  content: "";
+  top: 12px;
+  left: -20px;
   border-left: 1px solid #ccc;
-  border-top:1px solid #ccc;
-  border-radius:0px 0 0 0;
-  width:20px;
-  height:100%;
+  border-top: 1px solid #ccc;
+  border-radius: 0px 0 0 0;
+  width: 20px;
+  height: 100%;
 }
 
-.tree li:last-child::after  {
-  display:none;
+.tree li:last-child::after {
+  display: none;
 }
 
-.tree li:last-child:before{
+.tree li:last-child:before {
   border-radius: 0 0 0 5px;
 }
 
-ul.tree>li:first-child::before {
-  display:none;
+ul.tree > li:first-child::before {
+  display: none;
 }
 
-ul.tree>li:first-child::after {
-  border-radius:5px 0 0 0;
+ul.tree > li:first-child::after {
+  border-radius: 5px 0 0 0;
 }
 
 .tree li a {
   border: 1px #ccc solid;
   border-radius: 5px;
-  padding:2px 5px;
+  padding: 2px 5px;
+  text-decoration: none;
 }
 
-.tree li a:hover, .tree li a:hover+ul li a,
-.tree li a:focus, .tree li a:focus+ul li a {
-  background: #ccc; color: #000; border: 1px solid #000;
+.tree li a:hover,
+.tree li a:hover + ul li a,
+.tree li a:focus,
+.tree li a:focus + ul li a {
+  background: #ccc;
+  color: #000;
+  border: 1px solid #000;
   cursor: pointer;
 }
 
-.tree li a:hover+ul li::after, .tree li a:focus+ul li::after,
-.tree li a:hover+ul li::before, .tree li a:focus+ul li::before 
-.tree li a:hover+ul::before, .tree li a:focus+ul::before 
-.tree li a:hover+ul ul::before, .tree li a:focus+ul ul::before{
-  border-color:  #000; /*connector color on hover*/
+.tree li a:hover + ul li::after,
+.tree li a:focus + ul li::after,
+.tree li a:hover + ul li::before,
+.tree li a:focus + ul li::before .tree li a:hover + ul::before,
+.tree li a:focus + ul::before .tree li a:hover + ul ul::before,
+.tree li a:focus + ul ul::before {
+  border-color: #000; /*connector color on hover*/
+}
+
+.section ul {
+  transition: opacity 0.3s linear;
+  height: 0;
+  transform: translate(9999px);
+  opacity: 0;
+}
+.section input:checked ~ ul {
+  transform: translate(0);
+  opacity: 1;
+  height: auto;
+}
+
+.section input[type="checkbox"] {
+  display: none;
+}
+
+.section {
+  position: relative;
+  padding-left: 35px;
+}
+
+.section label + a {
+  margin-left: -35px;
+  padding-left: 22px;
+  text-decoration: none;
+  color: #000;
+}
+
+.section label:before {
+  content: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='rgba%280,0,0,.5%29' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M5 14l6-6-6-6'/%3e%3c/svg%3e");
+  position: absolute;
+  top: 4px;
+  left: 2px;
+  text-align: center;
+  color: black;
+  display: inline-block;
+  transition: transform 0.5s;
+  z-index: 1;
+  user-select: none;
+  cursor: pointer;
+}
+
+.section input:checked ~ label:before {
+  transform: rotate(90deg);
 }
