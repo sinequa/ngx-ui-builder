@@ -4,8 +4,8 @@ import * as prettify from 'html-prettify';
 import { SchematicsException } from '@angular-devkit/schematics';
 
 declare interface ComponentConfig extends Record<string,any> {
+  readonly id: string;
   type: string;
-  id: string;
   items?: string[];
   rawHtml?: string;
 }

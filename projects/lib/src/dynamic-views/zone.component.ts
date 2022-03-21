@@ -34,6 +34,8 @@ export class ZoneComponent implements AfterContentInit, OnInit, OnDestroy {
   @Output() itemClicked = new EventEmitter<{data: any, index?: number, event: Event}>();
 
   sub: Subscription;
+  
+  enabled$ = this.configService.editorEnabled$;
 
   constructor(
     public configService: ConfigService,

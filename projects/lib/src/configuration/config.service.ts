@@ -11,12 +11,12 @@ import {
   deleteEntities,
 } from '@ngneat/elf-entities';
 import { stateHistory } from '@ngneat/elf-state-history';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
-import { Observable } from 'rxjs';
 import { Condition } from './conditions.service';
 
 export interface ComponentConfig {
-  id: string;
+  readonly id: string;
   type: string;
   classes?: string;
   [key: string]: any;
@@ -28,9 +28,11 @@ export interface ContainerConfig extends ComponentConfig {
   items: string[];
 }
 
-
 @Injectable({ providedIn: 'root' })
 export class ConfigService {
+  
+  editorEnabled$ = new BehaviorSubject<boolean>(false);
+  
   store: Store;
   historyState: any;
   
@@ -158,5 +160,10 @@ export class ConfigService {
 
   public redo() {
     this.historyState.redo();
+  }
+  
+  public toggleEditor(enabled: boolean) {
+    this.editorEnabled$.next(enabled);
+
   }
 }
