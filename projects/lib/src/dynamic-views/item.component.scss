@@ -1,12 +1,16 @@
 .dragPlaceholder {
   --color: hsl(0, 0%, 43%);
-  padding: 20px;
   
   text-align:center;
   font-size: 20px;
   font-weight: bold;
   color: var(--color);
   
-  border: 2px dashed var(--color);
-
+  outline: 2px dashed var(--color);
+  min-width: 20px;
+  min-height: 20px;
+  
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
