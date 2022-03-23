@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { filter } from 'rxjs/operators';
 import { TemplateNameDirective } from '../utils';
 import {ConfigurableDirective} from './configurable.directive';
@@ -21,7 +21,10 @@ export class ConfigurableService {
   private _hoveredId?: string;
 
   // currently edited element'id
-  private edited$ = new Subject<Configurable|undefined>();
+  private edited$ = new Subject<Configurable | undefined>();
+  
+  // behavior subject as we need to retrieve the previous value to toggle it
+  editorEnabled$ = new BehaviorSubject<boolean>(false);
   
   // previous edited element
   previousConfigurableElement?: Configurable;
@@ -86,5 +89,10 @@ export class ConfigurableService {
 
   isConfigurable = (configurable: Configurable | undefined): configurable is Configurable => {
     return !!configurable;
+  }
+  
+  toggleEditor() {
+    const enabled = !this.editorEnabled$.value;
+    this.editorEnabled$.next(enabled);
   }
 }

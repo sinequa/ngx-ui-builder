@@ -9,7 +9,7 @@ import { ConfiguratorContext } from '../configurator.models';
     type="text"
     name="classes"
     [(ngModel)]="context.config.classes"
-    (ngModelChange)="context.configChanged()"
+    (ngModelChangeDebounced)="context.configChanged()"
   />
   `,
   changeDetection: ChangeDetectionStrategy.OnPush

@@ -16,6 +16,7 @@ import { TemplateNameDirective } from '../utils/template-name.directive';
 import { ConfigService } from '../configuration/config.service';
 import { Subscription } from 'rxjs';
 import { DragDropService } from './drag-drop.service';
+import { ConfigurableService } from '../configurable';
 
 @Component({
   selector: 'uib-zone',
@@ -34,9 +35,12 @@ export class ZoneComponent implements AfterContentInit, OnInit, OnDestroy {
   @Output() itemClicked = new EventEmitter<{data: any, index?: number, event: Event}>();
 
   sub: Subscription;
+  
+  enabled$ = this.configurableService.editorEnabled$;
 
   constructor(
     public configService: ConfigService,
+    public configurableService: ConfigurableService,
     public dragDropService: DragDropService,
     public cdr: ChangeDetectorRef
   ) {}

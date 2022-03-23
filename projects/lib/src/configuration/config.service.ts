@@ -11,12 +11,12 @@ import {
   deleteEntities,
 } from '@ngneat/elf-entities';
 import { stateHistory } from '@ngneat/elf-state-history';
-import { filter, map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
+import { filter, map } from 'rxjs/operators';
 import { Condition } from './conditions.service';
 
 export interface ComponentConfig {
-  id: string;
+  readonly id: string;
   type: string;
   classes?: string;
   [key: string]: any;
@@ -27,7 +27,6 @@ export interface ContainerConfig extends ComponentConfig {
   type: '_container';
   items: string[];
 }
-
 
 @Injectable({ providedIn: 'root' })
 export class ConfigService {

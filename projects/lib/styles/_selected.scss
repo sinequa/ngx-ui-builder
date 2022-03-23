@@ -1,49 +1,13 @@
-uib-zone .uib-configurable {
-  transition: margin ease 0.3s, padding ease 0.3s;
-  width: auto;
-}
-
-.uib-zone:hover {
-  .uib-configurable {
-    margin: var(--margin);
-    padding: var(--padding);
-  }
-}
-
 /* when zone is selected apply this style */
 .uib-configurable[selected] {
   padding: var(--padding);
 
   .uib-configurable {
     margin: var(--margin);
+    border-radius: 2px;
   }
+
   .uib-container {
     padding: var(--padding);
-  }
-
-  .uib-configurable:not(.highlight, .edited) {
-    outline: 1px dashed yellowgreen;
-    border-radius: 2px;
-  }
-  .uib-container:not(.highlight) {
-    outline: 1px dashed steelblue;
-    border-radius: 2px;
-  }
-}
-
-/* when hovering a zone or a zone's element */
-.uib-zone:hover {
-  &:not([selected]) {
-    padding: calc(var(--padding) * 2);
-  }
-
-  .uib-configurable:not(.highlight) {
-    outline: 1px dashed yellowgreen;
-    border-radius: 2px;
-  }
-
-  .uib-container:not(.highlight) {
-    outline: 1px dashed steelblue;
-    border-radius: 2px;
   }
 }
