@@ -53,7 +53,7 @@ export class ItemComponent implements OnInit, OnChanges, OnDestroy {
   ) {}
 
   ngOnChanges(changes: SimpleChanges): void {
-    if(changes.data || changes.dataIndex) {
+    if(changes.data || changes.dataIndex || changes.conditionsData) {
       this.updateData();
       this.updateCondition();
     }
