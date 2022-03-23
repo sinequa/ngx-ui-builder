@@ -9,6 +9,7 @@ import {
   selectAll,
   getEntities,
   deleteEntities,
+  deleteAllEntities,
 } from '@ngneat/elf-entities';
 import { stateHistory } from '@ngneat/elf-state-history';
 import { Observable } from 'rxjs';
@@ -40,6 +41,13 @@ export class ConfigService {
     this.store = new Store({ name: 'config', state, config });
     this.historyState = stateHistory(this.store, { maxAge: Infinity });
     this.store.subscribe(console.log);
+  }
+
+  set(config: ComponentConfig[]) {
+    this.store.update(
+      deleteAllEntities(),
+      addEntities(config)
+    );
   }
 
   public watchAllConfig(): Observable<ComponentConfig[]> {
@@ -95,19 +103,13 @@ export class ConfigService {
   /**
    * Test whether a given component id is used within the hierarchy of a container
    */
-  public isUsedWithin(id: string, containerId: string) {
-    const conf = this._getConfig(containerId);
-    if(conf?.type === '_container') {
-      for(let item of (conf as ContainerConfig).items) {
-        if(item === id) {
-          return true;
-        }
-        if(this.isUsedWithin(id, item)) {
-          return true;
-        }
-      }
-    }
-    return false;
+  public isUsed(id: string) {
+    return !!this.findParent(id);
+  }
+
+  public findParent(id: string): ContainerConfig | undefined {
+    return this.getAllConfig()
+      .find(item => this.isContainerConfig(item) && item.items.includes(id)) as ContainerConfig | undefined;
   }
 
   public updateConfig(value: ComponentConfig | ComponentConfig[]) {
