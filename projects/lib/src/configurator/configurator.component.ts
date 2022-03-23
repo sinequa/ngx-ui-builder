@@ -87,7 +87,7 @@ export class ConfiguratorComponent {
     });
     
     // when edition is disabled, close side panel
-    this.configService.editorEnabled$.subscribe(value => {
+    this.configurableService.editorEnabled$.subscribe(value => {
       if (value === false && this.offcanvas) {
         this.offcanvas.hide();
       }
