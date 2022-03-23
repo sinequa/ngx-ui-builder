@@ -140,7 +140,7 @@ export class PaletteComponent implements OnInit, OnChanges {
           type: c.type,
           display: c.id,
           title: `Type: ${this.context.templates?.[c.type]?.display || c.type}`,
-          removeable: !this.configService.isUsedWithin(c.id, this.context.zone),
+          removeable: !this.configService.isUsed(c.id),
           createConfig: _ => of(c) // The config already exists
         })
     )
