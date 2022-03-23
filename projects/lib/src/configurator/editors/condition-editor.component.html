@@ -3,41 +3,57 @@
   <input class="form-check-input" type="checkbox" id="activate" [(ngModel)]="activate">
   <label class="form-check-label" for="activate">Display this component conditionally</label>
 </div>
+
 <div *ngIf="context.config.condition">
-  <div>
+
+  <div class="mb-2">
     <label class="form-label" for="data">Data</label>
-    <select [(ngModel)]="context.config.condition.data" id="data" class="form-select" (ngModelChange)="context.configChanged()">
-      <option value="">data</option>
+    <select [(ngModel)]="context.config.condition.data" id="data" class="form-select" (ngModelChange)="updateConfig()">
+      <option value="" *ngIf="context.context.data">data</option>
       <option [ngValue]="source.key" *ngFor="let source of context.context.conditionsData | keyvalue">{{source.key}}</option>
     </select>
   </div>
-  <div>
+
+  <div class="mb-2">
     <label class="form-label" for="field">Field</label>
-    <input class="form-control" type="text" id="field" [(ngModel)]="context.config.condition.field" (ngModelChange)="context.configChanged()"/>
+    <input #fieldInput class="form-control" type="text" id="field" spellcheck="false" autocomplete="off" [(ngModel)]="context.config.condition.field" (ngModelChange)="updateConfig()"/>
+    <uib-autocomplete [inputElement]="fieldInput" [allSuggests]="fields" (select)="selectField($event)"></uib-autocomplete>
   </div>
-  <div>
+
+  <div class="mb-2">
     <label class="form-label" for="type">Type</label>
-    <select [(ngModel)]="context.config.condition.type" id="type" class="form-select" (ngModelChange)="context.configChanged()">
+    <select [(ngModel)]="context.config.condition.type" id="type" class="form-select" (ngModelChange)="updateConfig()">
       <option value="equals">Equals</option>
       <option value="regexp">Regular Expression</option>
     </select>
   </div>
-  <div>
+
+  <div class="mb-2">
     <label class="form-label">Value(s)</label>
     
-    <div class="input-group mb-1" *ngFor="let value of context.config.condition.values; let i = index; trackBy: trackByFn">
+    <div class="condition-value input-group flex-nowrap mb-1" *ngFor="let value of context.config.condition.values; let i = index; trackBy: trackByFn">
       <div class="input-group-text align-items-start">
-        <input class="form-check-input" type="checkbox" id="not" [(ngModel)]="value.not" (ngModelChange)="context.configChanged()">
-        <label class="form-check-label ms-1" for="not">Not</label>
+        <input class="form-check-input" type="checkbox" id="not{{i}}" [(ngModel)]="value.not" (ngModelChange)="updateConfig()">
+        <label class="form-check-label ms-1" for="not{{i}}">Not</label>
       </div>
-      <input class="form-control" type="text" id="value{{i}}" [(ngModel)]="context.config.condition.values[i].value" (ngModelChange)="context.configChanged()"/>
+      <div class="flex-grow-1">
+        <input #valueInput class="form-control rounded-0" type="text" id="value{{i}}" spellcheck="false" autocomplete="off" [(ngModel)]="context.config.condition.values[i].value" (ngModelChange)="updateConfig()"/>
+        <uib-autocomplete [inputElement]="valueInput" [allSuggests]="values" (select)="selectValue($event, context.config.condition.values[i])"></uib-autocomplete>
+      </div>
       <button class="btn btn-outline-secondary" type="button" uib-tooltip="Add another condition" container=".uib-bootstrap" (click)="addValue()">+</button>
-      <button class="btn btn-outline-danger" type="button" uib-tooltip="Remove this condition" container=".uib-bootstrap" (click)="removeValue(i)" *ngIf="i>=1">-</button>
+      <button class="btn btn-outline-danger" type="button" uib-tooltip="Remove this condition" container=".uib-bootstrap" (click)="removeValue(i)" *ngIf="context.config.condition.values.length > 1">-</button>
     </div>
+  </div>
 
+  <div class="form-check mb-2" *ngIf="context.config.condition.values.length">
+    <input class="form-check-input" type="checkbox" id="or" [(ngModel)]="context.config.condition.or" (ngModelChange)="updateConfig()">
+    <label class="form-check-label" for="or">Display if any of the condition is true</label>
   </div>
-  <div class="form-check" *ngIf="context.config.condition.values.length">
-    <input class="form-check-input" type="checkbox" id="or" [(ngModel)]="context.config.condition.or" (ngModelChange)="context.configChanged()">
-    <label class="form-check-label" for="or">Display of any of the condition is true</label>
+
+
+  <div class="mb-2">
+    <div>Debug text</div>
+    <pre><code>{{debugText}}</code></pre>
   </div>
+
 </div>

@@ -19,11 +19,33 @@ export interface ConditionValue {
 @Injectable({providedIn: 'root'})
 export class ConditionsService {
 
+  public selectData(condition: Condition, conditionsData?: Record<string, any>, data?: any): any {
+    return condition.data? conditionsData?.[condition.data] : data;
+  }
+
   public check(condition: Condition, conditionsData?: Record<string, any>, data?: any): boolean {
-    const selectData = condition.data? conditionsData?.[condition.data] : data;
+    const selectData = this.selectData(condition, conditionsData, data);
     const value = selectData?.[condition.field]?.toString() || '';
     return this.checkCondition(condition, value);
   }
+
+  public writeCondition(condition: Condition) {
+    const operator = condition.or? ') OR (' : ') AND (';
+    return '('+condition.values.map(v => this.writeValue(condition, v)).join(operator)+')';
+  }
+
+  public writeValue(condition: Condition, value: ConditionValue) {
+    if(condition.type === 'regexp') {
+      const operator = value.not? '!' : '';
+      return `${operator}${condition.data || 'data'}['${condition.field}'].match(/${value.value}/)'`;
+    }
+    else if (condition.type === 'equals') {
+      const operator = value.not? '!==' : '==='
+      return `${condition.data || 'data'}['${condition.field}'] ${operator} '${value.value}'`;
+    }
+    return '';
+  }
+  
 
   private checkCondition(condition: Condition, data: string): boolean {
     if(condition.or) {

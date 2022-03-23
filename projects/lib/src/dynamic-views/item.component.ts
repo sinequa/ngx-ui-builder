@@ -42,6 +42,8 @@ export class ItemComponent implements OnInit, OnChanges, OnDestroy {
 
   subs: Subscription[] = [];
 
+  _data: any;
+
   constructor(
     public configService: ConfigService,
     public conditionsService: ConditionsService,
@@ -51,7 +53,8 @@ export class ItemComponent implements OnInit, OnChanges, OnDestroy {
   ) {}
 
   ngOnChanges(changes: SimpleChanges): void {
-    if(changes.data) {
+    if(changes.data || changes.dataIndex || changes.conditionsData) {
+      this.updateData();
       this.updateCondition();
     }
   }
@@ -77,8 +80,12 @@ export class ItemComponent implements OnInit, OnChanges, OnDestroy {
     this.updateCondition();
   }
 
+  updateData() {
+    this._data = typeof this.dataIndex === 'undefined'? this.data : this.data[this.dataIndex];
+  }
+
   updateCondition() {
-    this.condition = this.config?.condition? this.conditionsService.check(this.config.condition, this.conditionsData, this.data) : true;
+    this.condition = this.config?.condition? this.conditionsService.check(this.config.condition, this.conditionsData, this._data) : true;
   }
 
   // Drag & Drop

@@ -1,3 +1,4 @@
+export * from './autocomplete.component';
 export * from './template-name.directive';
 export * from './modal.component';
 export * from './tooltip.directive';

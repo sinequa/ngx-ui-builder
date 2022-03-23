@@ -51,7 +51,7 @@
   
       <details [attr.open]="edited.config.condition? '' : undefined"
         class="mb-3"
-        *ngIf="edited.options.showConditionalDisplay && edited.context.data"
+        *ngIf="edited.options.showConditionalDisplay && (edited.context.data || edited.context.conditionsData)"
       >
         <summary uib-tooltip="Display this component only if the data validates a rule">Conditional display</summary>
         <uib-condition-editor [context]="edited"></uib-condition-editor>

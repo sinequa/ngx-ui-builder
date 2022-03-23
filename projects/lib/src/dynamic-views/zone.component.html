@@ -6,7 +6,7 @@
 <ng-template #array let-data>
   <ng-container *ngFor="let d of data; let index = index; let first = first" 
     [ngTemplateOutlet]="single"
-    [ngTemplateOutletContext]="{ $implicit: d, index, first }">
+    [ngTemplateOutletContext]="{ $implicit: data, index, first }">
   </ng-container>
 </ng-template>
 

@@ -51,7 +51,7 @@
 </div>
 
 <ng-container
-  *ngIf="config.type[0] !== '_' && condition"
+  *ngIf="!config.type.startsWith('_') && condition"
   [ngTemplateOutlet]="templates[config.type || id]?.template"
-  [ngTemplateOutletContext]="{ $implicit: config, data: data, id: id }"
+  [ngTemplateOutletContext]="{ $implicit: config, data: _data, id: id }"
 ></ng-container>
