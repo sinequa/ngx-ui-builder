@@ -12,7 +12,7 @@
 
 <!-- data is a single object -->
 <ng-template #single let-data let-index="index" let-first="first">
-  <div *ngIf="!first"
+  <div *ngIf="!first || (enabled$ | async) === false"
     [uib-item]="id"
     [id]="id"
     [configurable]="false"
@@ -25,7 +25,7 @@
     
     (click)="onItemClicked($event, data, index)"
   ></div>
-  <div #ref *ngIf="first"
+  <div #ref *ngIf="first && (enabled$ | async)"
   
     class="uib-zone"
 

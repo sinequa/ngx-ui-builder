@@ -13,6 +13,7 @@ import { switchMap, map, tap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { Configurable, ConfigurableService } from '../configurable/configurable.service';
 import { ComponentConfig, ConfigService, ContainerConfig } from '../configuration/config.service';
+import { Mutable } from '../utils/types.helpers';
 import { TemplateNameDirective } from '../utils/template-name.directive';
 import { defaultPaletteOptions } from './palette/palette.component';
 import { ConfiguratorContext, ConfiguratorOptions } from './configurator.models';
@@ -85,6 +86,13 @@ export class ConfiguratorComponent {
       this.cdr.markForCheck();
     });
     
+    // when edition is disabled, close side panel
+    this.configurableService.editorEnabled$.subscribe(value => {
+      if (value === false && this.offcanvas) {
+        this.offcanvas.hide();
+      }
+    })
+    
   }
 
   /**
@@ -140,7 +148,7 @@ export class ConfiguratorComponent {
   }
 
   duplicate(context: Configurable) {
-    const config = this.configService.getConfig(context.id);
+    const config: Mutable<ComponentConfig> = this.configService.getConfig(context.id);
     config.id = this.configService.generateId(config.id); // Generate a new config id
     if(context.parentId) {
       const container = this.configService.getContainer(context.parentId);
@@ -153,7 +161,7 @@ export class ConfiguratorComponent {
     // Special case of a zone
     else if(context.zone === context.id) {
       // Create another copy
-      const config2 = this.configService.getConfig(context.id);
+      const config2: Mutable<ComponentConfig> = this.configService.getConfig(context.id);
       config2.id = this.configService.generateId(config.id);
       
       const container: ContainerConfig = {
