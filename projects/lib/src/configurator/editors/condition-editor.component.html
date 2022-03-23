@@ -9,7 +9,7 @@
   <div class="mb-2">
     <label class="form-label" for="data">Data</label>
     <select [(ngModel)]="context.config.condition.data" id="data" class="form-select" (ngModelChange)="updateConfig()">
-      <option value="">data</option>
+      <option value="" *ngIf="context.context.data">data</option>
       <option [ngValue]="source.key" *ngFor="let source of context.context.conditionsData | keyvalue">{{source.key}}</option>
     </select>
   </div>
