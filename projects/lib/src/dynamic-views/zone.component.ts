@@ -73,6 +73,7 @@ export class ZoneComponent implements AfterContentInit, OnInit, OnDestroy {
   }
 
   onItemClicked(event: Event, data?: any, index?: number) {
+    data = typeof index === 'undefined'? data : data[index];
     this.itemClicked.next({data, index, event});
   }
 }
