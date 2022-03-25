@@ -8,7 +8,21 @@ declare interface ComponentConfig extends Record<string,any> {
   type: string;
   items?: string[];
   rawHtml?: string;
+  condition?: Condition;
 }
+
+declare interface Condition {
+  data?: string; // conditionsData selector (or undefined for the main data object)
+  field: string; // The field to select from the data object
+  type: 'equals' | 'regexp';
+  values: ConditionValue[];
+  or?: boolean;
+}
+
+declare interface ConditionValue {
+  value: string;
+  not?: boolean;
+};
 
 declare interface HTMLElement {
   name: string;
@@ -61,25 +75,28 @@ function processTemplate(dom: HTMLElement[], config: ComponentConfig[]): HtmlMod
     }
 
     //console.log(`Generating zone ${id}`,zone);
-    let innerHtml = generateHtml(conf, templates, config);
 
     // Manage special attributes of the uib-zone component
     let attr = `id="${id}"`;
     let dataName = "data";
-    if(zone.attribs['[data]']) {
-      // Try to guess the right data name (eg. "record" instead of "data")
-      if(templates?.[0]?.attribs) {
-        for(const [key, value] of Object.entries(templates[0].attribs)) {
-          if(key.startsWith("let-") && value === "data") {
-            dataName = key.substring(4);
-          }
+    // Try to guess the right data name (eg. "record" instead of "data")
+    if(templates?.[0]?.attribs) {
+      for(const [key, value] of Object.entries(templates[0].attribs)) {
+        if(key.startsWith("let-") && value === "data") { // Looking for pattern let-record="data"
+          dataName = key.substring(4);
         }
       }
-      attr = `${attr} *ngFor="let ${dataName} of ${zone.attribs['[data]']}"`
     }
 
     if(zone.attribs['class']) {
       attr = `${attr} class="${zone.attribs['class']}"`;
+    }
+
+    let innerHtml = generateHtml(conf, templates, config, dataName, zone.attribs['[conditionsData]']);
+
+    if(zone.attribs['[data]']) {
+      // strong assumption: data has to be an array (even though uib-zone can take non-array data)
+      innerHtml = innerHtml.replace("<div", `<div *ngFor="let ${dataName} of ${zone.attribs['[data]']}"`);
     }
 
     if(zone.attribs['(itemClicked)']){
@@ -118,24 +135,27 @@ function getZones(dom: HTMLElement[]): HTMLElement[] {
 }
   
 // Generate the HTML of a UI Builder component, based on its configuration and templates
-function generateHtml(conf: ComponentConfig, templates: HTMLElement[], config: ComponentConfig[]): string {
+function generateHtml(conf: ComponentConfig, templates: HTMLElement[], config: ComponentConfig[], dataName: string, conditionsDataName?: string): string {
   let classes = conf.classes || '';
   if(conf.type === '_container') {
     classes += " d-flex"; // Necessary to replace the display: flex from the .uib-container class
   }
-  const attr = classes? ` class="${classes.trim()}"`: '';
+  let attr = classes? ` class="${classes.trim()}"`: '';
+  if(conf.condition) {
+    attr += conditionToNgIf(conf.condition, dataName, conditionsDataName);
+  }
   if(conf.type === '_container') {
     const content = (conf.items as string[])
       .map(c => config.find(cc => cc.id === c))       // For each item, map its config
       .filter(c => c)                                 // Keep the configs that exist
-      .map(c => generateHtml(c!, templates, config))  // Generate the HTML for this item
+      .map(c => generateHtml(c!, templates, config, dataName, conditionsDataName))  // Generate the HTML for this item
       .join('\r\n');                                  // Join the resulting HTML
     return `<div${attr}>\r\n${content}\r\n</div>`;
   }
   else {
     let innerHtml = '';
     if(conf.type === '_raw-html') {
-      innerHtml = `\r\n<div>\r\n${conf.rawHtml || ''}\r\n</div>\r\n`;
+      innerHtml = `\r\n<div${attr}>\r\n${conf.rawHtml || ''}\r\n</div>\r\n`;
     }
     else {
       const template = templates.find(t => t.attribs?.['uib-template'] === conf.type);
@@ -145,6 +165,14 @@ function generateHtml(conf: ComponentConfig, templates: HTMLElement[], config: C
     }
     return `<div${attr}>${innerHtml}</div>`;
   }
+}
+
+function conditionToNgIf(condition: Condition, dataName: string, conditionsDataName?: string): string {
+  let data = dataName;
+  if(condition.data && conditionsDataName) {
+    data = `(${conditionsDataName})['${condition.data}']`;
+  }
+  return ` *ngIf="${data} | uibCondition:${JSON.stringify(condition).replace(/\"/g, "'")}"`;
 }
 
 // Construct a HTML string recursively from a list of elements

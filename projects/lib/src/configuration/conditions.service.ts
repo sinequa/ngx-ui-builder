@@ -23,10 +23,10 @@ export class ConditionsService {
     return condition.data? conditionsData?.[condition.data] : data;
   }
 
-  public check(condition: Condition, conditionsData?: Record<string, any>, data?: any): boolean {
+  public check(condition: Condition | undefined, conditionsData?: Record<string, any>, data?: any): boolean {
+    if(!condition) return true;
     const selectData = this.selectData(condition, conditionsData, data);
-    const value = selectData?.[condition.field]?.toString() || '';
-    return this.checkCondition(condition, value);
+    return this.checkData(condition, selectData);
   }
 
   public writeCondition(condition: Condition) {
@@ -46,6 +46,10 @@ export class ConditionsService {
     return '';
   }
   
+  public checkData(condition: Condition, data?: any) {
+    const value = data?.[condition.field]?.toString() || '';
+    return this.checkCondition(condition, value);
+  }
 
   private checkCondition(condition: Condition, data: string): boolean {
     if(condition.or) {
@@ -76,7 +80,7 @@ export class ConditionsService {
   private checkRegexp(condition: ConditionValue, value: string) {
     if(!condition.$regexp) {
       try {
-        condition.$regexp = new RegExp(condition.value);
+        condition.$regexp = new RegExp(condition.value, 'i');
       }
       catch(e) {
         console.warn("Incorrect regular expression ", condition.value);

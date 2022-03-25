@@ -85,7 +85,7 @@ export class ItemComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   updateCondition() {
-    this.condition = this.config?.condition? this.conditionsService.check(this.config.condition, this.conditionsData, this._data) : true;
+    this.condition = this.conditionsService.check(this.config?.condition, this.conditionsData, this._data);
   }
 
   // Drag & Drop
