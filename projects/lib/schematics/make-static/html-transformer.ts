@@ -1,6 +1,7 @@
 
 import * as htmlparser from 'htmlparser';
 import * as prettify from 'html-prettify';
+import * as sanitizeHtml from 'sanitize-html';
 import { SchematicsException } from '@angular-devkit/schematics';
 
 declare interface ComponentConfig extends Record<string,any> {
@@ -143,7 +144,7 @@ function generateHtml(conf: ComponentConfig, templates: HTMLElement[], config: C
       .join('\r\n');                                  // Join the resulting HTML
   }
   else if(conf.type === '_raw-html') {
-    innerHtml = `<div>\r\n${conf.rawHtml || ''}\r\n</div>`; // TODO: sanitize
+    innerHtml = `<div>\r\n${sanitizeHtml(conf.rawHtml || '')}\r\n</div>`;
   }
   else {
     const template = templates.find(t => t.attribs?.['uib-template'] === conf.type);
