@@ -8,21 +8,8 @@ declare interface ComponentConfig extends Record<string,any> {
   type: string;
   items?: string[];
   rawHtml?: string;
-  condition?: Condition;
+  condition?: {data?: string}; // Much simpler interface than Condition for extendibility
 }
-
-declare interface Condition {
-  data?: string; // conditionsData selector (or undefined for the main data object)
-  field: string; // The field to select from the data object
-  type: 'equals' | 'regexp';
-  values: ConditionValue[];
-  or?: boolean;
-}
-
-declare interface ConditionValue {
-  value: string;
-  not?: boolean;
-};
 
 declare interface HTMLElement {
   name: string;
@@ -167,12 +154,11 @@ function generateHtml(conf: ComponentConfig, templates: HTMLElement[], config: C
   }
 }
 
-function conditionToNgIf(condition: Condition, dataName: string, conditionsDataName?: string): string {
-  let data = dataName;
+function conditionToNgIf(condition: {data?: string}, dataName: string, conditionsDataName?: string): string {
   if(condition.data && conditionsDataName) {
-    data = `(${conditionsDataName})['${condition.data}']`;
+    dataName = `(${conditionsDataName})['${condition.data}']`;
   }
-  return ` *ngIf="${data} | uibCondition:${JSON.stringify(condition).replace(/\"/g, "'")}"`;
+  return ` *ngIf="${dataName} | uibCondition:${JSON.stringify(condition).replace(/\"/g, "'")}"`;
 }
 
 // Construct a HTML string recursively from a list of elements
