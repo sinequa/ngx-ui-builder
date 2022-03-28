@@ -16,7 +16,9 @@ import {
   UIBuilderIconUndo,
   UIBuilderIconRedo,
   UIBuilderIconTrash,
-  UIBuilderIconGrip
+  UIBuilderIconGrip,
+  UIBuilderIconEye,
+  UIBuilderIconEyeSlash
 } from "./svg-icons";
 
 export const iconsLibrary = [
@@ -37,5 +39,7 @@ export const iconsLibrary = [
   UIBuilderIconUndo,
   UIBuilderIconRedo,
   UIBuilderIconTrash,
-  UIBuilderIconGrip
+  UIBuilderIconGrip,
+  UIBuilderIconEye,
+  UIBuilderIconEyeSlash
 ]
