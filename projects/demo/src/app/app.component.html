@@ -104,7 +104,7 @@
       <input class="form-control" id="title"
         type="text"
         [(ngModel)]="context.config.title"
-        (ngModelChange)="context.configChanged()"
+        (ngModelChangeDebounced)="context.configChanged()"
       />
       <hr />
     </ng-template>

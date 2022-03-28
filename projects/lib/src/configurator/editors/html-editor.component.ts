@@ -10,7 +10,7 @@ import { ConfiguratorContext } from "../configurator.models";
     name="rawHtml"
     rows="15"
     [(ngModel)]="context.config.rawHtml"
-    (ngModelChange)="context.configChanged()"
+    (ngModelChangeDebounced)="context.configChanged()"
   ></textarea>
   `,
   styles: [`
