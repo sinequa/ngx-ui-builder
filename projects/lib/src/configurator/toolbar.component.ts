@@ -13,7 +13,7 @@ import { ConfigService } from "../configuration";
     <button class="btn btn-primary" (click)="configService.redo()" [disabled]="!(configService.canRedo$()| async)" uib-tooltip="Redo" placement="top">
       <svg-icon key="redo"></svg-icon>
     </button>
-  <ng-content></ng-content>
+    <ng-content></ng-content>
   </ng-container>
   <button class="btn bg-warning" (click)="toggleEditor()">
     <svg-icon *ngIf="editor.enabled" key="eye_slash"></svg-icon>

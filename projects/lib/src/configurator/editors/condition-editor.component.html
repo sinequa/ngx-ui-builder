@@ -16,7 +16,7 @@
 
   <div class="mb-2">
     <label class="form-label" for="field">Field</label>
-    <input #fieldInput class="form-control" type="text" id="field" spellcheck="false" autocomplete="off" [(ngModel)]="context.config.condition.field" (ngModelChange)="updateConfig()"/>
+    <input #fieldInput class="form-control" type="text" id="field" spellcheck="false" autocomplete="off" [(ngModel)]="context.config.condition.field" (ngModelChangeDebounced)="updateConfig()"/>
     <uib-autocomplete [inputElement]="fieldInput" [allSuggests]="fields" (select)="selectField($event)"></uib-autocomplete>
   </div>
 
@@ -37,8 +37,8 @@
         <label class="form-check-label ms-1" for="not{{i}}">Not</label>
       </div>
       <div class="flex-grow-1">
-        <input #valueInput class="form-control rounded-0" type="text" id="value{{i}}" spellcheck="false" autocomplete="off" [(ngModel)]="context.config.condition.values[i].value" (ngModelChange)="updateConfig()"/>
-        <uib-autocomplete [inputElement]="valueInput" [allSuggests]="values" (select)="selectValue($event, context.config.condition.values[i])"></uib-autocomplete>
+        <input #valueInput class="form-control rounded-0" type="text" id="value{{i}}" spellcheck="false" autocomplete="off" [(ngModel)]="value.value" (ngModelChangeDebounced)="updateConfig()"/>
+        <uib-autocomplete [inputElement]="valueInput" [allSuggests]="values" (select)="selectValue($event, value)"></uib-autocomplete>
       </div>
       <button class="btn btn-outline-secondary" type="button" uib-tooltip="Add another condition" container=".uib-bootstrap" (click)="addValue()">+</button>
       <button class="btn btn-outline-danger" type="button" uib-tooltip="Remove this condition" container=".uib-bootstrap" (click)="removeValue(i)" *ngIf="context.config.condition.values.length > 1">-</button>
