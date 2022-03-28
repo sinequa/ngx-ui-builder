@@ -8,14 +8,14 @@ import { ConfigService } from "../configuration";
 <div class="btn-group uib-toolbar uib-toolbar-anim" *ngIf="{enabled: configurableService.editorEnabled$ | async} as editor" >
   <ng-container *ngIf="editor.enabled">
     <ng-container [ngTemplateOutlet]="template"></ng-container>
-    <button class="btn btn-primary" (click)="configService.undo()" [disabled]="!(configService.canUndo$()| async)" uib-tooltip="Undo" placement="top">
+    <button class="btn btn-primary" (click)="configService.undo()" [ngClass]="{'disabled': !(configService.canUndo$()| async)}" uib-tooltip="Undo" placement="top">
       <svg-icon key="undo"></svg-icon>
     </button>
-    <button class="btn btn-primary" (click)="configService.redo()" [disabled]="!(configService.canRedo$()| async)" uib-tooltip="Redo" placement="top">
+    <button class="btn btn-primary" (click)="configService.redo()" [ngClass]="{'disabled': !(configService.canRedo$()| async)}" uib-tooltip="Redo" placement="top">
       <svg-icon key="redo"></svg-icon>
     </button>
   </ng-container>
-  <button class="btn btn-primary" (click)="toggleEditor()">
+  <button class="btn bg-warning" (click)="toggleEditor()" uib-tooltip="Enable/Disable UI-Editor">
     <svg-icon *ngIf="editor.enabled" key="eye_slash"></svg-icon>
     <svg-icon *ngIf="!editor.enabled" key="eye"></svg-icon>
   </button>
@@ -23,6 +23,13 @@ import { ConfigService } from "../configuration";
   `,
   styles: [
     `
+    .uib-toolbar .btn.disabled {
+      /* allow tooltip on disabled buttons */
+      pointer-events: visible;
+      /* but display a simple arrow cursor */
+      cursor: default;
+    }
+
     .uib-toolbar .btn svg-icon {
       display: flex;
       align-items: center;
