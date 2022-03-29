@@ -16,8 +16,7 @@ import { ConfigService } from "../configuration";
     </button>
   </ng-container>
   <button class="btn bg-warning" (click)="toggleEditor()" uib-tooltip="Enable/Disable UI-Editor">
-    <svg-icon *ngIf="editor.enabled" key="eye_slash"></svg-icon>
-    <svg-icon *ngIf="!editor.enabled" key="eye"></svg-icon>
+    <svg-icon key="{{editor.enabled ? 'eye_slash' : 'eye' }}"></svg-icon>
   </button>
 </div>
   `,

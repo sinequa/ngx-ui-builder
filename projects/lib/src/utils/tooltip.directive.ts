@@ -1,4 +1,4 @@
-import { AfterContentInit, Directive, ElementRef, HostBinding, HostListener, Input, OnChanges, OnDestroy } from "@angular/core";
+import { AfterContentInit, Directive, ElementRef, HostBinding, Input, OnChanges, OnDestroy } from "@angular/core";
 import { Tooltip } from "bootstrap";
 
 @Directive({
@@ -35,11 +35,7 @@ export class TooltipDirective implements OnChanges, OnDestroy, AfterContentInit 
   @Input() container?: string | Element = "uib-toolbar";
 
   tooltip?: Tooltip;
-  
-  @HostListener('mouseleave', ['$event']) mouseleave(event: MouseEvent) {
-    this.tooltip?.hide();
-  }
-  
+    
   // @Input() it's used to trigger the changes detection cycle for the directive
   @HostBinding('disabled')
   @Input() disabled: boolean;
@@ -48,9 +44,7 @@ export class TooltipDirective implements OnChanges, OnDestroy, AfterContentInit 
 
   ngOnChanges() {
     // when element is disabled, remove tooltip otherwise it will be shown/created when enabled
-    if (this.tooltip) {
-      this.tooltip?.dispose();
-    }
+    this.tooltip?.dispose();
     this.setTooltip();
   }
   
