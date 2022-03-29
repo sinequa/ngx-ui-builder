@@ -69,10 +69,20 @@
     &:not(.uib-container, .highlight, .dndDragging) {
       outline: 1px dashed yellowgreen;
     }
+    
+    /* Deactivate clicks within templates in edit mode */
+    & > *:not(.uib-configurable) {
+      pointer-events: none;
+    }
   }
 
   &:not([selected]) {
     padding: calc(var(--padding) * 2);
+  }
+
+  .uib-container {
+    min-width: 32px;
+    min-height: 32px;
   }
 
   .uib-container:not(.highlight, .dndDragging) {
