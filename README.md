@@ -148,6 +148,8 @@ Configuration is at the heart of the UI Builder: It defines which components are
 
 Configuration is managed in a reactive store based on [Elf](https://ngneat.github.io/elf/) (itself based on [RxJS](https://rxjs.dev/)). Elf includes a state history which powers **Undo**/**Redo** buttons. Therefore, every action on the configuration (moving a component with drag & drop, creating a new component, or modifying its parameters) is undoable.
 
+![undo redo](docs/undo.png)
+
 Any change to the configuration is immediately visible in the UI, giving users a "what you see is what you get experience" (Wysiwyg).
 
 Configuration can be easily synced with a server so that users always retrieve the application in the state they left it.
@@ -228,6 +230,67 @@ Containers have a built-in configurator for configuring these flexbox property v
 
 ![Flexbox configurator](./docs/flex-configurator.png)
 
-### Conditional components
+### Conditional display
+
+Sometimes a component should be displayed only in certain conditions. In a normal Angular application, one can simply use `*ngIf` to define these conditions.
+
+With the UI Builder, users can configure conditions by using the "Conditional display" form:
+
+![conditional display](./docs/conditions.png)
+
+In the above form:
+- "Data" corresponds to the `[data]` input passed to the `<uib-zone>` component. It is possible to pass additional objects to a zone via `[conditionsData]`.
+- "Field" corresponds to the field name of the data object.
+- "Type" can be "equals", or "regular expression", for more complex use cases
+- "Values" lists all the values that the condition should verify. "Not" allows to negate the condition, and "Display if any of the conditions is true" allows to switch between "AND" and "OR" when there are multiple values.
 
 ### Style encapsulation
+
+The library is dependent on [Bootstrap](https://getbootstrap.com/) for the styling of its components (configurator, toolbar, built-in forms).
+
+However Bootstrap does not have to be loaded globally in the host application (as it may conflict with another styling framework). Instead, we encapsulate the Bootstrap CSS within a `.uib-bootstrap` selector.
+
+This means the library can be integrated in the host application with the following pattern:
+
+```html
+<div class="uib-bootstrap">
+  
+    <uib-toolbar></uib-toolbar>
+
+    <uib-configurator>
+
+        ...
+
+    </uib-configurator>
+</div>
+```
+
+However, the host application still requires some additional styling and utilities to correctly display the dynamic components within a `<uib-zone>`.
+
+These styles can be integrated with the following lines:
+
+```scss
+@import "~bootstrap/dist/css/bootstrap-utilities.min";
+@import "~ngx-ui-builder/styles/ui-builder";
+```
+
+(Obviously, the first line can be ommited if you already use Bootstrap in your host application)
+
+### Static export
+
+Customizing applications with UI Builder comes at a cost:
+- The source code of the application becomes more complex
+- The application becomes slower, as a result of being completely dynamic (templates are displayed as a result of a changing configuration)
+
+So, at some point, it may be desirable to take the configuration and "convert it" into a normal, static, Angular application.
+
+This can be achieved with one line of Angular CLI:
+
+```
+ng generate ngx-ui-builder:make-static -- --config=my-config.json
+```
+
+The `make-static` schematic takes as an input a JSON file containing the configuration of your application and generates HTML template(s) with the right templates in the right positions and with the right parameters passed as inputs. It also takes care of removing the `<uib-zone>`, `<uib-toolbar>` and `<uib-configurator>` components from your app, as well as the import of the ui-builder stylesheet.
+
+After running this script, the app should compile and display your components exactly the same as before, but without a trace of the UI Builder in them anymore!
+

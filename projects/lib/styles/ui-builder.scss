@@ -5,8 +5,8 @@
   --menu-left: 0px;
 }
 
-/* bootstrap's colors init inside "uib-bootstrap" namespace */
-@import "_colors";
+/* bootstrap encapsulated inside "uib-bootstrap" namespace */
+@import "_uib-bootstrap";
 
 uib-toolbar {
   position: fixed;
