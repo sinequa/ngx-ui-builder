@@ -45,9 +45,9 @@
     </div>
   </div>
 
-  <div class="form-check mb-2" *ngIf="context.config.condition.values.length">
+  <div class="form-check mb-2" *ngIf="context.config.condition.values.length > 1">
     <input class="form-check-input" type="checkbox" id="or" [(ngModel)]="context.config.condition.or" (ngModelChange)="updateConfig()">
-    <label class="form-check-label" for="or">Display if any of the condition is true</label>
+    <label class="form-check-label" for="or">Display if any of the conditions is true</label>
   </div>
 
 
