@@ -14,13 +14,13 @@
 </ng-template>
 
 <ng-template #single let-id>
-  <a (mouseover)="hover(id)" (click)="select(id)">{{ id }}</a>
+  <a (mouseover)="hover(id)" (mouseleave)="hover(undefined)" (click)="select(id)" [attr.data-id]="id" [ngClass]="{ 'selected': id === (configurableService.edited$ | async)?.id }" >{{ id }}</a>
 </ng-template>
 
 <ng-template #parent let-id>
   <input type="checkbox" checked [id]="'menu-' + id">
   <label [for]="'menu-' + id"></label>
-  <a (mouseover)="hover(id)" (click)="select(id)">{{ id }}</a>
+  <ng-container [ngTemplateOutlet]="single" [ngTemplateOutletContext]="{ $implicit: id || undefined }"></ng-container>
   <ng-container
     [ngTemplateOutlet]="tree"
     [ngTemplateOutletContext]="{ $implicit: id }"

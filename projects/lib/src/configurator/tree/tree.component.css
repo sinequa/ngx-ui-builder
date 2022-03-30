@@ -69,6 +69,11 @@ ul.tree > li:first-child::after {
   text-decoration: none;
 }
 
+.tree li a.selected {
+  box-shadow: 0 0 0 3px red;
+  z-index: 1;
+}
+
 .tree li a:hover,
 .tree li a:hover + ul li a,
 .tree li a:focus,
@@ -122,10 +127,9 @@ ul.tree > li:first-child::after {
   top: 4px;
   left: 2px;
   text-align: center;
-  color: black;
   display: inline-block;
   transition: transform 0.5s;
-  z-index: 1;
+  z-index: 2;
   user-select: none;
   cursor: pointer;
 }
