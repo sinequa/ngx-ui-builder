@@ -16,7 +16,7 @@
     "noUnusedLocals": true,
     "rootDir": ".",
     "resolveJsonModule": true,
-    "outDir": "../../dist/lib/schematics",
+    "outDir": "../../dist/lib",
     "skipDefaultLibCheck": true,
     "skipLibCheck": true,
     "sourceMap": true,
