@@ -1,7 +1,7 @@
 import { Component, VERSION } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
-import { ConfigurableService, ConfigService } from '@sinequa/ui-builder';
+import { ConfigurableService, ConfigService } from '@sinequa/ngx-ui-builder';
 import { pokemons } from './pokemons';
 
 declare interface Layout {
