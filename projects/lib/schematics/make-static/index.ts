@@ -124,7 +124,7 @@ async function replaceTemplateUrl(host: workspaces.WorkspaceHost, tsPath: string
 
 async function commmentScssImport(host: workspaces.WorkspaceHost, scssPath: string) {
   const scss = await host.readFile(scssPath);
-  const scssImportPattern = /(\/\/\s?)?(@import\s+["']~ngx-ui-builder\/styles\/ui-builder["'])/;
+  const scssImportPattern = /(\/\/\s?)?(@import\s+["']~@sinequa\/ngx-ui-builder\/styles\/ui-builder["'])/;
   const lines = scss.split('\n');
   const res = replacePatternUnlessDone(lines, scssImportPattern, 1, '// $2');
   switch(res){
