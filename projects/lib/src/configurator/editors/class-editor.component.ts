@@ -4,7 +4,7 @@ import { ConfiguratorContext } from '../configurator.models';
 @Component({
   selector: 'uib-class-editor',
   template: `
-  <label class="form-label" for="classes">CSS Classes</label>
+  <label class="form-label" for="classes" i18n>CSS Classes</label>
   <input class="form-control" id="classes"
     type="text"
     name="classes"

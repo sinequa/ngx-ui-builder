@@ -1,58 +1,58 @@
 
 <div class="form-check">
   <input class="form-check-input" type="checkbox" id="activate" [(ngModel)]="activate">
-  <label class="form-check-label" for="activate">Display this component conditionally</label>
+  <label class="form-check-label" for="activate" i18n>Display this component conditionally</label>
 </div>
 
 <div *ngIf="context.config.condition">
 
   <div class="mb-2">
-    <label class="form-label" for="data">Data</label>
+    <label class="form-label" for="data" i18n>Data</label>
     <select [(ngModel)]="context.config.condition.data" id="data" class="form-select" (ngModelChange)="updateConfig()">
-      <option value="" *ngIf="context.context.data">data</option>
+      <option value="" *ngIf="context.context.data" i18n>data</option>
       <option [ngValue]="source.key" *ngFor="let source of context.context.conditionsData | keyvalue">{{source.key}}</option>
     </select>
   </div>
 
   <div class="mb-2">
-    <label class="form-label" for="field">Field</label>
+    <label class="form-label" for="field" i18n>Field</label>
     <input #fieldInput class="form-control" type="text" id="field" spellcheck="false" autocomplete="off" [(ngModel)]="context.config.condition.field" (ngModelChangeDebounced)="updateConfig()"/>
     <uib-autocomplete [inputElement]="fieldInput" [allSuggests]="fields" (select)="selectField($event)"></uib-autocomplete>
   </div>
 
   <div class="mb-2">
-    <label class="form-label" for="type">Type</label>
+    <label class="form-label" for="type" i18n>Type</label>
     <select [(ngModel)]="context.config.condition.type" id="type" class="form-select" (ngModelChange)="updateConfig()">
-      <option value="equals">Equals</option>
-      <option value="regexp">Regular Expression</option>
+      <option value="equals" i18n>Equals</option>
+      <option value="regexp" i18n>Regular Expression</option>
     </select>
   </div>
 
   <div class="mb-2">
-    <label class="form-label">Value(s)</label>
+    <label class="form-label" i18n>Value(s)</label>
     
     <div class="condition-value input-group flex-nowrap mb-1" *ngFor="let value of context.config.condition.values; let i = index; trackBy: trackByFn">
       <div class="input-group-text align-items-start">
         <input class="form-check-input" type="checkbox" id="not{{i}}" [(ngModel)]="value.not" (ngModelChange)="updateConfig()">
-        <label class="form-check-label ms-1" for="not{{i}}">Not</label>
+        <label class="form-check-label ms-1" for="not{{i}}" i18n>Not</label>
       </div>
       <div class="flex-grow-1">
         <input #valueInput class="form-control rounded-0" type="text" id="value{{i}}" spellcheck="false" autocomplete="off" [(ngModel)]="value.value" (ngModelChangeDebounced)="updateConfig()"/>
         <uib-autocomplete [inputElement]="valueInput" [allSuggests]="values" (select)="selectValue($event, value)"></uib-autocomplete>
       </div>
-      <button class="btn btn-outline-secondary" type="button" uib-tooltip="Add another condition" container=".uib-bootstrap" (click)="addValue()">+</button>
-      <button class="btn btn-outline-danger" type="button" uib-tooltip="Remove this condition" container=".uib-bootstrap" (click)="removeValue(i)" *ngIf="context.config.condition.values.length > 1">-</button>
+      <button class="btn btn-outline-secondary" type="button" i18n-uib-tooltip uib-tooltip="Add another condition" container=".uib-bootstrap" (click)="addValue()">+</button>
+      <button class="btn btn-outline-danger" type="button" i18n-uib-tooltip uib-tooltip="Remove this condition" container=".uib-bootstrap" (click)="removeValue(i)" *ngIf="context.config.condition.values.length > 1">-</button>
     </div>
   </div>
 
   <div class="form-check mb-2" *ngIf="context.config.condition.values.length > 1">
     <input class="form-check-input" type="checkbox" id="or" [(ngModel)]="context.config.condition.or" (ngModelChange)="updateConfig()">
-    <label class="form-check-label" for="or">Display if any of the conditions is true</label>
+    <label class="form-check-label" for="or" i18n>Display if any of the conditions is true</label>
   </div>
 
 
   <div class="mb-2">
-    <div>Debug text</div>
+    <div i18n>Debug text</div>
     <pre><code>{{debugText}}</code></pre>
   </div>
 
