@@ -1,0 +1,412 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>ngx-ui-builder documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="../" class="navbar-brand">ngx-ui-builder documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content interface">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li>Interfaces</li>
+  <li
+  >
+  ContainerConfig</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="active">
+            <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li >
+            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="c-info">
+        <p class="comment">
+            <h3>File</h3>
+        </p>
+        <p class="comment">
+            <code>projects/lib/src/configuration/config.service.ts</code>
+        </p>
+
+
+
+            <p class="comment">
+                <h3>Extends</h3>
+            </p>
+            <p class="comment">
+                        <code><a href="../interfaces/ComponentConfig.html" target="_self" >ComponentConfig</a></code>
+            </p>
+
+        <section>
+            <h3 id="index">Index</h3>
+            <table class="table table-sm table-bordered index-table">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <h6><b>Properties</b></h6>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <ul class="index-list">
+                                <li>
+                                        <a href="#items" 
+>
+                                            items
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#type" 
+>
+                                            type
+                                        </a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+
+
+            <section>
+                <h3 id="inputs">Properties</h3>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="items"></a>
+                                        <span class="name "><b>items</b>
+                                            <a href="#items">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>items:     <code>string[]</code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>    <code>string[]</code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="type"></a>
+                                        <span class="name "><b>type</b>
+                                            <a href="#type">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>type:     <code></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+
+
+
+
+
+                        </tbody>
+                    </table>
+            </section>
+    </div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="c-source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@angular/core&#x27;;
+import { createState, Store } from &#x27;@ngneat/elf&#x27;;
+import {
+  withEntities,
+  getEntity,
+  addEntities,
+  updateEntities,
+  selectEntity,
+  selectAll,
+  getEntities,
+  deleteEntities,
+  deleteAllEntities,
+} from &#x27;@ngneat/elf-entities&#x27;;
+import { stateHistory } from &#x27;@ngneat/elf-state-history&#x27;;
+import { Observable } from &#x27;rxjs&#x27;;
+import { filter, map } from &#x27;rxjs/operators&#x27;;
+import { Condition } from &#x27;./conditions.service&#x27;;
+
+export interface ComponentConfig {
+  readonly id: string;
+  type: string;
+  classes?: string;
+  [key: string]: any;
+  condition?: Condition;
+}
+
+export interface ContainerConfig extends ComponentConfig {
+  type: &#x27;_container&#x27;;
+  items: string[];
+}
+
+@Injectable({ providedIn: &#x27;root&#x27; })
+export class ConfigService {
+  store: Store;
+  historyState: any;
+  
+  init(initialValue: ComponentConfig[]) {
+    const { state, config } &#x3D; createState(
+      withEntities&lt;ComponentConfig&gt;({ initialValue })
+    );
+    this.store &#x3D; new Store({ name: &#x27;config&#x27;, state, config });
+    this.historyState &#x3D; stateHistory(this.store, { maxAge: Infinity });
+    this.store.subscribe(console.log);
+  }
+
+  set(config: ComponentConfig[]) {
+    this.store.update(
+      deleteAllEntities(),
+      addEntities(config)
+    );
+  }
+
+  public watchAllConfig(): Observable&lt;ComponentConfig[]&gt; {
+    return this.store.pipe(selectAll());
+  }
+
+  public getAllConfig(): ComponentConfig[] {
+    return this.store.query(getEntities());
+  }
+
+  public watchConfig(id: string): Observable&lt;ComponentConfig&gt; {
+    //console.log(&#x27;watch:&#x27;, id);
+    this.getConfig(id); // Ensure a value exists (if &#x27;id&#x27; has no config)
+    return this.store.pipe(
+      selectEntity(id),
+      filter(config &#x3D;&gt; config !&#x3D;&#x3D; undefined),
+      //tap((config) &#x3D;&gt; console.log(&#x27;change:&#x27;, config)),
+      map((config) &#x3D;&gt; JSON.parse(JSON.stringify(config)))
+    );
+  }
+
+  private _getConfig(id: string): ComponentConfig | undefined {
+    return this.store.query(getEntity(id));
+  }
+
+  public getConfig(id: string): ComponentConfig {
+    let config &#x3D; this._getConfig(id);
+    if (!config) {
+      config &#x3D; { id, type: id };
+      this.historyState.pause();
+      this.store.update(addEntities(config));
+      this.historyState.resume();
+    }
+    return JSON.parse(JSON.stringify(config)); // Deep copy
+  }
+
+  public getContainer(id: string): ContainerConfig {
+    const config &#x3D; this.getConfig(id);
+    if (!this.isContainerConfig(config)) {
+      throw &#x60;${id} is not a container&#x60;;
+    }
+    return config;
+  }
+
+  public isContainer(id: string): boolean {
+    return this.isContainerConfig(this._getConfig(id));
+  }
+
+  public isContainerConfig(conf: ComponentConfig|undefined): conf is ContainerConfig {
+    return conf?.type &#x3D;&#x3D;&#x3D; &#x27;_container&#x27;;
+  }
+
+  /**
+   * Test whether a given component id is used within the hierarchy of a container
+   */
+  public isUsed(id: string) {
+    return !!this.findParent(id);
+  }
+
+  public findParent(id: string): ContainerConfig | undefined {
+    return this.getAllConfig()
+      .find(item &#x3D;&gt; this.isContainerConfig(item) &amp;&amp; item.items.includes(id)) as ContainerConfig | undefined;
+  }
+
+  public updateConfig(value: ComponentConfig | ComponentConfig[]) {
+    //console.log(&#x27;update config&#x27;, this._getConfig(value.id));
+    //console.log(&#x27;new config&#x27;, value);
+    if(!Array.isArray(value)) value &#x3D; [value];
+    this.store.update(
+      ...value.map(v &#x3D;&gt; {
+        if(!this._getConfig(v.id)){
+          return addEntities(v)
+        }
+        return updateEntities([v.id], () &#x3D;&gt; v)}
+      )
+    );
+  }
+
+  public removeConfig(id: string) {
+    this.store.update(deleteEntities(id));
+  }
+
+  public generateId(type: string) {
+    let idx &#x3D; 1;
+    let root &#x3D; type.startsWith(&quot;_&quot;)? type.slice(1) : type;
+    const tokens &#x3D; type.split(&quot;-&quot;);
+    if(tokens[tokens.length-1].match(/\d+/)) {
+      idx &#x3D; +tokens[tokens.length-1];
+      root &#x3D; tokens.slice(0, tokens.length-1).join(&#x27;-&#x27;);
+    }
+    let id &#x3D; root;
+    do {
+      id &#x3D; &#x60;${root}-${idx++}&#x60;;
+    } while (this._getConfig(id) || id &#x3D;&#x3D;&#x3D; type);
+    return id;
+  }
+
+  public canUndo$(){
+    return this.historyState.hasPast$;
+  }
+
+  public canRedo$(){
+    return this.historyState.hasFuture$;
+  }
+
+  public undo() {
+    this.historyState.undo();
+  }
+
+  public redo() {
+    this.historyState.redo();
+  }
+}
+</code></pre>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'interface';
+            var COMPODOC_CURRENT_PAGE_URL = 'ContainerConfig.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

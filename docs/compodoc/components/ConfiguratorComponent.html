@@ -1,0 +1,1414 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>ngx-ui-builder documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="../" class="navbar-brand">ngx-ui-builder documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li>Components</li>
+  <li
+  >
+  ConfiguratorComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="active">
+            <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li >
+            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li >
+            <a href="#templateData" role="tab" id="templateData-tab" data-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li >
+            <a href="#styleData" role="tab" id="styleData-tab" data-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li >
+            <a href="#tree" role="tab" id="tree-tab" data-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="c-info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>projects/lib/src/configurator/configurator.component.ts</code>
+</p>
+
+
+
+
+
+
+<section>
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+            <tr>
+                <td class="col-md-3">changeDetection</td>
+                <td class="col-md-9"><code>ChangeDetectionStrategy.OnPush</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>uib-configurator</code></td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-3">styles</td>
+                <td class="col-md-9"><code>
+.offcanvas-body {
+  padding-bottom: 90px; // avoid toolbar hiding bottom of configurator
+}
+  </code></td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./configurator.component.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#_showTree" >_showTree</a>
+                            </li>
+                            <li>
+                                <a href="#children" >children</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#configService" >configService</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#configurableService" >configurableService</a>
+                            </li>
+                            <li>
+                                <a href="#configuration" >configuration</a>
+                            </li>
+                            <li>
+                                <a href="#configurators" >configurators</a>
+                            </li>
+                            <li>
+                                <a href="#edited$" >edited$</a>
+                            </li>
+                            <li>
+                                <a href="#offcanvas" >offcanvas</a>
+                            </li>
+                            <li>
+                                <a href="#offcanvasBodyEl" >offcanvasBodyEl</a>
+                            </li>
+                            <li>
+                                <a href="#offcanvasEl" >offcanvasEl</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#duplicate" >duplicate</a>
+                            </li>
+                            <li>
+                                <a href="#ngAfterContentInit" >ngAfterContentInit</a>
+                            </li>
+                            <li>
+                                <a href="#ngAfterViewInit" >ngAfterViewInit</a>
+                            </li>
+                            <li>
+                                <a href="#remove" >remove</a>
+                            </li>
+                            <li>
+                                <a href="#resolveOptions" >resolveOptions</a>
+                            </li>
+                            <li>
+                                <a href="#showTree" >showTree</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Inputs</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#options" >options</a>
+                            </li>
+                            <li>
+                                <a href="#zoneOptions" >zoneOptions</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(cdr: <a href="https://angular.io/api/core/ChangeDetectorRef" target="_blank">ChangeDetectorRef</a>, configurableService: <a href="../injectables/ConfigurableService.html" target="_self">ConfigurableService</a>, configService: <a href="../injectables/ConfigService.html" target="_self">ConfigService</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="59" class="link-to-prism">projects/lib/src/configurator/configurator.component.ts:59</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>cdr</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="https://angular.io/api/core/ChangeDetectorRef" target="_blank" >ChangeDetectorRef</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>configurableService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/ConfigurableService.html" target="_self" >ConfigurableService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>configService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/ConfigService.html" target="_self" >ConfigService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+    <section>
+    <h3 id="inputs">Inputs</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="options"></a>
+                        <b>options</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/ConfiguratorOptions.html" target="_self" >ConfiguratorOptions</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>defaultConfiguratorOptions</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="52" class="link-to-prism">projects/lib/src/configurator/configurator.component.ts:52</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="zoneOptions"></a>
+                        <b>zoneOptions</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/ConfiguratorOptions.html" target="_self" >Record&lt;string | ConfiguratorOptions&gt;</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{}</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="53" class="link-to-prism">projects/lib/src/configurator/configurator.component.ts:53</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+    <section>
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="duplicate"></a>
+                    <span class="name">
+                        <span ><b>duplicate</b></span>
+                        <a href="#duplicate"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>duplicate(context: <a href="../interfaces/Configurable.html" target="_self">Configurable</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="150"
+                            class="link-to-prism">projects/lib/src/configurator/configurator.component.ts:150</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>context</td>
+                                    <td>
+                                                <code><a href="../interfaces/Configurable.html" target="_self" >Configurable</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngAfterContentInit"></a>
+                    <span class="name">
+                        <span ><b>ngAfterContentInit</b></span>
+                        <a href="#ngAfterContentInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngAfterContentInit()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="114"
+                            class="link-to-prism">projects/lib/src/configurator/configurator.component.ts:114</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Extract list of configuration editors</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngAfterViewInit"></a>
+                    <span class="name">
+                        <span ><b>ngAfterViewInit</b></span>
+                        <a href="#ngAfterViewInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngAfterViewInit()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="101"
+                            class="link-to-prism">projects/lib/src/configurator/configurator.component.ts:101</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Create Bootstrap OffCanvas component</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="remove"></a>
+                    <span class="name">
+                        <span ><b>remove</b></span>
+                        <a href="#remove"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>remove(context: <a href="../interfaces/Configurable.html" target="_self">Configurable</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="137"
+                            class="link-to-prism">projects/lib/src/configurator/configurator.component.ts:137</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>It removes the item from the parent container.</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>context</td>
+                                    <td>
+                                                <code><a href="../interfaces/Configurable.html" target="_self" >Configurable</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="resolveOptions"></a>
+                    <span class="name">
+                        <span ><b>resolveOptions</b></span>
+                        <a href="#resolveOptions"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>resolveOptions(zone: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="125"
+                            class="link-to-prism">projects/lib/src/configurator/configurator.component.ts:125</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>zone</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="showTree"></a>
+                    <span class="name">
+                        <span ><b>showTree</b></span>
+                        <a href="#showTree"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>showTree(showTree)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="120"
+                            class="link-to-prism">projects/lib/src/configurator/configurator.component.ts:120</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Optional</td>
+                                    <td>Default value</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>showTree</td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+                                    <td>
+                                        <code>true</code>
+                                    </td>
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section>
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="_showTree"></a>
+                    <span class="name">
+                        <span ><b>_showTree</b></span>
+                        <a href="#_showTree"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="59" class="link-to-prism">projects/lib/src/configurator/configurator.component.ts:59</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="children"></a>
+                    <span class="name">
+                        <span ><b>children</b></span>
+                        <a href="#children"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../directives/TemplateNameDirective.html" target="_self" >QueryList&lt;TemplateNameDirective&gt;</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <b>Decorators : </b>
+                        <br />
+                        <code>
+                            @ContentChildren(TemplateNameDirective)<br />
+                        </code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="44" class="link-to-prism">projects/lib/src/configurator/configurator.component.ts:44</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="configService"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>configService</b></span>
+                        <a href="#configService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../injectables/ConfigService.html" target="_self" >ConfigService</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="64" class="link-to-prism">projects/lib/src/configurator/configurator.component.ts:64</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="configurableService"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>configurableService</b></span>
+                        <a href="#configurableService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../injectables/ConfigurableService.html" target="_self" >ConfigurableService</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="63" class="link-to-prism">projects/lib/src/configurator/configurator.component.ts:63</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="configuration"></a>
+                    <span class="name">
+                        <span ><b>configuration</b></span>
+                        <a href="#configuration"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/ComponentConfig.html" target="_self" >ComponentConfig[]</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="57" class="link-to-prism">projects/lib/src/configurator/configurator.component.ts:57</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="configurators"></a>
+                    <span class="name">
+                        <span ><b>configurators</b></span>
+                        <a href="#configurators"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../directives/TemplateNameDirective.html" target="_self" >Record&lt;string | TemplateNameDirective&gt;</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{}</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="45" class="link-to-prism">projects/lib/src/configurator/configurator.component.ts:45</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="edited$"></a>
+                    <span class="name">
+                        <span ><b>edited$</b></span>
+                        <a href="#edited$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/ConfiguratorContext.html" target="_self" >Observable&lt;ConfiguratorContext&gt;</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="55" class="link-to-prism">projects/lib/src/configurator/configurator.component.ts:55</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="offcanvas"></a>
+                    <span class="name">
+                        <span ><b>offcanvas</b></span>
+                        <a href="#offcanvas"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>Offcanvas</code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="48" class="link-to-prism">projects/lib/src/configurator/configurator.component.ts:48</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="offcanvasBodyEl"></a>
+                    <span class="name">
+                        <span ><b>offcanvasBodyEl</b></span>
+                        <a href="#offcanvasBodyEl"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://angular.io/api/core/ElementRef" target="_blank" >ElementRef</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <b>Decorators : </b>
+                        <br />
+                        <code>
+                            @ViewChild(&#x27;offcanvasBody&#x27;)<br />
+                        </code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="50" class="link-to-prism">projects/lib/src/configurator/configurator.component.ts:50</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="offcanvasEl"></a>
+                    <span class="name">
+                        <span ><b>offcanvasEl</b></span>
+                        <a href="#offcanvasEl"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://angular.io/api/core/ElementRef" target="_blank" >ElementRef</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <b>Decorators : </b>
+                        <br />
+                        <code>
+                            @ViewChild(&#x27;offcanvas&#x27;)<br />
+                        </code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="47" class="link-to-prism">projects/lib/src/configurator/configurator.component.ts:47</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="c-source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  ContentChildren,
+  ElementRef,
+  Input,
+  QueryList,
+  ViewChild,
+} from &#x27;@angular/core&#x27;;
+import { Offcanvas } from &#x27;bootstrap&#x27;;
+import { switchMap, map, tap } from &#x27;rxjs/operators&#x27;;
+import { Observable } from &#x27;rxjs&#x27;;
+import { Configurable, ConfigurableService } from &#x27;../configurable/configurable.service&#x27;;
+import { ComponentConfig, ConfigService, ContainerConfig } from &#x27;../configuration/config.service&#x27;;
+import { Mutable } from &#x27;../utils/types.helpers&#x27;;
+import { TemplateNameDirective } from &#x27;../utils/template-name.directive&#x27;;
+import { defaultPaletteOptions } from &#x27;./palette/palette.component&#x27;;
+import { ConfiguratorContext, ConfiguratorOptions } from &#x27;./configurator.models&#x27;;
+
+export const defaultConfiguratorOptions: ConfiguratorOptions &#x3D; {
+  paletteOptions: defaultPaletteOptions,
+  showFlexEditor: true,
+  showHtmlEditor: true,
+  showCssClasses: true,
+  showConditionalDisplay: true,
+  showRemove: true,
+  showDuplicate: true
+}
+
+@Component({
+  selector: &#x27;uib-configurator&#x27;,
+  templateUrl: &#x27;./configurator.component.html&#x27;,
+  styles:[&#x60;
+.offcanvas-body {
+  padding-bottom: 90px; // avoid toolbar hiding bottom of configurator
+}
+  &#x60;],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+})
+export class ConfiguratorComponent {
+  // Capture configurator templates
+  @ContentChildren(TemplateNameDirective)
+  children: QueryList&lt;TemplateNameDirective&gt;;
+  configurators: Record&lt;string, TemplateNameDirective&gt; &#x3D; {};
+
+  @ViewChild(&#x27;offcanvas&#x27;) offcanvasEl: ElementRef;
+  offcanvas: Offcanvas;
+
+  @ViewChild(&#x27;offcanvasBody&#x27;) offcanvasBodyEl: ElementRef;
+
+  @Input() options &#x3D; defaultConfiguratorOptions;
+  @Input() zoneOptions: Record&lt;string, ConfiguratorOptions&gt; &#x3D; {};
+
+  edited$: Observable&lt;ConfiguratorContext&gt;;
+  
+  configuration: ComponentConfig[] &#x3D; [];
+
+  _showTree: boolean;
+
+  constructor(
+    private cdr: ChangeDetectorRef,
+    public configurableService: ConfigurableService,
+    public configService: ConfigService
+  ) {
+    
+    this.edited$ &#x3D; configurableService.watchEdited().pipe(
+      tap(() &#x3D;&gt; this.offcanvas.show()),
+      tap(() &#x3D;&gt; this.showTree(false)),
+      switchMap((context) &#x3D;&gt; 
+        configService.watchConfig(context!.id).pipe(
+          map(config &#x3D;&gt; ({
+            context,
+            config,
+            options: this.resolveOptions(context.zone),
+            configurators: this.configurators,
+            configChanged: () &#x3D;&gt; this.configService.updateConfig(config)
+          }))
+        )
+      )
+    );
+    
+    // subscribe to configuration events
+    this.configService.watchAllConfig().subscribe(config &#x3D;&gt; {
+      this.configuration &#x3D; config;
+      this.cdr.markForCheck();
+    });
+    
+    // when edition is disabled, close side panel
+    this.configurableService.editorEnabled$.subscribe(value &#x3D;&gt; {
+      if (value &#x3D;&#x3D;&#x3D; false &amp;&amp; this.offcanvas) {
+        this.offcanvas.hide();
+      }
+    })
+    
+  }
+
+  /**
+   * Create Bootstrap OffCanvas component
+   */
+  ngAfterViewInit() {
+    this.offcanvas &#x3D; Offcanvas.getOrCreateInstance(this.offcanvasEl.nativeElement, {
+      backdrop: false,
+      scroll: true
+    });
+    this.offcanvasEl.nativeElement.addEventListener(&#x27;hide.bs.offcanvas&#x27;, _ &#x3D;&gt; {
+      this.configurableService.stopEditing();
+    });
+  }
+
+  /**
+   * Extract list of configuration editors
+   */
+  ngAfterContentInit() {
+    this.children.forEach(
+      tpl &#x3D;&gt; (this.configurators[tpl.templateName] &#x3D; tpl)
+    );
+  }
+  
+  showTree(showTree &#x3D; true) {
+    this._showTree &#x3D; showTree;
+    this.offcanvasBodyEl.nativeElement.scroll(0, 0);
+  }
+
+  resolveOptions(zone: string) {
+    // First set defaults, then the configurator options, then zone-specific options
+    const options &#x3D; Object.assign({}, defaultConfiguratorOptions, this.options, this.zoneOptions[zone] || {});
+    // Same thing for the nested palette options
+    options.paletteOptions &#x3D; Object.assign({}, defaultPaletteOptions, this.options.paletteOptions, this.zoneOptions[zone]?.paletteOptions || {});
+    return options;
+  }
+
+  /**
+   * It removes the item from the parent container.
+   * @param {Event} event - Event
+   */
+  remove(context: Configurable) {    
+    // only uib-zone cannot self remove
+    if (context.parentId) {
+      const container &#x3D; this.configService.getContainer(context.parentId);
+      const index &#x3D; container.items.findIndex(item &#x3D;&gt; item &#x3D;&#x3D;&#x3D; context.id);
+      if (index !&#x3D;&#x3D; -1) {
+        container.items.splice(index, 1);
+        this.configService.updateConfig([container]);
+        this.offcanvas.toggle();
+      }
+    }
+  }
+
+  duplicate(context: Configurable) {
+    const config: Mutable&lt;ComponentConfig&gt; &#x3D; this.configService.getConfig(context.id);
+    config.id &#x3D; this.configService.generateId(config.id); // Generate a new config id
+    if(context.parentId) {
+      const container &#x3D; this.configService.getContainer(context.parentId);
+      const index &#x3D; container.items.findIndex(item &#x3D;&gt; item &#x3D;&#x3D;&#x3D; context.id);
+      if (index !&#x3D;&#x3D; -1) {
+        container.items.splice(index+1, 0, config.id);
+        this.configService.updateConfig([config, container]);
+      }
+    }
+    // Special case of a zone
+    else if(context.zone &#x3D;&#x3D;&#x3D; context.id) {
+      // Create another copy
+      const config2: Mutable&lt;ComponentConfig&gt; &#x3D; this.configService.getConfig(context.id);
+      config2.id &#x3D; this.configService.generateId(config.id);
+      
+      const container: ContainerConfig &#x3D; {
+        id: context.id,
+        type: &#x27;_container&#x27;,
+        items: [config.id, config2.id],
+        classes: &quot;flex-column&quot;,
+      };
+
+      this.configService.updateConfig([config, config2, container]);
+    }
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;div #offcanvas class&#x3D;&quot;offcanvas offcanvas-end&quot; tabindex&#x3D;&quot;-1&quot; id&#x3D;&quot;offcanvas&quot; *ngIf&#x3D;&quot;{edited: (edited$ | async)} as obs&quot;&gt;
+  &lt;!-- HEADER --&gt;
+  &lt;div class&#x3D;&quot;offcanvas-header bg-light border-bottom&quot;&gt;
+    &lt;h5 class&#x3D;&quot;offcanvas-title&quot; *ngIf&#x3D;&quot;!_showTree &amp;&amp; obs.edited&quot;&gt;
+      &lt;strong&gt;{{obs.edited.config.id}}&lt;/strong&gt;
+      &lt;br/&gt;
+      &lt;h6 i18n&gt;(Type: &lt;strong&gt;{{obs.edited.config.type}}&lt;/strong&gt;)&lt;/h6&gt;
+    &lt;/h5&gt;
+    &lt;h5 class&#x3D;&quot;offcanvas-title&quot; *ngIf&#x3D;&quot;_showTree&quot; i18n&gt;Configuration Tree&lt;/h5&gt;
+
+    &lt;button type&#x3D;&quot;button&quot; class&#x3D;&quot;btn ms-auto&quot; [ngClass]&#x3D;&quot;_showTree? &#x27;btn-primary&#x27; : &#x27;btn-link&#x27;&quot; i18n-uib-tooltip uib-tooltip&#x3D;&quot;{{_showTree? &#x27;Hide&#x27; : &#x27;Show&#x27;}} configuration tree&quot; (click)&#x3D;&quot;showTree(!_showTree)&quot;&gt;
+      &lt;svg-icon key&#x3D;&quot;tree&quot; width&#x3D;&quot;22px&quot; height&#x3D;&quot;25px&quot;&gt;&lt;/svg-icon&gt;
+    &lt;/button&gt;
+    &lt;button type&#x3D;&quot;button&quot; class&#x3D;&quot;btn-close text-reset&quot; data-bs-dismiss&#x3D;&quot;offcanvas&quot; aria-label&#x3D;&quot;Close&quot; i18n-aria-label&gt;&lt;/button&gt;
+  &lt;/div&gt;
+
+  &lt;div #offcanvasBody class&#x3D;&quot;offcanvas-body&quot;&gt;
+    
+    &lt;ng-container *ngIf&#x3D;&quot;!_showTree &amp;&amp; obs.edited as edited&quot;&gt;
+      &lt;!-- CONFIGURATOR --&gt;
+    
+      &lt;ng-container
+        *ngTemplateOutlet&#x3D;&quot;configurators[edited.config.type]?.template; context: { $implicit: edited }&quot;&gt;
+      &lt;/ng-container&gt;
+  
+      &lt;ng-container *ngIf&#x3D;&quot;edited.config.type &#x3D;&#x3D;&#x3D; &#x27;_container&#x27;&quot;&gt;
+        &lt;details class&#x3D;&quot;mb-3&quot; open *ngIf&#x3D;&quot;edited.options.paletteOptions&quot;&gt;
+          &lt;summary i18n&gt;Component palette (drag &amp; drop)&lt;/summary&gt;
+          &lt;uib-palette
+            [context]&#x3D;&quot;edited.context&quot;
+            [options]&#x3D;&quot;edited.options.paletteOptions&quot;
+            [configurators]&#x3D;&quot;edited.configurators&quot;
+            &gt;
+          &lt;/uib-palette&gt;
+        &lt;/details&gt;
+    
+        &lt;details class&#x3D;&quot;mb-3&quot; open *ngIf&#x3D;&quot;edited.options.showFlexEditor&quot;&gt;
+          &lt;summary i18n&gt;Layout&lt;/summary&gt;
+          &lt;uib-flex-editor [config]&#x3D;&quot;edited.config&quot;&gt;&lt;/uib-flex-editor&gt;
+        &lt;/details&gt;
+      &lt;/ng-container&gt;      
+      
+      &lt;uib-html-editor *ngIf&#x3D;&quot;edited.options.showHtmlEditor &amp;&amp; edited.config.type &#x3D;&#x3D;&#x3D; &#x27;_raw-html&#x27;&quot;
+        [context]&#x3D;&quot;edited&quot;
+        class&#x3D;&quot;d-block mb-3&quot;&gt;
+      &lt;/uib-html-editor&gt;
+  
+      &lt;div class&#x3D;&quot;mb-3&quot; *ngIf&#x3D;&quot;edited.options.showCssClasses&quot;&gt;
+        &lt;uib-class-editor [context]&#x3D;&quot;edited&quot;&gt;&lt;/uib-class-editor&gt;
+      &lt;/div&gt;
+  
+      &lt;details [attr.open]&#x3D;&quot;edited.config.condition? &#x27;&#x27; : undefined&quot;
+        class&#x3D;&quot;mb-3&quot;
+        *ngIf&#x3D;&quot;edited.options.showConditionalDisplay &amp;&amp; (edited.context.data || edited.context.conditionsData)&quot;
+      &gt;
+        &lt;summary uib-tooltip&#x3D;&quot;Display this component only if the data validates a rule&quot; i18n-uib-tooltip i18n&gt;Conditional display&lt;/summary&gt;
+        &lt;uib-condition-editor [context]&#x3D;&quot;edited&quot;&gt;&lt;/uib-condition-editor&gt;
+      &lt;/details&gt;
+      
+      &lt;div class&#x3D;&quot;d-flex justify-content-start mb-1&quot;&gt;
+        &lt;button class&#x3D;&quot;btn btn-outline-danger me-2&quot;
+          (click)&#x3D;&quot;remove(edited.context)&quot;
+          uib-tooltip&#x3D;&quot;Remove this component from its parent&quot;
+          *ngIf&#x3D;&quot;edited.options.showRemove &amp;&amp; edited.context.parentId&quot;
+          i18n-uib-tooltip i18n
+        &gt;
+          Remove
+        &lt;/button&gt;
+        &lt;button class&#x3D;&quot;btn btn-outline-secondary&quot;
+          (click)&#x3D;&quot;duplicate(edited.context)&quot;
+          uib-tooltip&#x3D;&quot;Duplicate this component within its parent&quot;
+          *ngIf&#x3D;&quot;edited.options.showDuplicate&quot;
+          i18n-uib-tooltip i18n
+        &gt;
+          Duplicate
+        &lt;/button&gt;
+      &lt;/div&gt;
+    &lt;/ng-container&gt;
+    
+    &lt;uib-tree [configuration]&#x3D;&quot;configuration&quot; *ngIf&#x3D;&quot;_showTree&quot;&gt;&lt;/uib-tree&gt;
+      
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-styleData">
+            <pre class="line-numbers"><code class="language-scss">
+.offcanvas-body {
+  padding-bottom: 90px; // avoid toolbar hiding bottom of configurator
+}
+  
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><div #offcanvas class="offcanvas offcanvas-end" tabindex="-1" id="offcanvas" *ngIf="{edited: (edited$ | async)} as obs">  <!-- HEADER -->  <div class="offcanvas-header bg-light border-bottom">    <h5 class="offcanvas-title" *ngIf="!_showTree && obs.edited">      <strong>{{obs.edited.config.id}}</strong>      <br/>      <h6 i18n>(Type: <strong>{{obs.edited.config.type}}</strong>)</h6>    </h5>    <h5 class="offcanvas-title" *ngIf="_showTree" i18n>Configuration Tree</h5>    <button type="button" class="btn ms-auto" [ngClass]="_showTree? \'btn-primary\' : \'btn-link\'" i18n-uib-tooltip uib-tooltip="{{_showTree? \'Hide\' : \'Show\'}} configuration tree" (click)="showTree(!_showTree)">      <svg-icon key="tree" width="22px" height="25px"></svg-icon>    </button>    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close" i18n-aria-label></button>  </div>  <div #offcanvasBody class="offcanvas-body">        <ng-container *ngIf="!_showTree && obs.edited as edited">      <!-- CONFIGURATOR -->          <ng-container        *ngTemplateOutlet="configurators[edited.config.type]?.template; context: { $implicit: edited }">      </ng-container>        <ng-container *ngIf="edited.config.type === \'_container\'">        <details class="mb-3" open *ngIf="edited.options.paletteOptions">          <summary i18n>Component palette (drag & drop)</summary>          <uib-palette            [context]="edited.context"            [options]="edited.options.paletteOptions"            [configurators]="edited.configurators"            >          </uib-palette>        </details>            <details class="mb-3" open *ngIf="edited.options.showFlexEditor">          <summary i18n>Layout</summary>          <uib-flex-editor [config]="edited.config"></uib-flex-editor>        </details>      </ng-container>                  <uib-html-editor *ngIf="edited.options.showHtmlEditor && edited.config.type === \'_raw-html\'"        [context]="edited"        class="d-block mb-3">      </uib-html-editor>        <div class="mb-3" *ngIf="edited.options.showCssClasses">        <uib-class-editor [context]="edited"></uib-class-editor>      </div>        <details [attr.open]="edited.config.condition? \'\' : undefined"        class="mb-3"        *ngIf="edited.options.showConditionalDisplay && (edited.context.data || edited.context.conditionsData)"      >        <summary uib-tooltip="Display this component only if the data validates a rule" i18n-uib-tooltip i18n>Conditional display</summary>        <uib-condition-editor [context]="edited"></uib-condition-editor>      </details>            <div class="d-flex justify-content-start mb-1">        <button class="btn btn-outline-danger me-2"          (click)="remove(edited.context)"          uib-tooltip="Remove this component from its parent"          *ngIf="edited.options.showRemove && edited.context.parentId"          i18n-uib-tooltip i18n        >          Remove        </button>        <button class="btn btn-outline-secondary"          (click)="duplicate(edited.context)"          uib-tooltip="Duplicate this component within its parent"          *ngIf="edited.options.showDuplicate"          i18n-uib-tooltip i18n        >          Duplicate        </button>      </div>    </ng-container>        <uib-tree [configuration]="configuration" *ngIf="_showTree"></uib-tree>        </div></div></div>'
+    var COMPONENTS = [{'name': 'AutocompleteComponent', 'selector': 'uib-autocomplete'},{'name': 'ClassEditorComponent', 'selector': 'uib-class-editor'},{'name': 'ConditionEditorComponent', 'selector': 'uib-condition-editor'},{'name': 'ConfiguratorComponent', 'selector': 'uib-configurator'},{'name': 'FlexEditorComponent', 'selector': 'uib-flex-editor'},{'name': 'HtmlEditorComponent', 'selector': 'uib-html-editor'},{'name': 'ItemComponent', 'selector': '[uib-item]'},{'name': 'ModalComponent', 'selector': 'uib-modal'},{'name': 'PaletteComponent', 'selector': 'uib-palette'},{'name': 'SvgIconComponent', 'selector': 'svg-icon'},{'name': 'ToastComponent', 'selector': 'uib-toast'},{'name': 'ToolbarComponent', 'selector': 'uib-toolbar'},{'name': 'TreeComponent', 'selector': 'uib-tree'},{'name': 'ZoneComponent', 'selector': 'uib-zone'}];
+    var DIRECTIVES = [{'name': 'ConfigurableDirective', 'selector': '[uib-configurable]'},{'name': 'NgModelChangeDebouncedDirective', 'selector': '[ngModelChangeDebounced]'},{'name': 'TemplateNameDirective', 'selector': '[uib-template]'},{'name': 'TooltipDirective', 'selector': '[uib-tooltip]'}];
+    var ACTUAL_COMPONENT = {'name': 'ConfiguratorComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'ConfiguratorComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

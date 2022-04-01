@@ -1,0 +1,1100 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>ngx-ui-builder documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="../" class="navbar-brand">ngx-ui-builder documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li>Components</li>
+  <li
+  >
+  FlexEditorComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="active">
+            <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li >
+            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li >
+            <a href="#templateData" role="tab" id="templateData-tab" data-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li >
+            <a href="#styleData" role="tab" id="styleData-tab" data-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li >
+            <a href="#tree" role="tab" id="tree-tab" data-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="c-info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>projects/lib/src/configurator/editors/flex-editor.component.ts</code>
+</p>
+
+
+
+
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                    <code><a href="https://angular.io/api/core/OnChanges" target="_blank" >OnChanges</a></code>
+    </p>
+
+
+<section>
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>uib-flex-editor</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>./flex-editor.component.scss</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>flex-editor.component.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#alignmentHorizontal" >alignmentHorizontal</a>
+                            </li>
+                            <li>
+                                <a href="#alignmentVertical" >alignmentVertical</a>
+                            </li>
+                            <li>
+                                <a href="#classes" >classes</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#configService" >configService</a>
+                            </li>
+                            <li>
+                                <a href="#directions" >directions</a>
+                            </li>
+                            <li>
+                                <a href="#justify" >justify</a>
+                            </li>
+                            <li>
+                                <a href="#placement" >placement</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#ngOnChanges" >ngOnChanges</a>
+                            </li>
+                            <li>
+                                <a href="#toggleClass" >toggleClass</a>
+                            </li>
+                            <li>
+                                <a href="#updateConfig" >updateConfig</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Inputs</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#config" >config</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <h6><b>Accessors</b></h6>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <ul class="index-list">
+                                <li>
+                                    <a href="#direction" >direction</a>
+                                </li>
+                                <li>
+                                    <a href="#alignment" >alignment</a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(configService: <a href="../injectables/ConfigService.html" target="_self">ConfigService</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="58" class="link-to-prism">projects/lib/src/configurator/editors/flex-editor.component.ts:58</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>configService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/ConfigService.html" target="_self" >ConfigService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+    <section>
+    <h3 id="inputs">Inputs</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="config"></a>
+                        <b>config</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/ComponentConfig.html" target="_self" >ComponentConfig</a></code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="17" class="link-to-prism">projects/lib/src/configurator/editors/flex-editor.component.ts:17</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+    <section>
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnChanges"></a>
+                    <span class="name">
+                        <span ><b>ngOnChanges</b></span>
+                        <a href="#ngOnChanges"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnChanges(changes: <a href="https://angular.io/api/core/SimpleChanges" target="_blank">SimpleChanges</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="65"
+                            class="link-to-prism">projects/lib/src/configurator/editors/flex-editor.component.ts:65</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>changes</td>
+                                    <td>
+                                                <code><a href="https://angular.io/api/core/SimpleChanges" target="_blank" >SimpleChanges</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="toggleClass"></a>
+                    <span class="name">
+                        <span ><b>toggleClass</b></span>
+                        <a href="#toggleClass"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>toggleClass(style: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, turnOff: <a href="../interfaces/FlexOption.html" target="_self">FlexOption[]</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="77"
+                            class="link-to-prism">projects/lib/src/configurator/editors/flex-editor.component.ts:77</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                    <td>Default value</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>style</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+                                    <td>
+                                    </td>
+
+                                </tr>
+                                <tr>
+                                    <td>turnOff</td>
+                                    <td>
+                                                <code><a href="../interfaces/FlexOption.html" target="_self" >FlexOption[]</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+                                    <td>
+                                        <code>[]</code>
+                                    </td>
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="updateConfig"></a>
+                    <span class="name">
+                        <span ><b>updateConfig</b></span>
+                        <a href="#updateConfig"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>updateConfig()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="72"
+                            class="link-to-prism">projects/lib/src/configurator/editors/flex-editor.component.ts:72</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section>
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="alignmentHorizontal"></a>
+                    <span class="name">
+                        <span ><b>alignmentHorizontal</b></span>
+                        <a href="#alignmentHorizontal"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/FlexOption.html" target="_self" >FlexOption[]</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[
+    {key: &#x27;align_y_start&#x27;, text: $localize &#x60;top&#x60;, value: &#x27;flex-start&#x27;, bootstrap: &#x27;align-items-start&#x27;},
+    {key: &#x27;align_y_center&#x27;, text: $localize &#x60;center&#x60;, value: &#x27;center&#x27;, bootstrap: &#x27;align-items-center&#x27;},
+    {key: &#x27;align_y_end&#x27;, text: $localize &#x60;bottom&#x60;, value: &#x27;flex-end&#x27;, bootstrap: &#x27;align-items-end&#x27;},
+    {key: &#x27;align_y_stretch&#x27;, text: $localize &#x60;stretch&#x60;, value: &#x27;stretch&#x27;, bootstrap: &#x27;align-items-stretch&#x27;},
+    {key: &#x27;align_y_baseline&#x27;, text: $localize &#x60;baseline&#x60;, value: &#x27;baseline&#x27;, bootstrap: &#x27;align-items-baseline&#x27;},
+  ]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="41" class="link-to-prism">projects/lib/src/configurator/editors/flex-editor.component.ts:41</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="alignmentVertical"></a>
+                    <span class="name">
+                        <span ><b>alignmentVertical</b></span>
+                        <a href="#alignmentVertical"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/FlexOption.html" target="_self" >FlexOption[]</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[
+    {key:&#x27;align_x_start&#x27;, text: $localize &#x60;start&#x60;, value: &#x27;flex-start&#x27;, bootstrap: &#x27;align-items-start&#x27;},
+    {key:&#x27;align_x_center&#x27;, text: $localize &#x60;center&#x60;, value: &#x27;center&#x27;, bootstrap: &#x27;align-items-center&#x27;},
+    {key:&#x27;align_x_end&#x27;, text: $localize &#x60;end&#x60;, value: &#x27;flex-end&#x27;, bootstrap: &#x27;align-items-end&#x27;},
+    {key:&#x27;align_x_stretch&#x27;, text: $localize &#x60;stretch&#x60;, value: &#x27;stretch&#x27;, bootstrap: &#x27;align-items-stretch&#x27;},
+  ]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="49" class="link-to-prism">projects/lib/src/configurator/editors/flex-editor.component.ts:49</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="classes"></a>
+                    <span class="name">
+                        <span ><b>classes</b></span>
+                        <a href="#classes"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>string[]</code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="22" class="link-to-prism">projects/lib/src/configurator/editors/flex-editor.component.ts:22</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="configService"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>configService</b></span>
+                        <a href="#configService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../injectables/ConfigService.html" target="_self" >ConfigService</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="62" class="link-to-prism">projects/lib/src/configurator/editors/flex-editor.component.ts:62</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="directions"></a>
+                    <span class="name">
+                        <span ><b>directions</b></span>
+                        <a href="#directions"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/FlexOption.html" target="_self" >FlexOption[]</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[
+    {key: &#x27;arrow_down&#x27;, text: $localize &#x60;vertical&#x60;, value: &#x27;column&#x27;, bootstrap: &#x27;flex-column&#x27;},
+    {key: &#x27;arrow_forward&#x27;, text: $localize &#x60;horizontal&#x60;, value: &#x27;row&#x27;, bootstrap: &#x27;flex-row&#x27;}
+  ]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">projects/lib/src/configurator/editors/flex-editor.component.ts:28</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="justify"></a>
+                    <span class="name">
+                        <span ><b>justify</b></span>
+                        <a href="#justify"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/FlexOption.html" target="_self" >FlexOption[]</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[
+    {key:&#x27;align_x_start&#x27;, text: $localize &#x60;start&#x60;, value: &#x27;flex-start&#x27;, bootstrap: &#x27;justify-content-start&#x27;},
+    {key:&#x27;align_x_center&#x27;, text: $localize &#x60;center&#x60;, value: &#x27;center&#x27;, bootstrap: &#x27;justify-content-center&#x27;},
+    {key:&#x27;align_x_end&#x27;, text: $localize &#x60;end&#x60;, value: &#x27;flex-end&#x27;, bootstrap: &#x27;justify-content-end&#x27;},
+    {key:&#x27;align_x_space_around&#x27;, text: $localize &#x60;space around&#x60;, value: &#x27;space-around&#x27;, bootstrap: &#x27;justify-content-around&#x27;},
+    {key:&#x27;align_x_space_between&#x27;, text: $localize &#x60;space between&#x60;, value: &#x27;space-between&#x27;, bootstrap: &#x27;justify-content-between&#x27;}
+  ]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">projects/lib/src/configurator/editors/flex-editor.component.ts:33</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="placement"></a>
+                    <span class="name">
+                        <span ><b>placement</b></span>
+                        <a href="#placement"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&quot;bottom&quot;</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="20" class="link-to-prism">projects/lib/src/configurator/editors/flex-editor.component.ts:20</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="accessors">
+        Accessors
+    </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="direction"></a>
+                        <span class="name"><b>direction</b><a href="#direction"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>direction()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="24" class="link-to-prism">projects/lib/src/configurator/editors/flex-editor.component.ts:24</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="alignment"></a>
+                        <span class="name"><b>alignment</b><a href="#alignment"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>alignment()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="56" class="link-to-prism">projects/lib/src/configurator/editors/flex-editor.component.ts:56</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+</section>
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="c-source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, Input, OnChanges, SimpleChanges } from &#x27;@angular/core&#x27;;
+import { ComponentConfig, ConfigService } from &#x27;../../configuration&#x27;;
+
+declare interface FlexOption {
+  key: string;
+  text: string;
+  value: string;
+  bootstrap: string;
+}
+
+@Component({
+  selector: &#x27;uib-flex-editor&#x27;,
+  templateUrl: &#x27;flex-editor.component.html&#x27;,
+  styleUrls: [&#x27;./flex-editor.component.scss&#x27;],
+})
+export class FlexEditorComponent implements OnChanges {
+  @Input() config: ComponentConfig;
+  
+  // tooltip&#x27;s placement
+  placement &#x3D; &quot;bottom&quot;;
+  
+  classes: string[];
+
+  get direction(): &#x27;row&#x27; | &#x27;column&#x27; {
+    return this.classes.includes(&#x27;flex-column&#x27;) ? &#x27;column&#x27; : &#x27;row&#x27;;
+  }
+    
+  directions: FlexOption[] &#x3D; [
+    {key: &#x27;arrow_down&#x27;, text: $localize &#x60;vertical&#x60;, value: &#x27;column&#x27;, bootstrap: &#x27;flex-column&#x27;},
+    {key: &#x27;arrow_forward&#x27;, text: $localize &#x60;horizontal&#x60;, value: &#x27;row&#x27;, bootstrap: &#x27;flex-row&#x27;}
+  ]
+  
+  justify: FlexOption[] &#x3D; [
+    {key:&#x27;align_x_start&#x27;, text: $localize &#x60;start&#x60;, value: &#x27;flex-start&#x27;, bootstrap: &#x27;justify-content-start&#x27;},
+    {key:&#x27;align_x_center&#x27;, text: $localize &#x60;center&#x60;, value: &#x27;center&#x27;, bootstrap: &#x27;justify-content-center&#x27;},
+    {key:&#x27;align_x_end&#x27;, text: $localize &#x60;end&#x60;, value: &#x27;flex-end&#x27;, bootstrap: &#x27;justify-content-end&#x27;},
+    {key:&#x27;align_x_space_around&#x27;, text: $localize &#x60;space around&#x60;, value: &#x27;space-around&#x27;, bootstrap: &#x27;justify-content-around&#x27;},
+    {key:&#x27;align_x_space_between&#x27;, text: $localize &#x60;space between&#x60;, value: &#x27;space-between&#x27;, bootstrap: &#x27;justify-content-between&#x27;}
+  ]
+  
+  alignmentHorizontal: FlexOption[] &#x3D; [
+    {key: &#x27;align_y_start&#x27;, text: $localize &#x60;top&#x60;, value: &#x27;flex-start&#x27;, bootstrap: &#x27;align-items-start&#x27;},
+    {key: &#x27;align_y_center&#x27;, text: $localize &#x60;center&#x60;, value: &#x27;center&#x27;, bootstrap: &#x27;align-items-center&#x27;},
+    {key: &#x27;align_y_end&#x27;, text: $localize &#x60;bottom&#x60;, value: &#x27;flex-end&#x27;, bootstrap: &#x27;align-items-end&#x27;},
+    {key: &#x27;align_y_stretch&#x27;, text: $localize &#x60;stretch&#x60;, value: &#x27;stretch&#x27;, bootstrap: &#x27;align-items-stretch&#x27;},
+    {key: &#x27;align_y_baseline&#x27;, text: $localize &#x60;baseline&#x60;, value: &#x27;baseline&#x27;, bootstrap: &#x27;align-items-baseline&#x27;},
+  ]
+  
+  alignmentVertical: FlexOption[] &#x3D; [
+    {key:&#x27;align_x_start&#x27;, text: $localize &#x60;start&#x60;, value: &#x27;flex-start&#x27;, bootstrap: &#x27;align-items-start&#x27;},
+    {key:&#x27;align_x_center&#x27;, text: $localize &#x60;center&#x60;, value: &#x27;center&#x27;, bootstrap: &#x27;align-items-center&#x27;},
+    {key:&#x27;align_x_end&#x27;, text: $localize &#x60;end&#x60;, value: &#x27;flex-end&#x27;, bootstrap: &#x27;align-items-end&#x27;},
+    {key:&#x27;align_x_stretch&#x27;, text: $localize &#x60;stretch&#x60;, value: &#x27;stretch&#x27;, bootstrap: &#x27;align-items-stretch&#x27;},
+  ]
+
+  get alignment(): FlexOption[] {
+    return this.direction &#x3D;&#x3D;&#x3D; &#x27;column&#x27;? this.alignmentVertical : this.alignmentHorizontal;
+  }
+  
+  
+  constructor(
+    public configService: ConfigService
+  ) {}
+  
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes.config) {
+      // convert &quot;classes&quot; string into array
+      this.classes &#x3D; this.config.classes?.split(&#x27; &#x27;) || [];
+    }
+  }
+
+  updateConfig() {
+    this.config.classes &#x3D; this.classes.join(&#x27; &#x27;);
+    this.configService.updateConfig(this.config);
+  }
+
+  toggleClass(style: string, turnOff: FlexOption[] &#x3D; []) {
+    const i &#x3D; this.classes.indexOf(style);
+    // Remove all classes matching a flex option
+    this.classes &#x3D; this.classes.filter(c &#x3D;&gt; c !&#x3D;&#x3D; style &amp;&amp; !turnOff.find(o &#x3D;&gt; o.bootstrap &#x3D;&#x3D;&#x3D; c));
+    // Then add the class, unless it was already there (in which case, the filter turned it off)
+    if(i &#x3D;&#x3D;&#x3D; -1) {
+      this.classes.push(style);
+    }
+    this.updateConfig();
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;!-- direction --&gt;
+&lt;div class&#x3D;&quot;editor-line&quot;&gt;
+  &lt;div i18n&gt;Direction&lt;/div&gt;
+  &lt;div class&#x3D;&quot;radio-group&quot;&gt;
+    &lt;ng-container *ngFor&#x3D;&quot;let item of directions&quot;&gt;
+     &lt;input type&#x3D;&quot;radio&quot; name&#x3D;&quot;direction&quot; [id]&#x3D;&quot;item.key&quot; (click)&#x3D;&quot;toggleClass(item.bootstrap, directions)&quot; [checked]&#x3D;&quot;direction &#x3D;&#x3D;&#x3D; item.value&quot;/&gt;
+     &lt;label [for]&#x3D;&quot;item.key&quot; [uib-tooltip]&#x3D;&quot;item.text&quot; [placement]&#x3D;&quot;placement&quot;&gt;
+       &lt;svg-icon [key]&#x3D;&quot;item.key&quot; width&#x3D;&quot;22px&quot; height&#x3D;&quot;25px&quot;&gt;&lt;/svg-icon&gt;
+     &lt;/label&gt;
+    &lt;/ng-container&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- justify --&gt;
+&lt;div class&#x3D;&quot;editor-line&quot;&gt;
+  &lt;div i18n&gt;Justify&lt;/div&gt;
+  &lt;div
+    class&#x3D;&quot;radio-group&quot;
+    [style.--rotate]&#x3D;&quot;direction &#x3D;&#x3D;&#x3D; &#x27;column&#x27; ? &#x27;90deg&#x27; : &#x27;&#x27;&quot;
+  &gt;
+    &lt;ng-container *ngFor&#x3D;&quot;let item of justify&quot;&gt;
+      &lt;input type&#x3D;&quot;radio&quot; name&#x3D;&quot;justify&quot; [id]&#x3D;&quot;item.key&quot; (click)&#x3D;&quot;toggleClass(item.bootstrap, justify)&quot; [checked]&#x3D;&quot;classes.includes(item.bootstrap)&quot;/&gt;
+      &lt;label [for]&#x3D;&quot;item.key&quot; [uib-tooltip]&#x3D;&quot;item.text&quot; [placement]&#x3D;&quot;placement&quot;&gt;
+        &lt;svg-icon [key]&#x3D;&quot;item.key&quot; width&#x3D;&quot;22px&quot; height&#x3D;&quot;25px&quot;&gt;&lt;/svg-icon&gt;
+      &lt;/label&gt;        
+    &lt;/ng-container&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- alignment --&gt;
+&lt;div class&#x3D;&quot;editor-line&quot;&gt;
+  &lt;div i18n&gt;Alignment&lt;/div&gt;
+  &lt;!-- horizontal --&gt;
+  &lt;div class&#x3D;&quot;radio-group&quot;&gt;
+    &lt;ng-container *ngFor&#x3D;&quot;let item of alignment&quot;&gt;
+      &lt;input type&#x3D;&quot;radio&quot; name&#x3D;&quot;alignment&quot; id&#x3D;&quot;alignment-{{item.key}}&quot; (click)&#x3D;&quot;toggleClass(item.bootstrap, alignment)&quot; [checked]&#x3D;&quot;classes.includes(item.bootstrap)&quot;/&gt;
+      &lt;label for&#x3D;&quot;alignment-{{item.key}}&quot; [uib-tooltip]&#x3D;&quot;item.text&quot; [placement]&#x3D;&quot;placement&quot;&gt;
+        &lt;svg-icon [key]&#x3D;&quot;item.key&quot; width&#x3D;&quot;22px&quot; height&#x3D;&quot;25px&quot;&gt;&lt;/svg-icon&gt;
+      &lt;/label&gt;
+    &lt;/ng-container&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class&#x3D;&quot;editor-line&quot;&gt;
+  &lt;label class&#x3D;&quot;form-check-label&quot; for&#x3D;&quot;wrap&quot; i18n&gt;Wrap&lt;/label&gt;
+  &lt;input class&#x3D;&quot;form-check-input&quot; type&#x3D;&quot;checkbox&quot; id&#x3D;&quot;wrap&quot; (change)&#x3D;&quot;toggleClass(&#x27;flex-wrap&#x27;)&quot; [checked]&#x3D;&quot;classes.includes(&#x27;flex-wrap&#x27;)&quot;&gt;
+&lt;/div&gt;
+
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-styleData">
+                <p class="comment">
+                    <code>./flex-editor.component.scss</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss">.editor-line {
+  display: grid;
+  grid-template-columns: 105px 1fr;
+  align-items: center;
+}
+
+/* &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D; RADIO BUTTONS &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D; */
+
+.radio-group {
+  // --rotate: 90deg;
+  --icon-width: 22px;
+  --icon-height: 25px;
+  --bg-checked: hsl(80, 73%, 75%);
+  --bg-hover: hsl(80, 61%, 50%);
+
+  display: flex;
+  align-items: center;
+  gap: 0.2rem;
+}
+
+.radio-group label {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+  &gt; svg {
+    width: var(--icon-width);
+    height: var(--icon-height);
+
+    transform: rotate(var(--rotate, 0deg));
+    transition: transform 0.2s ease-in-out;
+  }
+}
+
+.radio-group input[type&#x3D;&#x27;radio&#x27;] {
+  display: none;
+}
+
+.radio-group input[type&#x3D;&#x27;radio&#x27;] + label {
+  padding: 0.3rem 0.5rem;
+  border-radius: 4px;
+  border: 1px dashed #ccc;
+  transition: background-color 0.4s ease-out;
+}
+
+.radio-group input[type&#x3D;&#x27;radio&#x27;]:checked + label {
+  border: 1px solid #000;
+  background-color: var(--bg-checked);
+  transition: background-color 0.4s ease-in;
+}
+
+.radio-group input[type&#x3D;&#x27;radio&#x27;] + label:hover {
+  cursor: pointer;
+  padding: 0.3rem 0.5rem;
+  color: white;
+  fill: white;
+  border-radius: 4px;
+  background-color: var(--bg-hover);
+  transition: background-color 0.2s ease-in, fill 0.2s ease-in, color 0.2s ease-in;
+}</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><!-- direction --><div class="editor-line">  <div i18n>Direction</div>  <div class="radio-group">    <ng-container *ngFor="let item of directions">     <input type="radio" name="direction" [id]="item.key" (click)="toggleClass(item.bootstrap, directions)" [checked]="direction === item.value"/>     <label [for]="item.key" [uib-tooltip]="item.text" [placement]="placement">       <svg-icon [key]="item.key" width="22px" height="25px"></svg-icon>     </label>    </ng-container>  </div></div><!-- justify --><div class="editor-line">  <div i18n>Justify</div>  <div    class="radio-group"    [style.--rotate]="direction === \'column\' ? \'90deg\' : \'\'"  >    <ng-container *ngFor="let item of justify">      <input type="radio" name="justify" [id]="item.key" (click)="toggleClass(item.bootstrap, justify)" [checked]="classes.includes(item.bootstrap)"/>      <label [for]="item.key" [uib-tooltip]="item.text" [placement]="placement">        <svg-icon [key]="item.key" width="22px" height="25px"></svg-icon>      </label>            </ng-container>  </div></div><!-- alignment --><div class="editor-line">  <div i18n>Alignment</div>  <!-- horizontal -->  <div class="radio-group">    <ng-container *ngFor="let item of alignment">      <input type="radio" name="alignment" id="alignment-{{item.key}}" (click)="toggleClass(item.bootstrap, alignment)" [checked]="classes.includes(item.bootstrap)"/>      <label for="alignment-{{item.key}}" [uib-tooltip]="item.text" [placement]="placement">        <svg-icon [key]="item.key" width="22px" height="25px"></svg-icon>      </label>    </ng-container>  </div></div><div class="editor-line">  <label class="form-check-label" for="wrap" i18n>Wrap</label>  <input class="form-check-input" type="checkbox" id="wrap" (change)="toggleClass(\'flex-wrap\')" [checked]="classes.includes(\'flex-wrap\')"></div></div>'
+    var COMPONENTS = [{'name': 'AutocompleteComponent', 'selector': 'uib-autocomplete'},{'name': 'ClassEditorComponent', 'selector': 'uib-class-editor'},{'name': 'ConditionEditorComponent', 'selector': 'uib-condition-editor'},{'name': 'ConfiguratorComponent', 'selector': 'uib-configurator'},{'name': 'FlexEditorComponent', 'selector': 'uib-flex-editor'},{'name': 'HtmlEditorComponent', 'selector': 'uib-html-editor'},{'name': 'ItemComponent', 'selector': '[uib-item]'},{'name': 'ModalComponent', 'selector': 'uib-modal'},{'name': 'PaletteComponent', 'selector': 'uib-palette'},{'name': 'SvgIconComponent', 'selector': 'svg-icon'},{'name': 'ToastComponent', 'selector': 'uib-toast'},{'name': 'ToolbarComponent', 'selector': 'uib-toolbar'},{'name': 'TreeComponent', 'selector': 'uib-tree'},{'name': 'ZoneComponent', 'selector': 'uib-zone'}];
+    var DIRECTIVES = [{'name': 'ConfigurableDirective', 'selector': '[uib-configurable]'},{'name': 'NgModelChangeDebouncedDirective', 'selector': '[ngModelChangeDebounced]'},{'name': 'TemplateNameDirective', 'selector': '[uib-template]'},{'name': 'TooltipDirective', 'selector': '[uib-tooltip]'}];
+    var ACTUAL_COMPONENT = {'name': 'FlexEditorComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'FlexEditorComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>
