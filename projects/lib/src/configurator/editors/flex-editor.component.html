@@ -1,6 +1,6 @@
 <!-- direction -->
 <div class="editor-line">
-  <div>Direction</div>
+  <div i18n>Direction</div>
   <div class="radio-group">
     <ng-container *ngFor="let item of directions">
      <input type="radio" name="direction" [id]="item.key" (click)="toggleClass(item.bootstrap, directions)" [checked]="direction === item.value"/>
@@ -13,7 +13,7 @@
 
 <!-- justify -->
 <div class="editor-line">
-  <div>Justify</div>
+  <div i18n>Justify</div>
   <div
     class="radio-group"
     [style.--rotate]="direction === 'column' ? '90deg' : ''"
@@ -29,7 +29,7 @@
 
 <!-- alignment -->
 <div class="editor-line">
-  <div>Alignment</div>
+  <div i18n>Alignment</div>
   <!-- horizontal -->
   <div class="radio-group">
     <ng-container *ngFor="let item of alignment">
@@ -42,7 +42,7 @@
 </div>
 
 <div class="editor-line">
-  <label class="form-check-label" for="wrap">Wrap</label>
+  <label class="form-check-label" for="wrap" i18n>Wrap</label>
   <input class="form-check-input" type="checkbox" id="wrap" (change)="toggleClass('flex-wrap')" [checked]="classes.includes('flex-wrap')">
 </div>
 

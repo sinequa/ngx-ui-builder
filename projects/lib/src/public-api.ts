@@ -1,3 +1,6 @@
+// Necessary to resolve the '$localize' marker
+import '@angular/localize/init';
+
 /*
  * Public API Surface of lib
  */

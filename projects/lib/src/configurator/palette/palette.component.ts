@@ -100,16 +100,16 @@ export class PaletteComponent implements OnInit, OnChanges {
     if (this.options.enableSubcontainers) {
       this.standardPalette.push({
         type: '_container',
-        display: 'Container',
-        title: 'A component to arrange various sub-components',
+        display: $localize `Container`,
+        title: $localize `A component to arrange various sub-components`,
         createConfig: (id: string) => of({ type: '_container', id, items: [] }),
       });
     }
     if (this.options.enableRawHtml) {
       this.standardPalette.push({
         type: '_raw-html',
-        display: 'Raw HTML',
-        title: 'A component to write HTML freely',
+        display: $localize `Raw HTML`,
+        title: $localize `A component to write HTML freely`,
         createConfig: (id: string) => of({ type: '_raw-html', id, rawHtml: this.options.rawHtmlPlaceholder})
       })
     }
@@ -139,7 +139,7 @@ export class PaletteComponent implements OnInit, OnChanges {
         .map(c => ({
           type: c.type,
           display: c.id,
-          title: `Type: ${this.context.templates?.[c.type]?.display || c.type}`,
+          title: $localize `Type: ${this.context.templates?.[c.type]?.display || c.type}`,
           removeable: !this.configService.isUsed(c.id),
           createConfig: _ => of(c) // The config already exists
         })
@@ -161,7 +161,7 @@ export class PaletteComponent implements OnInit, OnChanges {
         configurator,
         config,
         configChanged: () => {}, // do nothing when the configurator changes the config (before user presses 'OK')
-        title: `Create new ${type} component`,
+        title: $localize `Create new ${type} component`,
         close: new Subject<ComponentConfig|undefined>()
       }
       return this.modal.close;

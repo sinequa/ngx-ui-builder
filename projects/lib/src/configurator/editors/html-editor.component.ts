@@ -4,7 +4,7 @@ import { ConfiguratorContext } from "../configurator.models";
 @Component({
   selector: 'uib-html-editor',
   template: `
-  <label class="form-label" for="rawHtml">Raw HTML:</label>
+  <label class="form-label" for="rawHtml" i18n>Raw HTML:</label>
   <textarea class="form-control" id="rawHtml"
     type="text"
     name="rawHtml"

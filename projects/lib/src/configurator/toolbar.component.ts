@@ -4,22 +4,7 @@ import { ConfigService } from "../configuration";
 
 @Component({
   selector: 'uib-toolbar',
-  template: `
-<div class="btn-group uib-toolbar uib-toolbar-anim" *ngIf="{enabled: configurableService.editorEnabled$ | async} as editor" >
-  <ng-container *ngIf="editor.enabled">
-    <ng-container [ngTemplateOutlet]="template"></ng-container>
-    <button class="btn btn-primary" (click)="configService.undo()" [ngClass]="{'disabled': !(configService.canUndo$()| async)}" uib-tooltip="Undo" placement="top">
-      <svg-icon key="undo"></svg-icon>
-    </button>
-    <button class="btn btn-primary" (click)="configService.redo()" [ngClass]="{'disabled': !(configService.canRedo$()| async)}" uib-tooltip="Redo" placement="top">
-      <svg-icon key="redo"></svg-icon>
-    </button>
-  </ng-container>
-  <button class="btn btn-primary" (click)="toggleEditor()" uib-tooltip="Enable/Disable UI-Editor">
-    <svg-icon key="{{editor.enabled ? 'eye_slash' : 'eye' }}"></svg-icon>
-  </button>
-</div>
-  `,
+  templateUrl: './toolbar.component.html',
   styles: [
     `
     .uib-toolbar .btn.disabled {
