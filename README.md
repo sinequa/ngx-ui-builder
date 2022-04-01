@@ -294,3 +294,8 @@ The `make-static` schematic takes as an input a JSON file containing the configu
 
 After running this script, the app should compile and display your components exactly the same as before, but without a trace of the UI Builder in them anymore!
 
+### Internationalization
+
+The library has standard Angular i18n support.
+
+Running `ng extract-i18n` for an application using ngx-ui-builder will extract all the strings marked for translation.
