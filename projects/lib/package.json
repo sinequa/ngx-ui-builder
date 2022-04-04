@@ -30,6 +30,7 @@
   },
   "devDependencies": {
     "@types/bootstrap": "^5.1.6",
+    "@angular/localize": "^12.2.0",
     "copyfiles": "file:../../node_modules/copyfiles",
     "typescript": "file:../../node_modules/typescript"
   }
