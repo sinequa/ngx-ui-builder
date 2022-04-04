@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { filter } from 'rxjs/operators';
 import { TemplateNameDirective } from '../utils';
 import {ConfigurableDirective} from './configurable.directive';
@@ -20,8 +20,12 @@ export interface Configurable {
 export class ConfigurableService {
   private _hoveredId?: string;
 
-  // currently edited element'id
-  private edited$ = new Subject<Configurable | undefined>();
+  /** 
+   * currently edited element'id.
+   * 
+   * Can be undefined when element is unselected
+   */
+  edited$ = new BehaviorSubject<Configurable | undefined>(undefined);
   
   // behavior subject as we need to retrieve the previous value to toggle it
   editorEnabled$ = new BehaviorSubject<boolean>(false);
@@ -62,7 +66,7 @@ export class ConfigurableService {
     }
     else if (this.previousConfigurableElement.id !== configurable.id
       || (this.previousConfigurableElement.id === configurable.id && this.previousConfigurableElement.zone !== configurable.zone)) {
-      // previous exist and it's id don't match with the new configurable element
+      // previous element exist and his id don't match with the new configurable element
             
       this.previousConfigurableElement.removeEdited();
       this.previousConfigurableElement.removeSelected();
@@ -71,6 +75,8 @@ export class ConfigurableService {
     else if (this.previousConfigurableElement.id === configurable.id && this.previousConfigurableElement.zone === configurable.zone) {
       // same id and same zone
       this.previousConfigurableElement = undefined;
+      this.edited$.next(undefined);
+      return;
     }
     
     this.edited$.next(configurable);

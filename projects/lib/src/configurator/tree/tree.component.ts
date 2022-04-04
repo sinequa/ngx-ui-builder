@@ -1,5 +1,5 @@
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
-import {ConfigurableService} from '../../configurable';
+import { ConfigurableService} from '../../configurable';
 import { ComponentConfig } from '../../configuration';
 
 @Component({
@@ -14,7 +14,7 @@ export class TreeComponent implements OnChanges {
   
   private configurationMap: Map<string, Partial<ComponentConfig>>;
   
-  constructor(private configurableService: ConfigurableService) {}
+  constructor(public configurableService: ConfigurableService) {}
   
   ngOnChanges(changes: SimpleChanges) {
     // set our Map object,
@@ -52,7 +52,7 @@ export class TreeComponent implements OnChanges {
     el?.nativeElement.scrollIntoView({behavior: 'smooth', inline: 'nearest', block: 'center'});
   }
   
-  hover(id: string) {
+  hover(id: string | undefined) {
     const hoveredId = this.configurableService.hoveredId;
     if (hoveredId) {
       const prev = this.configurableService.configurableDirectiveMap.get(hoveredId);
@@ -60,9 +60,11 @@ export class TreeComponent implements OnChanges {
     }
     
     this.configurableService.hoveredId = id;
-    const el = this.configurableService.configurableDirectiveMap.get(id);
-    el?.addHighlight();
+    if (id) {
+      const el = this.configurableService.configurableDirectiveMap.get(id);
+      el?.addHighlight();
     
-    el?.nativeElement.scrollIntoView({behavior: 'smooth', inline: 'nearest', block: 'center'});
+      el?.nativeElement.scrollIntoView({ behavior: 'smooth', inline: 'nearest', block: 'center' });
+    }
   }
 }
