@@ -16,8 +16,8 @@
     "save": "dependencies"
   },
   "peerDependencies": {
-    "@angular/common": "^12.2.5",
-    "@angular/core": "^12.2.5",
+    "@angular/common": "^12.2.0",
+    "@angular/core": "^12.2.0",
     "@ngneat/elf": "^1.0.2",
     "@ngneat/elf-entities": "^3.0.0",
     "@ngneat/elf-state-history": "^1.0.1",

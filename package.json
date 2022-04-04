@@ -5,7 +5,8 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
-    "postbuild": "cd projects/lib && npm run build",
+    "build:lib": "ng build lib",
+    "postbuild:lib": "copyfiles README.md dist/lib/ && cd projects/lib && npm run build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "compodoc:build": "compodoc -p ./projects/lib/tsconfig.doc.json -d ./docs/compodoc"
@@ -36,7 +37,6 @@
     "@angular/cli": "~12.2.5",
     "@angular/compiler-cli": "~12.2.5",
     "@angular/localize": "^12.2.15",
-    "@ngneat/tailwind": "^7.0.3",
     "@types/bootstrap": "^5.1.6",
     "@types/jasmine": "~3.8.0",
     "@types/node": "^12.11.1",
@@ -49,9 +49,8 @@
     "karma-coverage": "~2.0.3",
     "karma-jasmine": "~4.0.0",
     "karma-jasmine-html-reporter": "~1.7.0",
-    "ng-packagr": "^12.1.1",
+    "ng-packagr": "^12.2.5",
     "sanitize-html": "2.7.0",
-    "tailwindcss": "latest",
     "typescript": "~4.3.5"
   }
 }
