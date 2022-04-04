@@ -12,7 +12,8 @@ const packageJson = {
     "ngx-drag-drop": "^2.0.0"
   },
   devDependencies: {
-    "@types/bootstrap": "^5.1.6"
+    "@angular/localize": "^12.2.0",
+    "@types/bootstrap": "^5.1.6",
   }
 }
 
@@ -35,7 +36,7 @@ export function ngAdd(): Rule {
       .map(lib => ({
         type: NodeDependencyType.Dev,
         name: lib,
-        version: packageJson.peerDependencies[lib],
+        version: packageJson.devDependencies[lib],
         overwrite: true,
       }))
       .forEach(dep => addPackageJsonDependency(tree, dep));

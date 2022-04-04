@@ -1,17 +1,24 @@
-# ngx-ui-builder documentation
+# UI Builder
 
-Welcome to the documentation site of the UI Builder library.
+_An Angular library for creating no-code tools & applications._
 
 - [Demo application](demo)
 - [API Reference](compodoc)
 
+
+**UI Builder** is an Angular library that lets developers create applications that can be easily reshaped and reconfigured by an end-user through point-and-click and drag-and-drop interactions.
+
+![Demo UI Builder](docs/demo.gif)
+
 ## Getting Started
 
-Install the library to your application with:
+Add the library to your application with:
 
 ```
 ng add @sinequa/ngx-ui-builder
 ```
+
+(This command installs the library and its peer dependencies from npm)
 
 Import the 2 following modules in your `app.module.ts` (the first one to display configurable components in your app; the second one to display their configurator):
 
@@ -30,11 +37,26 @@ import { DynamicViewsModule, ConfiguratorModule } from '@sinequa/ngx-ui-builder'
 Import the Bootstrap utilities and UI Builder stylesheets in your project's stylesheet:
 
 ```scss
-@import "~bootstrap/dist/css/bootstrap-utilities.min"; // Unless you already use Bootstrap
+@import "~bootstrap/dist/css/bootstrap-utilities.min"; // Unless you already use Bootstrap or Bootstrap utilities
 @import "~@sinequa/ngx-ui-builder/styles/ui-builder";
 ```
 
 (Note that the Bootstrap utilities should not affect the styling of your app: they only introduce convenience styling such as `display: flex` for the class name `d-flex`)
+
+Initialize the configuration service with a blank configuration:
+
+```ts
+import { ConfigService } from '@sinequa/ngx-ui-builder';
+
+...
+export class AppComponent {
+    
+  constructor(
+    public configService: ConfigService
+  ){
+    this.configService.init([]);
+  }
+```
 
 Create a first zone in your application:
 
@@ -63,6 +85,6 @@ Display the configurator and toolbar (wrapped under a `.uib-bootstrap` element, 
     <!-- Inject custom configurators here -->
       
     </uib-configurator>
-    
+
 </div>
 ```
