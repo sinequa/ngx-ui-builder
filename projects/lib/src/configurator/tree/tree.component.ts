@@ -1,5 +1,4 @@
-import { ChangeDetectorRef, Component, Input, OnChanges, SimpleChanges } from '@angular/core';
-import { tap } from 'rxjs/operators';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { ConfigurableService} from '../../configurable';
 import { ComponentConfig } from '../../configuration';
 
@@ -15,14 +14,7 @@ export class TreeComponent implements OnChanges {
   
   private configurationMap: Map<string, Partial<ComponentConfig>>;
   
-  constructor(
-    public configurableService: ConfigurableService,
-    private cdr: ChangeDetectorRef
-  ) {
-   
-    // listen to edited's element event
-    this.configurableService.edited$.pipe(tap(this.cdr.markForCheck))
-  }
+  constructor(public configurableService: ConfigurableService) {}
   
   ngOnChanges(changes: SimpleChanges) {
     // set our Map object,
