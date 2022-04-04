@@ -1,14 +1,11 @@
 # UI Builder
 
-_An Angular library for creating no-code tools & applications._
-
 - [Demo application](demo)
 - [API Reference](compodoc)
 
+**UI Builder** is an Angular library that lets developers create applications that can be easily reshaped and reconfigured by end-users through point-and-click and drag-and-drop interactions.
 
-**UI Builder** is an Angular library that lets developers create applications that can be easily reshaped and reconfigured by an end-user through point-and-click and drag-and-drop interactions.
-
-![Demo UI Builder](docs/demo.gif)
+![Demo UI Builder](demo.gif)
 
 ## Getting Started
 

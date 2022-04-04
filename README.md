@@ -4,7 +4,11 @@
 
 _An Angular library for creating no-code tools & applications._
 
-**UI Builder** is an Angular library that lets developers create applications that can be easily reshaped and reconfigured by an end-user through point-and-click and drag-and-drop interactions.
+- [Documentation](https://sinequa.github.io/ngx-ui-builder/)
+- [Demo application](https://sinequa.github.io/ngx-ui-builder/demo)
+- [API Reference](https://sinequa.github.io/ngx-ui-builder/compodoc)
+
+**UI Builder** is an Angular library that lets developers create applications that can be easily reshaped and reconfigured by end-users through point-and-click and drag-and-drop interactions.
 
 ![Demo UI Builder](docs/demo.gif)
 
