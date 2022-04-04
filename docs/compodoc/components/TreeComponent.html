@@ -1,0 +1,975 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>ngx-ui-builder documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="../" class="navbar-brand">ngx-ui-builder documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li>Components</li>
+  <li
+  >
+  TreeComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="active">
+            <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li >
+            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li >
+            <a href="#templateData" role="tab" id="templateData-tab" data-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li >
+            <a href="#styleData" role="tab" id="styleData-tab" data-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li >
+            <a href="#tree" role="tab" id="tree-tab" data-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="c-info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>projects/lib/src/configurator/tree/tree.component.ts</code>
+</p>
+
+
+
+
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                    <code><a href="https://angular.io/api/core/OnChanges" target="_blank" >OnChanges</a></code>
+    </p>
+
+
+<section>
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>uib-tree</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>tree.component.css</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./tree.component.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#configurationMap" >configurationMap</a>
+                            </li>
+                            <li>
+                                <a href="#root" >root</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#children" >children</a>
+                            </li>
+                            <li>
+                                <a href="#hover" >hover</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnChanges" >ngOnChanges</a>
+                            </li>
+                            <li>
+                                <a href="#select" >select</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Inputs</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#configuration" >configuration</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(configurableService: <a href="../injectables/ConfigurableService.html" target="_self">ConfigurableService</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="15" class="link-to-prism">projects/lib/src/configurator/tree/tree.component.ts:15</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>configurableService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/ConfigurableService.html" target="_self" >ConfigurableService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+    <section>
+    <h3 id="inputs">Inputs</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="configuration"></a>
+                        <b>configuration</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/ComponentConfig.html" target="_self" >ComponentConfig[]</a></code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="11" class="link-to-prism">projects/lib/src/configurator/tree/tree.component.ts:11</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+    <section>
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="children"></a>
+                    <span class="name">
+                        <span ><b>children</b></span>
+                        <a href="#children"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>children(id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="45"
+                            class="link-to-prism">projects/lib/src/configurator/tree/tree.component.ts:45</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Given an id, return all the children of that id.</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                    <td>Description</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>id</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                    <td>
+                                        <ul>
+<li>string - The id of the component.</li>
+</ul>
+
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>Partial[]</code>
+
+                    </div>
+                    <div class="io-description">
+                        <p>The children of the component with the given id.</p>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="hover"></a>
+                    <span class="name">
+                        <span ><b>hover</b></span>
+                        <a href="#hover"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>hover(id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="55"
+                            class="link-to-prism">projects/lib/src/configurator/tree/tree.component.ts:55</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>id</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnChanges"></a>
+                    <span class="name">
+                        <span ><b>ngOnChanges</b></span>
+                        <a href="#ngOnChanges"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnChanges(changes: <a href="https://angular.io/api/core/SimpleChanges" target="_blank">SimpleChanges</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="19"
+                            class="link-to-prism">projects/lib/src/configurator/tree/tree.component.ts:19</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>changes</td>
+                                    <td>
+                                                <code><a href="https://angular.io/api/core/SimpleChanges" target="_blank" >SimpleChanges</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="select"></a>
+                    <span class="name">
+                        <span ><b>select</b></span>
+                        <a href="#select"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>select(id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="49"
+                            class="link-to-prism">projects/lib/src/configurator/tree/tree.component.ts:49</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>id</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section>
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="configurationMap"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>configurationMap</b></span>
+                        <a href="#configurationMap"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/ComponentConfig.html" target="_self" >Map&lt;string | Partial&lt;ComponentConfig&gt;&gt;</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="15" class="link-to-prism">projects/lib/src/configurator/tree/tree.component.ts:15</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="root"></a>
+                    <span class="name">
+                        <span ><b>root</b></span>
+                        <a href="#root"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/ComponentConfig.html" target="_self" >Partial&lt;ComponentConfig&gt;[]</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">projects/lib/src/configurator/tree/tree.component.ts:13</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="c-source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, Input, OnChanges, SimpleChanges } from &#x27;@angular/core&#x27;;
+import {ConfigurableService} from &#x27;../../configurable&#x27;;
+import { ComponentConfig } from &#x27;../../configuration&#x27;;
+
+@Component({
+  selector: &#x27;uib-tree&#x27;,
+  templateUrl: &#x27;./tree.component.html&#x27;,
+  styleUrls: [&#x27;tree.component.css&#x27;],
+})
+export class TreeComponent implements OnChanges {
+  @Input() configuration: ComponentConfig[];
+  
+  root: Partial&lt;ComponentConfig&gt;[];
+  
+  private configurationMap: Map&lt;string, Partial&lt;ComponentConfig&gt;&gt;;
+  
+  constructor(private configurableService: ConfigurableService) {}
+  
+  ngOnChanges(changes: SimpleChanges) {
+    // set our Map object,
+    this.configurationMap &#x3D; new Map();
+    this.configuration.forEach((el) &#x3D;&gt; this.configurationMap.set(el.id, el));
+
+    // set children parent_id and order
+    this.configuration
+      .filter((parent) &#x3D;&gt; parent.items &amp;&amp; parent.items.length &gt; 0)
+      .forEach((parent) &#x3D;&gt;
+        parent.items.forEach((id: string, index: number) &#x3D;&gt; {
+          // a child could have multiple parents
+          // get child&#x27;s parents
+          const {parents &#x3D; [], orders &#x3D; {}} &#x3D; this.configurationMap.get(id) || {};
+          this.configurationMap.set(id, {...this.configurationMap.get(id), id: id, parents: [...parents, parent.id], orders: {...orders, [parent.id]: index }} )
+        })
+    );
+
+    // items without parent_id (root level)
+    this.root &#x3D; [...this.configurationMap.values()].filter((el) &#x3D;&gt; el.parents &#x3D;&#x3D;&#x3D; undefined);
+  }
+
+  /**
+   * Given an id, return all the children of that id.
+   * @param {string} id - string - The id of the component.
+   * @returns The children of the component with the given id.
+   */
+  children(id: string): Partial&lt;ComponentConfig&gt;[] {
+    return [...this.configurationMap.values()].filter((el) &#x3D;&gt; el.parents ? el.parents.includes(id) : false).sort((a, b) &#x3D;&gt; a.orders[id] - b.orders[id]);
+  }
+  
+  select(id: string) {
+    const el &#x3D; this.configurableService.configurableDirectiveMap.get(id);
+    el?.click(new MouseEvent(&quot;click&quot;));
+    el?.nativeElement.scrollIntoView({behavior: &#x27;smooth&#x27;, inline: &#x27;nearest&#x27;, block: &#x27;center&#x27;});
+  }
+  
+  hover(id: string) {
+    const hoveredId &#x3D; this.configurableService.hoveredId;
+    if (hoveredId) {
+      const prev &#x3D; this.configurableService.configurableDirectiveMap.get(hoveredId);
+      prev?.removeHighlight();
+    }
+    
+    this.configurableService.hoveredId &#x3D; id;
+    const el &#x3D; this.configurableService.configurableDirectiveMap.get(id);
+    el?.addHighlight();
+    
+    el?.nativeElement.scrollIntoView({behavior: &#x27;smooth&#x27;, inline: &#x27;nearest&#x27;, block: &#x27;center&#x27;});
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;content&quot;&gt;
+  &lt;ng-container
+    [ngTemplateOutlet]&#x3D;&quot;tree&quot;
+    [ngTemplateOutletContext]&#x3D;&quot;{ root }&quot;
+  &gt;&lt;/ng-container&gt;
+&lt;/div&gt;
+
+&lt;ng-template #tree let-id let-root&#x3D;&quot;root&quot;&gt;
+  &lt;ul [ngClass]&#x3D;&quot;{ tree: root }&quot;&gt;
+    &lt;li *ngFor&#x3D;&quot;let el of root || children(id)&quot; [ngClass]&#x3D;&quot;{ &#x27;section&#x27;: el.items }&quot;&gt;
+      &lt;ng-container [ngTemplateOutlet]&#x3D;&quot;el.items ? parent : single&quot; [ngTemplateOutletContext]&#x3D;&quot;{ $implicit: el.id }&quot;&gt;&lt;/ng-container&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/ng-template&gt;
+
+&lt;ng-template #single let-id&gt;
+  &lt;a (mouseover)&#x3D;&quot;hover(id)&quot; (click)&#x3D;&quot;select(id)&quot;&gt;{{ id }}&lt;/a&gt;
+&lt;/ng-template&gt;
+
+&lt;ng-template #parent let-id&gt;
+  &lt;input type&#x3D;&quot;checkbox&quot; checked [id]&#x3D;&quot;&#x27;menu-&#x27; + id&quot;&gt;
+  &lt;label [for]&#x3D;&quot;&#x27;menu-&#x27; + id&quot;&gt;&lt;/label&gt;
+  &lt;a (mouseover)&#x3D;&quot;hover(id)&quot; (click)&#x3D;&quot;select(id)&quot;&gt;{{ id }}&lt;/a&gt;
+  &lt;ng-container
+    [ngTemplateOutlet]&#x3D;&quot;tree&quot;
+    [ngTemplateOutletContext]&#x3D;&quot;{ $implicit: id }&quot;
+  &gt;&lt;/ng-container&gt;
+&lt;/ng-template&gt;</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-styleData">
+                <p class="comment">
+                    <code>tree.component.css</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss">.tree,
+.section ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.tree li {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: flex-start;
+  
+  list-style-type: none;
+  margin: 10px;
+  position: relative;
+  width: 100%;
+}
+
+.tree li:not(.section) {
+  max-width: max-content;
+}
+
+
+.tree li::before {
+  content: &quot;&quot;;
+  position: absolute;
+  top: -9px;
+  left: -20px;
+  border-left: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+  border-radius: 0 0 0 0px;
+  width: 20px;
+  height: 22px;
+}
+
+.tree li::after {
+  position: absolute;
+  content: &quot;&quot;;
+  top: 12px;
+  left: -20px;
+  border-left: 1px solid #ccc;
+  border-top: 1px solid #ccc;
+  border-radius: 0px 0 0 0;
+  width: 20px;
+  height: 100%;
+}
+
+.tree li:last-child::after {
+  display: none;
+}
+
+.tree li:last-child:before {
+  border-radius: 0 0 0 5px;
+}
+
+ul.tree &gt; li:first-child::before {
+  display: none;
+}
+
+ul.tree &gt; li:first-child::after {
+  border-radius: 5px 0 0 0;
+}
+
+.tree li a {
+  border: 1px #ccc solid;
+  border-radius: 5px;
+  padding: 2px 5px;
+  text-decoration: none;
+}
+
+.tree li a:hover,
+.tree li a:hover + ul li a,
+.tree li a:focus,
+.tree li a:focus + ul li a {
+  background: #ccc;
+  color: #000;
+  border: 1px solid #000;
+  cursor: pointer;
+}
+
+.tree li a:hover + ul li::after,
+.tree li a:focus + ul li::after,
+.tree li a:hover + ul li::before,
+.tree li a:focus + ul li::before .tree li a:hover + ul::before,
+.tree li a:focus + ul::before .tree li a:hover + ul ul::before,
+.tree li a:focus + ul ul::before {
+  border-color: #000; /*connector color on hover*/
+}
+
+.section ul {
+  transition: opacity 0.3s linear;
+  height: 0;
+  transform: translate(9999px);
+  opacity: 0;
+}
+.section input:checked ~ ul {
+  transform: translate(0);
+  opacity: 1;
+  height: auto;
+}
+
+.section input[type&#x3D;&quot;checkbox&quot;] {
+  display: none;
+}
+
+.section {
+  position: relative;
+  padding-left: 35px;
+}
+
+.section label + a {
+  margin-left: -35px;
+  padding-left: 22px;
+  text-decoration: none;
+  color: #000;
+}
+
+.section label:before {
+  content: url(&quot;data:image/svg+xml,%3csvg xmlns&#x3D;&#x27;http://www.w3.org/2000/svg&#x27; width&#x3D;&#x27;16&#x27; height&#x3D;&#x27;16&#x27; viewBox&#x3D;&#x27;0 0 16 16&#x27;%3e%3cpath fill&#x3D;&#x27;none&#x27; stroke&#x3D;&#x27;rgba%280,0,0,.5%29&#x27; stroke-linecap&#x3D;&#x27;round&#x27; stroke-linejoin&#x3D;&#x27;round&#x27; stroke-width&#x3D;&#x27;2&#x27; d&#x3D;&#x27;M5 14l6-6-6-6&#x27;/%3e%3c/svg%3e&quot;);
+  position: absolute;
+  top: 4px;
+  left: 2px;
+  text-align: center;
+  color: black;
+  display: inline-block;
+  transition: transform 0.5s;
+  z-index: 1;
+  user-select: none;
+  cursor: pointer;
+}
+
+.section input:checked ~ label:before {
+  transform: rotate(90deg);
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><div class="content">  <ng-container    [ngTemplateOutlet]="tree"    [ngTemplateOutletContext]="{ root }"  ></ng-container></div><ng-template #tree let-id let-root="root">  <ul [ngClass]="{ tree: root }">    <li *ngFor="let el of root || children(id)" [ngClass]="{ \'section\': el.items }">      <ng-container [ngTemplateOutlet]="el.items ? parent : single" [ngTemplateOutletContext]="{ $implicit: el.id }"></ng-container>    </li>  </ul></ng-template><ng-template #single let-id>  <a (mouseover)="hover(id)" (click)="select(id)">{{ id }}</a></ng-template><ng-template #parent let-id>  <input type="checkbox" checked [id]="\'menu-\' + id">  <label [for]="\'menu-\' + id"></label>  <a (mouseover)="hover(id)" (click)="select(id)">{{ id }}</a>  <ng-container    [ngTemplateOutlet]="tree"    [ngTemplateOutletContext]="{ $implicit: id }"  ></ng-container></ng-template></div>'
+    var COMPONENTS = [{'name': 'AutocompleteComponent', 'selector': 'uib-autocomplete'},{'name': 'ClassEditorComponent', 'selector': 'uib-class-editor'},{'name': 'ConditionEditorComponent', 'selector': 'uib-condition-editor'},{'name': 'ConfiguratorComponent', 'selector': 'uib-configurator'},{'name': 'FlexEditorComponent', 'selector': 'uib-flex-editor'},{'name': 'HtmlEditorComponent', 'selector': 'uib-html-editor'},{'name': 'ItemComponent', 'selector': '[uib-item]'},{'name': 'ModalComponent', 'selector': 'uib-modal'},{'name': 'PaletteComponent', 'selector': 'uib-palette'},{'name': 'SvgIconComponent', 'selector': 'svg-icon'},{'name': 'ToastComponent', 'selector': 'uib-toast'},{'name': 'ToolbarComponent', 'selector': 'uib-toolbar'},{'name': 'TreeComponent', 'selector': 'uib-tree'},{'name': 'ZoneComponent', 'selector': 'uib-zone'}];
+    var DIRECTIVES = [{'name': 'ConfigurableDirective', 'selector': '[uib-configurable]'},{'name': 'NgModelChangeDebouncedDirective', 'selector': '[ngModelChangeDebounced]'},{'name': 'TemplateNameDirective', 'selector': '[uib-template]'},{'name': 'TooltipDirective', 'selector': '[uib-tooltip]'}];
+    var ACTUAL_COMPONENT = {'name': 'TreeComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'TreeComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

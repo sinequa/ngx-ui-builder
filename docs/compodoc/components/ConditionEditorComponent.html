@@ -1,0 +1,1637 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>ngx-ui-builder documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="../" class="navbar-brand">ngx-ui-builder documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li>Components</li>
+  <li
+  >
+  ConditionEditorComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="active">
+            <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li >
+            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li >
+            <a href="#templateData" role="tab" id="templateData-tab" data-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li >
+            <a href="#styleData" role="tab" id="styleData-tab" data-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li >
+            <a href="#tree" role="tab" id="tree-tab" data-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="c-info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>projects/lib/src/configurator/editors/condition-editor.component.ts</code>
+</p>
+
+
+
+
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                    <code><a href="https://angular.io/api/core/OnChanges" target="_blank" >OnChanges</a></code>
+    </p>
+
+
+<section>
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+            <tr>
+                <td class="col-md-3">changeDetection</td>
+                <td class="col-md-9"><code>ChangeDetectionStrategy.OnPush</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>uib-condition-editor</code></td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-3">styles</td>
+                <td class="col-md-9"><code>
+  .condition-value .btn {
+    width: 40px;
+  }
+  .autocomplete .list-group {
+    top: 0;
+    width: 100%;
+    max-height: 200px;
+    overflow: auto;
+  }
+  </code></td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./condition-editor.component.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#conditionsService" >conditionsService</a>
+                            </li>
+                            <li>
+                                <a href="#data" >data</a>
+                            </li>
+                            <li>
+                                <a href="#debugText" >debugText</a>
+                            </li>
+                            <li>
+                                <a href="#fields" >fields</a>
+                            </li>
+                            <li>
+                                <a href="#values" >values</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#addValue" >addValue</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#addValueToList" >addValueToList</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnChanges" >ngOnChanges</a>
+                            </li>
+                            <li>
+                                <a href="#removeValue" >removeValue</a>
+                            </li>
+                            <li>
+                                <a href="#selectField" >selectField</a>
+                            </li>
+                            <li>
+                                <a href="#selectValue" >selectValue</a>
+                            </li>
+                            <li>
+                                <a href="#trackByFn" >trackByFn</a>
+                            </li>
+                            <li>
+                                <a href="#updateConfig" >updateConfig</a>
+                            </li>
+                            <li>
+                                <a href="#updateData" >updateData</a>
+                            </li>
+                            <li>
+                                <a href="#updateDebugText" >updateDebugText</a>
+                            </li>
+                            <li>
+                                <a href="#updateFields" >updateFields</a>
+                            </li>
+                            <li>
+                                <a href="#updateValues" >updateValues</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Inputs</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#context" >context</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <h6><b>Accessors</b></h6>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <ul class="index-list">
+                                <li>
+                                    <a href="#activate" >activate</a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(conditionsService: <a href="../injectables/ConditionsService.html" target="_self">ConditionsService</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">projects/lib/src/configurator/editors/condition-editor.component.ts:31</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>conditionsService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/ConditionsService.html" target="_self" >ConditionsService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+    <section>
+    <h3 id="inputs">Inputs</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="context"></a>
+                        <b>context</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/ConfiguratorContext.html" target="_self" >ConfiguratorContext</a></code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="22" class="link-to-prism">projects/lib/src/configurator/editors/condition-editor.component.ts:22</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+    <section>
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="addValue"></a>
+                    <span class="name">
+                        <span ><b>addValue</b></span>
+                        <a href="#addValue"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>addValue()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="101"
+                            class="link-to-prism">projects/lib/src/configurator/editors/condition-editor.component.ts:101</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="addValueToList"></a>
+                    <span class="name">
+                        <span class="modifier">Private</span>
+                        <span ><b>addValueToList</b></span>
+                        <a href="#addValueToList"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>addValueToList(values: string[], item: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>, field: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="76"
+                            class="link-to-prism">projects/lib/src/configurator/editors/condition-editor.component.ts:76</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>values</td>
+                                    <td>
+                                            <code>string[]</code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>item</td>
+                                    <td>
+                                                <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>field</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnChanges"></a>
+                    <span class="name">
+                        <span ><b>ngOnChanges</b></span>
+                        <a href="#ngOnChanges"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnChanges()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="37"
+                            class="link-to-prism">projects/lib/src/configurator/editors/condition-editor.component.ts:37</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="removeValue"></a>
+                    <span class="name">
+                        <span ><b>removeValue</b></span>
+                        <a href="#removeValue"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>removeValue(i: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="105"
+                            class="link-to-prism">projects/lib/src/configurator/editors/condition-editor.component.ts:105</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>i</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="selectField"></a>
+                    <span class="name">
+                        <span ><b>selectField</b></span>
+                        <a href="#selectField"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>selectField(field: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="110"
+                            class="link-to-prism">projects/lib/src/configurator/editors/condition-editor.component.ts:110</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>field</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="selectValue"></a>
+                    <span class="name">
+                        <span ><b>selectValue</b></span>
+                        <a href="#selectValue"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>selectValue(value: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, condition: <a href="../interfaces/ConditionValue.html" target="_self">ConditionValue</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="115"
+                            class="link-to-prism">projects/lib/src/configurator/editors/condition-editor.component.ts:115</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>value</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>condition</td>
+                                    <td>
+                                                <code><a href="../interfaces/ConditionValue.html" target="_self" >ConditionValue</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="trackByFn"></a>
+                    <span class="name">
+                        <span ><b>trackByFn</b></span>
+                        <a href="#trackByFn"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>trackByFn(index, item)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="121"
+                            class="link-to-prism">projects/lib/src/configurator/editors/condition-editor.component.ts:121</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>index</td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>item</td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="updateConfig"></a>
+                    <span class="name">
+                        <span ><b>updateConfig</b></span>
+                        <a href="#updateConfig"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>updateConfig(notify)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="41"
+                            class="link-to-prism">projects/lib/src/configurator/editors/condition-editor.component.ts:41</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Optional</td>
+                                    <td>Default value</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>notify</td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+                                    <td>
+                                        <code>true</code>
+                                    </td>
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="updateData"></a>
+                    <span class="name">
+                        <span ><b>updateData</b></span>
+                        <a href="#updateData"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>updateData(condition: <a href="../interfaces/Condition.html" target="_self">Condition</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="53"
+                            class="link-to-prism">projects/lib/src/configurator/editors/condition-editor.component.ts:53</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>condition</td>
+                                    <td>
+                                                <code><a href="../interfaces/Condition.html" target="_self" >Condition</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="updateDebugText"></a>
+                    <span class="name">
+                        <span ><b>updateDebugText</b></span>
+                        <a href="#updateDebugText"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>updateDebugText(condition: <a href="../interfaces/Condition.html" target="_self">Condition</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="83"
+                            class="link-to-prism">projects/lib/src/configurator/editors/condition-editor.component.ts:83</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>condition</td>
+                                    <td>
+                                                <code><a href="../interfaces/Condition.html" target="_self" >Condition</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="updateFields"></a>
+                    <span class="name">
+                        <span ><b>updateFields</b></span>
+                        <a href="#updateFields"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>updateFields()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="59"
+                            class="link-to-prism">projects/lib/src/configurator/editors/condition-editor.component.ts:59</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="updateValues"></a>
+                    <span class="name">
+                        <span ><b>updateValues</b></span>
+                        <a href="#updateValues"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>updateValues(condition: <a href="../interfaces/Condition.html" target="_self">Condition</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="63"
+                            class="link-to-prism">projects/lib/src/configurator/editors/condition-editor.component.ts:63</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>condition</td>
+                                    <td>
+                                                <code><a href="../interfaces/Condition.html" target="_self" >Condition</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section>
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="conditionsService"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>conditionsService</b></span>
+                        <a href="#conditionsService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../injectables/ConditionsService.html" target="_self" >ConditionsService</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">projects/lib/src/configurator/editors/condition-editor.component.ts:34</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="data"></a>
+                    <span class="name">
+                        <span ><b>data</b></span>
+                        <a href="#data"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">projects/lib/src/configurator/editors/condition-editor.component.ts:25</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="debugText"></a>
+                    <span class="name">
+                        <span ><b>debugText</b></span>
+                        <a href="#debugText"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">projects/lib/src/configurator/editors/condition-editor.component.ts:31</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="fields"></a>
+                    <span class="name">
+                        <span ><b>fields</b></span>
+                        <a href="#fields"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>string[]</code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="27" class="link-to-prism">projects/lib/src/configurator/editors/condition-editor.component.ts:27</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="values"></a>
+                    <span class="name">
+                        <span ><b>values</b></span>
+                        <a href="#values"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>string[]</code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">projects/lib/src/configurator/editors/condition-editor.component.ts:29</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="accessors">
+        Accessors
+    </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="activate"></a>
+                        <span class="name"><b>activate</b><a href="#activate"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>activate()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="87" class="link-to-prism">projects/lib/src/configurator/editors/condition-editor.component.ts:87</a></div>
+                                </td>
+                            </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>set</b><code>activate(value: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank">boolean</a>)</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="91" class="link-to-prism">projects/lib/src/configurator/editors/condition-editor.component.ts:91</a></div>
+                                </td>
+                            </tr>
+                    <tr>
+                        <td class="col-md-4">
+
+                                <div class="io-description">
+                                        <b>Parameters :</b>
+                                        <table class="params">
+                                            <thead>
+                                                <tr>
+                                                    <td>Name</td>
+                                                        <td>Type</td>
+                                                    <td>Optional</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                    <tr>
+                                                            <td>value</td>
+                                                    
+                                                            <td>
+                                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+                                                            </td>
+                                                    
+                                                        <td>
+                                                                No
+                                                        </td>
+                                                        
+                                                    </tr>
+                                            </tbody>
+                                        </table>
+                                </div>
+                                <div>
+                                </div>
+                                <div class="io-description">
+                                    <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                                </div>
+                        </td>
+                    </tr>
+            </tbody>
+        </table>
+</section>
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="c-source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { ChangeDetectionStrategy, Component, Input, OnChanges } from &quot;@angular/core&quot;;
+import { Condition, ConditionsService, ConditionValue } from &quot;../../configuration&quot;;
+import { ConfiguratorContext } from &quot;../configurator.models&quot;;
+
+@Component({
+  selector: &#x27;uib-condition-editor&#x27;,
+  templateUrl: &#x27;./condition-editor.component.html&#x27;,
+  styles: [&#x60;
+  .condition-value .btn {
+    width: 40px;
+  }
+  .autocomplete .list-group {
+    top: 0;
+    width: 100%;
+    max-height: 200px;
+    overflow: auto;
+  }
+  &#x60;],
+  changeDetection: ChangeDetectionStrategy.OnPush
+})
+export class ConditionEditorComponent implements OnChanges {
+  @Input() context: ConfiguratorContext;
+
+  // The data on which the current condition is evaluated
+  data: any;
+  // The data field on which the current condition is evaluated
+  fields: string[];
+  // The list of values tested by the current condition
+  values: string[];
+  // A debug text to understand the current condition
+  debugText: string;
+
+  constructor(
+    public conditionsService: ConditionsService
+  ){}
+
+  ngOnChanges() {
+    this.updateConfig(false);
+  }
+
+  updateConfig(notify &#x3D; true) {
+    if(this.context.config.condition) {
+      this.updateData(this.context.config.condition);
+      this.updateFields();
+      this.updateValues(this.context.config.condition);
+      this.updateDebugText(this.context.config.condition);
+    }
+    if(notify) {
+      this.context.configChanged();
+    }
+  }
+
+  updateData(condition: Condition) {
+    const data &#x3D; typeof this.context.context.dataIndex &#x3D;&#x3D;&#x3D; &#x27;undefined&#x27;?
+      this.context.context.data : this.context.context.data[this.context.context.dataIndex];
+    this.data &#x3D; this.conditionsService.selectData(condition, this.context.context.conditionsData, data);
+  }
+
+  updateFields() {
+    this.fields &#x3D; this.data? Object.keys(this.data) : [];
+  }
+
+  updateValues(condition: Condition) {
+    this.values &#x3D; [];
+    if(condition.field &amp;&amp; this.data) {
+      if(condition.data || typeof this.context.context.dataIndex &#x3D;&#x3D;&#x3D; &#x27;undefined&#x27;) {
+        this.addValueToList(this.values, this.data, condition.field);
+      }
+      // Special case of the data list
+      else {
+        this.context.context.data.forEach(item &#x3D;&gt; this.addValueToList(this.values, item, condition.field));
+      }
+    }
+  }
+
+  private addValueToList(values: string[], item: any, field: string) {
+    const data &#x3D; item[field]?.toString();
+    if(data &amp;&amp; !values.includes(data)) {
+      values.push(data);
+    }
+  }
+
+  updateDebugText(condition: Condition) {
+    this.debugText &#x3D; this.conditionsService.writeCondition(condition);
+  }
+
+  get activate(): boolean {
+    return !!this.context.config.condition;
+  }
+
+  set activate(value: boolean) {
+    if(value) { // Create a new condition from scratch
+      this.context.config.condition &#x3D; {data: &#x27;&#x27;, type: &#x27;equals&#x27;, field: &#x27;&#x27;, values: [{value: &#x27;&#x27;}]};
+    }
+    else {  // Erase the current condition
+      delete this.context.config.condition;
+    }
+    this.updateConfig();
+  }
+
+  addValue() {
+    this.context.config.condition?.values.push({value: &#x27;&#x27;});
+  }
+
+  removeValue(i: number) {
+    this.context.config.condition?.values.splice(i, 1);
+    this.updateConfig();
+  }
+
+  selectField(field: string) {
+    this.context.config.condition!.field &#x3D; field;
+    this.updateConfig();
+  }
+  
+  selectValue(value: string, condition: ConditionValue) {
+    condition.value &#x3D; value;
+    this.updateConfig();
+  }
+  
+  // This item instance might change, so we track by index
+  trackByFn(index, item) {
+    return index;
+  }
+}</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-templateData">
+        <pre class="line-numbers"><code class="language-html">
+&lt;div class&#x3D;&quot;form-check&quot;&gt;
+  &lt;input class&#x3D;&quot;form-check-input&quot; type&#x3D;&quot;checkbox&quot; id&#x3D;&quot;activate&quot; [(ngModel)]&#x3D;&quot;activate&quot;&gt;
+  &lt;label class&#x3D;&quot;form-check-label&quot; for&#x3D;&quot;activate&quot; i18n&gt;Display this component conditionally&lt;/label&gt;
+&lt;/div&gt;
+
+&lt;div *ngIf&#x3D;&quot;context.config.condition&quot;&gt;
+
+  &lt;div class&#x3D;&quot;mb-2&quot;&gt;
+    &lt;label class&#x3D;&quot;form-label&quot; for&#x3D;&quot;data&quot; i18n&gt;Data&lt;/label&gt;
+    &lt;select [(ngModel)]&#x3D;&quot;context.config.condition.data&quot; id&#x3D;&quot;data&quot; class&#x3D;&quot;form-select&quot; (ngModelChange)&#x3D;&quot;updateConfig()&quot;&gt;
+      &lt;option value&#x3D;&quot;&quot; *ngIf&#x3D;&quot;context.context.data&quot; i18n&gt;data&lt;/option&gt;
+      &lt;option [ngValue]&#x3D;&quot;source.key&quot; *ngFor&#x3D;&quot;let source of context.context.conditionsData | keyvalue&quot;&gt;{{source.key}}&lt;/option&gt;
+    &lt;/select&gt;
+  &lt;/div&gt;
+
+  &lt;div class&#x3D;&quot;mb-2&quot;&gt;
+    &lt;label class&#x3D;&quot;form-label&quot; for&#x3D;&quot;field&quot; i18n&gt;Field&lt;/label&gt;
+    &lt;input #fieldInput class&#x3D;&quot;form-control&quot; type&#x3D;&quot;text&quot; id&#x3D;&quot;field&quot; spellcheck&#x3D;&quot;false&quot; autocomplete&#x3D;&quot;off&quot; [(ngModel)]&#x3D;&quot;context.config.condition.field&quot; (ngModelChangeDebounced)&#x3D;&quot;updateConfig()&quot;/&gt;
+    &lt;uib-autocomplete [inputElement]&#x3D;&quot;fieldInput&quot; [allSuggests]&#x3D;&quot;fields&quot; (select)&#x3D;&quot;selectField($event)&quot;&gt;&lt;/uib-autocomplete&gt;
+  &lt;/div&gt;
+
+  &lt;div class&#x3D;&quot;mb-2&quot;&gt;
+    &lt;label class&#x3D;&quot;form-label&quot; for&#x3D;&quot;type&quot; i18n&gt;Type&lt;/label&gt;
+    &lt;select [(ngModel)]&#x3D;&quot;context.config.condition.type&quot; id&#x3D;&quot;type&quot; class&#x3D;&quot;form-select&quot; (ngModelChange)&#x3D;&quot;updateConfig()&quot;&gt;
+      &lt;option value&#x3D;&quot;equals&quot; i18n&gt;Equals&lt;/option&gt;
+      &lt;option value&#x3D;&quot;regexp&quot; i18n&gt;Regular Expression&lt;/option&gt;
+    &lt;/select&gt;
+  &lt;/div&gt;
+
+  &lt;div class&#x3D;&quot;mb-2&quot;&gt;
+    &lt;label class&#x3D;&quot;form-label&quot; i18n&gt;Value(s)&lt;/label&gt;
+    
+    &lt;div class&#x3D;&quot;condition-value input-group flex-nowrap mb-1&quot; *ngFor&#x3D;&quot;let value of context.config.condition.values; let i &#x3D; index; trackBy: trackByFn&quot;&gt;
+      &lt;div class&#x3D;&quot;input-group-text align-items-start&quot;&gt;
+        &lt;input class&#x3D;&quot;form-check-input&quot; type&#x3D;&quot;checkbox&quot; id&#x3D;&quot;not{{i}}&quot; [(ngModel)]&#x3D;&quot;value.not&quot; (ngModelChange)&#x3D;&quot;updateConfig()&quot;&gt;
+        &lt;label class&#x3D;&quot;form-check-label ms-1&quot; for&#x3D;&quot;not{{i}}&quot; i18n&gt;Not&lt;/label&gt;
+      &lt;/div&gt;
+      &lt;div class&#x3D;&quot;flex-grow-1&quot;&gt;
+        &lt;input #valueInput class&#x3D;&quot;form-control rounded-0&quot; type&#x3D;&quot;text&quot; id&#x3D;&quot;value{{i}}&quot; spellcheck&#x3D;&quot;false&quot; autocomplete&#x3D;&quot;off&quot; [(ngModel)]&#x3D;&quot;value.value&quot; (ngModelChangeDebounced)&#x3D;&quot;updateConfig()&quot;/&gt;
+        &lt;uib-autocomplete [inputElement]&#x3D;&quot;valueInput&quot; [allSuggests]&#x3D;&quot;values&quot; (select)&#x3D;&quot;selectValue($event, value)&quot;&gt;&lt;/uib-autocomplete&gt;
+      &lt;/div&gt;
+      &lt;button class&#x3D;&quot;btn btn-outline-secondary&quot; type&#x3D;&quot;button&quot; i18n-uib-tooltip uib-tooltip&#x3D;&quot;Add another condition&quot; container&#x3D;&quot;.uib-bootstrap&quot; (click)&#x3D;&quot;addValue()&quot;&gt;+&lt;/button&gt;
+      &lt;button class&#x3D;&quot;btn btn-outline-danger&quot; type&#x3D;&quot;button&quot; i18n-uib-tooltip uib-tooltip&#x3D;&quot;Remove this condition&quot; container&#x3D;&quot;.uib-bootstrap&quot; (click)&#x3D;&quot;removeValue(i)&quot; *ngIf&#x3D;&quot;context.config.condition.values.length &gt; 1&quot;&gt;-&lt;/button&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div class&#x3D;&quot;form-check mb-2&quot; *ngIf&#x3D;&quot;context.config.condition.values.length &gt; 1&quot;&gt;
+    &lt;input class&#x3D;&quot;form-check-input&quot; type&#x3D;&quot;checkbox&quot; id&#x3D;&quot;or&quot; [(ngModel)]&#x3D;&quot;context.config.condition.or&quot; (ngModelChange)&#x3D;&quot;updateConfig()&quot;&gt;
+    &lt;label class&#x3D;&quot;form-check-label&quot; for&#x3D;&quot;or&quot; i18n&gt;Display if any of the conditions is true&lt;/label&gt;
+  &lt;/div&gt;
+
+
+  &lt;div class&#x3D;&quot;mb-2&quot;&gt;
+    &lt;div i18n&gt;Debug text&lt;/div&gt;
+    &lt;pre&gt;&lt;code&gt;{{debugText}}&lt;/code&gt;&lt;/pre&gt;
+  &lt;/div&gt;
+
+&lt;/div&gt;</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-styleData">
+            <pre class="line-numbers"><code class="language-scss">
+  .condition-value .btn {
+    width: 40px;
+  }
+  .autocomplete .list-group {
+    top: 0;
+    width: 100%;
+    max-height: 200px;
+    overflow: auto;
+  }
+  
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><div class="form-check">  <input class="form-check-input" type="checkbox" id="activate" [(ngModel)]="activate">  <label class="form-check-label" for="activate" i18n>Display this component conditionally</label></div><div *ngIf="context.config.condition">  <div class="mb-2">    <label class="form-label" for="data" i18n>Data</label>    <select [(ngModel)]="context.config.condition.data" id="data" class="form-select" (ngModelChange)="updateConfig()">      <option value="" *ngIf="context.context.data" i18n>data</option>      <option [ngValue]="source.key" *ngFor="let source of context.context.conditionsData | keyvalue">{{source.key}}</option>    </select>  </div>  <div class="mb-2">    <label class="form-label" for="field" i18n>Field</label>    <input #fieldInput class="form-control" type="text" id="field" spellcheck="false" autocomplete="off" [(ngModel)]="context.config.condition.field" (ngModelChangeDebounced)="updateConfig()"/>    <uib-autocomplete [inputElement]="fieldInput" [allSuggests]="fields" (select)="selectField($event)"></uib-autocomplete>  </div>  <div class="mb-2">    <label class="form-label" for="type" i18n>Type</label>    <select [(ngModel)]="context.config.condition.type" id="type" class="form-select" (ngModelChange)="updateConfig()">      <option value="equals" i18n>Equals</option>      <option value="regexp" i18n>Regular Expression</option>    </select>  </div>  <div class="mb-2">    <label class="form-label" i18n>Value(s)</label>        <div class="condition-value input-group flex-nowrap mb-1" *ngFor="let value of context.config.condition.values; let i = index; trackBy: trackByFn">      <div class="input-group-text align-items-start">        <input class="form-check-input" type="checkbox" id="not{{i}}" [(ngModel)]="value.not" (ngModelChange)="updateConfig()">        <label class="form-check-label ms-1" for="not{{i}}" i18n>Not</label>      </div>      <div class="flex-grow-1">        <input #valueInput class="form-control rounded-0" type="text" id="value{{i}}" spellcheck="false" autocomplete="off" [(ngModel)]="value.value" (ngModelChangeDebounced)="updateConfig()"/>        <uib-autocomplete [inputElement]="valueInput" [allSuggests]="values" (select)="selectValue($event, value)"></uib-autocomplete>      </div>      <button class="btn btn-outline-secondary" type="button" i18n-uib-tooltip uib-tooltip="Add another condition" container=".uib-bootstrap" (click)="addValue()">+</button>      <button class="btn btn-outline-danger" type="button" i18n-uib-tooltip uib-tooltip="Remove this condition" container=".uib-bootstrap" (click)="removeValue(i)" *ngIf="context.config.condition.values.length > 1">-</button>    </div>  </div>  <div class="form-check mb-2" *ngIf="context.config.condition.values.length > 1">    <input class="form-check-input" type="checkbox" id="or" [(ngModel)]="context.config.condition.or" (ngModelChange)="updateConfig()">    <label class="form-check-label" for="or" i18n>Display if any of the conditions is true</label>  </div>  <div class="mb-2">    <div i18n>Debug text</div>    <pre><code>{{debugText}}</code></pre>  </div></div></div>'
+    var COMPONENTS = [{'name': 'AutocompleteComponent', 'selector': 'uib-autocomplete'},{'name': 'ClassEditorComponent', 'selector': 'uib-class-editor'},{'name': 'ConditionEditorComponent', 'selector': 'uib-condition-editor'},{'name': 'ConfiguratorComponent', 'selector': 'uib-configurator'},{'name': 'FlexEditorComponent', 'selector': 'uib-flex-editor'},{'name': 'HtmlEditorComponent', 'selector': 'uib-html-editor'},{'name': 'ItemComponent', 'selector': '[uib-item]'},{'name': 'ModalComponent', 'selector': 'uib-modal'},{'name': 'PaletteComponent', 'selector': 'uib-palette'},{'name': 'SvgIconComponent', 'selector': 'svg-icon'},{'name': 'ToastComponent', 'selector': 'uib-toast'},{'name': 'ToolbarComponent', 'selector': 'uib-toolbar'},{'name': 'TreeComponent', 'selector': 'uib-tree'},{'name': 'ZoneComponent', 'selector': 'uib-zone'}];
+    var DIRECTIVES = [{'name': 'ConfigurableDirective', 'selector': '[uib-configurable]'},{'name': 'NgModelChangeDebouncedDirective', 'selector': '[ngModelChangeDebounced]'},{'name': 'TemplateNameDirective', 'selector': '[uib-template]'},{'name': 'TooltipDirective', 'selector': '[uib-tooltip]'}];
+    var ACTUAL_COMPONENT = {'name': 'ConditionEditorComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'ConditionEditorComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>
