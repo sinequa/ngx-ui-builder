@@ -12,6 +12,17 @@ export function ngAdd(): Rule {
     Object.keys(packageJson.peerDependencies)
       .filter(lib => !lib.startsWith("@angular"))
       .map(lib => ({
+        type: NodeDependencyType.Default,
+        name: lib,
+        version: packageJson.peerDependencies[lib],
+        overwrite: true,
+      }))
+      .forEach(dep => addPackageJsonDependency(tree, dep));
+
+    // Add devDependency (specifically, bootstrap types)
+    Object.keys(packageJson.devDependencies)
+      .filter(lib => packageJson.devDependencies[lib].startsWith("@types"))
+      .map(lib => ({
         type: NodeDependencyType.Dev,
         name: lib,
         version: packageJson.peerDependencies[lib],
