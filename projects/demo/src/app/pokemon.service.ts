@@ -106,7 +106,7 @@ export class PokemonService {
     },
   ];
   
-  pokemons$ = new BehaviorSubject<Pokemon[]>([]);
+  pokemons$ = new BehaviorSubject<Pokemon[]>(this.pokemons);
 
   searchPokemons(search = "", abilities: string[] = [], weight?: number, experience?: number) {
     return this.pokemons$.next(this.pokemons.filter(p => {

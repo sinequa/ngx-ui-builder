@@ -5,6 +5,7 @@ import {
   ContentChildren,
   ElementRef,
   Input,
+  OnInit,
   QueryList,
   ViewChild,
 } from '@angular/core';
@@ -38,7 +39,7 @@ export const defaultConfiguratorOptions: ConfiguratorOptions = {
   `],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ConfiguratorComponent {
+export class ConfiguratorComponent implements OnInit {
   // Capture configurator templates
   @ContentChildren(TemplateNameDirective)
   children: QueryList<TemplateNameDirective>;
@@ -62,13 +63,15 @@ export class ConfiguratorComponent {
     private cdr: ChangeDetectorRef,
     public configurableService: ConfigurableService,
     public configService: ConfigService
-  ) {
-    
-    this.edited$ = configurableService.watchEdited().pipe(
+  ) {}
+
+  ngOnInit(): void {
+      
+    this.edited$ = this.configurableService.watchEdited().pipe(
       tap(() => this.offcanvas.show()),
       tap(() => this.showTree(false)),
       switchMap((context) => 
-        configService.watchConfig(context!.id).pipe(
+        this.configService.watchConfig(context!.id).pipe(
           map(config => ({
             context,
             config,
@@ -91,8 +94,7 @@ export class ConfiguratorComponent {
       if (value === false && this.offcanvas) {
         this.offcanvas.hide();
       }
-    })
-    
+    });
   }
 
   /**

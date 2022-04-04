@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ConfigurableService, ConfigService } from '@sinequa/ngx-ui-builder';
 import { PokemonService } from "./pokemon.service";
 import { defaultConfig } from "./config";
@@ -7,7 +7,7 @@ import { defaultConfig } from "./config";
   selector: 'app-root',
   templateUrl: './app.component.html'
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
 
   // Pokestore state
   allAbilities: string[] = [];
@@ -20,12 +20,11 @@ export class AppComponent {
     public configService: ConfigService,
     public configurableService: ConfigurableService,
     public pokemonService: PokemonService
-  ) {
+  ) {}
+
+  ngOnInit() {
 
     this.allAbilities = this.pokemonService.getAbilities();
-
-    // Initialize results list
-    this.pokemonService.searchPokemons();
 
     // Initial state of the UI builder
     this.configService.init(defaultConfig);
