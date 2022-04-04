@@ -1,8 +1,20 @@
 import { Rule, SchematicContext, Tree } from '@angular-devkit/schematics';
 import { NodePackageInstallTask } from '@angular-devkit/schematics/tasks';
 import { addPackageJsonDependency, NodeDependencyType } from '@schematics/angular/utility/dependencies';
-import * as packageJson from '../../package.json';
 
+const packageJson = {
+  peerDependencies: {
+    "@ngneat/elf": "^1.0.2",
+    "@ngneat/elf-entities": "^3.0.0",
+    "@ngneat/elf-state-history": "^1.0.1",
+    "@popperjs/core": "^2.11.0",
+    "bootstrap": "^5.1.3",
+    "ngx-drag-drop": "^2.0.0"
+  },
+  devDependencies: {
+    "@types/bootstrap": "^5.1.6"
+  }
+}
 
 // Just return the tree
 export function ngAdd(): Rule {
@@ -10,7 +22,6 @@ export function ngAdd(): Rule {
 
     // Add peerDependencies to the dependencies of the app
     Object.keys(packageJson.peerDependencies)
-      .filter(lib => !lib.startsWith("@angular"))
       .map(lib => ({
         type: NodeDependencyType.Default,
         name: lib,
@@ -21,7 +32,6 @@ export function ngAdd(): Rule {
 
     // Add devDependency (specifically, bootstrap types)
     Object.keys(packageJson.devDependencies)
-      .filter(lib => packageJson.devDependencies[lib].startsWith("@types"))
       .map(lib => ({
         type: NodeDependencyType.Dev,
         name: lib,
