@@ -3,3 +3,46 @@
 
 /* specific import used by the ui builder lib */
 @import "../../lib/styles/ui-builder";
+
+body {
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+
+.filters {
+    h3, h4 {
+        margin: 0;
+    }
+    h4 {
+        margin-top: 1em;
+    }
+}
+
+.main {
+    display: flex;
+    max-width: 1000px;
+    .result-item:hover {
+        background: aliceblue;
+    }
+}
+
+.metadata {
+    color: #212529;
+    background-color: #e3e6e9;
+    display: inline-block;
+    padding: 0.25em 0.4em;
+    margin: 0 0.25em 0.25em 0.25em;
+    font-size: 85%;
+    font-weight: 700;
+    line-height: 1;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    padding-right: 0.6em;
+    padding-left: 0.6em;
+    border-radius: 10rem;
+    text-decoration: none;
+}
+
+a.metadata:hover {
+    background-color: #cfd5db;
+}

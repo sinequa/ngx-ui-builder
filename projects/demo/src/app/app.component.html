@@ -6,58 +6,42 @@
   </ng-template>
 
   <ng-template uib-template="searchbar">
-    <input
-      type="text"
-      [(ngModel)]="search"
-      (ngModelChange)="searchPokemons()"
-      placeholder="Search for a Pokemon..."
-    />
+    <input type="text" [(ngModel)]="searchText" (ngModelChange)="search()" placeholder="Search for a Pokemon..." autocomplete="off" spellcheck="false"/>
   </ng-template>
 
   <ng-template uib-template="applied-filters">
     <div>
-      <span *ngFor="let ability of selectedAbilities" class="metadata">
-        {{ ability }}
-      </span>
-      <span *ngIf="selectedWeight" class="metadata">Weight &lt; {{ selectedWeight }}</span>
-      <span *ngIf="selectedExperience" class="metadata">XP &lt; {{ selectedExperience }}</span>
+      <span *ngFor="let ability of abilities" class="metadata">{{ ability }}</span>
+      <span *ngIf="weight" class="metadata">Weight &lt; {{ weight }}</span>
+      <span *ngIf="experience" class="metadata">XP &lt; {{ experience }}</span>
     </div>
   </ng-template>
 
   <ng-template uib-template="clear-filters">    
-    <button *ngIf="search || selectedAbilities.length || selectedWeight || selectedExperience"
-      (click)="clear($event)">
+    <button *ngIf="search || abilities.length || weight || experience" (click)="clear()">
       Clear search criteria
     </button>
   </ng-template>
 </uib-zone>
 
-
 <hr />
 
-
-<div class="d-flex w-75">
+<div class="main">
 
   <!-- FILTERS -->
 
-  <div class="p-1">
+  <div class="p-1 filters">
     <h3>Filters</h3>
     <uib-zone id="filters">
       <ng-template uib-template="range" let-config>
-        <h4>{{ config.field }}: {{ this[config.field] }}</h4>
-        <input
-          type="range"
-          min="0"
-          max="200"
-          [(ngModel)]="this[config.field]"
-          (ngModelChange)="searchPokemons()"
-        />
+        <h4>{{ config.field | titlecase }}: {{ this[config.field] }}</h4>
+        <input type="range" min="0"max="200" [(ngModel)]="this[config.field]" (ngModelChange)="search()"/>
       </ng-template>
 
       <ng-template uib-template="abilities">
-        <h4>Abilities</h4>
-        <div *ngFor="let a of abilities">
-          <a *ngIf="!selectedAbilities.includes(a)" href="#" (click)="selectAbility(a, $event)" class="metadata">{{ a }}</a>
+        <h4>Abilities:</h4>
+        <div *ngFor="let a of allAbilities">
+          <a *ngIf="!abilities.includes(a)" href="#" (click)="selectAbility(a)" class="metadata">{{ a }}</a>
         </div>
       </ng-template>
     </uib-zone>
@@ -66,18 +50,14 @@
 
   <!-- RESULTS -->
 
-  <uib-zone id="results" [data]="results$ | async" class="flex-grow-1 d-flex flex-row flex-wrap justify-content-start align-items-start align-content-start">
+  <uib-zone id="results" [data]="pokemonService.pokemons$ | async" class="flex-grow-1 d-flex flex-row flex-wrap justify-content-start align-items-start align-content-start">
+    
     <ng-template uib-template="image" display="Image" title="A component to display the picture of a Pokemon" let-data="data">
-      <img
-        src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/{{
-          data.id
-        }}.png"
-        [title]="data.name"
-      />
+      <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/{{data.id}}.png" [title]="data.name"/>
     </ng-template>
 
     <ng-template uib-template="description" display="Description" let-data="data" let-config>
-        {{data.description}}
+      {{data.description}}
     </ng-template>
     
     <ng-template uib-template="metadata" display="Metadata" let-data="data" let-config>
@@ -126,18 +106,5 @@
       <hr />
     </ng-template>
 
-    <ng-template uib-template="_container" let-context>
-
-      <!-- Custom pre-defined layouts -->
-      <div *ngIf="context.context.id === 'results'">
-        <h6>Results layout</h6>
-        <div class="form-check" *ngFor="let layout of layouts">
-          <input class="form-check-input" type="radio" [id]="layout.id" [value]="layout.id" [(ngModel)]="selectedLayout" (ngModelChange)="selectLayout(layout)">
-          <label class="form-check-label" [for]="layout.id">{{layout.name}}</label>
-        </div>
-        <hr />
-      </div>
-
-    </ng-template>
   </uib-configurator>
 </div>
