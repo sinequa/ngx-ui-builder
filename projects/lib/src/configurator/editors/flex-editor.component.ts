@@ -1,5 +1,6 @@
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { ComponentConfig, ConfigService } from '../../configuration';
+import { TooltipPlacement } from '../../utils';
 
 declare interface FlexOption {
   key: string;
@@ -17,7 +18,7 @@ export class FlexEditorComponent implements OnChanges {
   @Input() config: ComponentConfig;
   
   // tooltip's placement
-  placement = "bottom";
+  placement: TooltipPlacement = "bottom";
   
   classes: string[];
 
