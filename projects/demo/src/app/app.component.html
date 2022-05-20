@@ -10,14 +10,12 @@
   </ng-template>
 
   <ng-template uib-template="applied-filters">
-    <div>
-      <span *ngFor="let ability of abilities" class="metadata">{{ ability }}</span>
-      <span *ngIf="weight" class="metadata">Weight &lt; {{ weight }}</span>
-      <span *ngIf="experience" class="metadata">XP &lt; {{ experience }}</span>
-    </div>
+    <span *ngFor="let ability of abilities" class="metadata">{{ ability }}</span>
+    <span *ngIf="weight" class="metadata">Weight &lt; {{ weight }}</span>
+    <span *ngIf="experience" class="metadata">XP &lt; {{ experience }}</span>
   </ng-template>
 
-  <ng-template uib-template="clear-filters">    
+  <ng-template uib-template="clear-filters">
     <button *ngIf="search || abilities.length || weight || experience" (click)="clear()">
       Clear search criteria
     </button>
@@ -51,7 +49,7 @@
   <!-- RESULTS -->
 
   <uib-zone id="results" [data]="pokemonService.pokemons$ | async" class="flex-grow-1 d-flex flex-row flex-wrap justify-content-start align-items-start align-content-start">
-    
+
     <ng-template uib-template="image" display="Image" title="A component to display the picture of a Pokemon" let-data="data">
       <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/{{data.id}}.png" [title]="data.name"/>
     </ng-template>
@@ -59,12 +57,12 @@
     <ng-template uib-template="description" display="Description" let-data="data" let-config>
       {{data.description}}
     </ng-template>
-    
+
     <ng-template uib-template="metadata" display="Metadata" let-data="data" let-config>
       <strong *ngIf="!config.hideField">{{ config.field }}: </strong>
       <span *ngFor="let meta of asArray(data[config.field])" class="metadata">{{meta}}</span>
     </ng-template>
-    
+
   </uib-zone>
 
 </div>
@@ -73,7 +71,7 @@
 
 <div class="uib-bootstrap">
   <!-- bootstrap classes are now allowed here -->
-  
+
   <uib-toolbar></uib-toolbar>
 
   <!-- CONFIGURATOR -->
@@ -88,7 +86,7 @@
       />
       <hr />
     </ng-template>
-    
+
     <ng-template uib-template="metadata" let-context>
       <div class="mb-3">
         <label for="metadata" class="form-label">Metadata</label>
