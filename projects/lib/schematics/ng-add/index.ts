@@ -14,8 +14,8 @@ const packageJson = {
   devDependencies: {
     "@angular/localize": "^12.2.0",
     "@types/bootstrap": "^5.1.6",
-    "htmlparser": "^1.7.7",
-    "html-prettify": "^1.0.3",
+    "htmlparser": "1.7.7",
+    "html-prettify": "1.0.3",
     "sanitize-html": "2.7.0",
   }
 }
