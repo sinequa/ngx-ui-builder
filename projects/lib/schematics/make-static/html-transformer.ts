@@ -64,8 +64,6 @@ function processTemplate(dom: HTMLElement[], config: ComponentConfig[]): HtmlMod
 
     //console.log(`Generating zone ${id}`,zone);
 
-    // Manage special attributes of the uib-zone component
-    let attr = `id="${id}"`;
     let dataName = "data";
     // Try to guess the right data name (eg. "record" instead of "data")
     if(templates?.[0]?.attribs) {
@@ -76,25 +74,30 @@ function processTemplate(dom: HTMLElement[], config: ComponentConfig[]): HtmlMod
       }
     }
 
-    if(zone.attribs['class']) {
-      attr = `${attr} class="${zone.attribs['class']}"`;
-    }
-
     let innerHtml = generateHtml(conf, templates, config, dataName, zone.attribs['[conditionsData]']);
 
-    if(zone.attribs['[data]']) {
-      // strong assumption: data has to be an array (even though uib-zone can take non-array data)
-      innerHtml = innerHtml.replace("<div", `<div *ngFor="let ${dataName} of ${zone.attribs['[data]']}"`);
+    const attrs = [] as string[];
+    // Manage special attributes of the uib-zone component
+    for (const [attr, value] of Object.entries(zone.attribs)) {
+      switch(attr) {
+        case '[conditionsData]': break; // [conditionsData] input already handled by generateHtml()
+        case '[data]': {  // Transform the [data] input into a for loop on the child <div>
+          // strong assumption: data has to be an array (even though uib-zone can take non-array data)
+          innerHtml = innerHtml.replace("<div", `<div *ngFor="let ${dataName} of ${value}"`);
+          break;
+        }
+        case '(itemClicked)': { // Transform the (itemClicked) event on the zone into a (click) event on the child <div>
+          let action = zone.attribs['(itemClicked)']; // eg. onDocumentClicked($event.data, $event.event)
+          action = action.replace(/\$event\.data/, dataName);
+          action = action.replace(/\$event\.event/, "$event");
+          innerHtml = innerHtml.replace("<div", `<div (click)="${action}"`);
+          break;
+        }
+        default: attrs.push(`${attr}="${value}"`); break; // All other attributes are kept as is (incl. "id", "class", "*ngIf"...)
+      }
     }
 
-    if(zone.attribs['(itemClicked)']){
-      let action = zone.attribs['(itemClicked)']; // eg. onDocumentClicked($event.data, $event.event)
-      action = action.replace(/\$event\.data/, dataName);
-      action = action.replace(/\$event\.event/, "$event");
-      innerHtml = innerHtml.replace("<div", `<div (click)="${action}"`);
-    }
-
-    zone.$html = `<div ${attr}>\r\n${innerHtml}\r\n</div>`;
+    zone.$html = `<div ${attrs.join(' ')}>\r\n${innerHtml}\r\n</div>`;
 
     modifications.push(`Made uib-zone '${id}' static`);
   }
@@ -106,7 +109,7 @@ function processTemplate(dom: HTMLElement[], config: ComponentConfig[]): HtmlMod
 
   return {staticHtml, modifications};
 }
-  
+
 // Find uib-zone elements within the template
 function getZones(dom: HTMLElement[]): HTMLElement[] {
   let zones: HTMLElement[] = [];
@@ -121,7 +124,7 @@ function getZones(dom: HTMLElement[]): HTMLElement[] {
   }
   return zones;
 }
-  
+
 // Generate the HTML of a UI Builder component, based on its configuration and templates
 function generateHtml(conf: ComponentConfig, templates: HTMLElement[], config: ComponentConfig[], dataName: string, conditionsDataName?: string): string {
   // Generate attributes
@@ -192,7 +195,7 @@ function getInnerHtml(elements?: HTMLElement[], config?: ComponentConfig): strin
         case 'comment': text += `<!--${el.raw}-->`; break;
         case 'tag': {
           text += `<${attribs}>${getInnerHtml(el.children, config)}`;
-          if(!['input','img'].includes(el.name.toLowerCase())) {
+          if(!['input','img','hr'].includes(el.name.toLowerCase())) {
             text += `</${el.name}>`;
           }
           break;
@@ -202,7 +205,7 @@ function getInnerHtml(elements?: HTMLElement[], config?: ComponentConfig): strin
   }
   return text;
 }
-  
+
 function removeElements(dom: HTMLElement[], elements: string[], modifications: string[]) {
   dom.forEach(el => {
     if(el.children)
