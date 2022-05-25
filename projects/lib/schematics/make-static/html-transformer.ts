@@ -24,6 +24,7 @@ declare interface HTMLElement {
 export interface HtmlModifications {
   staticHtml: string;
   modifications: string[];
+  componentTypes: string[];
 }
 
 
@@ -44,6 +45,7 @@ export async function makeStaticHtml(html: string, config: ComponentConfig[]): P
 
 function processTemplate(dom: HTMLElement[], config: ComponentConfig[]): HtmlModifications {
   const modifications: string[] = [];
+  const componentTypes: string[] = [];
 
   const zones = getZones(dom);
   for(let zone of zones) {
@@ -74,7 +76,7 @@ function processTemplate(dom: HTMLElement[], config: ComponentConfig[]): HtmlMod
       }
     }
 
-    let innerHtml = generateHtml(conf, templates, config, dataName, zone.attribs['[conditionsData]']);
+    let innerHtml = generateHtml(conf, templates, config, dataName, zone.attribs['[conditionsData]'], componentTypes);
 
     const attrs = [] as string[];
     // Manage special attributes of the uib-zone component
@@ -107,7 +109,7 @@ function processTemplate(dom: HTMLElement[], config: ComponentConfig[]): HtmlMod
 
   const staticHtml = modifications.length > 0? prettify(getInnerHtml(dom)) : '';
 
-  return {staticHtml, modifications};
+  return {staticHtml, modifications, componentTypes};
 }
 
 // Find uib-zone elements within the template
@@ -126,7 +128,7 @@ function getZones(dom: HTMLElement[]): HTMLElement[] {
 }
 
 // Generate the HTML of a UI Builder component, based on its configuration and templates
-function generateHtml(conf: ComponentConfig, templates: HTMLElement[], config: ComponentConfig[], dataName: string, conditionsDataName?: string): string {
+function generateHtml(conf: ComponentConfig, templates: HTMLElement[], config: ComponentConfig[], dataName: string, conditionsDataName: string | undefined, componentTypes: string[]): string {
   // Generate attributes
   let classes = conf.classes || '';
   if(conf.type === '_container') {
@@ -143,13 +145,14 @@ function generateHtml(conf: ComponentConfig, templates: HTMLElement[], config: C
     innerHtml = (conf.items as string[])
       .map(c => config.find(cc => cc.id === c))       // For each item, map its config
       .filter(c => c)                                 // Keep the configs that exist
-      .map(c => generateHtml(c!, templates, config, dataName, conditionsDataName))  // Generate the HTML for this item
+      .map(c => generateHtml(c!, templates, config, dataName, conditionsDataName, componentTypes))  // Generate the HTML for this item
       .join('\r\n');                                  // Join the resulting HTML
   }
   else if(conf.type === '_raw-html') {
     innerHtml = `<div>\r\n${sanitizeHtml(conf.rawHtml || '')}\r\n</div>`;
   }
   else {
+    componentTypes.push(conf.type);
     const template = templates.find(t => t.attribs?.['uib-template'] === conf.type);
     if(template) {
       innerHtml = getInnerHtml(template.children, conf);
