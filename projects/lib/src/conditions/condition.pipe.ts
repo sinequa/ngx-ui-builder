@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from "@angular/core";
-import { Condition, ConditionsService } from "../configuration/conditions.service";
+import { Condition, ConditionsService } from "./conditions.service";
 
 @Pipe({
   name: 'uibCondition'

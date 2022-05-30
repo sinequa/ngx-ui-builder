@@ -14,7 +14,7 @@ import {
 import { stateHistory } from '@ngneat/elf-state-history';
 import { Observable } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
-import { Condition } from './conditions.service';
+import { Condition } from '../conditions/conditions.service';
 
 export interface ComponentConfig {
   readonly id: string;
@@ -33,7 +33,7 @@ export interface ContainerConfig extends ComponentConfig {
 export class ConfigService {
   store: Store;
   historyState: any;
-  
+
   init(initialValue: ComponentConfig[]) {
     const { state, config } = createState(
       withEntities<ComponentConfig>({ initialValue })

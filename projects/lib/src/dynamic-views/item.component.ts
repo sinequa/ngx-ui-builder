@@ -12,7 +12,7 @@ import {
 } from '@angular/core';
 import { DndDropEvent } from 'ngx-drag-drop';
 import { Subscription } from 'rxjs';
-import { ConditionsService } from '../configuration';
+import { ConditionsService } from '../conditions/conditions.service';
 import { ComponentConfig, ConfigService } from '../configuration/config.service';
 import { TemplateNameDirective } from '../utils';
 import { DragDropService } from './drag-drop.service';
@@ -31,9 +31,9 @@ export class ItemComponent implements OnInit, OnChanges, OnDestroy {
   @Input() conditionsData?: Record<string,any>;
 
   @Input() templates: Record<string, TemplateNameDirective>;
-  
+
   @Input() configurable: boolean = true;
-  
+
   @HostBinding('class')
   classes?: string;
 
@@ -62,7 +62,7 @@ export class ItemComponent implements OnInit, OnChanges, OnDestroy {
   ngOnInit() {
     const configChanges$ = this.configService.watchConfig(this.id).subscribe((config) => this.updateConfig(config));
     const allConfigChanges$ = this.configService.watchAllConfig().subscribe(() => this.cdr.markForCheck())
-    
+
     this.subs.push(configChanges$, allConfigChanges$)
     this.updateConfig(this.configService.getConfig(this.id));
   }
