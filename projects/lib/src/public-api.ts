@@ -8,5 +8,6 @@ import '@angular/localize/init';
 export * from './configurable';
 export * from './configuration';
 export * from './configurator';
+export * from './conditions';
 export * from './dynamic-views';
 export * from './utils';

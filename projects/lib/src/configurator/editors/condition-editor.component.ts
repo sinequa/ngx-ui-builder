@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input, OnChanges } from "@angular/core";
-import { Condition, ConditionsService, ConditionValue } from "../../configuration";
+import { Condition, ConditionsService, ConditionValue } from "../../conditions/conditions.service";
 import { ConfiguratorContext } from "../configurator.models";
 
 @Component({
@@ -111,12 +111,12 @@ export class ConditionEditorComponent implements OnChanges {
     this.context.config.condition!.field = field;
     this.updateConfig();
   }
-  
+
   selectValue(value: string, condition: ConditionValue) {
     condition.value = value;
     this.updateConfig();
   }
-  
+
   // This item instance might change, so we track by index
   trackByFn(index, item) {
     return index;

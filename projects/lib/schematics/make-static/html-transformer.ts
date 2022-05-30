@@ -105,7 +105,7 @@ function processTemplate(dom: HTMLElement[], config: ComponentConfig[]): HtmlMod
   }
 
   // Remove configurator and toolbar if found
-  dom = removeElements(dom, ['uib-toolbar', 'uib-configurator'], modifications);
+  dom = removeElements(dom, ['uib-toolbar', 'uib-configurator', 'uib-toast'], modifications);
 
   const staticHtml = modifications.length > 0? prettify(getInnerHtml(dom)) : '';
 
