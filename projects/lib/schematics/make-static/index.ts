@@ -19,7 +19,7 @@ export function makeStatic(options: MakeStaticOptions): Rule {
     if (!options.project && typeof workspace.extensions.defaultProject === 'string') {
       options.project = workspace.extensions.defaultProject;
     }
-    
+
     const project = (options.project != null) ? workspace.projects.get(options.project) : null;
     if (!project) {
       throw new SchematicsException(`Invalid project name: ${options.project}`);
@@ -28,7 +28,7 @@ export function makeStatic(options: MakeStaticOptions): Rule {
     if(project.extensions.projectType !== 'application') {
       throw new SchematicsException("The make-static schematic must be applied to an application.");
     }
-    
+
     // Reading config file
     const configStr = await host.readFile(options.config);
     const config = JSON.parse(configStr);
@@ -44,12 +44,15 @@ export function makeStatic(options: MakeStaticOptions): Rule {
     if(htmlTemplates.length === 0) {
       console.warn(`No HTML template could be found under ${src}`);
     }
-    
+
+    const usedComponentTypes: string[] = [];
+
     // Transforming the templates one by one
     for(let path of htmlTemplates) {
       console.log(`Found HTML template ${path}`);
       const html = await host.readFile(path);
-      const {staticHtml, modifications} = await makeStaticHtml(html, config);
+      const {staticHtml, modifications, componentTypes} = await makeStaticHtml(html, config);
+      usedComponentTypes.push(...componentTypes);
       if(modifications.length > 0) {
         modifications.forEach(m => console.log(`=> ${m}`));
         if(options.override) {
@@ -65,7 +68,7 @@ export function makeStatic(options: MakeStaticOptions): Rule {
           }
           if(options.updateTemplateUrls) {
             const tsPath = `${path.substring(0, path.length-5)}.ts` // Try to find the controller
-            console.log("Attempting to replace templateUrl in the component ", tsPath);
+            console.log("Attempting to replace templateUrl in the component", tsPath);
             if(tree.exists(tsPath)) {
               await replaceTemplateUrl(host, tsPath); // Replace the templateUrl to point to the static html file
             }
@@ -77,6 +80,25 @@ export function makeStatic(options: MakeStaticOptions): Rule {
       }
     }
 
+    if(options.appModuleDependencies) {
+      // Reading dependencies file
+      const depsStr = await host.readFile(options.appModuleDependencies);
+      const deps = JSON.parse(depsStr);
+
+      if(!deps || typeof deps !== 'object' || Array.isArray(deps)) {
+        throw new SchematicsException("Expected a JSON file mapping module names to component types (eg. {\"PokemonModule\": [\"pokemon-image\",\"pokemon-name\"]})");
+      }
+
+      const appModulePath = normalize(`${project.sourceRoot}/app/app.module.ts`);
+      if(tree.exists(appModulePath)) {
+        console.log("Removing unused dependencies from app.module.ts:", appModulePath);
+        await optimizeAppModule(host, appModulePath, deps, usedComponentTypes);
+      }
+      else {
+        console.warn("Could not find an app.module.ts file in the project:", appModulePath);
+      }
+    }
+
     // Commenting the ngx-ui-builder stylesheet import, if it can be found
     if(options.commentScssImport) {
       const scssPath = normalize(`${project.sourceRoot}/styles/app.scss`);
@@ -85,7 +107,7 @@ export function makeStatic(options: MakeStaticOptions): Rule {
         await commmentScssImport(host, scssPath);
       }
       else {
-        console.warn("Could not find a stylesheet in the project: ", scssPath);
+        console.warn("Could not find a stylesheet in the project:", scssPath);
       }
     }
   }
@@ -141,19 +163,59 @@ async function commmentScssImport(host: workspaces.WorkspaceHost, scssPath: stri
   }
 }
 
-function replacePatternUnlessDone(lines: string[], pattern: RegExp, foundGroup: number, replacement: string): 'not-found'|'found'|'replaced' {
+async function optimizeAppModule(host: workspaces.WorkspaceHost, appModulePath: string, deps: {[moduleName: string]: string[]}, usedComponentTypes: string[]) {
+  const appModule = await host.readFile(appModulePath);
+  const lines = appModule.split('\n');
+
+  let replacement = false;
+  Object.keys(deps).forEach(moduleName => {
+    const types = deps[moduleName];
+    if(!types || !Array.isArray(types)) {
+      console.error(`Expected a list of component type names for ${moduleName}: ${types}`);
+      return;
+    }
+
+    const isModuleUsed = !!types.find(type => usedComponentTypes.includes(type));
+    if(!isModuleUsed) {
+      console.log("Removing unused module:", moduleName);
+      const importPattern = new RegExp(`(\\/\\/\\s?)?(.*\\b${moduleName}\\b.*)`);
+      const res = replacePatternUnlessDone(lines, importPattern, 1, '// $2', false);
+      switch(res){
+        case 'replaced':
+          replacement = true;
+          console.log("=> Commented import successfully");
+          break;
+        case 'not-found':
+          console.warn("=> Could not find the import");
+          break;
+        case 'found':
+          console.log("=> The module is already commented out");
+          break;
+      }
+    }
+
+  });
+
+  if(replacement) {
+    host.writeFile(appModulePath, lines.join('\n'));
+  }
+}
+
+function replacePatternUnlessDone(lines: string[], pattern: RegExp, foundGroup: number, replacement: string, firstOnly = true): 'not-found'|'found'|'replaced' {
   let state: 'not-found'|'found'|'replaced' = 'not-found';
   for(let i=0; i<lines.length; i++) {
     const match = lines[i].match(pattern);
     if(match) {
-      if(match[foundGroup]) {
+      if(match[foundGroup] && state !== 'replaced') {
         state = 'found'
       }
       else {
         lines[i] = lines[i].replace(pattern, replacement);
         state = 'replaced';
       }
-      break;
+      if(firstOnly) {
+        break;
+      }
     }
   }
   return state;

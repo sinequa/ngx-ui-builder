@@ -8,10 +8,10 @@ export type TooltipPlacement = 'auto' | 'top' | 'bottom' | 'left' | 'right';
 })
 export class TooltipDirective implements OnChanges, OnDestroy {
   @Input('uib-tooltip') html: string;
-  
+
   /**
    * Allow Bootstrap tooltip's options configuration
-   * 
+   *
    * * `title`, `placement` and `container` options are removed from Bootstrap options as they use their own inputs.
    * * `html`, `sanitize`, `delay` and `trigger` options are sets with different values as well by default but can
    * be overriden here.
@@ -22,19 +22,19 @@ export class TooltipDirective implements OnChanges, OnDestroy {
     delay: { show: 300, hide: 0 },
     trigger: 'hover'
   };
-  
+
   /**
    * How to position the tooltip.
    */
   @Input() placement: TooltipPlacement = "auto";
-  
+
   /**
    * Append the tooltip to a specific element.
-   * 
-   * By default, tooltip is append to `uib-toolbar` component.
+   *
+   * By default, tooltip is append to `uib-bootstrap` component.
    * When `undefined`, tooltip is append to his host element.
    */
-  @Input() container?: string | Element;
+  @Input() container?: string | Element = ".uib-bootstrap";
 
   tooltip?: Tooltip;
 

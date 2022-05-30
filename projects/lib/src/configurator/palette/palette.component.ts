@@ -42,7 +42,7 @@ export const defaultPaletteOptions: PaletteOptions = {
   padding: 0.25rem 0.5rem;
   border-radius: 3px;
   background: rgb(0,0,0,0.1);
-  cursor: pointer;
+  cursor: grab;
   margin-right: 5px;
   margin-bottom: 5px;
 }
@@ -61,7 +61,7 @@ export const defaultPaletteOptions: PaletteOptions = {
 })
 export class PaletteComponent implements OnInit, OnChanges {
   @Input() context: Configurable;
-  @Input() configurators: Record<string,TemplateNameDirective> = {}; 
+  @Input() configurators: Record<string,TemplateNameDirective> = {};
   @Input() options = defaultPaletteOptions;
 
   standardPalette: PaletteItem[];
@@ -127,7 +127,7 @@ export class PaletteComponent implements OnInit, OnChanges {
     }
   }
 
-  generateExistingPalette(configs: ComponentConfig[]) {    
+  generateExistingPalette(configs: ComponentConfig[]) {
     if(!this.options.showExistingPalette) {
       this.existingPalette = [];
       return;
