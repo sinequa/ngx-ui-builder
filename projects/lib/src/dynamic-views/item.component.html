@@ -18,8 +18,6 @@
 
   [configurable]="false"
 
-  [attr.data-type]="child(item).type"
-
   [data]="data"
   [dataIndex]="dataIndex"
   [conditionsData]="conditionsData"
@@ -48,8 +46,6 @@
       [zone]="zone"
       [configurable]="true"
 
-      [attr.data-type]="child(item).type"
-      attr.data-name="{{ item }} - {{ zone}} - {{ child(item).type }}"
       [ngClass]="{'dropzone-content': isContainer(item)}"
 
       [uib-tooltip]="isContainer(item) ? '' : item"

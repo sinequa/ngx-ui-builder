@@ -16,15 +16,6 @@
   /* misc */
   transition: margin ease-in 0.3s, padding ease-in 0.3s;
 
-  /* debug only */
-  // &::before {
-  //   content: attr(data-zone);
-  //   position: absolute;
-  //   top: -6px;
-  //   left: 0;
-  // }
-
-
   &:not([selected]) {
     outline: 1px dashed lightsteelblue;
   }

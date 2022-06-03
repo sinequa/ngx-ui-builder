@@ -28,14 +28,6 @@ uib-toolbar {
 .dropzone-content {
   position: relative;
 	padding: 15px;
-
-  /* debug only */
-  // &::before {
-  //   content: attr(data-name);
-  //   position: absolute;
-  //   top: -6px;
-  //   left: 0;
-  // }
 }
 
 .dragPlaceholder {

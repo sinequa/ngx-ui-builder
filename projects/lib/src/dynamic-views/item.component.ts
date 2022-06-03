@@ -117,8 +117,4 @@ export class ItemComponent implements OnInit, OnChanges, OnDestroy {
     }
     return false;
   }
-
-  child(item: string) {
-    return this.configService.getConfig(item);
-  }
 }
