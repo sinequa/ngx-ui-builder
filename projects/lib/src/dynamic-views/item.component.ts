@@ -76,7 +76,10 @@ export class ItemComponent implements OnInit, OnChanges, OnDestroy {
     this.config = config;
     if (config.type === '_container') {
       this.el.nativeElement.style.display = 'flex';
-      this.el.nativeElement.classList.add('uib-dropzone-content');
+
+      if (this.configurable) {
+        this.el.nativeElement.classList.add('uib-dropzone-content');
+      }
     }
     this.classes = this.config.classes;
     this.isHorizontal = this.horizontal();
