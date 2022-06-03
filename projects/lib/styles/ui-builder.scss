@@ -26,11 +26,6 @@ uib-toolbar {
   min-height: 32px;
 }
 
-.uib-dropzone-content {
-  position: relative;
-	padding: 15px;
-}
-
 .dragPlaceholder {
   @include white-stripes;
   outline: 2px dashed orange;
