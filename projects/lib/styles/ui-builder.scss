@@ -18,14 +18,15 @@ uib-toolbar {
 /* zone's styles */
 @import "_zone";
 
-.dropzone {
+.uib-dropzone {
+  display: flex;
   flex-grow: 1;
 
   min-width: 32px;
   min-height: 32px;
 }
 
-.dropzone-content {
+.uib-dropzone-content {
   position: relative;
 	padding: 15px;
 }

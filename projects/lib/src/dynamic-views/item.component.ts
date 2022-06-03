@@ -18,7 +18,7 @@ import { TemplateNameDirective } from '../utils';
 import { ContainerIndex, DragDropService } from './drag-drop.service';
 
 @Component({
-  selector: 'uib-item, [uib-item]',
+  selector: '[uib-item]',
   templateUrl: './item.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrls: ['item.component.scss']
@@ -43,6 +43,8 @@ export class ItemComponent implements OnInit, OnChanges, OnDestroy {
   subs: Subscription[] = [];
 
   _data: any;
+
+  isHorizontal: boolean = false;
 
   constructor(
     public configService: ConfigService,
@@ -74,8 +76,10 @@ export class ItemComponent implements OnInit, OnChanges, OnDestroy {
     this.config = config;
     if (config.type === '_container') {
       this.el.nativeElement.style.display = 'flex';
+      this.el.nativeElement.classList.add('uib-dropzone-content');
     }
     this.classes = this.config.classes;
+    this.isHorizontal = this.horizontal();
     this.updateCondition();
   }
 
@@ -104,15 +108,11 @@ export class ItemComponent implements OnInit, OnChanges, OnDestroy {
     this.dragDropService.handleCancel(index, this.id);
   }
 
-  isContainer(id: string) {
-    return this.configService.isContainer(id);
-  }
-
-  isHorizontal() {
+  private horizontal(): boolean {
     if(this.config.classes?.includes('flex-column')) {
       return false;
     }
-    if (this.config.classes?.includes('d-flex') || this.el.nativeElement.style.display === "flex") {
+    if (this.config.classes?.includes('d-flex') || this.config.classes?.includes('uib-dropzone') || this.el.nativeElement.style.display === "flex") {
       return true;
     }
     return false;

@@ -14,7 +14,6 @@ import {
 import { TemplateNameDirective } from '../utils/template-name.directive';
 import { ConfigService } from '../configuration/config.service';
 import { Subscription } from 'rxjs';
-import { DragDropService } from './drag-drop.service';
 import { ConfigurableService } from '../configurable';
 
 @Component({
@@ -40,7 +39,6 @@ export class ZoneComponent implements AfterContentInit, OnInit, OnDestroy {
   constructor(
     public configService: ConfigService,
     public configurableService: ConfigurableService,
-    public dragDropService: DragDropService,
     public cdr: ChangeDetectorRef
   ) {}
 
@@ -62,10 +60,6 @@ export class ZoneComponent implements AfterContentInit, OnInit, OnDestroy {
 
   get isArray(): boolean {
     return Array.isArray(this.data);
-  }
-
-  get config() {
-    return this.configService.getConfig(this.id);
   }
 
   onItemClicked(event: Event, data?: any, index?: number) {

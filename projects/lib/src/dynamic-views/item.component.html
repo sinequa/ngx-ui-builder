@@ -28,12 +28,10 @@
 <ng-container *ngIf="config.type === '_container' && configurable">
   <div
     [ngClass]="config.classes"
-    class="dropzone"
-
-    style="display: flex;"
+    class="uib-dropzone"
 
     [dndDropzone]="[zone]"
-    [dndHorizontal]="isHorizontal()"
+    [dndHorizontal]="isHorizontal"
     (dndDrop)="onDndDrop($event)"
     >
 
@@ -46,9 +44,7 @@
       [zone]="zone"
       [configurable]="true"
 
-      [ngClass]="{'dropzone-content': isContainer(item)}"
-
-      [uib-tooltip]="isContainer(item) ? '' : item"
+      [uib-tooltip]="item"
       uib-configurable
 
       [parentId]="config.id"
