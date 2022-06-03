@@ -11,7 +11,6 @@ import {
   Output,
   EventEmitter,
 } from '@angular/core';
-import { DndDropEvent } from 'ngx-drag-drop';
 import { TemplateNameDirective } from '../utils/template-name.directive';
 import { ConfigService } from '../configuration/config.service';
 import { Subscription } from 'rxjs';
@@ -21,7 +20,7 @@ import { ConfigurableService } from '../configurable';
 @Component({
   selector: 'uib-zone',
   templateUrl: './zone.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ZoneComponent implements AfterContentInit, OnInit, OnDestroy {
   @ContentChildren(TemplateNameDirective)
@@ -35,7 +34,7 @@ export class ZoneComponent implements AfterContentInit, OnInit, OnDestroy {
   @Output() itemClicked = new EventEmitter<{data: any, index?: number, event: Event}>();
 
   sub: Subscription;
-  
+
   enabled$ = this.configurableService.editorEnabled$;
 
   constructor(
@@ -65,15 +64,8 @@ export class ZoneComponent implements AfterContentInit, OnInit, OnDestroy {
     return Array.isArray(this.data);
   }
 
-  onDndDrop(event: DndDropEvent) {
-    console.log('dropped', event);
-    if(typeof event.index === 'number') {
-      this.dragDropService.handleDrop(
-        this.id,
-        event.index,
-        event.data
-      );
-    }
+  get config() {
+    return this.configService.getConfig(this.id);
   }
 
   onItemClicked(event: Event, data?: any, index?: number) {

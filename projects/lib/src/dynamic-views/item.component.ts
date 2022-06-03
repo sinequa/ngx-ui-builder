@@ -15,10 +15,10 @@ import { Subscription } from 'rxjs';
 import { ConditionsService } from '../conditions/conditions.service';
 import { ComponentConfig, ConfigService } from '../configuration/config.service';
 import { TemplateNameDirective } from '../utils';
-import { DragDropService } from './drag-drop.service';
+import { ContainerIndex, DragDropService } from './drag-drop.service';
 
 @Component({
-  selector: '[uib-item]',
+  selector: 'uib-item, [uib-item]',
   templateUrl: './item.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrls: ['item.component.scss']
@@ -64,7 +64,6 @@ export class ItemComponent implements OnInit, OnChanges, OnDestroy {
     const allConfigChanges$ = this.configService.watchAllConfig().subscribe(() => this.cdr.markForCheck())
 
     this.subs.push(configChanges$, allConfigChanges$)
-    this.updateConfig(this.configService.getConfig(this.id));
   }
 
   ngOnDestroy() {
@@ -73,10 +72,10 @@ export class ItemComponent implements OnInit, OnChanges, OnDestroy {
 
   updateConfig(config: ComponentConfig) {
     this.config = config;
-    this.classes = this.config.classes;
-    if(this.configService.isContainerConfig(config)) {
-      this.classes = (this.classes || '') + ' uib-container';
+    if (config.type === '_container') {
+      this.el.nativeElement.style.display = 'flex';
     }
+    this.classes = this.config.classes;
     this.updateCondition();
   }
 
@@ -90,10 +89,13 @@ export class ItemComponent implements OnInit, OnChanges, OnDestroy {
 
   // Drag & Drop
 
-  onDndDrop(item: string, event: DndDropEvent) {
-    console.log('dropped', event);
+  onDndDrop(event: DndDropEvent) {
+    const dropped: string | ContainerIndex = (typeof event.data === 'string')
+      ? event.data
+      : { container: event.data.container, index: event.data.index }
+
     if(typeof event.index === 'number') {
-      this.dragDropService.handleDrop(item, event.index, event.data);
+      this.dragDropService.handleDrop(this.id, event.index, dropped);
     }
   }
 
@@ -107,9 +109,16 @@ export class ItemComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   isHorizontal() {
-    if(this.el.nativeElement.classList.contains('d-flex')) {
-      return !this.el.nativeElement.classList.contains('flex-column');
+    if(this.config.classes?.includes('flex-column')) {
+      return false;
+    }
+    if (this.config.classes?.includes('d-flex') || this.el.nativeElement.style.display === "flex") {
+      return true;
     }
     return false;
+  }
+
+  child(item: string) {
+    return this.configService.getConfig(item);
   }
 }

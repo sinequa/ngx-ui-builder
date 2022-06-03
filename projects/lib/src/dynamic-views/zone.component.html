@@ -1,51 +1,50 @@
 <ng-container
-  *ngTemplateOutlet="isArray ? array : single; context: { $implicit: data, first: 'true' }"
+*ngTemplateOutlet="isArray ? arrayTpl : zoneTpl; context: { $implicit: data, first: 'true' }"
 ></ng-container>
 
 <!-- data is an array -->
-<ng-template #array let-data>
-  <ng-container *ngFor="let d of data; let index = index; let first = first" 
-    [ngTemplateOutlet]="single"
+<ng-template #arrayTpl let-data>
+  <ng-container *ngFor="let d of data; let index = index; let first = first"
+    [ngTemplateOutlet]="zoneTpl"
     [ngTemplateOutletContext]="{ $implicit: data, index, first }">
   </ng-container>
 </ng-template>
 
 <!-- data is a single object -->
-<ng-template #single let-data let-index="index" let-first="first">
-  <div *ngIf="!first || (enabled$ | async) === false"
-    [uib-item]="id"
-    [id]="id"
-    [configurable]="false"
+<ng-template #zoneTpl let-data let-index="index" let-first="first">
 
-    [templates]="templates"
-    
-    [data]="data"
-    [dataIndex]="index"
-    [conditionsData]="conditionsData"
-    
-    (click)="onItemClicked($event, data, index)"
-  ></div>
-  <div #ref *ngIf="first && (enabled$ | async)"
-  
-    class="uib-zone"
+    <!-- en mode editeur -->
+    <uib-item *ngIf="first && (enabled$ | async)" class="uib-zone"
+      [uib-item]="id"
+      [id]="id"
+      [zone]="id"
+      [templates]="templates"
+      [configurable]="true"
 
-    uib-configurable
-    [uib-disable-if]="index"
+      uib-configurable
 
-    [uib-item]="id"
-    [id]="id"
-    [zone]="id"
-    [templates]="templates"
+      [data]="data"
+      [dataIndex]="index"
+      [conditionsData]="conditionsData"
 
-    [data]="data"
-    [dataIndex]="index"
-    [conditionsData]="conditionsData"
+      [attr.data-zone]="id"
+      >
+    </uib-item>
 
-    [dndDropzone]="[id]"
-    [dndHorizontal]="ref.isHorizontal()"
-    [dndDisableDropIf]="index"
-    (dndDrop)="onDndDrop($event)"
+    <!-- en mode normal -->
+    <uib-item *ngIf="!first || (enabled$ | async) === false"
+      [uib-item]="id"
+      [id]="id"
+      [templates]="templates"
+      [configurable]="false"
 
-    (click)="onItemClicked($event, data, index)"
-  ></div>
+      [ngClass]="config.classes"
+
+
+      [data]="data"
+      [dataIndex]="index"
+      [conditionsData]="conditionsData"
+
+      (click)="onItemClicked($event, data, index)">
+    </uib-item>
 </ng-template>
