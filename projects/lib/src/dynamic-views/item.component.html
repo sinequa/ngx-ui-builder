@@ -1,54 +1,3 @@
-<ng-container *ngIf="config.type === '_container'">
-  <div *ngIf="configurable" class="dragPlaceholder" dndPlaceholderRef>+</div>
-
-  <ng-container *ngIf="condition">
-    <ng-container *ngIf="!configurable">
-      <div #ref *ngFor="let item of config.items; let i = index"
-
-      [uib-item]="item"
-      [id]="item"
-      [templates]="templates"
-      [configurable]="configurable"
-
-      [data]="data"
-      [dataIndex]="dataIndex"
-      [conditionsData]="conditionsData"
-      ></div>    
-    </ng-container>
-
-    <ng-container *ngIf="configurable">
-      <div #ref *ngFor="let item of config.items; let i = index"
-          [uib-tooltip]="!isContainer(item) ? item : ''"
-
-          uib-configurable
-          [parentId]="config.id"
-          [uib-disable-if]="dataIndex"
-
-          [uib-item]="item"
-          [id]="item"
-          [zone]="zone"
-          [templates]="templates"
-          [configurable]="configurable"
-
-          [data]="data"
-          [dataIndex]="dataIndex"
-          [conditionsData]="conditionsData"
-    
-          [dndDraggable]="{item, index: i, container: id}"
-          [dndDisableIf]="dataIndex"
-          [dndType]="zone"
-          [dndDropzone]="[zone]"
-          [dndHorizontal]="ref.isHorizontal()"
-          [dndDisableDropIf]="!isContainer(item) || dataIndex"
-          (dndDrop)="onDndDrop(item, $event)"
-          (dndCanceled)="onDndCanceled(item, i)"
-        ></div>
-    </ng-container>
-
-  </ng-container>
-
-</ng-container>
-
 <div
   *ngIf="config.type === '_raw-html' && condition"
   [innerHTML]="config.rawHtml">
@@ -59,3 +8,57 @@
   [ngTemplateOutlet]="templates[config.type || id]?.template"
   [ngTemplateOutletContext]="{ $implicit: config, data: _data, id: id }"
 ></ng-container>
+
+<ng-container *ngIf="config.type === '_container' && !configurable">
+  <div *ngFor="let item of config.items; let index = index"
+  [uib-item]="item"
+  [id]="item"
+  [templates]="templates"
+  [zone]="zone"
+
+  [configurable]="false"
+
+  [data]="data"
+  [dataIndex]="dataIndex"
+  [conditionsData]="conditionsData"
+  ></div>
+</ng-container>
+
+<!-- mode editeur -->
+<ng-container *ngIf="config.type === '_container' && configurable">
+  <div
+    [ngClass]="config.classes"
+    class="uib-dropzone"
+
+    [dndDropzone]="[zone]"
+    [dndHorizontal]="isHorizontal"
+    (dndDrop)="onDndDrop($event)"
+    >
+
+    <div class="dragPlaceholder align-self-stretch" dndPlaceholderRef></div>
+
+    <div *ngFor="let item of config.items; let index = index"
+      [uib-item]="item"
+      [id]="item"
+      [templates]="templates"
+      [zone]="zone"
+      [configurable]="true"
+
+      [uib-tooltip]="item"
+      uib-configurable
+
+      [parentId]="config.id"
+      [uib-disable-if]="dataIndex"
+
+      [data]="data"
+      [dataIndex]="dataIndex"
+      [conditionsData]="conditionsData"
+
+      [dndDraggable]="{item, index, container: config.id}"
+      [dndType]="zone"
+      (dndCanceled)="onDndCanceled(item, index)"
+      ></div>
+
+  </div>
+
+</ng-container>

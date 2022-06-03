@@ -15,7 +15,7 @@ import { Subscription } from 'rxjs';
 import { ConditionsService } from '../conditions/conditions.service';
 import { ComponentConfig, ConfigService } from '../configuration/config.service';
 import { TemplateNameDirective } from '../utils';
-import { DragDropService } from './drag-drop.service';
+import { ContainerIndex, DragDropService } from './drag-drop.service';
 
 @Component({
   selector: '[uib-item]',
@@ -44,6 +44,8 @@ export class ItemComponent implements OnInit, OnChanges, OnDestroy {
 
   _data: any;
 
+  isHorizontal: boolean = false;
+
   constructor(
     public configService: ConfigService,
     public conditionsService: ConditionsService,
@@ -64,7 +66,6 @@ export class ItemComponent implements OnInit, OnChanges, OnDestroy {
     const allConfigChanges$ = this.configService.watchAllConfig().subscribe(() => this.cdr.markForCheck())
 
     this.subs.push(configChanges$, allConfigChanges$)
-    this.updateConfig(this.configService.getConfig(this.id));
   }
 
   ngOnDestroy() {
@@ -73,10 +74,15 @@ export class ItemComponent implements OnInit, OnChanges, OnDestroy {
 
   updateConfig(config: ComponentConfig) {
     this.config = config;
-    this.classes = this.config.classes;
-    if(this.configService.isContainerConfig(config)) {
-      this.classes = (this.classes || '') + ' uib-container';
+    if (config.type === '_container') {
+      this.el.nativeElement.style.display = 'flex';
+
+      if (this.configurable) {
+        this.el.nativeElement.classList.add('uib-dropzone-content');
+      }
     }
+    this.classes = this.config.classes;
+    this.isHorizontal = this.horizontal();
     this.updateCondition();
   }
 
@@ -90,10 +96,13 @@ export class ItemComponent implements OnInit, OnChanges, OnDestroy {
 
   // Drag & Drop
 
-  onDndDrop(item: string, event: DndDropEvent) {
-    console.log('dropped', event);
+  onDndDrop(event: DndDropEvent) {
+    const dropped: string | ContainerIndex = (typeof event.data === 'string')
+      ? event.data
+      : { container: event.data.container, index: event.data.index }
+
     if(typeof event.index === 'number') {
-      this.dragDropService.handleDrop(item, event.index, event.data);
+      this.dragDropService.handleDrop(this.id, event.index, dropped);
     }
   }
 
@@ -102,13 +111,12 @@ export class ItemComponent implements OnInit, OnChanges, OnDestroy {
     this.dragDropService.handleCancel(index, this.id);
   }
 
-  isContainer(id: string) {
-    return this.configService.isContainer(id);
-  }
-
-  isHorizontal() {
-    if(this.el.nativeElement.classList.contains('d-flex')) {
-      return !this.el.nativeElement.classList.contains('flex-column');
+  private horizontal(): boolean {
+    if(this.config.classes?.includes('flex-column')) {
+      return false;
+    }
+    if (this.config.classes?.includes('d-flex') || this.config.classes?.includes('uib-dropzone') || this.el.nativeElement.style.display === "flex") {
+      return true;
     }
     return false;
   }

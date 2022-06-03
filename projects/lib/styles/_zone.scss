@@ -1,19 +1,20 @@
 @import "_mixins";
-@import "_animations";
-
-/* selection behavior, choose one or both: '_hover' or '_selected' */
-// @import '_hover';
 @import "_selected";
 
 /* default zone styles */
-.uib-zone {  
+.uib-zone {
+  position: relative;
+
   /* box-model */
   min-width: 32px;
   min-height: 32px;
   margin: 4px;
-  
+
   /* visual */
   border-radius: 4px;
+
+  /* misc */
+  transition: margin ease-in 0.3s, padding ease-in 0.3s;
 
   &:not([selected]) {
     outline: 1px dashed lightsteelblue;
@@ -37,17 +38,12 @@
     @include edited;
   }
 
-  /* highlight styles */
+  /* highlight styles sync with tree */
   &.highlight,
-  .highlight {
-    outline: 2px solid red !important;
-    // box-shadow:inset 0 0 0 2px red;
-    
-    &:not(:hover) {
-      padding: 2px;
-      outline-offset: -2px;
-    }
-    
+  .uib-dropzone-content.highlight,
+  .highlight:not(.uib-dropzone-content) {
+    outline: 2px solid red;
+    z-index: 99;
   }
 }
 
@@ -55,7 +51,7 @@
 .uib-zone:hover {
   outline: 1px dashed lightsteelblue;
 
-  .uib-configurable {
+  [uib-configurable] {
     /* box-model */
     margin: var(--margin);
     padding: var(--padding);
@@ -63,15 +59,12 @@
     /* visual */
     border-radius: 2px;
 
-    /* misc */
-    transition: margin ease 0.3s, padding ease 0.3s;
-
-    &:not(.uib-container, .highlight, .dndDragging) {
+    &:not(.uib-container, .highlight, .dndDragging, .uib-dropzone-content) {
       outline: 1px dashed yellowgreen;
     }
-    
+
     /* Deactivate clicks within templates in edit mode */
-    & > *:not(.uib-configurable) {
+    & > *:not(.uib-dropzone) {
       pointer-events: none;
     }
   }
@@ -85,7 +78,21 @@
     min-height: 32px;
   }
 
-  .uib-container:not(.highlight, .dndDragging) {
+  .uib-dropzone-content {
     outline: 1px dashed steelblue;
   }
+
+  /* highlight styles */
+  &.highlight,
+  .uib-dropzone-content.highlight {
+    outline: 2px solid red;
+    z-index: 99;
+  }
+}
+
+/* while dragging remove outline and add a slight border */
+[uib-configurable].dndDragging {
+  background-color: lightgray;
+  outline: none !important;
+  border: 1px solid gray !important;
 }

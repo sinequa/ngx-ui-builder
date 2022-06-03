@@ -15,10 +15,30 @@ uib-toolbar {
   z-index: 1046; // just above the configurator
 }
 
-/* container is a flexbox */
-.uib-container {
-  display: flex;
-}
-
 /* zone's styles */
 @import "_zone";
+
+.uib-dropzone {
+  display: flex;
+  flex-grow: 1;
+
+  min-width: 32px;
+  min-height: 32px;
+}
+
+.uib-dropzone-content {
+  position: relative;
+	padding: 15px;
+}
+
+.dragPlaceholder {
+  @include white-stripes;
+  outline: 2px dashed orange;
+
+	flex-grow: 1;
+
+  min-height: 16px;
+  min-width: 16px;
+
+  z-index: 99;
+}
