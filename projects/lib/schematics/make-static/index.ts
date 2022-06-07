@@ -176,24 +176,22 @@ async function optimizeAppModule(host: workspaces.WorkspaceHost, appModulePath: 
     }
 
     const isModuleUsed = !!types.find(type => usedComponentTypes.includes(type));
-    if(!isModuleUsed) {
-      console.log("Removing unused module:", moduleName);
-      const importPattern = new RegExp(`(\\/\\/\\s?)?(.*\\b${moduleName}\\b.*)`);
-      const res = replacePatternUnlessDone(lines, importPattern, 1, '// $2', false);
-      switch(res){
-        case 'replaced':
-          replacement = true;
-          console.log("=> Commented import successfully");
-          break;
-        case 'not-found':
-          console.warn("=> Could not find the import");
-          break;
-        case 'found':
-          console.log("=> The module is already commented out");
-          break;
-      }
-    }
+    console.log(isModuleUsed? "Adding module" : "Removing unused module:", moduleName);
 
+    const importPattern = new RegExp(`(\\/\\/\\s?)?(.*\\b${moduleName}\\b.*)`);
+    const res = replacePatternUnlessDone(lines, importPattern, isModuleUsed? 3 : 1, isModuleUsed? '$2' : '// $2', false);
+    switch(res){
+      case 'replaced':
+        replacement = true;
+        console.log(`=> ${isModuleUsed? "Removed" : "Added"} comment successfully`);
+        break;
+      case 'not-found':
+        console.warn("=> Could not find the import");
+        break;
+      case 'found':
+        console.log(`=> The module is already ${isModuleUsed? 'active' : 'commented out'}`);
+        break;
+    }
   });
 
   if(replacement) {
@@ -206,8 +204,10 @@ function replacePatternUnlessDone(lines: string[], pattern: RegExp, foundGroup: 
   for(let i=0; i<lines.length; i++) {
     const match = lines[i].match(pattern);
     if(match) {
-      if(match[foundGroup] && state !== 'replaced') {
-        state = 'found'
+      if(match[foundGroup]) { // Do nothing if we already find a certain pattern
+        if(state !== 'replaced') {
+          state = 'found';
+        }
       }
       else {
         lines[i] = lines[i].replace(pattern, replacement);
