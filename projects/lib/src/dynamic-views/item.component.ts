@@ -73,6 +73,7 @@ export class ItemComponent implements OnInit, OnChanges, OnDestroy {
 
   updateConfig(config: ComponentConfig) {
     this.config = config;
+    this.updateCondition();
     this.classes = this.config.classes;
     if (config.type === '_container') {
       this.classes += ' uib-container';
@@ -80,8 +81,10 @@ export class ItemComponent implements OnInit, OnChanges, OnDestroy {
         this.classes += ' uib-dropzone-content';
       }
     }
+    if(!this.condition && !this.configurable) {
+      this.classes += ' d-none'; // hide component unless in edit mode
+    }
     this.isHorizontal = this.horizontal();
-    this.updateCondition();
   }
 
   updateData() {
