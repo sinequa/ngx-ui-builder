@@ -11,16 +11,14 @@
 
 <ng-container *ngIf="config.type === '_container' && !configurable">
   <div *ngFor="let item of config.items; let index = index"
-  [uib-item]="item"
-  [id]="item"
-  [templates]="templates"
-  [zone]="zone"
+    [uib-item]="item"
+    [templates]="templates"
 
-  [configurable]="false"
+    [configurable]="false"
 
-  [data]="data"
-  [dataIndex]="dataIndex"
-  [conditionsData]="conditionsData"
+    [data]="data"
+    [dataIndex]="dataIndex"
+    [conditionsData]="conditionsData"
   ></div>
 </ng-container>
 

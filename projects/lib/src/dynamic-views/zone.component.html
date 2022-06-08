@@ -26,15 +26,12 @@
     [data]="data"
     [dataIndex]="index"
     [conditionsData]="conditionsData"
-
-    [attr.data-zone]="id"
     >
   </div>
 
   <!-- en mode normal -->
   <div *ngIf="!first || (enabled$ | async) === false"
     [uib-item]="id"
-    [id]="id"
     [templates]="templates"
     [configurable]="false"
 

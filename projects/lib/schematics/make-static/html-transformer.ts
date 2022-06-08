@@ -131,10 +131,16 @@ function getZones(dom: HTMLElement[]): HTMLElement[] {
 function generateHtml(conf: ComponentConfig, templates: HTMLElement[], config: ComponentConfig[], dataName: string, conditionsDataName: string | undefined, componentTypes: string[]): string {
   // Generate attributes
   let classes = conf.classes || '';
+  let style = '';
   if(conf.type === '_container') {
-    classes += " d-flex"; // Necessary to replace the display: flex from the .uib-container class
+    // Necessary to replace the display: flex and min-width: 0 from the .uib-container class
+    classes += " d-flex";
+    style = 'min-width: 0;'
   }
   let attr = classes? ` class="${classes.trim()}"`: '';
+  if(style) {
+    attr += ` style="${style}"`;
+  }
   if(conf.condition) {
     attr += conditionToNgIf(conf.condition, dataName, conditionsDataName);
   }
