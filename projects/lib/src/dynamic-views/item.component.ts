@@ -20,8 +20,7 @@ import { ContainerIndex, DragDropService } from './drag-drop.service';
 @Component({
   selector: '[uib-item]',
   templateUrl: './item.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  styleUrls: ['item.component.scss']
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ItemComponent implements OnInit, OnChanges, OnDestroy {
   @Input('uib-item') id: string;
@@ -74,16 +73,18 @@ export class ItemComponent implements OnInit, OnChanges, OnDestroy {
 
   updateConfig(config: ComponentConfig) {
     this.config = config;
+    this.updateCondition();
+    this.classes = this.config.classes;
     if (config.type === '_container') {
-      this.el.nativeElement.style.display = 'flex';
-
+      this.classes += ' uib-container';
       if (this.configurable) {
-        this.el.nativeElement.classList.add('uib-dropzone-content');
+        this.classes += ' uib-dropzone-content';
       }
     }
-    this.classes = this.config.classes;
+    if(!this.condition && !this.configurable) {
+      this.classes += ' d-none'; // hide component unless in edit mode
+    }
     this.isHorizontal = this.horizontal();
-    this.updateCondition();
   }
 
   updateData() {

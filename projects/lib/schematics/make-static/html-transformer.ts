@@ -131,10 +131,16 @@ function getZones(dom: HTMLElement[]): HTMLElement[] {
 function generateHtml(conf: ComponentConfig, templates: HTMLElement[], config: ComponentConfig[], dataName: string, conditionsDataName: string | undefined, componentTypes: string[]): string {
   // Generate attributes
   let classes = conf.classes || '';
+  let style = '';
   if(conf.type === '_container') {
-    classes += " d-flex"; // Necessary to replace the display: flex from the .uib-container class
+    // Necessary to replace the display: flex and min-width: 0 from the .uib-container class
+    classes += " d-flex";
+    style = 'min-width: 0;'
   }
   let attr = classes? ` class="${classes.trim()}"`: '';
+  if(style) {
+    attr += ` style="${style}"`;
+  }
   if(conf.condition) {
     attr += conditionToNgIf(conf.condition, dataName, conditionsDataName);
   }
@@ -181,13 +187,13 @@ function getInnerHtml(elements?: HTMLElement[], config?: ComponentConfig): strin
       let attribs = el.raw;
       // If a config object is provided, we use it to rewrite the template where it contains references to that config
       if(config) {
-        [...attribs.matchAll(/\bconfig\.(\w+)\b/g)]
+        [...attribs.matchAll(/\bconfig\.([\w\.]+)\b/g)]
           .reverse() // Start from the end so that index positions remain valid during the rewrite
           .forEach(match => {
             const expr = match[0];
-            const prop = match[1];
+            const props = match[1].split('.');
             //console.log(expr, prop, config)
-            const value = JSON.stringify(config[prop])?.replace(/\"/g, "'");
+            const value = JSON.stringify(getConfigValue(config, props))?.replace(/\"/g, "'");
             if(match.index !== undefined) {
               attribs = attribs.substring(0,match.index) + value + attribs.substring(match.index+ expr.length);
             }
@@ -207,6 +213,14 @@ function getInnerHtml(elements?: HTMLElement[], config?: ComponentConfig): strin
     }
   }
   return text;
+}
+
+function getConfigValue(config: ComponentConfig, props: string[]): any {
+  let value = config;
+  for(let prop of props) {
+    value = value?.[prop];
+  }
+  return value;
 }
 
 function removeElements(dom: HTMLElement[], elements: string[], modifications: string[]) {

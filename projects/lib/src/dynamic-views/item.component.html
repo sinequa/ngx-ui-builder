@@ -9,23 +9,21 @@
   [ngTemplateOutletContext]="{ $implicit: config, data: _data, id: id }"
 ></ng-container>
 
-<ng-container *ngIf="config.type === '_container' && !configurable">
+<ng-container *ngIf="config.type === '_container' && condition && !configurable">
   <div *ngFor="let item of config.items; let index = index"
-  [uib-item]="item"
-  [id]="item"
-  [templates]="templates"
-  [zone]="zone"
+    [uib-item]="item"
+    [templates]="templates"
 
-  [configurable]="false"
+    [configurable]="false"
 
-  [data]="data"
-  [dataIndex]="dataIndex"
-  [conditionsData]="conditionsData"
+    [data]="data"
+    [dataIndex]="dataIndex"
+    [conditionsData]="conditionsData"
   ></div>
 </ng-container>
 
 <!-- mode editeur -->
-<ng-container *ngIf="config.type === '_container' && configurable">
+<ng-container *ngIf="config.type === '_container' && condition && configurable">
   <div
     [ngClass]="config.classes"
     class="uib-dropzone"

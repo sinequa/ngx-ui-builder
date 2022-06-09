@@ -18,6 +18,11 @@ uib-toolbar {
 /* zone's styles */
 @import "_zone";
 
+.uib-container {
+  display: flex;
+  min-width: 0; // Removes issues with container not fitting to content size: https://stackoverflow.com/questions/36247140/why-dont-flex-items-shrink-past-content-size
+}
+
 .uib-dropzone {
   display: flex;
   flex-grow: 1;
