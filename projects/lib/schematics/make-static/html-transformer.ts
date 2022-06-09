@@ -187,13 +187,13 @@ function getInnerHtml(elements?: HTMLElement[], config?: ComponentConfig): strin
       let attribs = el.raw;
       // If a config object is provided, we use it to rewrite the template where it contains references to that config
       if(config) {
-        [...attribs.matchAll(/\bconfig\.(\w+)\b/g)]
+        [...attribs.matchAll(/\bconfig\.([\w\.]+)\b/g)]
           .reverse() // Start from the end so that index positions remain valid during the rewrite
           .forEach(match => {
             const expr = match[0];
-            const prop = match[1];
+            const props = match[1].split('.');
             //console.log(expr, prop, config)
-            const value = JSON.stringify(config[prop])?.replace(/\"/g, "'");
+            const value = JSON.stringify(getConfigValue(config, props))?.replace(/\"/g, "'");
             if(match.index !== undefined) {
               attribs = attribs.substring(0,match.index) + value + attribs.substring(match.index+ expr.length);
             }
@@ -213,6 +213,14 @@ function getInnerHtml(elements?: HTMLElement[], config?: ComponentConfig): strin
     }
   }
   return text;
+}
+
+function getConfigValue(config: ComponentConfig, props: string[]): any {
+  let value = config;
+  for(let prop of props) {
+    value = value?.[prop];
+  }
+  return value;
 }
 
 function removeElements(dom: HTMLElement[], elements: string[], modifications: string[]) {
