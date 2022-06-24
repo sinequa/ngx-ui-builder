@@ -14,6 +14,9 @@ export interface MakeStaticOptions {
   // Path to a JSON file mapping a module's name to a list of component types (eg. {PokemonModule: ['pokemon-image', 'pokemon-name']})
   appModuleDependencies?: string;
 
+  // Detect when the configration contains images encoded as base64 strings and transform them as files in the assets folder
+  createBase64Images: boolean;
+
   // The name of the project.
   project?: string;
 }
