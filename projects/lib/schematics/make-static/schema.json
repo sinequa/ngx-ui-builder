@@ -29,6 +29,11 @@
       "type": "string",
       "format": "path"
     },
+    "createBase64Images": {
+      "description": "Detect when the configration contains images encoded as base64 strings and transform them as files in the assets folder",
+      "type": "boolean",
+      "default": true
+    },
     "project": {
       "type": "string",
       "description": "The name of the project.",

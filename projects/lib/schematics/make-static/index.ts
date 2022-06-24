@@ -5,6 +5,7 @@ import {
 import { normalize, virtualFs, workspaces } from '@angular-devkit/core';
 import { MakeStaticOptions } from "./schema";
 import { makeStaticHtml } from './html-transformer';
+import { createHash } from 'crypto';
 
 // Entry point of the make-static schematic
 export function makeStatic(options: MakeStaticOptions): Rule {
@@ -32,6 +33,20 @@ export function makeStatic(options: MakeStaticOptions): Rule {
     // Reading config file
     const configStr = await host.readFile(options.config);
     const config = JSON.parse(configStr);
+    if(!Array.isArray(config)) {
+      throw new SchematicsException(`Expected an array of configuration objects in ${options.config}: ${config}`);
+    }
+
+    // Manage base64 images
+    if(options.createBase64Images) {
+      const src = normalize(`${project.sourceRoot}/assets`);
+      if(!host.isDirectory(src)) {
+        console.warn(`Directory ${src} does not exist: could not generate base64 image`);
+      }
+      else {
+        await createBase64Images(config, tree, src);
+      }
+    }
 
     // Inferring the project app folder
     const src = normalize(`${project.sourceRoot}/app`);
@@ -219,6 +234,36 @@ function replacePatternUnlessDone(lines: string[], pattern: RegExp, foundGroup: 
     }
   }
   return state;
+}
+
+async function createBase64Images(config: any, tree: Tree, assets: string) {
+  if(Array.isArray(config)) {
+    for(let item of config) {
+      createBase64Images(item, tree, assets);
+    }
+  }
+  else if(typeof config === 'object') {
+    for(let [key,val] of Object.entries(config)) {
+      if(typeof val === 'object') {
+        createBase64Images(val, tree, assets); // recursively go through objects and arrays
+      }
+      else if(typeof val === 'string') {
+        const match = val.match(/^data:image\/([^;]+);base64,(.+)$/i);
+        if(match) {
+          const ext = match[1];
+          const data = Buffer.from(match[2], 'base64');
+          const hash = createHash('md5').update(data).digest('hex');
+          const filename = `${hash}.${ext}`;
+          const path = normalize(`${assets}/${filename}`);
+          console.log(`==> Writing image ${path} and updating prop ${key} in the configuration`);
+          config[key] = `assets/${filename}`;
+          if(!tree.exists(path)) {
+            tree.create(path, data);
+          }
+        }
+      }
+    }
+  }
 }
 
 function createHost(tree: Tree): workspaces.WorkspaceHost {
