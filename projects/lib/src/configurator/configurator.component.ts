@@ -34,7 +34,7 @@ export const defaultConfiguratorOptions: ConfiguratorOptions = {
   templateUrl: './configurator.component.html',
   styles:[`
 .offcanvas-body {
-  padding-bottom: 90px; // avoid toolbar hiding bottom of configurator
+  padding-bottom: 90px; /* avoid toolbar hiding bottom of configurator */
 }
   `],
   changeDetection: ChangeDetectionStrategy.OnPush,

@@ -6,15 +6,15 @@ import {
   addEntities,
   updateEntities,
   selectEntity,
-  selectAll,
-  getEntities,
+  selectAllEntities,
+  getAllEntities,
   deleteEntities,
   deleteAllEntities,
 } from '@ngneat/elf-entities';
 import { stateHistory } from '@ngneat/elf-state-history';
 import { Observable } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
-import { Condition } from '../conditions/conditions.service';
+import { Condition } from '../conditions';
 
 export interface ComponentConfig {
   readonly id: string;
@@ -51,11 +51,11 @@ export class ConfigService {
   }
 
   public watchAllConfig(): Observable<ComponentConfig[]> {
-    return this.store.pipe(selectAll());
+    return this.store.pipe(selectAllEntities());
   }
 
   public getAllConfig(): ComponentConfig[] {
-    return this.store.query(getEntities());
+    return this.store.query(getAllEntities());
   }
 
   public watchConfig(id: string): Observable<ComponentConfig> {

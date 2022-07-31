@@ -4,7 +4,7 @@ import {
   ComponentConfig,
   ConfigService,
   ContainerConfig,
-} from '../configuration/config.service';
+} from '../configuration';
 
 export interface ContainerIndex {
   container: string;
