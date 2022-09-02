@@ -16,13 +16,13 @@
     "save": "dependencies"
   },
   "peerDependencies": {
-    "@angular/common": "^12.2.0",
-    "@angular/core": "^12.2.0",
-    "@ngneat/elf": "^1.0.2",
-    "@ngneat/elf-entities": "^3.0.0",
-    "@ngneat/elf-state-history": "^1.0.1",
-    "@popperjs/core": "^2.11.0",
-    "bootstrap": "^5.1.3",
+    "@angular/common": "^14.1.0",
+    "@angular/core": "^14.1.0",
+    "@ngneat/elf": "^2.1.0",
+    "@ngneat/elf-entities": "^3.4.0",
+    "@ngneat/elf-state-history": "^1.1.0",
+    "@popperjs/core": "^2.11.5",
+    "bootstrap": "^5.2.0",
     "ngx-drag-drop": "^2.0.0"
   },
   "dependencies": {
@@ -30,7 +30,7 @@
   },
   "devDependencies": {
     "@types/bootstrap": "^5.1.6",
-    "@angular/localize": "^12.2.0",
+    "@angular/localize": "^14.1.0",
     "copyfiles": "file:../../node_modules/copyfiles",
     "typescript": "file:../../node_modules/typescript"
   }

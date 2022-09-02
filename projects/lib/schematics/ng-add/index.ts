@@ -4,19 +4,19 @@ import { addPackageJsonDependency, NodeDependencyType } from '@schematics/angula
 
 const packageJson = {
   peerDependencies: {
-    "@ngneat/elf": "^1.0.2",
-    "@ngneat/elf-entities": "^3.0.0",
-    "@ngneat/elf-state-history": "^1.0.1",
-    "@popperjs/core": "^2.11.0",
-    "bootstrap": "^5.1.3",
+    "@ngneat/elf": "^2.1.0",
+    "@ngneat/elf-entities": "^4.3.1",
+    "@ngneat/elf-state-history": "^1.1.0",
+    "@popperjs/core": "^2.11.5",
+    "bootstrap": "^5.2.0",
     "ngx-drag-drop": "^2.0.0"
   },
   devDependencies: {
-    "@angular/localize": "^12.2.0",
-    "@types/bootstrap": "^5.1.6",
+    "@angular/localize": "^14.1.0",
+    "@types/bootstrap": "^5.2.0",
     "htmlparser": "1.7.7",
-    "html-prettify": "1.0.3",
-    "sanitize-html": "2.7.0",
+    "html-prettify": "1.0.7",
+    "sanitize-html": "2.7.1",
   }
 }
 

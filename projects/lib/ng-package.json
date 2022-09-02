@@ -5,13 +5,6 @@
     "styles/*.scss"
   ],
   "lib": {
-    "entryFile": "src/public-api.ts",
-    "umdModuleIds": {
-      "@ngneat/elf": "@ngneat/elf",
-      "@ngneat/elf-entities": "@ngneat/elf-entities",
-      "@ngneat/elf-state-history": "@ngneat/elf-state-history",
-      "bootstrap": "bootstrap",
-      "ngx-drag-drop": "ngx-drag-drop"
-    }
+    "entryFile": "src/public-api.ts"
   }
 }

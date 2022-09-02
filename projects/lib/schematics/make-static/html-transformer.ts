@@ -1,6 +1,6 @@
 
 import * as htmlparser from 'htmlparser';
-import * as prettify from 'html-prettify';
+import prettify from 'html-prettify';
 import * as sanitizeHtml from 'sanitize-html';
 import { SchematicsException } from '@angular-devkit/schematics';
 
