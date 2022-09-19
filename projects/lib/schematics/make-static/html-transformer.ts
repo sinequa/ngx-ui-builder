@@ -1,10 +1,10 @@
 
 import * as htmlparser from 'htmlparser';
 import prettify from 'html-prettify';
-import * as sanitizeHtml from 'sanitize-html';
+import sanitizeHtml from 'sanitize-html';
 import { SchematicsException } from '@angular-devkit/schematics';
 
-declare interface ComponentConfig extends Record<string,any> {
+export interface ComponentConfig extends Record<string,any> {
   readonly id: string;
   type: string;
   items?: string[];
@@ -12,7 +12,16 @@ declare interface ComponentConfig extends Record<string,any> {
   condition?: {data?: string}; // Much simpler interface than Condition for extendibility
 }
 
-declare interface HTMLElement {
+export interface ConditionsContext {
+  /** [data] attribute of uib-zone */
+  zoneData?: string;
+  /** [conditionsData] attribute of uib-zone */
+  conditionsData?: string;
+  /** name of "data object" injected in uib-templates (eg. let-record="data") */
+  dataName?: string;
+}
+
+export interface HTMLElement {
   name: string;
   type: 'tag' | 'comment' | 'text';
   raw: string;
@@ -66,17 +75,26 @@ function processTemplate(dom: HTMLElement[], config: ComponentConfig[]): HtmlMod
 
     //console.log(`Generating zone ${id}`,zone);
 
-    let dataName = "data";
     // Try to guess the right data name (eg. "record" instead of "data")
-    if(templates?.[0]?.attribs) {
-      for(const [key, value] of Object.entries(templates[0].attribs)) {
+    let dataName: string|undefined;
+    for(const template of templates) {
+      for(const [key, value] of Object.entries(template.attribs)) {
         if(key.startsWith("let-") && value === "data") { // Looking for pattern let-record="data"
           dataName = key.substring(4);
+          break;
         }
       }
+      if(dataName) break;
     }
 
-    let innerHtml = generateHtml(conf, templates, config, dataName, zone.attribs['[conditionsData]'], componentTypes);
+    // Context to evaluate conditions in this zone
+    const context: ConditionsContext = {
+      dataName,
+      conditionsData: zone.attribs['[conditionsData]'], // conditions can be based on an explicit "conditionsData" object
+      zoneData: zone.attribs['data']                    // ... or implicitly on the zone's data
+    }
+
+    let innerHtml = generateHtml(conf, templates, config, context, componentTypes);
 
     const attrs = [] as string[];
     // Manage special attributes of the uib-zone component
@@ -85,12 +103,12 @@ function processTemplate(dom: HTMLElement[], config: ComponentConfig[]): HtmlMod
         case '[conditionsData]': break; // [conditionsData] input already handled by generateHtml()
         case '[data]': {  // Transform the [data] input into a for loop on the child <div>
           // strong assumption: data has to be an array (even though uib-zone can take non-array data)
-          innerHtml = innerHtml.replace("<div", `<div *ngFor="let ${dataName} of ${value}"`);
+          innerHtml = innerHtml.replace("<div", `<div *ngFor="let ${dataName || "data"} of ${value}"`);
           break;
         }
         case '(itemClicked)': { // Transform the (itemClicked) event on the zone into a (click) event on the child <div>
           let action = zone.attribs['(itemClicked)']; // eg. onDocumentClicked($event.data, $event.event)
-          action = action.replace(/\$event\.data/, dataName);
+          action = action.replace(/\$event\.data/, dataName || "data");
           action = action.replace(/\$event\.event/, "$event");
           innerHtml = innerHtml.replace("<div", `<div (click)="${action}"`);
           break;
@@ -128,7 +146,7 @@ function getZones(dom: HTMLElement[]): HTMLElement[] {
 }
 
 // Generate the HTML of a UI Builder component, based on its configuration and templates
-function generateHtml(conf: ComponentConfig, templates: HTMLElement[], config: ComponentConfig[], dataName: string, conditionsDataName: string | undefined, componentTypes: string[]): string {
+function generateHtml(conf: ComponentConfig, templates: HTMLElement[], config: ComponentConfig[], context: ConditionsContext, componentTypes: string[]): string {
   // Generate attributes
   let classes = conf.classes || '';
   let style = '';
@@ -142,7 +160,7 @@ function generateHtml(conf: ComponentConfig, templates: HTMLElement[], config: C
     attr += ` style="${style}"`;
   }
   if(conf.condition) {
-    attr += conditionToNgIf(conf.condition, dataName, conditionsDataName);
+    attr += conditionToNgIf(conf.condition, context);
   }
 
   // Generate inner HTML
@@ -151,7 +169,7 @@ function generateHtml(conf: ComponentConfig, templates: HTMLElement[], config: C
     innerHtml = (conf.items as string[])
       .map(c => config.find(cc => cc.id === c))       // For each item, map its config
       .filter(c => c)                                 // Keep the configs that exist
-      .map(c => generateHtml(c!, templates, config, dataName, conditionsDataName, componentTypes))  // Generate the HTML for this item
+      .map(c => generateHtml(c!, templates, config, context, componentTypes))  // Generate the HTML for this item
       .join('\r\n');                                  // Join the resulting HTML
   }
   else if(conf.type === '_raw-html') {
@@ -168,11 +186,18 @@ function generateHtml(conf: ComponentConfig, templates: HTMLElement[], config: C
   return `<div${attr}>\r\n${innerHtml}\r\n</div>`;
 }
 
-function conditionToNgIf(condition: {data?: string}, dataName: string, conditionsDataName?: string): string {
-  if(condition.data && conditionsDataName) {
-    dataName = `(${conditionsDataName})['${condition.data}']`;
+function conditionToNgIf(condition: {data?: string}, context: ConditionsContext): string {
+  let obj;
+  if(condition.data && context.conditionsData) {
+    obj = `(${context.conditionsData})['${condition.data}']`;
   }
-  return ` *ngIf="${dataName} | uibCondition:${JSON.stringify(condition).replace(/\"/g, "'")}"`;
+  else if(!condition.data && context.zoneData) { // if there is no condition.data, we instead use the zone's data
+    obj = context.dataName || context.zoneData;
+  }
+  if(obj) {
+    return ` *ngIf="${obj} | uibCondition:${JSON.stringify(condition).replace(/\"/g, "'")}"`;
+  }
+  return "";
 }
 
 // Construct a HTML string recursively from a list of elements
