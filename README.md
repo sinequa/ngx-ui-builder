@@ -1,4 +1,5 @@
 [![CI](https://github.com/sinequa/ngx-ui-builder/actions/workflows/main.yml/badge.svg)](https://github.com/sinequa/ngx-ui-builder/actions/workflows/main.yml)
+[![npm version](https://badge.fury.io/js/@sinequa%2Fngx-ui-builder.svg)](https://badge.fury.io/js/@sinequa%2Fngx-ui-builder)
 
 # UI Builder
 
