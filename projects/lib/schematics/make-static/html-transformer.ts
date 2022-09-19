@@ -1,7 +1,7 @@
 
 import * as htmlparser from 'htmlparser';
 import prettify from 'html-prettify';
-import * as sanitizeHtml from 'sanitize-html';
+import sanitizeHtml from 'sanitize-html';
 import { SchematicsException } from '@angular-devkit/schematics';
 
 export interface ComponentConfig extends Record<string,any> {
