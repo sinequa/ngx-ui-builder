@@ -91,7 +91,7 @@ function processTemplate(dom: HTMLElement[], config: ComponentConfig[]): HtmlMod
     const context: ConditionsContext = {
       dataName,
       conditionsData: zone.attribs['[conditionsData]'], // conditions can be based on an explicit "conditionsData" object
-      zoneData: zone.attribs['data']                    // ... or implicitly on the zone's data
+      zoneData: zone.attribs['[data]']                    // ... or implicitly on the zone's data
     }
 
     let innerHtml = generateHtml(conf, templates, config, context, componentTypes);
