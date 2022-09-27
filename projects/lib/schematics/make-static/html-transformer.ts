@@ -91,7 +91,7 @@ function processTemplate(dom: HTMLElement[], config: ComponentConfig[]): HtmlMod
     const context: ConditionsContext = {
       dataName,
       conditionsData: zone.attribs['[conditionsData]'], // conditions can be based on an explicit "conditionsData" object
-      zoneData: zone.attribs['data']                    // ... or implicitly on the zone's data
+      zoneData: zone.attribs['[data]']                    // ... or implicitly on the zone's data
     }
 
     let innerHtml = generateHtml(conf, templates, config, context, componentTypes);
@@ -212,6 +212,7 @@ function getInnerHtml(elements?: HTMLElement[], config?: ComponentConfig): strin
       let attribs = el.raw;
       // If a config object is provided, we use it to rewrite the template where it contains references to that config
       if(config) {
+        // Replace patterns "config.some.property" with the actual property value
         [...attribs.matchAll(/\bconfig\.([\w\.]+)\b/g)]
           .reverse() // Start from the end so that index positions remain valid during the rewrite
           .forEach(match => {
@@ -221,6 +222,17 @@ function getInnerHtml(elements?: HTMLElement[], config?: ComponentConfig): strin
             const value = JSON.stringify(getConfigValue(config, props))?.replace(/\"/g, "'");
             if(match.index !== undefined) {
               attribs = attribs.substring(0,match.index) + value + attribs.substring(match.index+ expr.length);
+            }
+          });
+
+        // Replace patterns "config | ..." with the property object
+        [...attribs.matchAll(/\bconfig\s*\|\s*/g)]
+          .reverse()
+          .forEach(match => {
+            const expr = match[0];
+            const value = JSON.stringify(config).replace(/\"/g, "'");
+            if(match.index !== undefined) {
+              attribs = attribs.substring(0,match.index) + value + " | " + attribs.substring(match.index+ expr.length);
             }
           });
       }
