@@ -71,8 +71,7 @@ export class DragDropService {
     this.toastService.show(
       $localize `Component '${config[0]}' removed`,
       "warning text-dark",
-      [this.undoAction],
-      {animation: true, delay: 10000, autohide: true}
+      [this.undoAction]
     );
   }
 

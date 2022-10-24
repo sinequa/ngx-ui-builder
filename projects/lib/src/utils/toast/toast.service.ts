@@ -25,8 +25,6 @@ export class ToastService {
 
   onToastMessage = new Subject<ToastMessage|null>();
 
-  constructor() {}
-
   show(
     message: string,
     style: BsStyle | string = 'info',
