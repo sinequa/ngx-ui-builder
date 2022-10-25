@@ -15,14 +15,14 @@
   </div>
 
   <div #offcanvasBody class="offcanvas-body">
-    
+
     <ng-container *ngIf="!_showTree && obs.edited as edited">
       <!-- CONFIGURATOR -->
-    
+
       <ng-container
         *ngTemplateOutlet="configurators[edited.config.type]?.template; context: { $implicit: edited }">
       </ng-container>
-  
+
       <ng-container *ngIf="edited.config.type === '_container'">
         <details class="mb-3" open *ngIf="edited.options.paletteOptions">
           <summary i18n>Component palette (drag & drop)</summary>
@@ -33,22 +33,26 @@
             >
           </uib-palette>
         </details>
-    
+
         <details class="mb-3" open *ngIf="edited.options.showFlexEditor">
           <summary i18n>Layout</summary>
           <uib-flex-editor [config]="edited.config"></uib-flex-editor>
         </details>
-      </ng-container>      
-      
+      </ng-container>
+
       <uib-html-editor *ngIf="edited.options.showHtmlEditor && edited.config.type === '_raw-html'"
         [context]="edited"
         class="d-block mb-3">
       </uib-html-editor>
-  
+
       <div class="mb-3" *ngIf="edited.options.showCssClasses">
         <uib-class-editor [context]="edited"></uib-class-editor>
       </div>
-  
+
+      <div class="mb-3" *ngIf="edited.options.showSpacingEditor">
+        <uib-bs-spacing-editor [config]="edited.config"></uib-bs-spacing-editor>
+      </div>
+
       <details [attr.open]="edited.config.condition? '' : undefined"
         class="mb-3"
         *ngIf="edited.options.showConditionalDisplay && (edited.context.data || edited.context.conditionsData)"
@@ -56,7 +60,7 @@
         <summary uib-tooltip="Display this component only if the data validates a rule" i18n-uib-tooltip i18n>Conditional display</summary>
         <uib-condition-editor [context]="edited"></uib-condition-editor>
       </details>
-      
+
       <div class="d-flex justify-content-start mb-1">
         <button class="btn btn-outline-danger me-2"
           (click)="remove(edited.context)"
@@ -76,8 +80,8 @@
         </button>
       </div>
     </ng-container>
-    
+
     <uib-tree [configuration]="configuration" *ngIf="_showTree"></uib-tree>
-      
+
   </div>
 </div>
