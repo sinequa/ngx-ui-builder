@@ -43,13 +43,13 @@ export class SpacingEditorComponent implements AfterViewInit, OnChanges {
     name: "direction",
     title: $localize `Direction`,
     options: [
-      {description: $localize `All around`, code: "", icon: "all-directions"},
-      {description: $localize `On the left side`, code: "s", icon: "left-side"},
-      {description: $localize `On the right side`, code: "e", icon: "right-side"},
-      {description: $localize `On the top side`, code: "t", icon: "top-side"},
-      {description: $localize `On the bottom side`, code: "b", icon: "arrow_down"},
-      {description: $localize `On the left and right`, code: "x", icon: "horizontal"},
-      {description: $localize `On the top and bottom`, code: "y", icon: "vertical"}
+      {description: $localize `All around`, code: "", icon: "direction-left-right-top-bottom"},
+      {description: $localize `On the left side`, code: "s", icon: "direction-left"},
+      {description: $localize `On the right side`, code: "e", icon: "direction-right"},
+      {description: $localize `On the top side`, code: "t", icon: "direction-top"},
+      {description: $localize `On the bottom side`, code: "b", icon: "direction-bottom"},
+      {description: $localize `On the left and right`, code: "x", icon: "direction-left-right"},
+      {description: $localize `On the top and bottom`, code: "y", icon: "direction-top-bottom"}
     ]
   };
 
@@ -58,12 +58,11 @@ export class SpacingEditorComponent implements AfterViewInit, OnChanges {
     title: $localize `Space`,
     options: [
       {description: $localize `None`, code: "0", icon: "no-space"},
-      {description: $localize `Extra Small`, code: "1", icon: "extra-small"},
-      {description: $localize `Small`, code: "2", icon: "small"},
-      {description: $localize `Medium`, code: "3", icon: "medium"},
-      {description: $localize `Large`, code: "4", icon: "large"},
-      {description: $localize `Extra Large`, code: "5", icon: "extra-large"},
-      {description: $localize `Auto`, code: "auto", icon: "auto"}
+      {description: $localize `Extra Small`, code: "1", icon: "space-xs"},
+      {description: $localize `Small`, code: "2", icon: "space-s"},
+      {description: $localize `Medium`, code: "3", icon: "space-m"},
+      {description: $localize `Large`, code: "4", icon: "space-l"},
+      {description: $localize `Extra Large`, code: "5", icon: "space-xl"}
     ]
   };
 
@@ -71,20 +70,26 @@ export class SpacingEditorComponent implements AfterViewInit, OnChanges {
     name: "direction",
     title: $localize `Direction`,
     options: [
-      {description: $localize `All around`, code: "", icon: "border"},
-      {description: $localize `On the left side`, code: "-start", icon: "border-left"},
-      {description: $localize `On the right side`, code: "-end", icon: "border-right"},
-      {description: $localize `On the top side`, code: "-top", icon: "border-top"},
-      {description: $localize `On the bottom side`, code: "-bottom", icon: "border-bottom"},
+      {description: $localize `All around`, code: "", icon: "direction-left-right-top-bottom"},
+      {description: $localize `On the left side`, code: "-start", icon: "direction-left"},
+      {description: $localize `On the right side`, code: "-end", icon: "direction-right"},
+      {description: $localize `On the top side`, code: "-top", icon: "direction-top"},
+      {description: $localize `On the bottom side`, code: "-bottom", icon: "direction-bottom"},
     ]
   }
 
-  borderMagnitudes = {...this.magnitudes, options: this.magnitudes.options.slice(0, -1)};
+  marginMagnitudes = {
+    ...this.magnitudes,
+    options: [
+      ...this.magnitudes.options,
+      {description: $localize `Auto`, code: "auto", icon: "auto"}
+    ]
+  };
 
   options = [
-    {name: "m", title: $localize `Margin`, description: $localize `Margin is the space around the component`, properties: [this.directions, this.magnitudes]},
+    {name: "m", title: $localize `Margin`, description: $localize `Margin is the space around the component`, properties: [this.directions, this.marginMagnitudes]},
     {name: "p", title: $localize `Padding`, description: $localize `Padding is the space within the component`, properties: [this.directions, this.magnitudes]},
-    {name: "border", title: $localize `Border`, description: $localize `Border around the component`, properties: [this.borderDirections, this.borderMagnitudes]}
+    {name: "border", title: $localize `Border`, description: $localize `Border around the component`, properties: [this.borderDirections, this.magnitudes]}
   ];
 
 
@@ -123,7 +128,7 @@ export class SpacingEditorComponent implements AfterViewInit, OnChanges {
     for(let index=0; index<this.classes.length; index++) {
       const c = this.classes[index];
       // Extract margin
-      let match = c.match(/^m([stebxy]?)-([0-5])$/);
+      let match = c.match(/^m([stebxy]?)-([0-5]|auto)$/);
       if(match) {
         this.state['m'] = {index, direction: match[1], magnitude: match[2]};
       }
