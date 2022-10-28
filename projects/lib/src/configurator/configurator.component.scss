@@ -1,0 +1,7 @@
+.offcanvas-body {
+  padding-bottom: 90px; /* avoid toolbar hiding bottom of configurator */
+}
+
+.ltr > svg-icon {
+  transform: rotate(180deg) translateY(-4px);
+}

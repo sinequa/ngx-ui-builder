@@ -32,11 +32,7 @@ export const defaultConfiguratorOptions: ConfiguratorOptions = {
 @Component({
   selector: 'uib-configurator',
   templateUrl: './configurator.component.html',
-  styles:[`
-.offcanvas-body {
-  padding-bottom: 90px; /* avoid toolbar hiding bottom of configurator */
-}
-  `],
+  styleUrls:['./configurator.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ConfiguratorComponent implements OnInit {
@@ -54,10 +50,11 @@ export class ConfiguratorComponent implements OnInit {
   @Input() zoneOptions: Record<string, ConfiguratorOptions> = {};
 
   edited$: Observable<ConfiguratorContext>;
-  
+
   configuration: ComponentConfig[] = [];
 
   _showTree: boolean;
+  ltr = false;
 
   constructor(
     private cdr: ChangeDetectorRef,
@@ -66,11 +63,11 @@ export class ConfiguratorComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-      
+
     this.edited$ = this.configurableService.watchEdited().pipe(
       tap(() => this.offcanvas.show()),
       tap(() => this.showTree(false)),
-      switchMap((context) => 
+      switchMap((context) =>
         this.configService.watchConfig(context!.id).pipe(
           map(config => ({
             context,
@@ -82,13 +79,13 @@ export class ConfiguratorComponent implements OnInit {
         )
       )
     );
-    
+
     // subscribe to configuration events
     this.configService.watchAllConfig().subscribe(config => {
-      this.configuration = config;
+      this.configuration = config!;
       this.cdr.markForCheck();
     });
-    
+
     // when edition is disabled, close side panel
     this.configurableService.editorEnabled$.subscribe(value => {
       if (value === false && this.offcanvas) {
@@ -118,7 +115,7 @@ export class ConfiguratorComponent implements OnInit {
       tpl => (this.configurators[tpl.templateName] = tpl)
     );
   }
-  
+
   showTree(showTree = true) {
     this._showTree = showTree;
     this.offcanvasBodyEl.nativeElement.scroll(0, 0);
@@ -136,7 +133,7 @@ export class ConfiguratorComponent implements OnInit {
    * It removes the item from the parent container.
    * @param {Event} event - Event
    */
-  remove(context: Configurable) {    
+  remove(context: Configurable) {
     // only uib-zone cannot self remove
     if (context.parentId) {
       const container = this.configService.getContainer(context.parentId);
@@ -165,7 +162,7 @@ export class ConfiguratorComponent implements OnInit {
       // Create another copy
       const config2: Mutable<ComponentConfig> = this.configService.getConfig(context.id);
       config2.id = this.configService.generateId(config.id);
-      
+
       const container: ContainerConfig = {
         id: context.id,
         type: '_container',
