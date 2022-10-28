@@ -1,4 +1,4 @@
-<div #offcanvas class="offcanvas offcanvas-end" tabindex="-1" id="offcanvas" *ngIf="{edited: (edited$ | async)} as obs">
+<div #offcanvas class="offcanvas" [ngClass]="{'offcanvas-start': ltr, 'offcanvas-end': !ltr}" tabindex="-1" id="offcanvas" *ngIf="{edited: (edited$ | async)} as obs">
   <!-- HEADER -->
   <div class="offcanvas-header bg-light border-bottom">
     <h5 class="offcanvas-title" *ngIf="!_showTree && obs.edited">
@@ -8,21 +8,24 @@
     </h5>
     <h5 class="offcanvas-title" *ngIf="_showTree" i18n>Configuration Tree</h5>
 
-    <button type="button" class="btn ms-auto" [ngClass]="_showTree? 'btn-primary' : 'btn-link'" i18n-uib-tooltip uib-tooltip="{{_showTree? 'Hide' : 'Show'}} configuration tree" (click)="showTree(!_showTree)">
+    <button id="right-to-left" type="button" [ngClass]="{'ltr': !ltr}" i18n-uib-tooltip uib-tooltip="Slide to {{ltr? 'right':'left'}}" class="btn btn-sm btn-link ms-auto" (click)="ltr = !ltr">
+      <svg-icon key="arrow_forward" width="22px" height="25px"></svg-icon>
+    </button>
+    <button type="button" class="btn btn-sm" [ngClass]="_showTree? 'btn-square btn-primary' : 'btn-link'" i18n-uib-tooltip uib-tooltip="{{_showTree? 'Hide' : 'Show'}} configuration tree" (click)="showTree(!_showTree)">
       <svg-icon key="tree" width="22px" height="25px"></svg-icon>
     </button>
     <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close" i18n-aria-label></button>
   </div>
 
   <div #offcanvasBody class="offcanvas-body">
-    
+
     <ng-container *ngIf="!_showTree && obs.edited as edited">
       <!-- CONFIGURATOR -->
-    
+
       <ng-container
         *ngTemplateOutlet="configurators[edited.config.type]?.template; context: { $implicit: edited }">
       </ng-container>
-  
+
       <ng-container *ngIf="edited.config.type === '_container'">
         <details class="mb-3" open *ngIf="edited.options.paletteOptions">
           <summary i18n>Component palette (drag & drop)</summary>
@@ -33,22 +36,22 @@
             >
           </uib-palette>
         </details>
-    
+
         <details class="mb-3" open *ngIf="edited.options.showFlexEditor">
           <summary i18n>Layout</summary>
           <uib-flex-editor [config]="edited.config"></uib-flex-editor>
         </details>
-      </ng-container>      
-      
+      </ng-container>
+
       <uib-html-editor *ngIf="edited.options.showHtmlEditor && edited.config.type === '_raw-html'"
         [context]="edited"
         class="d-block mb-3">
       </uib-html-editor>
-  
+
       <div class="mb-3" *ngIf="edited.options.showCssClasses">
         <uib-class-editor [context]="edited"></uib-class-editor>
       </div>
-  
+
       <details [attr.open]="edited.config.condition? '' : undefined"
         class="mb-3"
         *ngIf="edited.options.showConditionalDisplay && (edited.context.data || edited.context.conditionsData)"
@@ -56,7 +59,7 @@
         <summary uib-tooltip="Display this component only if the data validates a rule" i18n-uib-tooltip i18n>Conditional display</summary>
         <uib-condition-editor [context]="edited"></uib-condition-editor>
       </details>
-      
+
       <div class="d-flex justify-content-start mb-1">
         <button class="btn btn-outline-danger me-2"
           (click)="remove(edited.context)"
@@ -76,8 +79,8 @@
         </button>
       </div>
     </ng-container>
-    
+
     <uib-tree [configuration]="configuration" *ngIf="_showTree"></uib-tree>
-      
+
   </div>
 </div>
