@@ -24,6 +24,7 @@ export const defaultConfiguratorOptions: ConfiguratorOptions = {
   showFlexEditor: true,
   showHtmlEditor: true,
   showCssClasses: true,
+  showSpacingEditor: true,
   showConditionalDisplay: true,
   showRemove: true,
   showDuplicate: true

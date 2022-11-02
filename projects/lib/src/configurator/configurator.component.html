@@ -52,6 +52,10 @@
         <uib-class-editor [context]="edited"></uib-class-editor>
       </div>
 
+      <div class="mb-3" *ngIf="edited.options.showSpacingEditor">
+        <uib-bs-spacing-editor [config]="edited.config"></uib-bs-spacing-editor>
+      </div>
+
       <details [attr.open]="edited.config.condition? '' : undefined"
         class="mb-3"
         *ngIf="edited.options.showConditionalDisplay && (edited.context.data || edited.context.conditionsData)"
