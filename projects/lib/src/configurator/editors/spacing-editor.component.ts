@@ -15,8 +15,8 @@ import { ComponentConfig, ConfigService } from "../../configuration";
           <div class="radio-group">
             <ng-container *ngFor="let o of prop.options">
               <input type="radio" id="{{option.name}}-{{prop.name}}-{{o.code}}" [checked]="isChecked(option.name, prop.name, o.code)" (click)="toggle(option.name, prop.name, o.code)"/>
-              <label for="{{option.name}}-{{prop.name}}-{{o.code}}" [uib-tooltip]="o.description" placement="bottom">
-                <svg-icon [key]="o.icon" width="22px" height="25px"></svg-icon>
+              <label class="p-0" for="{{option.name}}-{{prop.name}}-{{o.code}}" [uib-tooltip]="o.description" placement="bottom">
+                <svg-icon [key]="o.icon" width="36px" height="36px"></svg-icon>
               </label>
             </ng-container>
           </div>
