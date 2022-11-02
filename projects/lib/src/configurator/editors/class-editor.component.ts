@@ -5,9 +5,13 @@ import { ConfiguratorContext } from '../configurator.models';
   selector: 'uib-class-editor',
   template: `
   <label class="form-label" for="classes" i18n>CSS Classes</label>
-  <input class="form-control" id="classes"
+  <input
+    class="form-control"
+    id="classes"
     type="text"
     name="classes"
+    autocomplete="off"
+    spellcheck="false"
     [(ngModel)]="context.config.classes"
     (ngModelChangeDebounced)="context.configChanged()"
   />

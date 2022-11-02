@@ -5,6 +5,7 @@ import {
   ConfigService,
   ContainerConfig,
 } from '../configuration';
+import { ToastAction, ToastService } from '../utils';
 
 export interface ContainerIndex {
   container: string;
@@ -18,9 +19,19 @@ export interface ComponentCreator {
 
 @Injectable({ providedIn: 'root' })
 export class DragDropService {
-  constructor(public configService: ConfigService) {}
+
+  constructor(
+    public configService: ConfigService,
+    public toastService: ToastService
+  ) {}
 
   draggedCreator?: ComponentCreator;
+
+  undoAction: ToastAction = {
+    text: $localize `Undo`,
+    hideToast: true,
+    action: () => this.configService.undo()
+  }
 
   public handleDrop(
     containerId: string,
@@ -55,8 +66,13 @@ export class DragDropService {
     containerId: string
   ) {
     const container = this.configService.getContainer(containerId);
-    container.items.splice(index, 1);
+    const config = container.items.splice(index, 1);
     this.configService.updateConfig([container]);
+    this.toastService.show(
+      $localize `Component '${config[0]}' removed`,
+      "warning text-dark",
+      [this.undoAction]
+    );
   }
 
   private insertNew(
