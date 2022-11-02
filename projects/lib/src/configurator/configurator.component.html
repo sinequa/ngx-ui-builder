@@ -1,4 +1,4 @@
-<div #offcanvas class="offcanvas offcanvas-end" tabindex="-1" id="offcanvas" *ngIf="{edited: (edited$ | async)} as obs">
+<div #offcanvas class="offcanvas" [ngClass]="{'offcanvas-start': ltr, 'offcanvas-end': !ltr}" tabindex="-1" id="offcanvas" *ngIf="{edited: (edited$ | async)} as obs">
   <!-- HEADER -->
   <div class="offcanvas-header bg-light border-bottom">
     <h5 class="offcanvas-title" *ngIf="!_showTree && obs.edited">
@@ -8,7 +8,10 @@
     </h5>
     <h5 class="offcanvas-title" *ngIf="_showTree" i18n>Configuration Tree</h5>
 
-    <button type="button" class="btn ms-auto" [ngClass]="_showTree? 'btn-primary' : 'btn-link'" i18n-uib-tooltip uib-tooltip="{{_showTree? 'Hide' : 'Show'}} configuration tree" (click)="showTree(!_showTree)">
+    <button id="right-to-left" type="button" [ngClass]="{'ltr': !ltr}" i18n-uib-tooltip uib-tooltip="Slide to {{ltr? 'right':'left'}}" class="btn btn-sm btn-link ms-auto" (click)="ltr = !ltr">
+      <svg-icon key="arrow_forward" width="22px" height="25px"></svg-icon>
+    </button>
+    <button type="button" class="btn btn-sm" [ngClass]="_showTree? 'btn-square btn-primary' : 'btn-link'" i18n-uib-tooltip uib-tooltip="{{_showTree? 'Hide' : 'Show'}} configuration tree" (click)="showTree(!_showTree)">
       <svg-icon key="tree" width="22px" height="25px"></svg-icon>
     </button>
     <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close" i18n-aria-label></button>

@@ -33,11 +33,7 @@ export const defaultConfiguratorOptions: ConfiguratorOptions = {
 @Component({
   selector: 'uib-configurator',
   templateUrl: './configurator.component.html',
-  styles:[`
-.offcanvas-body {
-  padding-bottom: 90px; /* avoid toolbar hiding bottom of configurator */
-}
-  `],
+  styleUrls:['./configurator.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ConfiguratorComponent implements OnInit {
@@ -59,6 +55,7 @@ export class ConfiguratorComponent implements OnInit {
   configuration: ComponentConfig[] = [];
 
   _showTree: boolean;
+  ltr = false;
 
   constructor(
     private cdr: ChangeDetectorRef,
@@ -86,7 +83,7 @@ export class ConfiguratorComponent implements OnInit {
 
     // subscribe to configuration events
     this.configService.watchAllConfig().subscribe(config => {
-      this.configuration = config;
+      this.configuration = config!;
       this.cdr.markForCheck();
     });
 
