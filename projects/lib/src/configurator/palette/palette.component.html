@@ -1,26 +1,33 @@
 
-<div class="p-2 ps-1">
-  <ng-container *ngIf="options.showStandardPalette">
-    <h6 class="mb-0" i18n>New components</h6>
-    <small class="text-muted" i18n>Create and configure a new component</small>
-    <div>
+<div class="p-2">
+
+  <details *ngIf="options.showStandardPalette" open>
+    <summary>
+      <h6 class="d-inline" i18n>Drag & drop a new component</h6>
+    </summary>
+    <small class="text-muted" i18n>Drag & drop an item from this palette into the UI to create and configure a new component.</small>
+    <div class="mt-1">
       <ng-container *ngFor="let item of standardPalette"
         [ngTemplateOutlet]="paletteItem"
         [ngTemplateOutletContext]="{$implicit: item}">
       </ng-container>
     </div>
-  </ng-container>
+  </details>
 
-  <ng-container *ngIf="options.showExistingPalette">
-    <h6 class="mt-3 mb-0" i18n>Existing components</h6>
-    <small class="text-muted" i18n>Insert a pre-configured conponent</small>
-    <div>
+  <details *ngIf="options.showExistingPalette" class="mt-3">
+    <summary>
+      <h6 class="d-inline" i18n>Drag & drop an existing component</h6>
+    </summary>
+    <small class="text-muted mb-1" i18n>Drag & drop an item from this palette into the UI to insert a conponent whose configuration already exists.
+    </small>
+    <span uib-tooltip="This palette may include unused configuration from components removed from the UI." i18n-uib-tooltip>ⓘ</span>
+    <div class="mt-1">
       <ng-container *ngFor="let item of existingPalette"
         [ngTemplateOutlet]="paletteItem"
         [ngTemplateOutletContext]="{$implicit: item}">
       </ng-container>
-    </div>    
-  </ng-container>
+    </div>
+  </details>
 </div>
 
 <ng-template #paletteItem let-item>
@@ -32,14 +39,15 @@
     [uib-tooltip]="item.title"
     container=".uib-bootstrap"
     placement="bottom"
-    class="palette-item">
+    class="palette-item"
+    [ngClass]="{'uib-unused': item.removeable}">
     <svg-icon class="grip" key="grip" height="1em"></svg-icon>
     <span [ngClass]="item.iconClass"></span>
     {{item.display || item.type}}
     <button *ngIf="item.removeable"
       type="button"
       class="btn-close"
-      uib-tooltip="Remove unused configuration"
+      uib-tooltip="Remove this unused configuration"
       i18n-uib-tooltip
       placement="bottom"
       container=".uib-bootstrap"

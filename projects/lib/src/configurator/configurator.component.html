@@ -1,10 +1,10 @@
 <div #offcanvas class="offcanvas" [ngClass]="{'offcanvas-start': ltr, 'offcanvas-end': !ltr}" tabindex="-1" id="offcanvas" *ngIf="{edited: (edited$ | async)} as obs">
   <!-- HEADER -->
   <div class="offcanvas-header bg-light border-bottom">
-    <h5 class="offcanvas-title" *ngIf="!_showTree && obs.edited">
-      <strong>{{obs.edited.config.id}}</strong>
+    <h5 class="offcanvas-title" *ngIf="!_showTree && obs.edited as edited">
+      <strong>{{edited.config.id}}</strong>
       <br/>
-      <h6 i18n>(Type: <strong>{{obs.edited.config.type}}</strong>)</h6>
+      <h6 i18n>(Type: <strong>{{edited.context.templates[edited.config.type]?.display || edited.config.type}}</strong>)</h6>
     </h5>
     <h5 class="offcanvas-title" *ngIf="_showTree" i18n>Configuration Tree</h5>
 
@@ -21,6 +21,10 @@
 
     <ng-container *ngIf="!_showTree && obs.edited as edited">
       <!-- CONFIGURATOR -->
+      <div class="text-muted" *ngIf="edited.context.templates[edited.config.type]?.title as description">
+        {{description}}
+        <hr />
+      </div>
 
       <ng-container
         *ngTemplateOutlet="configurators[edited.config.type]?.template; context: { $implicit: edited }">
@@ -28,7 +32,7 @@
 
       <ng-container *ngIf="edited.config.type === '_container'">
         <details class="mb-3" open *ngIf="edited.options.paletteOptions">
-          <summary i18n>Component palette (drag & drop)</summary>
+          <summary i18n>Component palette</summary>
           <uib-palette
             [context]="edited.context"
             [options]="edited.options.paletteOptions"

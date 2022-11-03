@@ -34,29 +34,7 @@ export const defaultPaletteOptions: PaletteOptions = {
 @Component({
   selector: 'uib-palette',
   templateUrl: './palette.component.html',
-  styles: [
-    `
-.palette-item {
-  display: inline-block;
-  border: 1px solid grey;
-  padding: 0.25rem 0.5rem;
-  border-radius: 3px;
-  background: rgb(0,0,0,0.1);
-  cursor: grab;
-  margin-right: 5px;
-  margin-bottom: 5px;
-}
-.palette-item .btn-close {
-  font-size: 0.7em;
-}
-.palette-item .grip {
-  position: relative;
-  top: -2px;
-  color: #7c7c7c;
-  margin-right: 3px;
-}
-  `
-  ],
+  styleUrls: ['./palette.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PaletteComponent implements OnInit, OnChanges {
