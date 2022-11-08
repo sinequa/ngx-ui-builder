@@ -4,7 +4,7 @@
     <h5 class="offcanvas-title" *ngIf="!_showTree && obs.edited as edited">
       <strong>{{edited.config.id}}</strong>
       <br/>
-      <h6 i18n>(Type: <strong>{{edited.context.templates[edited.config.type]?.display || edited.config.type}}</strong>)</h6>
+      <h6 i18n>(Type: <strong>{{edited.context.templates?.[edited.config.type]?.display || edited.config.type}}</strong>)</h6>
     </h5>
     <h5 class="offcanvas-title" *ngIf="_showTree" i18n>Configuration Tree</h5>
 
@@ -21,7 +21,7 @@
 
     <ng-container *ngIf="!_showTree && obs.edited as edited">
       <!-- CONFIGURATOR -->
-      <div class="text-muted" *ngIf="edited.context.templates[edited.config.type]?.title as description">
+      <div class="text-muted" *ngIf="edited.context.templates?.[edited.config.type]?.title as description">
         {{description}}
         <hr />
       </div>
