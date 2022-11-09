@@ -475,7 +475,7 @@
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@angular/core&#x27;;
-import { BehaviorSubject, Observable, Subject } from &#x27;rxjs&#x27;;
+import { BehaviorSubject, Observable } from &#x27;rxjs&#x27;;
 import { filter } from &#x27;rxjs/operators&#x27;;
 import { TemplateNameDirective } from &#x27;../utils&#x27;;
 import {ConfigurableDirective} from &#x27;./configurable.directive&#x27;;
@@ -496,8 +496,12 @@ export interface Configurable {
 export class ConfigurableService {
   private _hoveredId?: string;
 
-  // currently edited element&#x27;id
-  private edited$ &#x3D; new Subject&lt;Configurable | undefined&gt;();
+  /** 
+   * currently edited element&#x27;id.
+   * 
+   * Can be undefined when element is unselected
+   */
+  edited$ &#x3D; new BehaviorSubject&lt;Configurable | undefined&gt;(undefined);
   
   // behavior subject as we need to retrieve the previous value to toggle it
   editorEnabled$ &#x3D; new BehaviorSubject&lt;boolean&gt;(false);
@@ -538,7 +542,7 @@ export class ConfigurableService {
     }
     else if (this.previousConfigurableElement.id !&#x3D;&#x3D; configurable.id
       || (this.previousConfigurableElement.id &#x3D;&#x3D;&#x3D; configurable.id &amp;&amp; this.previousConfigurableElement.zone !&#x3D;&#x3D; configurable.zone)) {
-      // previous exist and it&#x27;s id don&#x27;t match with the new configurable element
+      // previous element exist and his id don&#x27;t match with the new configurable element
             
       this.previousConfigurableElement.removeEdited();
       this.previousConfigurableElement.removeSelected();
@@ -547,6 +551,8 @@ export class ConfigurableService {
     else if (this.previousConfigurableElement.id &#x3D;&#x3D;&#x3D; configurable.id &amp;&amp; this.previousConfigurableElement.zone &#x3D;&#x3D;&#x3D; configurable.zone) {
       // same id and same zone
       this.previousConfigurableElement &#x3D; undefined;
+      this.edited$.next(undefined);
+      return;
     }
     
     this.edited$.next(configurable);

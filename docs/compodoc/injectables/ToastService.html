@@ -93,7 +93,10 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
-                                <a href="#info" >info</a>
+                                <a href="#hide" >hide</a>
+                            </li>
+                            <li>
+                                <a href="#show" >show</a>
                             </li>
                         </ul>
                     </td>
@@ -107,24 +110,6 @@
     </table>
 </section>
 
-            <section>
-    <h3 id="constructor">Constructor</h3>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-<code>constructor()</code>
-                    </td>
-                </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="7" class="link-to-prism">projects/lib/src/utils/toast/toast.service.ts:7</a></div>
-                            </td>
-                        </tr>
-
-            </tbody>
-        </table>
-</section>
 
             <section>
     
@@ -135,24 +120,61 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="info"></a>
+                    <a name="hide"></a>
                     <span class="name">
-                        <span ><b>info</b></span>
-                        <a href="#info"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>hide</b></span>
+                        <a href="#hide"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>info(message: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+<code>hide()</code>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="11"
-                            class="link-to-prism">projects/lib/src/utils/toast/toast.service.ts:11</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="37"
+                            class="link-to-prism">projects/lib/src/utils/toast/toast.service.ts:37</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="show"></a>
+                    <span class="name">
+                        <span ><b>show</b></span>
+                        <a href="#show"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>show(message: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, style: <a href="../undefineds/BsStyle.html" target="_self">BsStyle | string</a>, actions?: <a href="../interfaces/ToastAction.html" target="_self">ToastAction[]</a>, options?: Toast.Options)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="28"
+                            class="link-to-prism">projects/lib/src/utils/toast/toast.service.ts:28</a></div>
                 </td>
             </tr>
 
@@ -169,6 +191,7 @@
                                     <td>Name</td>
                                     <td>Type</td>
                                     <td>Optional</td>
+                                    <td>Default value</td>
                                 </tr>
                             </thead>
                             <tbody>
@@ -182,6 +205,51 @@
                                         No
                                     </td>
 
+                                    <td>
+                                    </td>
+
+                                </tr>
+                                <tr>
+                                    <td>style</td>
+                                    <td>
+                                                <code><a href="../miscellaneous/typealiases.html#BsStyle" target="_self" >BsStyle | string</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+                                    <td>
+                                        <code>&#x27;info&#x27;</code>
+                                    </td>
+
+                                </tr>
+                                <tr>
+                                    <td>actions</td>
+                                    <td>
+                                                <code><a href="../interfaces/ToastAction.html" target="_self" >ToastAction[]</a></code>
+                                    </td>
+
+                                    <td>
+                                        Yes
+                                    </td>
+
+                                    <td>
+                                    </td>
+
+                                </tr>
+                                <tr>
+                                    <td>options</td>
+                                    <td>
+                                            <code>Toast.Options</code>
+                                    </td>
+
+                                    <td>
+                                        Yes
+                                    </td>
+
+                                    <td>
+                                    </td>
 
                                 </tr>
                             </tbody>
@@ -219,12 +287,12 @@
             </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Default value : </i><code>new Subject&lt;string&gt;()</code>
+                        <i>Default value : </i><code>new Subject&lt;ToastMessage|null&gt;()</code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="7" class="link-to-prism">projects/lib/src/utils/toast/toast.service.ts:7</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="26" class="link-to-prism">projects/lib/src/utils/toast/toast.service.ts:26</a></div>
                         </td>
                     </tr>
 
@@ -238,18 +306,47 @@
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@angular/core&#x27;;
+import { Toast } from &#x27;bootstrap&#x27;;
 import { Subject } from &#x27;rxjs&#x27;;
+
+export type BsStyle &#x3D; &#x27;info&#x27; | &#x27;success&#x27; | &#x27;warning&#x27; | &#x27;danger&#x27; | &#x27;primary&#x27; | &#x27;secondary&#x27; | &#x27;light&#x27; | &#x27;dark&#x27;;
+
+export interface ToastAction {
+  text?: string;
+  style?: string | string;
+  icon?: string;
+  hideToast?: boolean;
+  action: () &#x3D;&gt; void;
+}
+
+export interface ToastMessage {
+  icon?: string;
+  message: string;
+  style?: BsStyle | string;
+  actions?: ToastAction[];
+  options?: Toast.Options;
+}
 
 @Injectable({providedIn: &#x27;root&#x27;})
 export class ToastService {
-  
-  onToastMessage &#x3D; new Subject&lt;string&gt;();
-  
-  constructor() {}
-  
-  info(message:string) { this.onToastMessage.next(message) }
-  
-}</code></pre>
+
+  onToastMessage &#x3D; new Subject&lt;ToastMessage|null&gt;();
+
+  show(
+    message: string,
+    style: BsStyle | string &#x3D; &#x27;info&#x27;,
+    actions?: ToastAction[],
+    options?: Toast.Options
+  ) {
+    this.onToastMessage.next({message, style, actions, options});
+  }
+
+  hide() {
+    this.onToastMessage.next(null);
+  }
+
+}
+</code></pre>
     </div>
 
 </div>

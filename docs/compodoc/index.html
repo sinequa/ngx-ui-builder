@@ -31,11 +31,65 @@
                <div class="content getting-started">
                    <div class="content-data">
 
-<p><a href="https://github.com/sinequa/ngx-ui-builder/actions/workflows/main.yml"><img src="https://github.com/sinequa/ngx-ui-builder/actions/workflows/main.yml/badge.svg" alt="CI" class="img-responsive"></a></p>
+<p><a href="https://github.com/sinequa/ngx-ui-builder/actions/workflows/main.yml"><img src="https://github.com/sinequa/ngx-ui-builder/actions/workflows/main.yml/badge.svg" alt="CI" class="img-responsive"></a>
+<a href="https://badge.fury.io/js/@sinequa%2Fngx-ui-builder"><img src="https://badge.fury.io/js/@sinequa%2Fngx-ui-builder.svg" alt="npm version" class="img-responsive"></a></p>
 <h1 id="ui-builder">UI Builder</h1>
-<p><em>A library for making no-code Angular applications.</em></p>
-<p><strong>UI Builder</strong> is an Angular library that lets you transform an application with a static layout and fixed configuration into an application that can be easily reshaped and reconfigured by an end-user, without writing code.</p>
-<h2 id="principle">Principle</h2>
+<p><em>An Angular library for creating no-code tools &amp; applications.</em></p>
+<ul>
+<li><a href="https://sinequa.github.io/ngx-ui-builder/">Documentation</a></li>
+<li><a href="https://sinequa.github.io/ngx-ui-builder/demo">Demo application</a></li>
+<li><a href="https://sinequa.github.io/ngx-ui-builder/compodoc">API Reference</a></li>
+</ul>
+<p><strong>UI Builder</strong> is an Angular library that lets developers create applications that can be easily reshaped and reconfigured by end-users through point-and-click and drag-and-drop interactions.</p>
+<p><img src="docs/demo.gif" alt="Demo UI Builder" class="img-responsive"></p>
+<h2 id="getting-started">Getting Started</h2>
+<p>Add the library to your application with:</p>
+<div><pre class="line-numbers"><code class="language-none">ng add &#64;sinequa/ngx-ui-builder</code></pre></div><p>(This command installs the library and its peer dependencies from npm)</p>
+<p>Import the 2 following modules in your <code>app.module.ts</code> (the first one to display configurable components in your app; the second one to display their configurator):</p>
+<div><pre class="line-numbers"><code class="language-ts">import { DynamicViewsModule, ConfiguratorModule } from &#39;&#64;sinequa/ngx-ui-builder&#39;;
+
+&#64;NgModule({
+    imports: [
+        ...
+        DynamicViewsModule,
+        ConfiguratorModule
+    ]
+})</code></pre></div><p>Import the Bootstrap utilities and UI Builder stylesheets in your project&#39;s stylesheet:</p>
+<div><pre class="line-numbers"><code class="language-scss">&#64;import &quot;~bootstrap/dist/css/bootstrap-utilities.min&quot;; // Unless you already use Bootstrap or Bootstrap utilities
+&#64;import &quot;~&#64;sinequa/ngx-ui-builder/styles/ui-builder&quot;;</code></pre></div><p>(Note that the Bootstrap utilities should not affect the styling of your app: they only introduce convenience styling such as <code>display: flex</code> for the class name <code>d-flex</code>)</p>
+<p>Initialize the configuration service with a blank configuration:</p>
+<div><pre class="line-numbers"><code class="language-ts">import { ConfigService } from &#39;&#64;sinequa/ngx-ui-builder&#39;;
+
+...
+export class AppComponent {
+    
+  constructor(
+    public configService: ConfigService
+  ){
+    this.configService.init([]);
+  }</code></pre></div><p>Create a first zone in your application:</p>
+<div><pre class="line-numbers"><code class="language-html">&lt;uib-zone id=&quot;test&quot;&gt;
+    &lt;ng-template uib-template=&quot;test&quot;&gt;
+        &lt;h1&gt;Hello world&lt;/h1&gt;
+    &lt;/ng-template&gt;
+&lt;/uib-zone&gt;</code></pre></div><p>Display the configurator and toolbar (wrapped under a <code>.uib-bootstrap</code> element, so that these components are correctly styled):</p>
+<div><pre class="line-numbers"><code class="language-html">
+&lt;div class=&quot;uib-bootstrap&quot;&gt;
+
+    &lt;uib-toolbar&gt;
+        
+    &lt;!-- Inject custom toolbar buttons here --&gt;
+
+    &lt;/uib-toolbar&gt;
+
+    &lt;uib-configurator&gt;
+        
+    &lt;!-- Inject custom configurators here --&gt;
+      
+    &lt;/uib-configurator&gt;
+
+&lt;/div&gt;</code></pre></div><h2 id="usage">Usage</h2>
+<h3 id="introduction">Introduction</h3>
 <p>A normal Angular application has HTML templates that look like this:</p>
 <div><pre class="line-numbers"><code class="language-html">&lt;div *ngFor=&quot;let product of products&quot;&gt;
     &lt;h3&gt;{{product.name}}&lt;/h3&gt;

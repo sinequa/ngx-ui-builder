@@ -69,7 +69,6 @@
             <p class="comment">
                             <code><a href="https://angular.io/api/core/OnChanges" target="_blank" >OnChanges</a></code>
                             <code><a href="https://angular.io/api/core/OnDestroy" target="_blank" >OnDestroy</a></code>
-                            <code><a href="https://angular.io/api/core/AfterContentInit" target="_blank" >AfterContentInit</a></code>
             </p>
 
 
@@ -120,16 +119,10 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
-                                <a href="#ngAfterContentInit" >ngAfterContentInit</a>
-                            </li>
-                            <li>
                                 <a href="#ngOnChanges" >ngOnChanges</a>
                             </li>
                             <li>
                                 <a href="#ngOnDestroy" >ngOnDestroy</a>
-                            </li>
-                            <li>
-                                <a href="#setTooltip" >setTooltip</a>
                             </li>
                         </ul>
                     </td>
@@ -148,9 +141,6 @@
                             </li>
                             <li>
                                 <a href="#container" >container</a>
-                            </li>
-                            <li>
-                                <a href="#disabled" >disabled</a>
                             </li>
                             <li>
                                 <a href="#placement" >placement</a>
@@ -180,7 +170,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="41" class="link-to-prism">projects/lib/src/utils/tooltip.directive.ts:41</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">projects/lib/src/utils/tooltip.directive.ts:39</a></div>
                             </td>
                         </tr>
 
@@ -239,14 +229,14 @@
                         <i>Default value : </i><code>{
     html: true,
     sanitize: false,
-    delay: 300,
+    delay: { show: 300, hide: 0 },
     trigger: &#x27;hover&#x27;
   }</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="17" class="link-to-prism">projects/lib/src/utils/tooltip.directive.ts:17</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">projects/lib/src/utils/tooltip.directive.ts:19</a></div>
                             </td>
                         </tr>
                 <tr>
@@ -278,43 +268,22 @@ be overriden here.</li>
                 </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Default value : </i><code>&quot;uib-toolbar&quot;</code>
+                        <i>Default value : </i><code>&quot;.uib-bootstrap&quot;</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">projects/lib/src/utils/tooltip.directive.ts:35</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">projects/lib/src/utils/tooltip.directive.ts:37</a></div>
                             </td>
                         </tr>
                 <tr>
                     <td class="col-md-4">
                         <div class="io-description"><p>Append the tooltip to a specific element.</p>
-<p>By default, tooltip is append to <code>uib-toolbar</code> component.
+<p>By default, tooltip is append to <code>uib-bootstrap</code> component.
 When <code>undefined</code>, tooltip is append to his host element.</p>
 </div>
                     </td>
                 </tr>
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="disabled"></a>
-                        <b>disabled</b>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
-
-                    </td>
-                </tr>
-                        <tr>
-                            <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="41" class="link-to-prism">projects/lib/src/utils/tooltip.directive.ts:41</a></div>
-                            </td>
-                        </tr>
             </tbody>
         </table>
         <table class="table table-sm table-bordered">
@@ -327,18 +296,18 @@ When <code>undefined</code>, tooltip is append to his host element.</p>
                 </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Type : </i>    <code>&quot;auto&quot; | &quot;top&quot; | &quot;bottom&quot; | &quot;left&quot; | &quot;right&quot;</code>
+                        <i>Type : </i>        <code><a href="../miscellaneous/typealiases.html#TooltipPlacement" target="_self" >TooltipPlacement</a></code>
 
                     </td>
                 </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Default value : </i><code>&#x27;auto&#x27;</code>
+                        <i>Default value : </i><code>&quot;auto&quot;</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="27" class="link-to-prism">projects/lib/src/utils/tooltip.directive.ts:27</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">projects/lib/src/utils/tooltip.directive.ts:29</a></div>
                             </td>
                         </tr>
                 <tr>
@@ -365,7 +334,7 @@ When <code>undefined</code>, tooltip is append to his host element.</p>
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="8" class="link-to-prism">projects/lib/src/utils/tooltip.directive.ts:8</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="10" class="link-to-prism">projects/lib/src/utils/tooltip.directive.ts:10</a></div>
                             </td>
                         </tr>
             </tbody>
@@ -379,43 +348,6 @@ When <code>undefined</code>, tooltip is append to his host element.</p>
     <h3 id="methods">
         Methods
     </h3>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="ngAfterContentInit"></a>
-                    <span class="name">
-                        <span ><b>ngAfterContentInit</b></span>
-                        <a href="#ngAfterContentInit"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>ngAfterContentInit()</code>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="51"
-                            class="link-to-prism">projects/lib/src/utils/tooltip.directive.ts:51</a></div>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-
-                    <div class="io-description">
-                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
-
-                    </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
     <table class="table table-sm table-bordered">
         <tbody>
             <tr>
@@ -436,8 +368,8 @@ When <code>undefined</code>, tooltip is append to his host element.</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="45"
-                            class="link-to-prism">projects/lib/src/utils/tooltip.directive.ts:45</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="43"
+                            class="link-to-prism">projects/lib/src/utils/tooltip.directive.ts:43</a></div>
                 </td>
             </tr>
 
@@ -490,47 +422,6 @@ When <code>undefined</code>, tooltip is append to his host element.</p>
             </tr>
         </tbody>
     </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="setTooltip"></a>
-                    <span class="name">
-                        <span ><b>setTooltip</b></span>
-                        <a href="#setTooltip"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>setTooltip()</code>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="62"
-                            class="link-to-prism">projects/lib/src/utils/tooltip.directive.ts:62</a></div>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-description"><ul>
-<li>If the <code>html</code> property is set, create a tooltip with the <code>Tooltip.getOrCreateInstance</code> method</li>
-</ul>
-</div>
-
-                    <div class="io-description">
-                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
-
-                    </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
 </section>
             <section>
     
@@ -557,7 +448,7 @@ When <code>undefined</code>, tooltip is append to his host element.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">projects/lib/src/utils/tooltip.directive.ts:43</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="41" class="link-to-prism">projects/lib/src/utils/tooltip.directive.ts:41</a></div>
                         </td>
                     </tr>
 
@@ -584,7 +475,7 @@ When <code>undefined</code>, tooltip is append to his host element.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">projects/lib/src/utils/tooltip.directive.ts:37</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">projects/lib/src/utils/tooltip.directive.ts:39</a></div>
                         </td>
                     </tr>
 
@@ -598,18 +489,20 @@ When <code>undefined</code>, tooltip is append to his host element.</p>
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { AfterContentInit, Directive, ElementRef, HostBinding, Input, OnChanges, OnDestroy } from &quot;@angular/core&quot;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Directive, ElementRef, Input, OnChanges, OnDestroy } from &quot;@angular/core&quot;;
 import { Tooltip } from &quot;bootstrap&quot;;
+
+export type TooltipPlacement &#x3D; &#x27;auto&#x27; | &#x27;top&#x27; | &#x27;bottom&#x27; | &#x27;left&#x27; | &#x27;right&#x27;;
 
 @Directive({
   selector: &#x27;[uib-tooltip]&#x27;
 })
-export class TooltipDirective implements OnChanges, OnDestroy, AfterContentInit {
+export class TooltipDirective implements OnChanges, OnDestroy {
   @Input(&#x27;uib-tooltip&#x27;) html: string;
-  
+
   /**
    * Allow Bootstrap tooltip&#x27;s options configuration
-   * 
+   *
    * * &#x60;title&#x60;, &#x60;placement&#x60; and &#x60;container&#x60; options are removed from Bootstrap options as they use their own inputs.
    * * &#x60;html&#x60;, &#x60;sanitize&#x60;, &#x60;delay&#x60; and &#x60;trigger&#x60; options are sets with different values as well by default but can
    * be overriden here.
@@ -617,61 +510,44 @@ export class TooltipDirective implements OnChanges, OnDestroy, AfterContentInit 
   @Input() config?: Partial&lt;Omit&lt;Tooltip.Options, &#x27;title&#x27; | &#x27;placement&#x27; | &#x27;container&#x27;&gt;&gt; &#x3D; {
     html: true,
     sanitize: false,
-    delay: 300,
+    delay: { show: 300, hide: 0 },
     trigger: &#x27;hover&#x27;
   };
-  
+
   /**
    * How to position the tooltip.
    */
-  @Input() placement: &#x27;auto&#x27; | &#x27;top&#x27; | &#x27;bottom&#x27; | &#x27;left&#x27; | &#x27;right&#x27; &#x3D; &#x27;auto&#x27;;
-  
+  @Input() placement: TooltipPlacement &#x3D; &quot;auto&quot;;
+
   /**
    * Append the tooltip to a specific element.
-   * 
-   * By default, tooltip is append to &#x60;uib-toolbar&#x60; component.
+   *
+   * By default, tooltip is append to &#x60;uib-bootstrap&#x60; component.
    * When &#x60;undefined&#x60;, tooltip is append to his host element.
    */
-  @Input() container?: string | Element &#x3D; &quot;uib-toolbar&quot;;
+  @Input() container?: string | Element &#x3D; &quot;.uib-bootstrap&quot;;
 
   tooltip?: Tooltip;
-    
-  // @Input() it&#x27;s used to trigger the changes detection cycle for the directive
-  @HostBinding(&#x27;disabled&#x27;)
-  @Input() disabled: boolean;
 
   constructor(public el: ElementRef){}
 
   ngOnChanges() {
-    // when element is disabled, remove tooltip otherwise it will be shown/created when enabled
-    this.tooltip?.dispose();
-    this.setTooltip();
-  }
-  
-  ngAfterContentInit(): void {
-    this.setTooltip();
+    this.tooltip?.dispose(); // Force the creation of a new tooltip, or else the content is not updated
+    if(this.html) {
+      this.tooltip &#x3D; Tooltip.getOrCreateInstance(this.el.nativeElement, {
+        ...this.config,
+        placement: this.placement,
+        title: this.html,
+        container: this.container || this.el.nativeElement
+      });
+    }
   }
 
   ngOnDestroy() {
     this.tooltip?.dispose();
   }
-  
-  /**
-   * * If the &#x60;html&#x60; property is set, create a tooltip with the &#x60;Tooltip.getOrCreateInstance&#x60; method
-   */
-  setTooltip() {
-    if (this.html) {
-      // tooltip trigger by default is now &#x27;hover&#x27; instead of &#x27;hover focus&#x27;
-      // this, prevents tooltip display on component focused
-      this.tooltip &#x3D; Tooltip.getOrCreateInstance(this.el.nativeElement, {
-        ...this.config,
-        placement: this.placement,
-        title: this.html,
-        container: this.container || this.el.nativeElement,
-      });
-    }
-  }
-}</code></pre>
+}
+</code></pre>
     </div>
 
 </div>

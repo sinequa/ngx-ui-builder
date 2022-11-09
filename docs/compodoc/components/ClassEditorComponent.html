@@ -95,9 +95,13 @@
             <tr>
                 <td class="col-md-3">template</td>
                 <td class="col-md-9"><pre class="line-numbers"><code class="language-html">&lt;label class&#x3D;&quot;form-label&quot; for&#x3D;&quot;classes&quot; i18n&gt;CSS Classes&lt;/label&gt;
-&lt;input class&#x3D;&quot;form-control&quot; id&#x3D;&quot;classes&quot;
+&lt;input
+  class&#x3D;&quot;form-control&quot;
+  id&#x3D;&quot;classes&quot;
   type&#x3D;&quot;text&quot;
   name&#x3D;&quot;classes&quot;
+  autocomplete&#x3D;&quot;off&quot;
+  spellcheck&#x3D;&quot;false&quot;
   [(ngModel)]&#x3D;&quot;context.config.classes&quot;
   (ngModelChangeDebounced)&#x3D;&quot;context.configChanged()&quot;
 /&gt;
@@ -163,7 +167,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">projects/lib/src/configurator/editors/class-editor.component.ts:18</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="22" class="link-to-prism">projects/lib/src/configurator/editors/class-editor.component.ts:22</a></div>
                             </td>
                         </tr>
             </tbody>
@@ -185,9 +189,13 @@ import { ConfiguratorContext } from &#x27;../configurator.models&#x27;;
   selector: &#x27;uib-class-editor&#x27;,
   template: &#x60;
   &lt;label class&#x3D;&quot;form-label&quot; for&#x3D;&quot;classes&quot; i18n&gt;CSS Classes&lt;/label&gt;
-  &lt;input class&#x3D;&quot;form-control&quot; id&#x3D;&quot;classes&quot;
+  &lt;input
+    class&#x3D;&quot;form-control&quot;
+    id&#x3D;&quot;classes&quot;
     type&#x3D;&quot;text&quot;
     name&#x3D;&quot;classes&quot;
+    autocomplete&#x3D;&quot;off&quot;
+    spellcheck&#x3D;&quot;false&quot;
     [(ngModel)]&#x3D;&quot;context.config.classes&quot;
     (ngModelChangeDebounced)&#x3D;&quot;context.configChanged()&quot;
   /&gt;
@@ -228,8 +236,8 @@ export class ClassEditorComponent {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><label class="form-label" for="classes" i18n>CSS Classes</label><input class="form-control" id="classes"  type="text"  name="classes"  [(ngModel)]="context.config.classes"  (ngModelChangeDebounced)="context.configChanged()"/></div>'
-    var COMPONENTS = [{'name': 'AutocompleteComponent', 'selector': 'uib-autocomplete'},{'name': 'ClassEditorComponent', 'selector': 'uib-class-editor'},{'name': 'ConditionEditorComponent', 'selector': 'uib-condition-editor'},{'name': 'ConfiguratorComponent', 'selector': 'uib-configurator'},{'name': 'FlexEditorComponent', 'selector': 'uib-flex-editor'},{'name': 'HtmlEditorComponent', 'selector': 'uib-html-editor'},{'name': 'ItemComponent', 'selector': '[uib-item]'},{'name': 'ModalComponent', 'selector': 'uib-modal'},{'name': 'PaletteComponent', 'selector': 'uib-palette'},{'name': 'SvgIconComponent', 'selector': 'svg-icon'},{'name': 'ToastComponent', 'selector': 'uib-toast'},{'name': 'ToolbarComponent', 'selector': 'uib-toolbar'},{'name': 'TreeComponent', 'selector': 'uib-tree'},{'name': 'ZoneComponent', 'selector': 'uib-zone'}];
+        var COMPONENT_TEMPLATE = '<div><label class="form-label" for="classes" i18n>CSS Classes</label><input  class="form-control"  id="classes"  type="text"  name="classes"  autocomplete="off"  spellcheck="false"  [(ngModel)]="context.config.classes"  (ngModelChangeDebounced)="context.configChanged()"/></div>'
+    var COMPONENTS = [{'name': 'AutocompleteComponent', 'selector': 'uib-autocomplete'},{'name': 'ClassEditorComponent', 'selector': 'uib-class-editor'},{'name': 'ConditionEditorComponent', 'selector': 'uib-condition-editor'},{'name': 'ConfiguratorComponent', 'selector': 'uib-configurator'},{'name': 'FlexEditorComponent', 'selector': 'uib-flex-editor'},{'name': 'HtmlEditorComponent', 'selector': 'uib-html-editor'},{'name': 'ItemComponent', 'selector': '[uib-item]'},{'name': 'ModalComponent', 'selector': 'uib-modal'},{'name': 'PaletteComponent', 'selector': 'uib-palette'},{'name': 'SpacingEditorComponent', 'selector': 'uib-bs-spacing-editor'},{'name': 'SvgIconComponent', 'selector': 'svg-icon'},{'name': 'ToastComponent', 'selector': 'uib-toast'},{'name': 'ToolbarComponent', 'selector': 'uib-toolbar'},{'name': 'TreeComponent', 'selector': 'uib-tree'},{'name': 'ZoneComponent', 'selector': 'uib-zone'}];
     var DIRECTIVES = [{'name': 'ConfigurableDirective', 'selector': '[uib-configurable]'},{'name': 'NgModelChangeDebouncedDirective', 'selector': '[ngModelChangeDebounced]'},{'name': 'TemplateNameDirective', 'selector': '[uib-template]'},{'name': 'TooltipDirective', 'selector': '[uib-tooltip]'}];
     var ACTUAL_COMPONENT = {'name': 'ClassEditorComponent'};
 </script>

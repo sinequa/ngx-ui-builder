@@ -31,12 +31,12 @@
   <div class="p-1 filters">
     <h3>Filters</h3>
     <uib-zone id="filters">
-      <ng-template uib-template="range" let-config>
+      <ng-template uib-template="range" display="Range filter" let-config>
         <h4>{{ config.field | titlecase }}: {{ this[config.field] }}</h4>
         <input type="range" min="0"max="200" [(ngModel)]="this[config.field]" (ngModelChange)="search()"/>
       </ng-template>
 
-      <ng-template uib-template="abilities">
+      <ng-template uib-template="abilities" display="Ability filter">
         <h4>Abilities:</h4>
         <div *ngFor="let a of allAbilities">
           <a *ngIf="!abilities.includes(a)" href="#" (click)="selectAbility(a)" class="metadata">{{ a }}</a>
@@ -84,7 +84,6 @@
         [(ngModel)]="context.config.title"
         (ngModelChangeDebounced)="context.configChanged()"
       />
-      <hr />
     </ng-template>
 
     <ng-template uib-template="metadata" let-context>
@@ -101,7 +100,6 @@
         <input class="form-check-input" type="checkbox" id="hideField" [(ngModel)]="!!context.config.hideField" (ngModelChange)="context.configChanged()">
         <label class="form-check-label" for="hideField">Hide field</label>
       </div>
-      <hr />
     </ng-template>
 
   </uib-configurator>

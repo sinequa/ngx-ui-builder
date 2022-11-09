@@ -399,34 +399,12 @@ export const defaultPaletteOptions: PaletteOptions &#x3D; {
 @Component({
   selector: &#x27;uib-palette&#x27;,
   templateUrl: &#x27;./palette.component.html&#x27;,
-  styles: [
-    &#x60;
-.palette-item {
-  display: inline-block;
-  border: 1px solid grey;
-  padding: 0.25rem 0.5rem;
-  border-radius: 3px;
-  background: rgb(0,0,0,0.1);
-  cursor: pointer;
-  margin-right: 5px;
-  margin-bottom: 5px;
-}
-.palette-item .btn-close {
-  font-size: 0.7em;
-}
-.palette-item .grip {
-  position: relative;
-  top: -2px;
-  color: #7c7c7c;
-  margin-right: 3px;
-}
-  &#x60;
-  ],
+  styleUrls: [&#x27;./palette.component.scss&#x27;],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PaletteComponent implements OnInit, OnChanges {
   @Input() context: Configurable;
-  @Input() configurators: Record&lt;string,TemplateNameDirective&gt; &#x3D; {}; 
+  @Input() configurators: Record&lt;string,TemplateNameDirective&gt; &#x3D; {};
   @Input() options &#x3D; defaultPaletteOptions;
 
   standardPalette: PaletteItem[];
@@ -492,7 +470,7 @@ export class PaletteComponent implements OnInit, OnChanges {
     }
   }
 
-  generateExistingPalette(configs: ComponentConfig[]) {    
+  generateExistingPalette(configs: ComponentConfig[]) {
     if(!this.options.showExistingPalette) {
       this.existingPalette &#x3D; [];
       return;

@@ -62,7 +62,7 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>projects/lib/src/dynamic-views/condition.pipe.ts</code>
+            <code>projects/lib/src/conditions/condition.pipe.ts</code>
         </p>
 
 
@@ -106,7 +106,7 @@
             <tr>
                 <td class="col-md-4">
                     <div class="io-line">Defined in <a href="" data-line="13"
-                            class="link-to-prism">projects/lib/src/dynamic-views/condition.pipe.ts:13</a></div>
+                            class="link-to-prism">projects/lib/src/conditions/condition.pipe.ts:13</a></div>
                 </td>
             </tr>
 
@@ -192,7 +192,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="10" class="link-to-prism">projects/lib/src/dynamic-views/condition.pipe.ts:10</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="10" class="link-to-prism">projects/lib/src/conditions/condition.pipe.ts:10</a></div>
                         </td>
                     </tr>
 
@@ -206,7 +206,7 @@
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Pipe, PipeTransform } from &quot;@angular/core&quot;;
-import { Condition, ConditionsService } from &quot;../configuration/conditions.service&quot;;
+import { Condition, ConditionsService } from &quot;./conditions.service&quot;;
 
 @Pipe({
   name: &#x27;uibCondition&#x27;
@@ -222,7 +222,8 @@ export class ConditionPipe implements PipeTransform {
     return this.conditionService.checkData(params, value);
   }
 
-}</code></pre>
+}
+</code></pre>
     </div>
 
 </div>

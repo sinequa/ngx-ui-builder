@@ -52,6 +52,11 @@
         class="d-block mb-3">
       </uib-html-editor>
 
+      <!-- Separator to mark the difference between the type-specific configurator and the generic configuration options -->
+      <ng-container *ngIf="configurators[edited.config.type]?.template || edited.config.type.startsWith('_')">
+        <hr />
+      </ng-container>
+
       <div class="mb-3" *ngIf="edited.options.showCssClasses">
         <uib-class-editor [context]="edited"></uib-class-editor>
       </div>

@@ -293,15 +293,15 @@ import {
   addEntities,
   updateEntities,
   selectEntity,
-  selectAll,
-  getEntities,
+  selectAllEntities,
+  getAllEntities,
   deleteEntities,
   deleteAllEntities,
 } from &#x27;@ngneat/elf-entities&#x27;;
 import { stateHistory } from &#x27;@ngneat/elf-state-history&#x27;;
 import { Observable } from &#x27;rxjs&#x27;;
 import { filter, map } from &#x27;rxjs/operators&#x27;;
-import { Condition } from &#x27;./conditions.service&#x27;;
+import { Condition } from &#x27;../conditions&#x27;;
 
 export interface ComponentConfig {
   readonly id: string;
@@ -320,7 +320,7 @@ export interface ContainerConfig extends ComponentConfig {
 export class ConfigService {
   store: Store;
   historyState: any;
-  
+
   init(initialValue: ComponentConfig[]) {
     const { state, config } &#x3D; createState(
       withEntities&lt;ComponentConfig&gt;({ initialValue })
@@ -338,11 +338,11 @@ export class ConfigService {
   }
 
   public watchAllConfig(): Observable&lt;ComponentConfig[]&gt; {
-    return this.store.pipe(selectAll());
+    return this.store.pipe(selectAllEntities());
   }
 
   public getAllConfig(): ComponentConfig[] {
-    return this.store.query(getEntities());
+    return this.store.query(getAllEntities());
   }
 
   public watchConfig(id: string): Observable&lt;ComponentConfig&gt; {
