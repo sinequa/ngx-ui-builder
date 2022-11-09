@@ -1,0 +1,1597 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>ngx-ui-builder documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="../" class="navbar-brand">ngx-ui-builder documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li>Components</li>
+  <li
+  >
+  SpacingEditorComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="active">
+            <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li >
+            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li >
+            <a href="#styleData" role="tab" id="styleData-tab" data-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li >
+            <a href="#tree" role="tab" id="tree-tab" data-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="c-info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>projects/lib/src/configurator/editors/spacing-editor.component.ts</code>
+</p>
+
+
+
+
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                    <code><a href="https://angular.io/api/core/AfterViewInit" target="_blank" >AfterViewInit</a></code>
+                    <code><a href="https://angular.io/api/core/OnChanges" target="_blank" >OnChanges</a></code>
+    </p>
+
+
+<section>
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+            <tr>
+                <td class="col-md-3">changeDetection</td>
+                <td class="col-md-9"><code>ChangeDetectionStrategy.OnPush</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>uib-bs-spacing-editor</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>./flex-editor.component.scss</code></td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-3">template</td>
+                <td class="col-md-9"><pre class="line-numbers"><code class="language-html">&lt;details id&#x3D;&quot;spacing-options&quot; #details&gt;
+  &lt;summary i18n&gt;Spacing and borders&lt;/summary&gt;
+  &lt;div class&#x3D;&quot;card p-2&quot;&gt;
+    &lt;details *ngFor&#x3D;&quot;let option of options&quot; [id]&#x3D;&quot;option.name&quot; #details&gt;
+      &lt;summary&gt;&lt;strong&gt;{{option.title}}&lt;/strong&gt;&lt;/summary&gt;
+      &lt;p class&#x3D;&quot;small text-muted m-0&quot;&gt;{{option.description}}&lt;/p&gt;
+      &lt;ng-container *ngFor&#x3D;&quot;let prop of option.properties&quot;&gt;
+        &lt;div&gt;{{prop.title}}&lt;/div&gt;
+        &lt;div class&#x3D;&quot;radio-group&quot;&gt;
+          &lt;ng-container *ngFor&#x3D;&quot;let o of prop.options&quot;&gt;
+            &lt;input type&#x3D;&quot;radio&quot; id&#x3D;&quot;{{option.name}}-{{prop.name}}-{{o.code}}&quot; [checked]&#x3D;&quot;isChecked(option.name, prop.name, o.code)&quot; (click)&#x3D;&quot;toggle(option.name, prop.name, o.code)&quot;/&gt;
+            &lt;label class&#x3D;&quot;p-0&quot; for&#x3D;&quot;{{option.name}}-{{prop.name}}-{{o.code}}&quot; [uib-tooltip]&#x3D;&quot;o.description&quot; placement&#x3D;&quot;bottom&quot;&gt;
+              &lt;svg-icon [key]&#x3D;&quot;o.icon&quot; width&#x3D;&quot;36px&quot; height&#x3D;&quot;36px&quot;&gt;&lt;/svg-icon&gt;
+            &lt;/label&gt;
+          &lt;/ng-container&gt;
+        &lt;/div&gt;
+      &lt;/ng-container&gt;
+    &lt;/details&gt;
+    &lt;a class&#x3D;&quot;small text-muted mt-2&quot; href&#x3D;&quot;https://getbootstrap.com/docs/5.2/utilities/api/&quot; target&#x3D;&quot;_blank&quot; i18n&gt;More utilities from the Bootstrap library&lt;/a&gt;
+  &lt;/div&gt;
+&lt;/details&gt;
+</code></pre></td>
+            </tr>
+
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#borderDirections" >borderDirections</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#cdRef" >cdRef</a>
+                            </li>
+                            <li>
+                                <a href="#classes" >classes</a>
+                            </li>
+                            <li>
+                                <a href="#componentId" >componentId</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#configService" >configService</a>
+                            </li>
+                            <li>
+                                <a href="#details" >details</a>
+                            </li>
+                            <li>
+                                <a href="#directions" >directions</a>
+                            </li>
+                            <li>
+                                <a href="#magnitudes" >magnitudes</a>
+                            </li>
+                            <li>
+                                <a href="#marginMagnitudes" >marginMagnitudes</a>
+                            </li>
+                            <li>
+                                <a href="#options" >options</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#renderer" >renderer</a>
+                            </li>
+                            <li>
+                                <a href="#state" >state</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#isChecked" >isChecked</a>
+                            </li>
+                            <li>
+                                <a href="#ngAfterViewInit" >ngAfterViewInit</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnChanges" >ngOnChanges</a>
+                            </li>
+                            <li>
+                                <a href="#toggle" >toggle</a>
+                            </li>
+                            <li>
+                                <a href="#updateClasses" >updateClasses</a>
+                            </li>
+                            <li>
+                                <a href="#updateDetails" >updateDetails</a>
+                            </li>
+                            <li>
+                                <a href="#updateState" >updateState</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Inputs</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#config" >config</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(configService: <a href="../injectables/ConfigService.html" target="_self">ConfigService</a>, renderer: <a href="https://angular.io/api/core/Renderer2" target="_blank">Renderer2</a>, cdRef: <a href="https://angular.io/api/core/ChangeDetectorRef" target="_blank">ChangeDetectorRef</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="93" class="link-to-prism">projects/lib/src/configurator/editors/spacing-editor.component.ts:93</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>configService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/ConfigService.html" target="_self" >ConfigService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>renderer</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="https://angular.io/api/core/Renderer2" target="_blank" >Renderer2</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>cdRef</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="https://angular.io/api/core/ChangeDetectorRef" target="_blank" >ChangeDetectorRef</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+    <section>
+    <h3 id="inputs">Inputs</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="config"></a>
+                        <b>config</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/ComponentConfig.html" target="_self" >ComponentConfig</a></code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">projects/lib/src/configurator/editors/spacing-editor.component.ts:33</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+    <section>
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isChecked"></a>
+                    <span class="name">
+                        <span ><b>isChecked</b></span>
+                        <a href="#isChecked"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>isChecked(type: "p" | "m" | "border" | string, prop: "direction" | "magnitude", code: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="185"
+                            class="link-to-prism">projects/lib/src/configurator/editors/spacing-editor.component.ts:185</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Returns the activation state of a given property.
+This function is called by the template to set the &quot;checked&quot; state
+of each radio button.</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>type</td>
+                                    <td>
+                                            <code>&quot;p&quot; | &quot;m&quot; | &quot;border&quot; | string</code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>prop</td>
+                                    <td>
+                                            <code>&quot;direction&quot; | &quot;magnitude&quot;</code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>code</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngAfterViewInit"></a>
+                    <span class="name">
+                        <span ><b>ngAfterViewInit</b></span>
+                        <a href="#ngAfterViewInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngAfterViewInit()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="117"
+                            class="link-to-prism">projects/lib/src/configurator/editors/spacing-editor.component.ts:117</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Initialize the state of the <detail> elements upon ViewInit
+(the first call to updateDetails() from ngOnChanges() does not
+yet have access to these elements)</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnChanges"></a>
+                    <span class="name">
+                        <span ><b>ngOnChanges</b></span>
+                        <a href="#ngOnChanges"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnChanges(changes: <a href="https://angular.io/api/core/SimpleChanges" target="_blank">SimpleChanges</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="102"
+                            class="link-to-prism">projects/lib/src/configurator/editors/spacing-editor.component.ts:102</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>changes</td>
+                                    <td>
+                                                <code><a href="https://angular.io/api/core/SimpleChanges" target="_blank" >SimpleChanges</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="toggle"></a>
+                    <span class="name">
+                        <span ><b>toggle</b></span>
+                        <a href="#toggle"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>toggle(type: "p" | "m" | "border" | string, prop: "direction" | "magnitude", code: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="196"
+                            class="link-to-prism">projects/lib/src/configurator/editors/spacing-editor.component.ts:196</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Toggles the state of a given property.
+This function is called by the template upon a click on a radio button.</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>type</td>
+                                    <td>
+                                            <code>&quot;p&quot; | &quot;m&quot; | &quot;border&quot; | string</code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>prop</td>
+                                    <td>
+                                            <code>&quot;direction&quot; | &quot;magnitude&quot;</code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>code</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="updateClasses"></a>
+                    <span class="name">
+                        <span ><b>updateClasses</b></span>
+                        <a href="#updateClasses"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>updateClasses()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="222"
+                            class="link-to-prism">projects/lib/src/configurator/editors/spacing-editor.component.ts:222</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Update the class list and propagate the update to the config service</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="updateDetails"></a>
+                    <span class="name">
+                        <span ><b>updateDetails</b></span>
+                        <a href="#updateDetails"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>updateDetails()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="158"
+                            class="link-to-prism">projects/lib/src/configurator/editors/spacing-editor.component.ts:158</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>This method opens or closes the <detail> elements, depending on the classes
+contained in the configuration</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="updateState"></a>
+                    <span class="name">
+                        <span ><b>updateState</b></span>
+                        <a href="#updateState"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>updateState()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="125"
+                            class="link-to-prism">projects/lib/src/configurator/editors/spacing-editor.component.ts:125</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Take the input configuration (config.classes) and parse the content
+to feed the state object (which determines the state of each option).</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section>
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="borderDirections"></a>
+                    <span class="name">
+                        <span ><b>borderDirections</b></span>
+                        <a href="#borderDirections"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/object" target="_blank" >object</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{
+    name: &quot;direction&quot;,
+    title: $localize &#x60;Direction&#x60;,
+    options: [
+      {description: $localize &#x60;All around&#x60;, code: &quot;&quot;, icon: &quot;direction-left-right-top-bottom&quot;},
+      {description: $localize &#x60;On the left side&#x60;, code: &quot;-start&quot;, icon: &quot;direction-left&quot;},
+      {description: $localize &#x60;On the right side&#x60;, code: &quot;-end&quot;, icon: &quot;direction-right&quot;},
+      {description: $localize &#x60;On the top side&#x60;, code: &quot;-top&quot;, icon: &quot;direction-top&quot;},
+      {description: $localize &#x60;On the bottom side&#x60;, code: &quot;-bottom&quot;, icon: &quot;direction-bottom&quot;},
+    ]
+  }</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="69" class="link-to-prism">projects/lib/src/configurator/editors/spacing-editor.component.ts:69</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="cdRef"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>cdRef</b></span>
+                        <a href="#cdRef"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://angular.io/api/core/ChangeDetectorRef" target="_blank" >ChangeDetectorRef</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="99" class="link-to-prism">projects/lib/src/configurator/editors/spacing-editor.component.ts:99</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="classes"></a>
+                    <span class="name">
+                        <span ><b>classes</b></span>
+                        <a href="#classes"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>string[]</code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">projects/lib/src/configurator/editors/spacing-editor.component.ts:39</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="componentId"></a>
+                    <span class="name">
+                        <span ><b>componentId</b></span>
+                        <a href="#componentId"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">projects/lib/src/configurator/editors/spacing-editor.component.ts:37</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="configService"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>configService</b></span>
+                        <a href="#configService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../injectables/ConfigService.html" target="_self" >ConfigService</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="97" class="link-to-prism">projects/lib/src/configurator/editors/spacing-editor.component.ts:97</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="details"></a>
+                    <span class="name">
+                        <span ><b>details</b></span>
+                        <a href="#details"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>QueryList&lt;ElementRef&lt;HTMLDetailsElement&gt;&gt;</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <b>Decorators : </b>
+                        <br />
+                        <code>
+                            @ViewChildren(&#x27;details&#x27;)<br />
+                        </code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">projects/lib/src/configurator/editors/spacing-editor.component.ts:35</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="directions"></a>
+                    <span class="name">
+                        <span ><b>directions</b></span>
+                        <a href="#directions"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/object" target="_blank" >object</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{
+    name: &quot;direction&quot;,
+    title: $localize &#x60;Direction&#x60;,
+    options: [
+      {description: $localize &#x60;All around&#x60;, code: &quot;&quot;, icon: &quot;direction-left-right-top-bottom&quot;},
+      {description: $localize &#x60;On the left side&#x60;, code: &quot;s&quot;, icon: &quot;direction-left&quot;},
+      {description: $localize &#x60;On the right side&#x60;, code: &quot;e&quot;, icon: &quot;direction-right&quot;},
+      {description: $localize &#x60;On the top side&#x60;, code: &quot;t&quot;, icon: &quot;direction-top&quot;},
+      {description: $localize &#x60;On the bottom side&#x60;, code: &quot;b&quot;, icon: &quot;direction-bottom&quot;},
+      {description: $localize &#x60;On the left and right&#x60;, code: &quot;x&quot;, icon: &quot;direction-left-right&quot;},
+      {description: $localize &#x60;On the top and bottom&#x60;, code: &quot;y&quot;, icon: &quot;direction-top-bottom&quot;}
+    ]
+  }</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">projects/lib/src/configurator/editors/spacing-editor.component.ts:42</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="magnitudes"></a>
+                    <span class="name">
+                        <span ><b>magnitudes</b></span>
+                        <a href="#magnitudes"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/object" target="_blank" >object</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{
+    name: &quot;magnitude&quot;,
+    title: $localize &#x60;Space&#x60;,
+    options: [
+      {description: $localize &#x60;None&#x60;, code: &quot;0&quot;, icon: &quot;no-space&quot;},
+      {description: $localize &#x60;Extra Small&#x60;, code: &quot;1&quot;, icon: &quot;space-xs&quot;},
+      {description: $localize &#x60;Small&#x60;, code: &quot;2&quot;, icon: &quot;space-s&quot;},
+      {description: $localize &#x60;Medium&#x60;, code: &quot;3&quot;, icon: &quot;space-m&quot;},
+      {description: $localize &#x60;Large&#x60;, code: &quot;4&quot;, icon: &quot;space-l&quot;},
+      {description: $localize &#x60;Extra Large&#x60;, code: &quot;5&quot;, icon: &quot;space-xl&quot;}
+    ]
+  }</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="56" class="link-to-prism">projects/lib/src/configurator/editors/spacing-editor.component.ts:56</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="marginMagnitudes"></a>
+                    <span class="name">
+                        <span ><b>marginMagnitudes</b></span>
+                        <a href="#marginMagnitudes"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/object" target="_blank" >object</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{
+    ...this.magnitudes,
+    options: [
+      ...this.magnitudes.options,
+      {description: $localize &#x60;Auto&#x60;, code: &quot;auto&quot;, icon: &quot;auto&quot;}
+    ]
+  }</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="81" class="link-to-prism">projects/lib/src/configurator/editors/spacing-editor.component.ts:81</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="options"></a>
+                    <span class="name">
+                        <span ><b>options</b></span>
+                        <a href="#options"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>[]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[
+    {name: &quot;m&quot;, title: $localize &#x60;Margin&#x60;, description: $localize &#x60;Margin is the space around the component&#x60;, properties: [this.directions, this.marginMagnitudes]},
+    {name: &quot;p&quot;, title: $localize &#x60;Padding&#x60;, description: $localize &#x60;Padding is the space within the component&#x60;, properties: [this.directions, this.magnitudes]},
+    {name: &quot;border&quot;, title: $localize &#x60;Border&#x60;, description: $localize &#x60;Border around the component&#x60;, properties: [this.borderDirections, this.magnitudes]}
+  ]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="89" class="link-to-prism">projects/lib/src/configurator/editors/spacing-editor.component.ts:89</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="renderer"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>renderer</b></span>
+                        <a href="#renderer"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://angular.io/api/core/Renderer2" target="_blank" >Renderer2</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="98" class="link-to-prism">projects/lib/src/configurator/editors/spacing-editor.component.ts:98</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="state"></a>
+                    <span class="name">
+                        <span ><b>state</b></span>
+                        <a href="#state"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>literal type</code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="40" class="link-to-prism">projects/lib/src/configurator/editors/spacing-editor.component.ts:40</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="c-source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, Input, OnChanges, QueryList, Renderer2, SimpleChanges, ViewChildren } from &quot;@angular/core&quot;;
+import { ComponentConfig, ConfigService } from &quot;../../configuration&quot;;
+
+@Component({
+  selector: &#x27;uib-bs-spacing-editor&#x27;,
+  template: &#x60;
+  &lt;details id&#x3D;&quot;spacing-options&quot; #details&gt;
+    &lt;summary i18n&gt;Spacing and borders&lt;/summary&gt;
+    &lt;div class&#x3D;&quot;card p-2&quot;&gt;
+      &lt;details *ngFor&#x3D;&quot;let option of options&quot; [id]&#x3D;&quot;option.name&quot; #details&gt;
+        &lt;summary&gt;&lt;strong&gt;{{option.title}}&lt;/strong&gt;&lt;/summary&gt;
+        &lt;p class&#x3D;&quot;small text-muted m-0&quot;&gt;{{option.description}}&lt;/p&gt;
+        &lt;ng-container *ngFor&#x3D;&quot;let prop of option.properties&quot;&gt;
+          &lt;div&gt;{{prop.title}}&lt;/div&gt;
+          &lt;div class&#x3D;&quot;radio-group&quot;&gt;
+            &lt;ng-container *ngFor&#x3D;&quot;let o of prop.options&quot;&gt;
+              &lt;input type&#x3D;&quot;radio&quot; id&#x3D;&quot;{{option.name}}-{{prop.name}}-{{o.code}}&quot; [checked]&#x3D;&quot;isChecked(option.name, prop.name, o.code)&quot; (click)&#x3D;&quot;toggle(option.name, prop.name, o.code)&quot;/&gt;
+              &lt;label class&#x3D;&quot;p-0&quot; for&#x3D;&quot;{{option.name}}-{{prop.name}}-{{o.code}}&quot; [uib-tooltip]&#x3D;&quot;o.description&quot; placement&#x3D;&quot;bottom&quot;&gt;
+                &lt;svg-icon [key]&#x3D;&quot;o.icon&quot; width&#x3D;&quot;36px&quot; height&#x3D;&quot;36px&quot;&gt;&lt;/svg-icon&gt;
+              &lt;/label&gt;
+            &lt;/ng-container&gt;
+          &lt;/div&gt;
+        &lt;/ng-container&gt;
+      &lt;/details&gt;
+      &lt;a class&#x3D;&quot;small text-muted mt-2&quot; href&#x3D;&quot;https://getbootstrap.com/docs/5.2/utilities/api/&quot; target&#x3D;&quot;_blank&quot; i18n&gt;More utilities from the Bootstrap library&lt;/a&gt;
+    &lt;/div&gt;
+  &lt;/details&gt;
+  &#x60;,
+  styleUrls: [&#x27;./flex-editor.component.scss&#x27;],
+  changeDetection: ChangeDetectionStrategy.OnPush
+})
+export class SpacingEditorComponent implements AfterViewInit, OnChanges {
+  @Input() config: ComponentConfig;
+
+  @ViewChildren(&quot;details&quot;) details: QueryList&lt;ElementRef&lt;HTMLDetailsElement&gt;&gt;;
+
+  componentId: string;
+
+  classes: string[];
+  state: {[type: string]: {index: number, direction: string|undefined, magnitude: string|undefined}};
+
+  directions &#x3D; {
+    name: &quot;direction&quot;,
+    title: $localize &#x60;Direction&#x60;,
+    options: [
+      {description: $localize &#x60;All around&#x60;, code: &quot;&quot;, icon: &quot;direction-left-right-top-bottom&quot;},
+      {description: $localize &#x60;On the left side&#x60;, code: &quot;s&quot;, icon: &quot;direction-left&quot;},
+      {description: $localize &#x60;On the right side&#x60;, code: &quot;e&quot;, icon: &quot;direction-right&quot;},
+      {description: $localize &#x60;On the top side&#x60;, code: &quot;t&quot;, icon: &quot;direction-top&quot;},
+      {description: $localize &#x60;On the bottom side&#x60;, code: &quot;b&quot;, icon: &quot;direction-bottom&quot;},
+      {description: $localize &#x60;On the left and right&#x60;, code: &quot;x&quot;, icon: &quot;direction-left-right&quot;},
+      {description: $localize &#x60;On the top and bottom&#x60;, code: &quot;y&quot;, icon: &quot;direction-top-bottom&quot;}
+    ]
+  };
+
+  magnitudes &#x3D; {
+    name: &quot;magnitude&quot;,
+    title: $localize &#x60;Space&#x60;,
+    options: [
+      {description: $localize &#x60;None&#x60;, code: &quot;0&quot;, icon: &quot;no-space&quot;},
+      {description: $localize &#x60;Extra Small&#x60;, code: &quot;1&quot;, icon: &quot;space-xs&quot;},
+      {description: $localize &#x60;Small&#x60;, code: &quot;2&quot;, icon: &quot;space-s&quot;},
+      {description: $localize &#x60;Medium&#x60;, code: &quot;3&quot;, icon: &quot;space-m&quot;},
+      {description: $localize &#x60;Large&#x60;, code: &quot;4&quot;, icon: &quot;space-l&quot;},
+      {description: $localize &#x60;Extra Large&#x60;, code: &quot;5&quot;, icon: &quot;space-xl&quot;}
+    ]
+  };
+
+  borderDirections &#x3D; {
+    name: &quot;direction&quot;,
+    title: $localize &#x60;Direction&#x60;,
+    options: [
+      {description: $localize &#x60;All around&#x60;, code: &quot;&quot;, icon: &quot;direction-left-right-top-bottom&quot;},
+      {description: $localize &#x60;On the left side&#x60;, code: &quot;-start&quot;, icon: &quot;direction-left&quot;},
+      {description: $localize &#x60;On the right side&#x60;, code: &quot;-end&quot;, icon: &quot;direction-right&quot;},
+      {description: $localize &#x60;On the top side&#x60;, code: &quot;-top&quot;, icon: &quot;direction-top&quot;},
+      {description: $localize &#x60;On the bottom side&#x60;, code: &quot;-bottom&quot;, icon: &quot;direction-bottom&quot;},
+    ]
+  }
+
+  marginMagnitudes &#x3D; {
+    ...this.magnitudes,
+    options: [
+      ...this.magnitudes.options,
+      {description: $localize &#x60;Auto&#x60;, code: &quot;auto&quot;, icon: &quot;auto&quot;}
+    ]
+  };
+
+  options &#x3D; [
+    {name: &quot;m&quot;, title: $localize &#x60;Margin&#x60;, description: $localize &#x60;Margin is the space around the component&#x60;, properties: [this.directions, this.marginMagnitudes]},
+    {name: &quot;p&quot;, title: $localize &#x60;Padding&#x60;, description: $localize &#x60;Padding is the space within the component&#x60;, properties: [this.directions, this.magnitudes]},
+    {name: &quot;border&quot;, title: $localize &#x60;Border&#x60;, description: $localize &#x60;Border around the component&#x60;, properties: [this.borderDirections, this.magnitudes]}
+  ];
+
+
+  constructor(
+    public configService: ConfigService,
+    public renderer: Renderer2,
+    public cdRef: ChangeDetectorRef
+  ){}
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes.config) {
+      this.updateState();
+      if(this.config.id !&#x3D;&#x3D; this.componentId) {
+        this.componentId &#x3D; this.config.id;
+        this.updateDetails(); // Update the &lt;details&gt; when a new component is open
+      }
+    }
+  }
+
+  /**
+   * Initialize the state of the &lt;detail&gt; elements upon ViewInit
+   * (the first call to updateDetails() from ngOnChanges() does not
+   * yet have access to these elements)
+   */
+  ngAfterViewInit(): void {
+    this.updateDetails();
+  }
+
+  /**
+   * Take the input configuration (config.classes) and parse the content
+   * to feed the state object (which determines the state of each option).
+   */
+  updateState() {
+    this.classes &#x3D; this.config.classes?.split(&#x27; &#x27;) || [];
+    this.state &#x3D; {};
+    for(let index&#x3D;0; index&lt;this.classes.length; index++) {
+      const c &#x3D; this.classes[index];
+      // Extract margin
+      let match &#x3D; c.match(/^m([stebxy]?)-([0-5]|auto)$/);
+      if(match) {
+        this.state[&#x27;m&#x27;] &#x3D; {index, direction: match[1], magnitude: match[2]};
+      }
+      // Extract padding
+      match &#x3D; c.match(/^p([stebxy]?)-([0-5])$/);
+      if(match) {
+        this.state[&#x27;p&#x27;] &#x3D; {index, direction: match[1], magnitude: match[2]};
+      }
+      // Extract &quot;border-1&quot;
+      match &#x3D; c.match(/^border-([0-5])$/);
+      if(match) {
+        this.state[&#x27;border-magnitude&#x27;] &#x3D; {index, direction: undefined, magnitude: match[1]};
+      }
+      // Extract &quot;border-top&quot; or &quot;border&quot;
+      for(const direction of this.borderDirections.options.map(o &#x3D;&gt; o.code)) {
+        if(c &#x3D;&#x3D;&#x3D; &#x60;border${direction}&#x60;) {
+          this.state[&#x60;border${direction}&#x60;] &#x3D; {index, direction, magnitude: undefined};
+        }
+      }
+    }
+  }
+
+  /**
+   * This method opens or closes the &lt;detail&gt; elements, depending on the classes
+   * contained in the configuration
+   */
+  updateDetails() {
+    if(this.details) {
+      const props &#x3D; Object.keys(this.state);
+      for(let detail of this.details) {
+        let open: boolean &#x3D; true;
+        switch(detail.nativeElement.id) {
+          case &quot;spacing-options&quot;: open &#x3D; props.length &gt; 0; break;
+          case &quot;m&quot;: open &#x3D; props.includes(&#x27;m&#x27;); break;
+          case &quot;p&quot;: open &#x3D; props.includes(&#x27;p&#x27;); break;
+          case &quot;border&quot;: open &#x3D; !!props.find(p &#x3D;&gt; p.startsWith(&quot;border&quot;)); break;
+        }
+        if(open) {
+          this.renderer.setAttribute(detail.nativeElement, &quot;open&quot;, &quot;&quot;);
+        }
+        else {
+          this.renderer.removeAttribute(detail.nativeElement, &quot;open&quot;)
+        }
+      }
+      this.cdRef.detectChanges();
+    }
+  }
+
+  /**
+   * Returns the activation state of a given property.
+   * This function is called by the template to set the &quot;checked&quot; state
+   * of each radio button.
+   */
+  isChecked(type: &#x27;p&#x27;|&#x27;m&#x27;|&#x27;border&#x27;|string, prop: &#x27;direction&#x27;|&#x27;magnitude&#x27;, code: string): boolean {
+    if(type &#x3D;&#x3D;&#x3D; &#x27;border&#x27;) {
+      type &#x3D; prop &#x3D;&#x3D;&#x3D; &#x27;magnitude&#x27;? &#x60;${type}-${prop}&#x60; : &#x60;${type}${code}&#x60;;
+    }
+    return this.state[type]?.[prop] &#x3D;&#x3D;&#x3D; code;
+  }
+
+  /**
+   * Toggles the state of a given property.
+   * This function is called by the template upon a click on a radio button.
+   */
+  toggle(type: &#x27;p&#x27;|&#x27;m&#x27;|&#x27;border&#x27;|string, prop: &#x27;direction&#x27;|&#x27;magnitude&#x27;, code: string) {
+    if(type &#x3D;&#x3D;&#x3D; &#x27;border&#x27;) {
+      type &#x3D; prop &#x3D;&#x3D;&#x3D; &#x27;magnitude&#x27;? &#x60;${type}-${prop}&#x60; : &#x60;${type}${code}&#x60;;
+    }
+    const match &#x3D; this.state[type];
+    if(match) {
+      const currentVal &#x3D; match[prop];
+      if(currentVal &#x3D;&#x3D;&#x3D; code) {
+        this.classes[match.index] &#x3D; &quot;&quot;;
+        delete this.state[type];
+      }
+      else {
+        match[prop] &#x3D; code;
+      }
+    }
+    else {
+      this.state[type] &#x3D; {index: this.classes.length, direction: &#x27;&#x27;, magnitude: &#x27;0&#x27;};
+      this.state[type][prop] &#x3D; code;
+    }
+
+    this.updateClasses();
+  }
+
+  /**
+   * Update the class list and propagate the update to the config service
+   */
+  updateClasses() {
+    for(const [type,match] of Object.entries(this.state)) {
+      if(type.startsWith(&#x27;border&#x27;)) {
+        this.classes[match.index] &#x3D; type &#x3D;&#x3D;&#x3D; &#x27;border-magnitude&#x27; ? &#x60;border-${match.magnitude}&#x60; : &#x60;border${match.direction}&#x60;;
+      }
+      else {
+        this.classes[match.index] &#x3D; &#x60;${type}${match.direction}-${match.magnitude}&#x60;;
+      }
+    }
+    this.config.classes &#x3D; this.classes.filter(c &#x3D;&gt; c).join(&#x27; &#x27;);
+    this.configService.updateConfig(this.config);
+  }
+
+}
+</code></pre>
+    </div>
+
+
+    <div class="tab-pane fade " id="c-styleData">
+                <p class="comment">
+                    <code>./flex-editor.component.scss</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss">.editor-line {
+  display: grid;
+  grid-template-columns: 105px 1fr;
+  align-items: center;
+}
+
+/* &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D; RADIO BUTTONS &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D; */
+
+.radio-group {
+  // --rotate: 90deg;
+  --icon-width: 22px;
+  --icon-height: 25px;
+  --bg-checked: hsl(80, 73%, 75%);
+  --bg-hover: hsl(80, 61%, 50%);
+
+  display: flex;
+  align-items: center;
+  gap: 0.2rem;
+}
+
+.radio-group label {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &gt; svg {
+    width: var(--icon-width);
+    height: var(--icon-height);
+
+    transform: rotate(var(--rotate, 0deg));
+    transition: transform 0.2s ease-in-out;
+  }
+}
+
+.radio-group input[type&#x3D;&#x27;radio&#x27;] {
+  display: none;
+}
+
+.radio-group input[type&#x3D;&#x27;radio&#x27;] + label {
+  cursor: pointer;
+  padding: 0.3rem 0.5rem;
+  border-radius: 4px;
+  border: 1px dashed #ccc;
+  transition: background-color 0.2s ease-in-out, fill 0.2s ease-in-out, color 0.2s ease-in-out;
+}
+
+.radio-group input[type&#x3D;&#x27;radio&#x27;]:checked + label {
+  border: 1px solid #000;
+  background-color: var(--bg-checked);
+}
+
+.radio-group input[type&#x3D;&#x27;radio&#x27;] + label:hover {
+  color: white;
+  fill: white;
+  background-color: var(--bg-hover);
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><details id="spacing-options" #details>  <summary i18n>Spacing and borders</summary>  <div class="card p-2">    <details *ngFor="let option of options" [id]="option.name" #details>      <summary><strong>{{option.title}}</strong></summary>      <p class="small text-muted m-0">{{option.description}}</p>      <ng-container *ngFor="let prop of option.properties">        <div>{{prop.title}}</div>        <div class="radio-group">          <ng-container *ngFor="let o of prop.options">            <input type="radio" id="{{option.name}}-{{prop.name}}-{{o.code}}" [checked]="isChecked(option.name, prop.name, o.code)" (click)="toggle(option.name, prop.name, o.code)"/>            <label class="p-0" for="{{option.name}}-{{prop.name}}-{{o.code}}" [uib-tooltip]="o.description" placement="bottom">              <svg-icon [key]="o.icon" width="36px" height="36px"></svg-icon>            </label>          </ng-container>        </div>      </ng-container>    </details>    <a class="small text-muted mt-2" href="https://getbootstrap.com/docs/5.2/utilities/api/" target="_blank" i18n>More utilities from the Bootstrap library</a>  </div></details></div>'
+    var COMPONENTS = [{'name': 'AutocompleteComponent', 'selector': 'uib-autocomplete'},{'name': 'ClassEditorComponent', 'selector': 'uib-class-editor'},{'name': 'ConditionEditorComponent', 'selector': 'uib-condition-editor'},{'name': 'ConfiguratorComponent', 'selector': 'uib-configurator'},{'name': 'FlexEditorComponent', 'selector': 'uib-flex-editor'},{'name': 'HtmlEditorComponent', 'selector': 'uib-html-editor'},{'name': 'ItemComponent', 'selector': '[uib-item]'},{'name': 'ModalComponent', 'selector': 'uib-modal'},{'name': 'PaletteComponent', 'selector': 'uib-palette'},{'name': 'SpacingEditorComponent', 'selector': 'uib-bs-spacing-editor'},{'name': 'SvgIconComponent', 'selector': 'svg-icon'},{'name': 'ToastComponent', 'selector': 'uib-toast'},{'name': 'ToolbarComponent', 'selector': 'uib-toolbar'},{'name': 'TreeComponent', 'selector': 'uib-tree'},{'name': 'ZoneComponent', 'selector': 'uib-zone'}];
+    var DIRECTIVES = [{'name': 'ConfigurableDirective', 'selector': '[uib-configurable]'},{'name': 'NgModelChangeDebouncedDirective', 'selector': '[ngModelChangeDebounced]'},{'name': 'TemplateNameDirective', 'selector': '[uib-template]'},{'name': 'TooltipDirective', 'selector': '[uib-tooltip]'}];
+    var ACTUAL_COMPONENT = {'name': 'SpacingEditorComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'SpacingEditorComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

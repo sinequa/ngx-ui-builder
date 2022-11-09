@@ -257,6 +257,7 @@
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, Input, OnChanges, SimpleChanges } from &#x27;@angular/core&#x27;;
 import { ComponentConfig, ConfigService } from &#x27;../../configuration&#x27;;
+import { TooltipPlacement } from &#x27;../../utils&#x27;;
 
 declare interface FlexOption {
   key: string;
@@ -274,7 +275,7 @@ export class FlexEditorComponent implements OnChanges {
   @Input() config: ComponentConfig;
   
   // tooltip&#x27;s placement
-  placement &#x3D; &quot;bottom&quot;;
+  placement: TooltipPlacement &#x3D; &quot;bottom&quot;;
   
   classes: string[];
 

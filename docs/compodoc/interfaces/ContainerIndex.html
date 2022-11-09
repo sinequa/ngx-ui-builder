@@ -183,7 +183,8 @@ import {
   ComponentConfig,
   ConfigService,
   ContainerConfig,
-} from &#x27;../configuration/config.service&#x27;;
+} from &#x27;../configuration&#x27;;
+import { ToastAction, ToastService } from &#x27;../utils&#x27;;
 
 export interface ContainerIndex {
   container: string;
@@ -197,9 +198,19 @@ export interface ComponentCreator {
 
 @Injectable({ providedIn: &#x27;root&#x27; })
 export class DragDropService {
-  constructor(public configService: ConfigService) {}
+
+  constructor(
+    public configService: ConfigService,
+    public toastService: ToastService
+  ) {}
 
   draggedCreator?: ComponentCreator;
+
+  undoAction: ToastAction &#x3D; {
+    text: $localize &#x60;Undo&#x60;,
+    hideToast: true,
+    action: () &#x3D;&gt; this.configService.undo()
+  }
 
   public handleDrop(
     containerId: string,
@@ -234,8 +245,13 @@ export class DragDropService {
     containerId: string
   ) {
     const container &#x3D; this.configService.getContainer(containerId);
-    container.items.splice(index, 1);
+    const config &#x3D; container.items.splice(index, 1);
     this.configService.updateConfig([container]);
+    this.toastService.show(
+      $localize &#x60;Component &#x27;${config[0]}&#x27; removed&#x60;,
+      &quot;warning text-dark&quot;,
+      [this.undoAction]
+    );
   }
 
   private insertNew(

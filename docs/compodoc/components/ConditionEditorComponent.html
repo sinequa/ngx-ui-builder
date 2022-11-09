@@ -1326,7 +1326,7 @@
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { ChangeDetectionStrategy, Component, Input, OnChanges } from &quot;@angular/core&quot;;
-import { Condition, ConditionsService, ConditionValue } from &quot;../../configuration&quot;;
+import { Condition, ConditionsService, ConditionValue } from &quot;../../conditions/conditions.service&quot;;
 import { ConfiguratorContext } from &quot;../configurator.models&quot;;
 
 @Component({
@@ -1438,17 +1438,18 @@ export class ConditionEditorComponent implements OnChanges {
     this.context.config.condition!.field &#x3D; field;
     this.updateConfig();
   }
-  
+
   selectValue(value: string, condition: ConditionValue) {
     condition.value &#x3D; value;
     this.updateConfig();
   }
-  
+
   // This item instance might change, so we track by index
   trackByFn(index, item) {
     return index;
   }
-}</code></pre>
+}
+</code></pre>
     </div>
 
     <div class="tab-pane fade " id="c-templateData">
@@ -1554,7 +1555,7 @@ export class ConditionEditorComponent implements OnChanges {
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
         var COMPONENT_TEMPLATE = '<div><div class="form-check">  <input class="form-check-input" type="checkbox" id="activate" [(ngModel)]="activate">  <label class="form-check-label" for="activate" i18n>Display this component conditionally</label></div><div *ngIf="context.config.condition">  <div class="mb-2">    <label class="form-label" for="data" i18n>Data</label>    <select [(ngModel)]="context.config.condition.data" id="data" class="form-select" (ngModelChange)="updateConfig()">      <option value="" *ngIf="context.context.data" i18n>data</option>      <option [ngValue]="source.key" *ngFor="let source of context.context.conditionsData | keyvalue">{{source.key}}</option>    </select>  </div>  <div class="mb-2">    <label class="form-label" for="field" i18n>Field</label>    <input #fieldInput class="form-control" type="text" id="field" spellcheck="false" autocomplete="off" [(ngModel)]="context.config.condition.field" (ngModelChangeDebounced)="updateConfig()"/>    <uib-autocomplete [inputElement]="fieldInput" [allSuggests]="fields" (select)="selectField($event)"></uib-autocomplete>  </div>  <div class="mb-2">    <label class="form-label" for="type" i18n>Type</label>    <select [(ngModel)]="context.config.condition.type" id="type" class="form-select" (ngModelChange)="updateConfig()">      <option value="equals" i18n>Equals</option>      <option value="regexp" i18n>Regular Expression</option>    </select>  </div>  <div class="mb-2">    <label class="form-label" i18n>Value(s)</label>        <div class="condition-value input-group flex-nowrap mb-1" *ngFor="let value of context.config.condition.values; let i = index; trackBy: trackByFn">      <div class="input-group-text align-items-start">        <input class="form-check-input" type="checkbox" id="not{{i}}" [(ngModel)]="value.not" (ngModelChange)="updateConfig()">        <label class="form-check-label ms-1" for="not{{i}}" i18n>Not</label>      </div>      <div class="flex-grow-1">        <input #valueInput class="form-control rounded-0" type="text" id="value{{i}}" spellcheck="false" autocomplete="off" [(ngModel)]="value.value" (ngModelChangeDebounced)="updateConfig()"/>        <uib-autocomplete [inputElement]="valueInput" [allSuggests]="values" (select)="selectValue($event, value)"></uib-autocomplete>      </div>      <button class="btn btn-outline-secondary" type="button" i18n-uib-tooltip uib-tooltip="Add another condition" container=".uib-bootstrap" (click)="addValue()">+</button>      <button class="btn btn-outline-danger" type="button" i18n-uib-tooltip uib-tooltip="Remove this condition" container=".uib-bootstrap" (click)="removeValue(i)" *ngIf="context.config.condition.values.length > 1">-</button>    </div>  </div>  <div class="form-check mb-2" *ngIf="context.config.condition.values.length > 1">    <input class="form-check-input" type="checkbox" id="or" [(ngModel)]="context.config.condition.or" (ngModelChange)="updateConfig()">    <label class="form-check-label" for="or" i18n>Display if any of the conditions is true</label>  </div>  <div class="mb-2">    <div i18n>Debug text</div>    <pre><code>{{debugText}}</code></pre>  </div></div></div>'
-    var COMPONENTS = [{'name': 'AutocompleteComponent', 'selector': 'uib-autocomplete'},{'name': 'ClassEditorComponent', 'selector': 'uib-class-editor'},{'name': 'ConditionEditorComponent', 'selector': 'uib-condition-editor'},{'name': 'ConfiguratorComponent', 'selector': 'uib-configurator'},{'name': 'FlexEditorComponent', 'selector': 'uib-flex-editor'},{'name': 'HtmlEditorComponent', 'selector': 'uib-html-editor'},{'name': 'ItemComponent', 'selector': '[uib-item]'},{'name': 'ModalComponent', 'selector': 'uib-modal'},{'name': 'PaletteComponent', 'selector': 'uib-palette'},{'name': 'SvgIconComponent', 'selector': 'svg-icon'},{'name': 'ToastComponent', 'selector': 'uib-toast'},{'name': 'ToolbarComponent', 'selector': 'uib-toolbar'},{'name': 'TreeComponent', 'selector': 'uib-tree'},{'name': 'ZoneComponent', 'selector': 'uib-zone'}];
+    var COMPONENTS = [{'name': 'AutocompleteComponent', 'selector': 'uib-autocomplete'},{'name': 'ClassEditorComponent', 'selector': 'uib-class-editor'},{'name': 'ConditionEditorComponent', 'selector': 'uib-condition-editor'},{'name': 'ConfiguratorComponent', 'selector': 'uib-configurator'},{'name': 'FlexEditorComponent', 'selector': 'uib-flex-editor'},{'name': 'HtmlEditorComponent', 'selector': 'uib-html-editor'},{'name': 'ItemComponent', 'selector': '[uib-item]'},{'name': 'ModalComponent', 'selector': 'uib-modal'},{'name': 'PaletteComponent', 'selector': 'uib-palette'},{'name': 'SpacingEditorComponent', 'selector': 'uib-bs-spacing-editor'},{'name': 'SvgIconComponent', 'selector': 'svg-icon'},{'name': 'ToastComponent', 'selector': 'uib-toast'},{'name': 'ToolbarComponent', 'selector': 'uib-toolbar'},{'name': 'TreeComponent', 'selector': 'uib-tree'},{'name': 'ZoneComponent', 'selector': 'uib-zone'}];
     var DIRECTIVES = [{'name': 'ConfigurableDirective', 'selector': '[uib-configurable]'},{'name': 'NgModelChangeDebouncedDirective', 'selector': '[ngModelChangeDebounced]'},{'name': 'TemplateNameDirective', 'selector': '[uib-template]'},{'name': 'TooltipDirective', 'selector': '[uib-tooltip]'}];
     var ACTUAL_COMPONENT = {'name': 'ConditionEditorComponent'};
 </script>
