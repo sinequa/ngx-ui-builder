@@ -1,6 +1,6 @@
 import { NgModule } from "@angular/core";
 import { StoreModule } from "@ngrx/store";
-import { uibReducer } from "./config.reducer";
+import { uibConfig } from "./config.reducer";
 
-@NgModule({imports: [StoreModule.forRoot(uibReducer)]})
+@NgModule({imports: [StoreModule.forFeature(uibConfig)]})
 export class ConfigModule {}

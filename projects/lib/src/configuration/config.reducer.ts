@@ -1,4 +1,4 @@
-import { createFeatureSelector, on } from "@ngrx/store";
+import { createFeature, on } from "@ngrx/store";
 import { initialUndoRedoState, undoRedo, UndoRedoState } from "ngrx-wieder";
 import { addConfig, initConfig, removeConfig, setConfig, updateConfig } from "./config.actions";
 import { ComponentConfig } from "./config.model";
@@ -19,7 +19,7 @@ function storeConfig(state: ConfigState, config: ComponentConfig[]) {
   return state;
 }
 
-const uibConfig = createUndoRedoReducer<ConfigState>(
+const reducer = createUndoRedoReducer<ConfigState>(
   {config: {}, ...initialUndoRedoState},
 
   on(initConfig, (state, {config}) => storeConfig(state, config)),
@@ -51,8 +51,5 @@ const uibConfig = createUndoRedoReducer<ConfigState>(
   })
 );
 
-export const uibReducer = { uibConfig };
 
-const feature = Object.keys(uibReducer)[0]; // The name of the NGRX store feature
-
-export const selectConfig = createFeatureSelector<ConfigState>(feature);
+export const uibConfig = createFeature({ name: 'uibConfig', reducer });
