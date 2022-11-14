@@ -13,7 +13,7 @@ import {
 import { DndDropEvent } from 'ngx-drag-drop';
 import { Subscription } from 'rxjs';
 import { ConditionsService } from '../conditions/conditions.service';
-import { ComponentConfig, ConfigService } from '../configuration/config.service';
+import { ComponentConfig, ConfigService } from '../configuration';
 import { TemplateNameDirective } from '../utils';
 import { ContainerIndex, DragDropService } from './drag-drop.service';
 

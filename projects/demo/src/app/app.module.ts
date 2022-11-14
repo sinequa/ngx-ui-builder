@@ -5,7 +5,8 @@ import { FormsModule } from '@angular/forms';
 
 import { DynamicViewsModule, ConfiguratorModule, ConditionsModule } from '@sinequa/ngx-ui-builder';
 import { AppComponent } from './app.component';
-import {CommonModule} from '@angular/common';
+import { CommonModule } from '@angular/common';
+import { StoreModule } from '@ngrx/store';
 
 @NgModule({
   imports: [
@@ -13,6 +14,7 @@ import {CommonModule} from '@angular/common';
     CommonModule,
     FormsModule,
     HttpClientModule,
+    StoreModule.forRoot({}),
 
     DynamicViewsModule,
     ConfiguratorModule,

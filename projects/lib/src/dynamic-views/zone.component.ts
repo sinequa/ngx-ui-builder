@@ -43,7 +43,7 @@ export class ZoneComponent implements AfterContentInit, OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    this.sub = this.configService.watchConfig(this.id).subscribe((id) => {
+    this.sub = this.configService.watchConfig(this.id).subscribe(() => {
       this.cdr.markForCheck(); // necessary to apply config changes
     });
   }

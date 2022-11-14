@@ -234,7 +234,7 @@ Like for the zones, the custom configurators are passed by transclusion.
 
 Configuration is at the heart of the UI Builder: It defines which components are displayed, their visual layout and which parameters they use.
 
-Configuration is managed in a reactive store based on [Elf](https://ngneat.github.io/elf/) (itself based on [RxJS](https://rxjs.dev/)). Elf includes a state history which powers **Undo**/**Redo** buttons. Therefore, every action on the configuration (moving a component with drag & drop, creating a new component, or modifying its parameters) is undoable.
+Configuration is managed in a reactive store based on [NgRx](https://ngrx.io/), [Immer](https://immerjs.github.io/immer/) and [ngrx-wieder](https://github.com/nilsmehlhorn/ngrx-wieder). ngrx-wieder includes a state history which powers **Undo**/**Redo** buttons. Therefore, every action on the configuration (moving a component with drag & drop, creating a new component, or modifying its parameters) is undoable.
 
 ![undo redo](docs/undo.png)
 

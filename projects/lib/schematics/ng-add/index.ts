@@ -4,11 +4,11 @@ import { addPackageJsonDependency, NodeDependencyType } from '@schematics/angula
 
 const packageJson = {
   peerDependencies: {
-    "@ngneat/elf": "^2.1.0",
-    "@ngneat/elf-entities": "^4.3.1",
-    "@ngneat/elf-state-history": "^1.1.0",
+    "@ngrx/store": "^14.3.2",
     "@popperjs/core": "^2.11.5",
     "bootstrap": "^5.2.0",
+    "immer": "^9.0.16",
+    "ngrx-wieder": "^9.0.0",
     "ngx-drag-drop": "^2.0.0"
   },
   devDependencies: {

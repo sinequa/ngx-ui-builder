@@ -1,89 +1,88 @@
 import { Injectable } from '@angular/core';
-import { createState, Store } from '@ngneat/elf';
-import {
-  withEntities,
-  getEntity,
-  addEntities,
-  updateEntities,
-  selectEntity,
-  selectAllEntities,
-  getAllEntities,
-  deleteEntities,
-  deleteAllEntities,
-} from '@ngneat/elf-entities';
-import { stateHistory } from '@ngneat/elf-state-history';
+import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { filter, map } from 'rxjs/operators';
-import { Condition } from '../conditions';
-
-export interface ComponentConfig {
-  readonly id: string;
-  type: string;
-  classes?: string;
-  [key: string]: any;
-  condition?: Condition;
-}
-
-export interface ContainerConfig extends ComponentConfig {
-  type: '_container';
-  items: string[];
-}
+import { filter, map, take } from 'rxjs/operators';
+import { initConfig, removeConfig, setConfig, updateConfig } from './config.actions';
+import { ComponentConfig, ContainerConfig } from './config.model';
+import { selectAll, selectCanRedo, selectCanUndo, selectItem } from './config.selectors';
 
 @Injectable({ providedIn: 'root' })
 export class ConfigService {
-  store: Store;
-  historyState: any;
 
-  init(initialValue: ComponentConfig[]) {
-    const { state, config } = createState(
-      withEntities<ComponentConfig>({ initialValue })
-    );
-    this.store = new Store({ name: 'config', state, config });
-    this.historyState = stateHistory(this.store, { maxAge: Infinity });
-    this.store.subscribe(console.log);
+  constructor(
+    public store: Store
+  ){}
+
+  /**
+   * Initialize configuration assuming the store is empty.
+   * No object is removed and the state history is not modified.
+   * @param config list of configuration items to manage
+   */
+  public init(config: ComponentConfig[]) {
+    this.store.dispatch(initConfig({config}));
   }
 
-  set(config: ComponentConfig[]) {
-    this.store.update(
-      deleteAllEntities(),
-      addEntities(config)
-    );
+  /**
+   * Set the configuration assuming the store is not empty.
+   * All previously existing objects are removed and the state
+   * history is reset.
+   * @param config
+   */
+  public set(config: ComponentConfig[]) {
+    this.store.dispatch({type: 'CLEAR'}); // Clear the previous history, as the previous actions won't work on new objects
+    this.store.dispatch(setConfig({config}));
   }
 
+  /**
+   * Watch any change in the configuration objects.
+   */
   public watchAllConfig(): Observable<ComponentConfig[]> {
-    return this.store.pipe(selectAllEntities());
+    return this.store.select(selectAll);
   }
 
+  /**
+   * @returns all current configuration
+   */
   public getAllConfig(): ComponentConfig[] {
-    return this.store.query(getAllEntities());
+    let config: ComponentConfig[] = [];
+    this.watchAllConfig().pipe(take(1)).subscribe(c => config = c);
+    return config;
   }
 
+  /**
+   * Watch changes of one specific configuration object
+   */
   public watchConfig(id: string): Observable<ComponentConfig> {
-    //console.log('watch:', id);
     this.getConfig(id); // Ensure a value exists (if 'id' has no config)
-    return this.store.pipe(
-      selectEntity(id),
-      filter(config => config !== undefined),
-      //tap((config) => console.log('change:', config)),
-      map((config) => JSON.parse(JSON.stringify(config)))
+    return this.store.select(selectItem(id)).pipe(
+      filter(config => !!config),
+      map((config: ComponentConfig) => JSON.parse(JSON.stringify(config)))
     );
   }
 
   private _getConfig(id: string): ComponentConfig | undefined {
-    return this.store.query(getEntity(id));
+    let config: ComponentConfig | undefined;
+    this.store.select(selectItem(id))
+      .pipe(take(1))
+      .subscribe(c => config = c);
+    return config;
   }
 
+  /**
+   * @returns the current configuration of a specific item with the given id
+   */
   public getConfig(id: string): ComponentConfig {
     let config = this._getConfig(id);
     if (!config) {
       config = { id, type: id };
-      this.historyState.pause();
-      this.store.update(addEntities(config));
-      this.historyState.resume();
+      this.store.dispatch(initConfig({config: [config]})); // Use init instead of add, because add is undoable
     }
     return JSON.parse(JSON.stringify(config)); // Deep copy
   }
 
+  /**
+   * @returns the current configuration of a specific container item with the given id
+   */
   public getContainer(id: string): ContainerConfig {
     const config = this.getConfig(id);
     if (!this.isContainerConfig(config)) {
@@ -92,10 +91,16 @@ export class ConfigService {
     return config;
   }
 
+  /**
+   * @returns true if the configuration with the given id is a container
+   */
   public isContainer(id: string): boolean {
     return this.isContainerConfig(this._getConfig(id));
   }
 
+  /**
+   * @returns true if the given configuration is a container
+   */
   public isContainerConfig(conf: ComponentConfig|undefined): conf is ContainerConfig {
     return conf?.type === '_container';
   }
@@ -107,29 +112,31 @@ export class ConfigService {
     return !!this.findParent(id);
   }
 
+  /**
+   * @returns the configuration of a container that includes the given id as a child item
+   */
   public findParent(id: string): ContainerConfig | undefined {
     return this.getAllConfig()
       .find(item => this.isContainerConfig(item) && item.items.includes(id)) as ContainerConfig | undefined;
   }
 
-  public updateConfig(value: ComponentConfig | ComponentConfig[]) {
-    //console.log('update config', this._getConfig(value.id));
-    //console.log('new config', value);
-    if(!Array.isArray(value)) value = [value];
-    this.store.update(
-      ...value.map(v => {
-        if(!this._getConfig(v.id)){
-          return addEntities(v)
-        }
-        return updateEntities([v.id], () => v)}
-      )
-    );
+  /**
+   * Update the configuration of a given component or list of components
+   */
+  public updateConfig(config: ComponentConfig | ComponentConfig[]) {
+    this.store.dispatch(updateConfig({config}));
   }
 
+  /**
+   * Remove the configuration of a component with the given id
+   */
   public removeConfig(id: string) {
-    this.store.update(deleteEntities(id));
+    this.store.dispatch(removeConfig({id}));
   }
 
+  /**
+   * @returns a new unique component id for the given component type
+   */
   public generateId(type: string) {
     let idx = 1;
     let root = type.startsWith("_")? type.slice(1) : type;
@@ -145,19 +152,35 @@ export class ConfigService {
     return id;
   }
 
-  public canUndo$(){
-    return this.historyState.hasPast$;
+  /**
+   * @returns an observable state for the possibility of undoing the last action
+   */
+  public canUndo$(): Observable<boolean> {
+    return this.store.select(selectCanUndo());
   }
 
-  public canRedo$(){
-    return this.historyState.hasFuture$;
+  /**
+   * @returns an observable state for the possibility of redoing the next action
+   */
+  public canRedo$(): Observable<boolean> {
+    return this.store.select(selectCanRedo());
   }
 
+  /**
+   * Undo the last action if possible
+   */
   public undo() {
-    this.historyState.undo();
+    this.canUndo$().pipe(take(1)).subscribe(
+      can => can && this.store.dispatch({type: "UNDO"})
+    );
   }
 
+  /**
+   * Redo the next action if possible
+   */
   public redo() {
-    this.historyState.redo();
+    this.canRedo$().pipe(take(1)).subscribe(
+      can => can && this.store.dispatch({type: "REDO"})
+    );
   }
 }
