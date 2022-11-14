@@ -1,7 +1,7 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnChanges, OnInit } from '@angular/core';
-import { Observable, of, Subject } from 'rxjs';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnChanges, OnDestroy, OnInit } from '@angular/core';
+import { Observable, of, Subject, Subscription } from 'rxjs';
 import { Configurable } from '../../configurable/configurable.service';
-import { ComponentConfig, ConfigService } from '../../configuration/config.service';
+import { ComponentConfig, ConfigService } from '../../configuration';
 import { ComponentCreator, DragDropService } from '../../dynamic-views/drag-drop.service';
 import { TemplateNameDirective } from '../../utils';
 import { PaletteOptions } from '../configurator.models';
@@ -37,7 +37,7 @@ export const defaultPaletteOptions: PaletteOptions = {
   styleUrls: ['./palette.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class PaletteComponent implements OnInit, OnChanges {
+export class PaletteComponent implements OnInit, OnChanges, OnDestroy {
   @Input() context: Configurable;
   @Input() configurators: Record<string,TemplateNameDirective> = {};
   @Input() options = defaultPaletteOptions;
@@ -55,7 +55,7 @@ export class PaletteComponent implements OnInit, OnChanges {
 
   ngOnInit() {
     // The palette of existing components is constructed from the complete configuration
-    this.configService.watchAllConfig()
+    this.sub = this.configService.watchAllConfig()
       .subscribe(configs => {
         this.generateExistingPalette(configs)
         this.cdRef.markForCheck();
@@ -68,6 +68,11 @@ export class PaletteComponent implements OnInit, OnChanges {
     this.generateAutoPalette();
     // The existing palette must be update when the standard palette changes
     this.generateExistingPalette(this.configService.getAllConfig());
+  }
+
+  sub: Subscription;
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
   }
 
   generateAutoPalette() {

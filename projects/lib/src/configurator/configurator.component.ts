@@ -13,7 +13,7 @@ import { Offcanvas } from 'bootstrap';
 import { switchMap, map, tap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { Configurable, ConfigurableService } from '../configurable/configurable.service';
-import { ComponentConfig, ConfigService, ContainerConfig } from '../configuration/config.service';
+import { ComponentConfig, ConfigService, ContainerConfig } from '../configuration';
 import { Mutable } from '../utils/types.helpers';
 import { TemplateNameDirective } from '../utils/template-name.directive';
 import { defaultPaletteOptions } from './palette/palette.component';

@@ -1,152 +1,88 @@
 import { Injectable } from '@angular/core';
-import { createAction, on, props, createFeatureSelector, createSelector, Store } from '@ngrx/store';
-import { createHistorySelectors, initialUndoRedoState, undoRedo, UndoRedoState } from 'ngrx-wieder';
+import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { filter, map, take } from 'rxjs/operators';
-import { Condition } from '../conditions';
-
-export interface ComponentConfig {
-  readonly id: string;
-  type: string;
-  classes?: string;
-  [key: string]: any;
-  condition?: Condition;
-}
-
-export interface ContainerConfig extends ComponentConfig {
-  type: '_container';
-  items: string[];
-}
-
-interface State extends UndoRedoState {
-  config: {[id: string]: ComponentConfig};
-}
-
-const initConfig = createAction('INIT', props<{config: ComponentConfig[]}>());
-const setConfig = createAction('SET', props<{config: ComponentConfig[]}>());
-const addConfig = createAction('ADD', props<{config: ComponentConfig}>());
-const removeConfig = createAction('REMOVE', props<{id: string}>());
-const updateConfig = createAction('UPDATE', props<{config: ComponentConfig | ComponentConfig[]}>());
-const updateNoHistoryConfig = createAction('UPDATE_NO_HISTORY', props<{config: ComponentConfig | ComponentConfig[]}>());
-
-const selectConfig = createFeatureSelector<State>('uibConfig');
-const selectAll = createSelector(selectConfig, (s: State) => Object.values(s.config));
-
-const { createUndoRedoReducer } = undoRedo({
-  allowedActionTypes: ['ADD', 'REMOVE', 'UPDATE'],
-  maxBufferSize: Number.MAX_SAFE_INTEGER
-});
-
-export const uibConfig = createUndoRedoReducer<State>(
-  {config: {}, ...initialUndoRedoState},
-
-  on(initConfig, (state, {config}) => {
-    for(let c of config) {
-      state.config[c.id] = c;
-    }
-    return state;
-  }),
-
-  on(setConfig, (state, {config}) => {
-    // Clear current state
-    for(let key of Object.keys(state)) {
-      delete state[key];
-    }
-    // Add new state
-    for(let c of config) {
-      state.config[c.id] = c;
-    }
-    return state;
-  }),
-
-  on(addConfig, (state, {config}) => {
-    if(state.config[config.id]) {
-      throw new Error(`Config ${config.id} already exists.`);
-    }
-    state.config[config.id] = config;
-    return state;
-  }),
-
-  on(removeConfig, (state, {id}) => {
-    delete state.config[id];
-    return state;
-  }),
-
-  on(updateConfig, (state, {config}) => {
-    if(!Array.isArray(config)) config = [config];
-    for(let c of config) {
-      state.config[c.id] = c;
-    }
-    return state;
-  }),
-
-  on(updateNoHistoryConfig, (state, {config}) => {
-    if(!Array.isArray(config)) config = [config];
-    for(let c of config) {
-      state.config[c.id] = c;
-    }
-    return state;
-  })
-);
-
-const {
-  selectCanUndo,
-  selectCanRedo,
-} = createHistorySelectors<State, State>(selectConfig);
-
+import { initConfig, removeConfig, setConfig, updateConfig } from './config.actions';
+import { ComponentConfig, ContainerConfig } from './config.model';
+import { selectAll, selectCanRedo, selectCanUndo, selectItem } from './config.selectors';
 
 @Injectable({ providedIn: 'root' })
 export class ConfigService {
 
-  constructor(public store: Store<State>){
-    this.store.subscribe(v => console.log(v));
-  }
+  constructor(
+    public store: Store
+  ){}
 
+  /**
+   * Initialize configuration assuming the store is empty.
+   * No object is removed and the state history is not modified.
+   * @param config list of configuration items to manage
+   */
   public init(config: ComponentConfig[]) {
     this.store.dispatch(initConfig({config}));
   }
 
+  /**
+   * Set the configuration assuming the store is not empty.
+   * All previously existing objects are removed and the state
+   * history is reset.
+   * @param config
+   */
   public set(config: ComponentConfig[]) {
+    this.store.dispatch({type: 'CLEAR'}); // Clear the previous history, as the previous actions won't work on new objects
     this.store.dispatch(setConfig({config}));
   }
 
+  /**
+   * Watch any change in the configuration objects.
+   */
   public watchAllConfig(): Observable<ComponentConfig[]> {
     return this.store.select(selectAll);
   }
 
+  /**
+   * @returns all current configuration
+   */
   public getAllConfig(): ComponentConfig[] {
     let config: ComponentConfig[] = [];
-    this.store.select(selectAll).pipe(take(1)).subscribe(c => config = c);
+    this.watchAllConfig().pipe(take(1)).subscribe(c => config = c);
     return config;
   }
 
+  /**
+   * Watch changes of one specific configuration object
+   */
   public watchConfig(id: string): Observable<ComponentConfig> {
     this.getConfig(id); // Ensure a value exists (if 'id' has no config)
-    const selector = createSelector(selectConfig, s => s.config[id]);
-    return this.store.select(selector).pipe(
-      filter(config => config !== undefined),
+    return this.store.select(selectItem(id)).pipe(
+      filter(config => !!config),
       map((config: ComponentConfig) => JSON.parse(JSON.stringify(config)))
     );
   }
 
   private _getConfig(id: string): ComponentConfig | undefined {
     let config: ComponentConfig | undefined;
-    const selector = createSelector(selectConfig, s => s.config[id]);
-    this.store.select(selector)
+    this.store.select(selectItem(id))
       .pipe(take(1))
       .subscribe(c => config = c);
     return config;
   }
 
+  /**
+   * @returns the current configuration of a specific item with the given id
+   */
   public getConfig(id: string): ComponentConfig {
     let config = this._getConfig(id);
     if (!config) {
       config = { id, type: id };
-      this.store.dispatch(updateNoHistoryConfig({config}));
+      this.store.dispatch(initConfig({config: [config]})); // Use init instead of add, because add is undoable
     }
     return JSON.parse(JSON.stringify(config)); // Deep copy
   }
 
+  /**
+   * @returns the current configuration of a specific container item with the given id
+   */
   public getContainer(id: string): ContainerConfig {
     const config = this.getConfig(id);
     if (!this.isContainerConfig(config)) {
@@ -155,10 +91,16 @@ export class ConfigService {
     return config;
   }
 
+  /**
+   * @returns true if the configuration with the given id is a container
+   */
   public isContainer(id: string): boolean {
     return this.isContainerConfig(this._getConfig(id));
   }
 
+  /**
+   * @returns true if the given configuration is a container
+   */
   public isContainerConfig(conf: ComponentConfig|undefined): conf is ContainerConfig {
     return conf?.type === '_container';
   }
@@ -170,19 +112,31 @@ export class ConfigService {
     return !!this.findParent(id);
   }
 
+  /**
+   * @returns the configuration of a container that includes the given id as a child item
+   */
   public findParent(id: string): ContainerConfig | undefined {
     return this.getAllConfig()
       .find(item => this.isContainerConfig(item) && item.items.includes(id)) as ContainerConfig | undefined;
   }
 
+  /**
+   * Update the configuration of a given component or list of components
+   */
   public updateConfig(config: ComponentConfig | ComponentConfig[]) {
     this.store.dispatch(updateConfig({config}));
   }
 
+  /**
+   * Remove the configuration of a component with the given id
+   */
   public removeConfig(id: string) {
     this.store.dispatch(removeConfig({id}));
   }
 
+  /**
+   * @returns a new unique component id for the given component type
+   */
   public generateId(type: string) {
     let idx = 1;
     let root = type.startsWith("_")? type.slice(1) : type;
@@ -198,20 +152,32 @@ export class ConfigService {
     return id;
   }
 
+  /**
+   * @returns an observable state for the possibility of undoing the last action
+   */
   public canUndo$(): Observable<boolean> {
     return this.store.select(selectCanUndo());
   }
 
+  /**
+   * @returns an observable state for the possibility of redoing the next action
+   */
   public canRedo$(): Observable<boolean> {
     return this.store.select(selectCanRedo());
   }
 
+  /**
+   * Undo the last action if possible
+   */
   public undo() {
     this.canUndo$().pipe(take(1)).subscribe(
       can => can && this.store.dispatch({type: "UNDO"})
     );
   }
 
+  /**
+   * Redo the next action if possible
+   */
   public redo() {
     this.canRedo$().pipe(take(1)).subscribe(
       can => can && this.store.dispatch({type: "REDO"})
