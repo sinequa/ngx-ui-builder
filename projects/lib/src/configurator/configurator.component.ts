@@ -14,8 +14,8 @@ import { switchMap, map, tap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { Configurable, ConfigurableService } from '../configurable/configurable.service';
 import { ComponentConfig, ConfigService, ContainerConfig } from '../configuration';
-import { Mutable } from '../utils/types.helpers';
-import { TemplateNameDirective } from '../utils/template-name.directive';
+import { Mutable } from '../utils/typings';
+import { TemplateNameDirective } from '../utils/directive/template-name.directive';
 import { defaultPaletteOptions } from './palette/palette.component';
 import { ConfiguratorContext, ConfiguratorOptions } from './configurator.models';
 

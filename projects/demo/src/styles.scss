@@ -1,14 +1,14 @@
 /* bootstrap's utilities only */
-@import "~bootstrap/scss/mixins/banner";
+@import "bootstrap/scss/mixins/banner";
 @include bsBanner(Utilities);
-@import "~bootstrap/scss/functions";
-@import "~bootstrap/scss/variables";
-@import "~bootstrap/scss/maps";
-@import "~bootstrap/scss/mixins";
-@import "~bootstrap/scss/utilities";
-@import "~bootstrap/scss/root";
-@import "~bootstrap/scss/helpers";
-@import "~bootstrap/scss/utilities/api";
+@import "bootstrap/scss/functions";
+@import "bootstrap/scss/variables";
+@import "bootstrap/scss/maps";
+@import "bootstrap/scss/mixins";
+@import "bootstrap/scss/utilities";
+@import "bootstrap/scss/root";
+@import "bootstrap/scss/helpers";
+@import "bootstrap/scss/utilities/api";
 
 /* specific import used by the ui builder lib */
 @import "../../lib/styles/ui-builder";
