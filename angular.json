@@ -26,6 +26,9 @@
             "polyfills": "projects/demo/src/polyfills.ts",
             "tsConfig": "projects/demo/tsconfig.json",
             "inlineStyleLanguage": "scss",
+            "stylePreprocessorOptions": {
+              "includePaths": ["node_modules"]
+            },
             "assets": [
               "projects/demo/src/favicon.ico",
               "projects/demo/src/assets"

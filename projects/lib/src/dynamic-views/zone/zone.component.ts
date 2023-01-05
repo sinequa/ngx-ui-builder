@@ -11,10 +11,10 @@ import {
   Output,
   EventEmitter,
 } from '@angular/core';
-import { TemplateNameDirective } from '../utils/template-name.directive';
-import { ConfigService } from '../configuration/config.service';
 import { Subscription } from 'rxjs';
-import { ConfigurableService } from '../configurable';
+import { TemplateNameDirective } from '../../utils/directive/template-name.directive';
+import { ConfigService } from '../../configuration/config.service';
+import { ConfigurableService } from '../../configurable';
 
 @Component({
   selector: 'uib-zone',

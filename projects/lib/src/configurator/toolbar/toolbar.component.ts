@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, ContentChild, TemplateRef } from "@angular/core";
-import { ConfigurableService } from "../configurable";
-import { ConfigService } from "../configuration";
+
+import { ConfigurableService } from "../../configurable";
+import { ConfigService } from "../../configuration";
 
 @Component({
   selector: 'uib-toolbar',
@@ -29,12 +30,12 @@ import { ConfigService } from "../configuration";
 })
 export class ToolbarComponent {
   @ContentChild(TemplateRef, {static: false}) template: TemplateRef<any>;
-  
+
   constructor(
     public configService: ConfigService,
     public configurableService: ConfigurableService
   ) {}
-  
+
   toggleEditor() {
     this.configurableService.toggleEditor();
   }
