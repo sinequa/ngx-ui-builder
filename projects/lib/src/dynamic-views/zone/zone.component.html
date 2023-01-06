@@ -1,43 +1,35 @@
 <ng-container
-*ngTemplateOutlet="isArray ? arrayTpl : zoneTpl; context: { $implicit: data, first: 'true' }"
+*ngTemplateOutlet="isArray ? array : zone; context: { data, first: 'true' }"
 ></ng-container>
 
 <!-- data is an array -->
-<ng-template #arrayTpl let-data>
+<ng-template #array let-data>
   <ng-container *ngFor="let d of data; let index = index; let first = first"
-    [ngTemplateOutlet]="zoneTpl"
-    [ngTemplateOutletContext]="{ $implicit: data, index, first }">
+    [ngTemplateOutlet]="zone"
+    [ngTemplateOutletContext]="{ index, first }">
   </ng-container>
 </ng-template>
 
 <!-- data is a single object -->
-<ng-template #zoneTpl let-data let-index="index" let-first="first">
+<ng-template #zone let-index="index" let-first="first">
 
   <!-- en mode editeur -->
-  <div *ngIf="first && (enabled$ | async)" class="uib-zone"
-    [uib-item]="id"
+  <div *ngIf="first && (enabled$ | async)"
+    class="uib-zone"
     [id]="id"
-    [zone]="id"
-    [templates]="templates"
+
+    [uib-item]="id"
     [configurable]="true"
-
-    uib-configurable
-
-    [data]="data"
     [dataIndex]="index"
-    [conditionsData]="conditionsData"
-    >
+
+    uib-configurable>
   </div>
 
   <!-- en mode normal -->
   <div *ngIf="!first || (enabled$ | async) === false"
     [uib-item]="id"
-    [templates]="templates"
     [configurable]="false"
-
-    [data]="data"
     [dataIndex]="index"
-    [conditionsData]="conditionsData"
 
     (click)="onItemClicked($event, data, index)">
   </div>

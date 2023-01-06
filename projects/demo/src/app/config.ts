@@ -1,4 +1,6 @@
-export const defaultConfig = [
+import { ComponentConfig } from "@sinequa/ngx-ui-builder";
+
+export const defaultConfig:ComponentConfig[] = [
   {
     id: 'header',
     type: '_container',
@@ -23,7 +25,7 @@ export const defaultConfig = [
   {
     id: 'results',
     type: '_container',
-    items: ['image', 'metas'],
+    items: ['image','metas'],
     classes: 'result-item flex-row mb-3 w-100'
   },
   {

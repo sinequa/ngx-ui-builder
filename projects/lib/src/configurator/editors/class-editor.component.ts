@@ -5,7 +5,7 @@ import { ConfiguratorContext } from '../configurator.models';
   selector: 'uib-class-editor',
   template: `
   <label class="form-label" for="classes" i18n>CSS Classes</label>
-  <input
+  <textarea
     class="form-control"
     id="classes"
     type="text"
@@ -14,7 +14,7 @@ import { ConfiguratorContext } from '../configurator.models';
     spellcheck="false"
     [(ngModel)]="context.config.classes"
     (ngModelChangeDebounced)="context.configChanged()"
-  />
+  ></textarea>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush
 })

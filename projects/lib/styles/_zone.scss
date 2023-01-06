@@ -1,5 +1,4 @@
 @import "_mixins";
-@import "_selected";
 
 /* default zone styles */
 .uib-zone {
@@ -8,13 +7,9 @@
   /* box-model */
   min-width: 32px;
   min-height: 32px;
-  margin: 4px;
 
   /* visual */
   border-radius: 4px;
-
-  /* misc */
-  transition: margin ease-in 0.3s, padding ease-in 0.3s;
 
   &:not([selected]) {
     outline: 1px dashed lightsteelblue;
@@ -45,48 +40,45 @@
     outline: 2px solid red;
     z-index: 99;
   }
-}
 
-/* when hovering a zone or a zone's element */
-.uib-zone:hover {
-  outline: 1px dashed lightsteelblue;
+  /* when hovering a zone or a zone's element */
+  &:hover {
+    outline: 1px dashed lightsteelblue;
+    margin: 4px;
 
-  [uib-configurable] {
-    /* box-model */
-    margin: var(--margin);
-    padding: var(--padding);
+    [uib-configurable] {
+      /* box-model */
+      margin: var(--margin);
+      padding: var(--padding);
 
-    /* visual */
-    border-radius: 2px;
+      /* visual */
+      border-radius: 2px;
 
-    &:not(.uib-container, .highlight, .dndDragging, .uib-dropzone-content) {
-      outline: 1px dashed yellowgreen;
+      &:not(.uib-container, .highlight, .dndDragging, .uib-dropzone-content) {
+        outline: 1px dashed yellowgreen;
+      }
+
+      /* Deactivate clicks within templates in edit mode */
+      & > *:not(.uib-dropzone) {
+        pointer-events: none;
+      }
     }
 
-    /* Deactivate clicks within templates in edit mode */
-    & > *:not(.uib-dropzone) {
-      pointer-events: none;
+    .uib-container {
+      min-width: 32px;
+      min-height: 32px;
     }
-  }
 
-  &:not([selected]) {
-    padding: calc(var(--padding) * 2);
-  }
+    .uib-dropzone-content {
+      outline: 1px dashed steelblue;
+    }
 
-  .uib-container {
-    min-width: 32px;
-    min-height: 32px;
-  }
-
-  .uib-dropzone-content {
-    outline: 1px dashed steelblue;
-  }
-
-  /* highlight styles */
-  &.highlight,
-  .uib-dropzone-content.highlight {
-    outline: 2px solid red;
-    z-index: 99;
+    /* highlight styles */
+    &.highlight,
+    .uib-dropzone-content.highlight {
+      outline: 2px solid red;
+      z-index: 99;
+    }
   }
 }
 

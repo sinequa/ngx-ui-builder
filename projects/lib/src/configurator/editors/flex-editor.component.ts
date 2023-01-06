@@ -16,21 +16,21 @@ declare interface FlexOption {
 })
 export class FlexEditorComponent implements OnChanges {
   @Input() config: ComponentConfig;
-  
+
   // tooltip's placement
   placement: TooltipPlacement = "bottom";
-  
+
   classes: string[];
 
   get direction(): 'row' | 'column' {
     return this.classes.includes('flex-column') ? 'column' : 'row';
   }
-    
+
   directions: FlexOption[] = [
-    {key: 'arrow_down', text: $localize `vertical`, value: 'column', bootstrap: 'flex-column'},
-    {key: 'arrow_forward', text: $localize `horizontal`, value: 'row', bootstrap: 'flex-row'}
+    {key: 'direction-right', text: $localize `horizontal`, value: 'row', bootstrap: 'flex-row'},
+    {key: 'direction-bottom', text: $localize `vertical`, value: 'column', bootstrap: 'flex-column'}
   ]
-  
+
   justify: FlexOption[] = [
     {key:'align_x_start', text: $localize `start`, value: 'flex-start', bootstrap: 'justify-content-start'},
     {key:'align_x_center', text: $localize `center`, value: 'center', bootstrap: 'justify-content-center'},
@@ -38,7 +38,7 @@ export class FlexEditorComponent implements OnChanges {
     {key:'align_x_space_around', text: $localize `space around`, value: 'space-around', bootstrap: 'justify-content-around'},
     {key:'align_x_space_between', text: $localize `space between`, value: 'space-between', bootstrap: 'justify-content-between'}
   ]
-  
+
   alignmentHorizontal: FlexOption[] = [
     {key: 'align_y_start', text: $localize `top`, value: 'flex-start', bootstrap: 'align-items-start'},
     {key: 'align_y_center', text: $localize `center`, value: 'center', bootstrap: 'align-items-center'},
@@ -46,7 +46,7 @@ export class FlexEditorComponent implements OnChanges {
     {key: 'align_y_stretch', text: $localize `stretch`, value: 'stretch', bootstrap: 'align-items-stretch'},
     {key: 'align_y_baseline', text: $localize `baseline`, value: 'baseline', bootstrap: 'align-items-baseline'},
   ]
-  
+
   alignmentVertical: FlexOption[] = [
     {key:'align_x_start', text: $localize `start`, value: 'flex-start', bootstrap: 'align-items-start'},
     {key:'align_x_center', text: $localize `center`, value: 'center', bootstrap: 'align-items-center'},
@@ -57,12 +57,12 @@ export class FlexEditorComponent implements OnChanges {
   get alignment(): FlexOption[] {
     return this.direction === 'column'? this.alignmentVertical : this.alignmentHorizontal;
   }
-  
-  
+
+
   constructor(
     public configService: ConfigService
   ) {}
-  
+
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.config) {
       // convert "classes" string into array
@@ -70,7 +70,7 @@ export class FlexEditorComponent implements OnChanges {
     }
   }
 
-  updateConfig() {
+  private updateConfig() {
     this.config.classes = this.classes.join(' ');
     this.configService.updateConfig(this.config);
   }

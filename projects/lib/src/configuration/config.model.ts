@@ -1,22 +1,24 @@
 import { Condition } from "../conditions";
 
+type StringWithAutocomplete<T> = T | (string & Record<never, never>);
+
 /**
  * An object containing the configuration of a component.
  */
-export interface ComponentConfig {
+export type ComponentConfig = {
   /** Unique string identifying the component */
-  readonly id: string;
+  readonly id: string,
   /** The type is should correspond to a template injected in a
       uib-zone component, so that this component can be displayed */
-  type: string;
+  type: StringWithAutocomplete<'_container' | '_raw'>,
   /** Optional list of CSS class injected in the div
       wrapping the template of this component */
-  classes?: string;
+  classes?: string,
   /** Any parameter needed to display the component */
   [key: string]: any;
   /** An optional condition to display the component only when
       some conditions are met */
-  condition?: Condition;
+  condition?: Condition,
 }
 
 /**

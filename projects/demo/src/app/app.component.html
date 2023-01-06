@@ -1,25 +1,21 @@
 <!-- HEADER -->
 
 <uib-zone id="header">
-  <ng-template uib-template="title" let-config>
-    <h1>{{ config.title }}</h1>
-  </ng-template>
+  <h1 *uib-template="'title';let config">{{ config.title }} - DEMO</h1>
 
-  <ng-template uib-template="searchbar">
-    <input type="text" [(ngModel)]="searchText" (ngModelChange)="search()" placeholder="Search for a Pokemon..." autocomplete="off" spellcheck="false"/>
-  </ng-template>
+  <input *uib-template="'searchbar'" type="text" [(ngModel)]="searchText" (ngModelChange)="search()" placeholder="Search for a Pokemon..." autocomplete="off" spellcheck="false"/>
 
-  <ng-template uib-template="applied-filters">
+  <ng-container *uib-template="'applied-filters'">
     <span *ngFor="let ability of abilities" class="metadata">{{ ability }}</span>
     <span *ngIf="weight" class="metadata">Weight &lt; {{ weight }}</span>
     <span *ngIf="experience" class="metadata">XP &lt; {{ experience }}</span>
-  </ng-template>
+  </ng-container>
 
-  <ng-template uib-template="clear-filters">
-    <button *ngIf="search || abilities.length || weight || experience" (click)="clear()">
+  <ng-container *ngIf="search || abilities.length || weight || experience">
+    <button *uib-template="'clear-filters'" (click)="clear()">
       Clear search criteria
     </button>
-  </ng-template>
+  </ng-container>
 </uib-zone>
 
 <hr />
@@ -31,17 +27,17 @@
   <div class="p-1 filters">
     <h3>Filters</h3>
     <uib-zone id="filters">
-      <ng-template uib-template="range" display="Range filter" let-config>
+      <div *uib-template="'range';let config" display="Range filter">
         <h4>{{ config.field | titlecase }}: {{ this[config.field] }}</h4>
         <input type="range" min="0"max="200" [(ngModel)]="this[config.field]" (ngModelChange)="search()"/>
-      </ng-template>
+      </div>
 
-      <ng-template uib-template="abilities" display="Ability filter">
+      <ng-container *uib-template="'abilities'" display="Ability filter">
         <h4>Abilities:</h4>
         <div *ngFor="let a of allAbilities">
           <a *ngIf="!abilities.includes(a)" href="#" (click)="selectAbility(a)" class="metadata">{{ a }}</a>
         </div>
-      </ng-template>
+      </ng-container>
     </uib-zone>
   </div>
 
@@ -51,17 +47,19 @@
   <uib-zone id="results" [data]="pokemonService.pokemons$ | async" class="flex-grow-1 d-flex flex-row flex-wrap justify-content-start align-items-start align-content-start">
 
     <ng-template uib-template="image" display="Image" title="A component to display the picture of a Pokemon" let-data="data">
-      <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/{{data.id}}.png" [title]="data.name"/>
+      <img *ngIf="data?.id" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/{{data?.id}}.png" [title]="data?.name"/>
     </ng-template>
 
-    <ng-template uib-template="description" display="Description" let-data="data" let-config>
-      {{data.description}}
-    </ng-template>
+    <div *uib-template="'description';let config; let data=data" display="Description">
+      {{data?.description}}
+    </div>
 
-    <ng-template uib-template="metadata" display="Metadata" let-data="data" let-config>
-      <strong *ngIf="!config.hideField">{{ config.field }}: </strong>
-      <span *ngFor="let meta of asArray(data[config.field])" class="metadata">{{meta}}</span>
-    </ng-template>
+    <div *uib-template="'metadata';let config; let data=data" display="Metadata">
+      <ng-container *ngIf="data">
+        <strong *ngIf="!config.hideField">{{ config.field }}: </strong>
+        <span *ngFor="let meta of asArray(data?.[config.field])" class="metadata">{{meta}}</span>
+      </ng-container>
+    </div>
 
   </uib-zone>
 

@@ -2,14 +2,13 @@
   display: grid;
   grid-template-columns: 105px 1fr;
   align-items: center;
+  margin-bottom: .5rem;
 }
 
 /* ================ RADIO BUTTONS ================= */
 
 .radio-group {
   // --rotate: 90deg;
-  --icon-width: 22px;
-  --icon-height: 25px;
   --bg-checked: hsl(80, 73%, 75%);
   --bg-hover: hsl(80, 61%, 50%);
 
@@ -24,10 +23,10 @@
   justify-content: center;
   align-items: center;
 
-  > svg {
-    width: var(--icon-width);
-    height: var(--icon-height);
+  width: 36px;
+  height: 36px;
 
+  > svg {
     transform: rotate(var(--rotate, 0deg));
     transition: transform 0.2s ease-in-out;
   }
