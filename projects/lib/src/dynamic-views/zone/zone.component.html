@@ -1,5 +1,5 @@
 <ng-container
-*ngTemplateOutlet="isArray ? array : zone; context: { data, first: 'true' }"
+*ngTemplateOutlet="isArray ? array : zone; context: { $implicit: data, first: 'true' }"
 ></ng-container>
 
 <!-- data is an array -->
