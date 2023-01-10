@@ -8,13 +8,14 @@ import {
   OnChanges,
   OnDestroy,
   OnInit,
-  SimpleChanges
+  SimpleChanges,
 } from '@angular/core';
 import { DndDropEvent } from 'ngx-drag-drop';
 import { Subscription } from 'rxjs';
+
 import { ConditionsService } from '../../conditions/conditions.service';
 import { ComponentConfig, ConfigService } from '../../configuration';
-import { TemplateNameDirective } from '../../utils';
+import { ZoneContextService } from '../zone/zone-context.service';
 import { ContainerIndex, DragDropService } from '../drag-drop.service';
 
 @Component({
@@ -23,38 +24,71 @@ import { ContainerIndex, DragDropService } from '../drag-drop.service';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ItemComponent implements OnInit, OnChanges, OnDestroy {
+  /**
+   * id's element
+   */
   @Input('uib-item') id: string;
-  @Input() zone: string;
-  @Input() data?: any;
+  @Input() parentId: string;
+
+  /**
+   * index of element displayed when data is an Array
+   */
   @Input() dataIndex?: number;
-  @Input() conditionsData?: Record<string,any>;
 
-  @Input() templates: Record<string, TemplateNameDirective>;
-
+  /**
+   * Is the component configurable
+   */
   @Input() configurable: boolean = true;
 
   @HostBinding('class')
   classes?: string;
 
+
+  // zone's conext informations
+  /**
+   * zone's name/id
+   */
+   zone: string;
+
+  /**
+   * used to store the configuration object for the component.
+   */
   config: ComponentConfig;
+  /**
+   * used to determine if the component should be displayed or not.
+   */
   condition = true;
-
-  subs: Subscription[] = [];
-
   _data: any;
 
+  private subscription = new Subscription();
+
+  /**
+   * used to determine if the flex direction is horizontal or not.
+   * Always `false` when the component's type is not `_container`
+   */
   isHorizontal: boolean = false;
 
   constructor(
+    public zoneRef: ZoneContextService,
     public configService: ConfigService,
     public conditionsService: ConditionsService,
     public dragDropService: DragDropService,
     public cdr: ChangeDetectorRef,
-    public el: ElementRef
-  ) {}
+    public el: ElementRef<HTMLElement>
+  ) {
+    // retrieve all zone's available informations
+    this.zone = this.zoneRef.id;
+
+    this.subscription.add(
+      this.zoneRef.changes$.subscribe(({ data, conditionsData }) => {
+        this.updateData();
+        this.updateCondition();
+      })
+    );
+  }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if(changes.data || changes.dataIndex || changes.conditionsData) {
+    if(changes.dataIndex) {
       this.updateData();
       this.updateCondition();
     }
@@ -62,16 +96,25 @@ export class ItemComponent implements OnInit, OnChanges, OnDestroy {
 
   ngOnInit() {
     const configChanges$ = this.configService.watchConfig(this.id).subscribe((config) => this.updateConfig(config));
-    const allConfigChanges$ = this.configService.watchAllConfig().subscribe(() => this.cdr.markForCheck())
+    const allConfigChanges$ = this.configService.watchAllConfig().subscribe(() => this.cdr.markForCheck());
 
-    this.subs.push(configChanges$, allConfigChanges$)
+    this.subscription.add(configChanges$);
+    this.subscription.add(allConfigChanges$);
   }
 
   ngOnDestroy() {
-    this.subs.forEach((s) => s.unsubscribe());
+    this.subscription.unsubscribe();
   }
 
-  updateConfig(config: ComponentConfig) {
+  // updates
+
+  /**
+   * It updates the component's configuration and condition, and sets the classes
+   * for the component
+   * @param {ComponentConfig} config - ComponentConfig - the configuration object
+   * for the component
+   */
+  private updateConfig(config: ComponentConfig) {
     this.config = config;
     this.updateCondition();
     this.classes = this.config.classes;
@@ -87,12 +130,23 @@ export class ItemComponent implements OnInit, OnChanges, OnDestroy {
     this.isHorizontal = this.horizontal();
   }
 
-  updateData() {
-    this._data = typeof this.dataIndex === 'undefined'? this.data : this.data[this.dataIndex];
+  /**
+   * If the dataIndex property is undefined, then the data property is assigned to
+   * the `_data` property.
+   *
+   * Otherwise, the data property is indexed by the dataIndex
+   * property and the result is assigned to the _data property
+   */
+  private updateData() {
+    this._data = typeof this.dataIndex === 'undefined'? this.zoneRef.data : this.zoneRef.data[this.dataIndex];
   }
 
-  updateCondition() {
-    this.condition = this.conditionsService.check(this.config?.condition, this.conditionsData, this._data);
+  /**
+   * If the condition is not null, then check the condition and update the
+   * condition variable
+   */
+  private updateCondition() {
+    this.condition = this.conditionsService.check(this.config?.condition, this.zoneRef.conditionsData, this._data);
   }
 
   // Drag & Drop
@@ -112,6 +166,14 @@ export class ItemComponent implements OnInit, OnChanges, OnDestroy {
     this.dragDropService.handleCancel(index, this.id);
   }
 
+  /**
+   * * If the element has a class of flex-column, it's not horizontal.
+   * * If it has a class of d-flex or uib-dropzone, it's horizontal.
+   * * If it has a style of display: flex, it's horizontal.
+   *
+   * Otherwise, it's not horizontal
+   * @returns A boolean value.
+   */
   private horizontal(): boolean {
     if(this.config.classes?.includes('flex-column')) {
       return false;

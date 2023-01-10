@@ -27,7 +27,7 @@
       </div>
 
       <ng-container
-        *ngTemplateOutlet="configurators[edited.config.type]?.template; context: { $implicit: edited }">
+        *ngTemplateOutlet="configurators[edited.config.type]?.templateRef; context: { $implicit: edited }">
       </ng-container>
 
       <ng-container *ngIf="edited.config.type === '_container'">
@@ -53,7 +53,7 @@
       </uib-html-editor>
 
       <!-- Separator to mark the difference between the type-specific configurator and the generic configuration options -->
-      <ng-container *ngIf="configurators[edited.config.type]?.template || edited.config.type.startsWith('_')">
+      <ng-container *ngIf="configurators[edited.config.type]?.templateRef || edited.config.type.startsWith('_')">
         <hr />
       </ng-container>
 

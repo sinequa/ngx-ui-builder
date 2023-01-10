@@ -15,9 +15,9 @@ import { Observable } from 'rxjs';
 import { Configurable, ConfigurableService } from '../configurable/configurable.service';
 import { ComponentConfig, ConfigService, ContainerConfig } from '../configuration';
 import { Mutable } from '../utils/typings';
-import { TemplateNameDirective } from '../utils/directive/template-name.directive';
 import { defaultPaletteOptions } from './palette/palette.component';
 import { ConfiguratorContext, ConfiguratorOptions } from './configurator.models';
+import { TemplateNameDirective } from '../utils/directive/template-name.directive';
 
 export const defaultConfiguratorOptions: ConfiguratorOptions = {
   paletteOptions: defaultPaletteOptions,
@@ -33,7 +33,7 @@ export const defaultConfiguratorOptions: ConfiguratorOptions = {
 @Component({
   selector: 'uib-configurator',
   templateUrl: './configurator.component.html',
-  styleUrls:['./configurator.component.scss'],
+  styleUrls: ['./configurator.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ConfiguratorComponent implements OnInit {
@@ -42,10 +42,10 @@ export class ConfiguratorComponent implements OnInit {
   children: QueryList<TemplateNameDirective>;
   configurators: Record<string, TemplateNameDirective> = {};
 
-  @ViewChild('offcanvas') offcanvasEl: ElementRef;
+  @ViewChild('offcanvas') offcanvasEl: ElementRef<HTMLElement>;
   offcanvas: Offcanvas;
 
-  @ViewChild('offcanvasBody') offcanvasBodyEl: ElementRef;
+  @ViewChild('offcanvasBody') offcanvasBodyEl:ElementRef<HTMLElement>;
 
   @Input() options = defaultConfiguratorOptions;
   @Input() zoneOptions: Record<string, ConfiguratorOptions> = {};
@@ -64,7 +64,6 @@ export class ConfiguratorComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-
     this.edited$ = this.configurableService.watchEdited().pipe(
       tap(() => this.offcanvas.show()),
       tap(() => this.showTree(false)),
@@ -113,7 +112,7 @@ export class ConfiguratorComponent implements OnInit {
    */
   ngAfterContentInit() {
     this.children.forEach(
-      tpl => (this.configurators[tpl.templateName] = tpl)
+      template => (this.configurators[template.name] = template)
     );
   }
 

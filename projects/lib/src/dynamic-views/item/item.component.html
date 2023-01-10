@@ -5,20 +5,15 @@
 
 <ng-container
   *ngIf="!config.type.startsWith('_') && condition"
-  [ngTemplateOutlet]="templates[config.type || id]?.template"
+  [ngTemplateOutlet]="zoneRef.templates[config.type || id]?.templateRef"
   [ngTemplateOutletContext]="{ $implicit: config, data: _data, id: id }"
 ></ng-container>
 
 <ng-container *ngIf="config.type === '_container' && condition && !configurable">
   <div *ngFor="let item of config.items; let index = index"
     [uib-item]="item"
-    [templates]="templates"
-
     [configurable]="false"
-
-    [data]="data"
     [dataIndex]="dataIndex"
-    [conditionsData]="conditionsData"
   ></div>
 </ng-container>
 
@@ -37,24 +32,20 @@
 
     <div *ngFor="let item of config.items; let index = index"
       [uib-item]="item"
-      [id]="item"
-      [templates]="templates"
-      [zone]="zone"
       [configurable]="true"
+      [dataIndex]="dataIndex"
 
       [uib-tooltip]="item"
-      uib-configurable
 
+      uib-configurable
+      [id]="item"
       [parentId]="config.id"
       [uib-disable-if]="dataIndex"
-
-      [data]="data"
-      [dataIndex]="dataIndex"
-      [conditionsData]="conditionsData"
 
       [dndDraggable]="{item, index, container: config.id}"
       [dndType]="zone"
       (dndCanceled)="onDndCanceled(item, index)"
+
       ></div>
 
   </div>

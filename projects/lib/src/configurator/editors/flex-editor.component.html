@@ -4,45 +4,39 @@
   <div class="radio-group">
     <ng-container *ngFor="let item of directions">
      <input type="radio" name="direction" [id]="item.key" (click)="toggleClass(item.bootstrap, directions)" [checked]="direction === item.value"/>
-     <label [for]="item.key" [uib-tooltip]="item.text" [placement]="placement">
-       <svg-icon [key]="item.key" width="22px" height="25px"></svg-icon>
+     <label class="p-0" [for]="item.key" [uib-tooltip]="item.text" [placement]="placement">
+       <svg-icon [key]="item.key"></svg-icon>
      </label>
     </ng-container>
   </div>
 </div>
 
 <!-- justify -->
-<div class="editor-line">
-  <div i18n>Justify</div>
-  <div
-    class="radio-group"
-    [style.--rotate]="direction === 'column' ? '90deg' : ''"
-  >
-    <ng-container *ngFor="let item of justify">
-      <input type="radio" name="justify" [id]="item.key" (click)="toggleClass(item.bootstrap, justify)" [checked]="classes.includes(item.bootstrap)"/>
-      <label [for]="item.key" [uib-tooltip]="item.text" [placement]="placement">
-        <svg-icon [key]="item.key" width="22px" height="25px"></svg-icon>
-      </label>        
-    </ng-container>
-  </div>
-</div>
+<ng-container *ngTemplateOutlet="radioGroup; context: {$implicit: justify, name: 'justify', direction}"></ng-container>
 
 <!-- alignment -->
-<div class="editor-line">
-  <div i18n>Alignment</div>
-  <!-- horizontal -->
-  <div class="radio-group">
-    <ng-container *ngFor="let item of alignment">
-      <input type="radio" name="alignment" id="alignment-{{item.key}}" (click)="toggleClass(item.bootstrap, alignment)" [checked]="classes.includes(item.bootstrap)"/>
-      <label for="alignment-{{item.key}}" [uib-tooltip]="item.text" [placement]="placement">
-        <svg-icon [key]="item.key" width="22px" height="25px"></svg-icon>
-      </label>
-    </ng-container>
-  </div>
-</div>
+<ng-container *ngTemplateOutlet="radioGroup; context: {$implicit: alignment, name: 'alignment'}"></ng-container>
 
 <div class="editor-line">
   <label class="form-check-label" for="wrap" i18n>Wrap</label>
   <input class="form-check-input" type="checkbox" id="wrap" (change)="toggleClass('flex-wrap')" [checked]="classes.includes('flex-wrap')">
 </div>
+
+<ng-template #radioGroup let-items let-name="name" let-direction="direction">
+  <div class="editor-line">
+    <div i18n>{{ name | titlecase }}</div>
+    <div class="radio-group" [style.--rotate]="direction === 'column' ? '90deg' : ''">
+      <ng-container *ngFor="let item of items">
+        <input type="radio"
+          name="{{name}}"
+          id="{{name}}-{{item.key}}"
+          (click)="toggleClass(item.bootstrap, items)"
+          [checked]="classes.includes(item.bootstrap)"/>
+        <label for="{{name}}-{{item.key}}" [uib-tooltip]="item.text" [placement]="placement">
+          <svg-icon [key]="item.key"></svg-icon>
+        </label>
+      </ng-container>
+    </div>
+  </div>
+</ng-template>
 

@@ -19,12 +19,10 @@
   /* display current edited element */
   &.edited {
     @include white-stripes;
-    
-    padding: var(--padding);
-    
+
     background-color: lightblue;
     outline: 1px dashed lightskyblue;
-    
+
     /* inset shadow acts as a border */
     box-shadow: inset 0px 0px 0px 2px #fff;
   }
