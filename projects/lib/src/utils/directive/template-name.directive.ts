@@ -13,15 +13,15 @@ export class TemplateNameDirective {
   /**
    * name used by the configurator to identify the component
    */
-  @Input() display?: string;
+  @Input('uib-templateDisplay') display?: string;
   /**
    * icon used by the configurator to identify the component
    */
-  @Input() iconClass?: string;
+  @Input('uib-templateIconClass') iconClass?: string;
   /**
-   * title used by the configurator
+   * description used by the configurator
    */
-  @Input() title?: string;
+  @Input('uib-templateDescription') description?: string;
 
   templateRef: TemplateRef<any>;
 

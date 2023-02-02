@@ -21,7 +21,7 @@
 
     <ng-container *ngIf="!_showTree && obs.edited as edited">
       <!-- CONFIGURATOR -->
-      <div class="text-muted" *ngIf="edited.context.templates?.[edited.config.type]?.title as description">
+      <div class="text-muted" *ngIf="edited.context.templates?.[edited.config.type]?.description as description">
         {{description}}
         <hr />
       </div>
@@ -53,9 +53,9 @@
       </uib-html-editor>
 
       <!-- Separator to mark the difference between the type-specific configurator and the generic configuration options -->
-      <ng-container *ngIf="configurators[edited.config.type]?.templateRef || edited.config.type.startsWith('_')">
-        <hr />
-      </ng-container>
+      <!-- <ng-container > -->
+      <hr *ngIf="configurators[edited.config.type]?.templateRef || edited.config.type.startsWith('_')" />
+      <!-- </ng-container> -->
 
       <div class="mb-3" *ngIf="edited.options.showCssClasses">
         <uib-class-editor [context]="edited"></uib-class-editor>
@@ -65,27 +65,26 @@
         <uib-bs-spacing-editor [config]="edited.config"></uib-bs-spacing-editor>
       </div>
 
-      <details [attr.open]="edited.config.condition? '' : undefined"
-        class="mb-3"
-        *ngIf="edited.options.showConditionalDisplay && (edited.context.data || edited.context.conditionsData)"
-      >
+      <details *ngIf="edited.options.showConditionalDisplay && (edited.context.data || edited.context.conditionsData)"
+        [attr.open]="edited.config.condition? '' : undefined"
+        class="mb-3">
         <summary uib-tooltip="Display this component only if the data validates a rule" i18n-uib-tooltip i18n>Conditional display</summary>
         <uib-condition-editor [context]="edited"></uib-condition-editor>
       </details>
 
       <div class="d-flex justify-content-start mb-1">
-        <button class="btn btn-outline-danger me-2"
+        <button *ngIf="edited.options.showRemove && edited.context.parentId"
+          class="btn btn-outline-danger me-2"
           (click)="remove(edited.context)"
           uib-tooltip="Remove this component from its parent"
-          *ngIf="edited.options.showRemove && edited.context.parentId"
           i18n-uib-tooltip i18n
         >
           Remove
         </button>
-        <button class="btn btn-outline-secondary"
+        <button *ngIf="edited.options.showDuplicate"
+          class="btn btn-outline-secondary"
           (click)="duplicate(edited.context)"
           uib-tooltip="Duplicate this component within its parent"
-          *ngIf="edited.options.showDuplicate"
           i18n-uib-tooltip i18n
         >
           Duplicate

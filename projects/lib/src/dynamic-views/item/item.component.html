@@ -6,7 +6,7 @@
 <ng-container
   *ngIf="!config.type.startsWith('_') && condition"
   [ngTemplateOutlet]="zoneRef.templates[config.type || id]?.templateRef"
-  [ngTemplateOutletContext]="{ $implicit: config, data: _data, id: id }"
+  [ngTemplateOutletContext]="{ $implicit: config, data: _data, id }"
 ></ng-container>
 
 <ng-container *ngIf="config.type === '_container' && condition && !configurable">
