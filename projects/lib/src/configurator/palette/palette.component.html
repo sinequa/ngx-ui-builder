@@ -58,5 +58,5 @@
 
 <!-- Modal -->
 <uib-modal [title]="modal?.title" [show]="!!modal" (close)="onModalClose($event)">
-  <div *ngTemplateOutlet="modal?.configurator.template; context: { $implicit: modal }"></div>
+  <div *ngTemplateOutlet="modal?.configurator.templateRef; context: { $implicit: modal }"></div>
 </uib-modal>

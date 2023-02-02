@@ -103,7 +103,7 @@ export class PaletteComponent implements OnInit, OnChanges, OnDestroy {
           type,
           display: template.display || type,
           iconClass: template.iconClass,
-          title: template.title,
+          title: template.description,
           createConfig: (id: string) => this.openModal(id, type, this.configurators[type]),
         });
       });
