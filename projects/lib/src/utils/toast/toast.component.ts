@@ -2,9 +2,12 @@ import { AfterViewInit, Component, ElementRef, Input, OnDestroy, ViewChild } fro
 import { Toast } from 'bootstrap';
 import { Subscription } from 'rxjs';
 import { ToastAction, ToastMessage, ToastService } from './toast.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'uib-toast',
+  standalone: true,
+  imports: [CommonModule],
   templateUrl: './toast.component.html',
   styles: [`
   .alert {

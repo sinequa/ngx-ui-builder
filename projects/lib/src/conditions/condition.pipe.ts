@@ -2,7 +2,8 @@ import { Pipe, PipeTransform } from "@angular/core";
 import { Condition, ConditionsService } from "./conditions.service";
 
 @Pipe({
-  name: 'uibCondition'
+  name: 'uibCondition',
+  standalone: true
 })
 export class ConditionPipe implements PipeTransform {
 

@@ -2,6 +2,7 @@ import { Directive, Input, TemplateRef } from '@angular/core';
 
 @Directive({
   selector: '[uib-template]',
+  standalone: true
 })
 export class TemplateNameDirective {
   /**

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ConfigurableService, ConfigService, UtilsModule, ConfiguratorModule, DynamicViewsModule } from '@sinequa/ngx-ui-builder';
+import { ConfigurableService, ConfigService, ZoneComponent, ToolbarComponent, ConfiguratorComponent, ToastComponent, TemplateNameDirective, NgModelChangeDebouncedDirective } from '@sinequa/ngx-ui-builder';
 import { PokemonService } from "./pokemon.service";
 import { defaultConfig } from "./config";
 import { FormsModule } from '@angular/forms';
@@ -11,9 +11,13 @@ import { CommonModule } from '@angular/common';
   imports: [
     CommonModule,
     FormsModule,
-    UtilsModule,
-    ConfiguratorModule,
-    DynamicViewsModule
+
+    ZoneComponent,
+    ToolbarComponent,
+    ConfiguratorComponent,
+    ToastComponent,
+    TemplateNameDirective,
+    NgModelChangeDebouncedDirective
   ],
   templateUrl: './app.component.html'
 })

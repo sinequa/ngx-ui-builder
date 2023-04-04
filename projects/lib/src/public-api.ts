@@ -11,3 +11,6 @@ export * from './configurator';
 export * from './conditions';
 export * from './dynamic-views';
 export * from './utils';
+
+export * from './svg/svg-icons';
+export * from "./utils/svg-icon";

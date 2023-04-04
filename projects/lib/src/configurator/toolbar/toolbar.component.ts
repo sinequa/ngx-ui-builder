@@ -2,9 +2,13 @@ import { ChangeDetectionStrategy, Component, ContentChild, TemplateRef } from "@
 
 import { ConfigurableService } from "../../configurable";
 import { ConfigService } from "../../configuration";
+import { SvgIconComponent } from "../../utils/svg-icon/svg-icon.component";
+import { CommonModule } from "@angular/common";
 
 @Component({
   selector: 'uib-toolbar',
+  standalone: true,
+  imports: [CommonModule, SvgIconComponent],
   templateUrl: './toolbar.component.html',
   styles: [
     `

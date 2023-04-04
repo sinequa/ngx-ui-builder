@@ -3,8 +3,10 @@ import { Observable, of, Subject, Subscription } from 'rxjs';
 import { Configurable } from '../../configurable/configurable.service';
 import { ComponentConfig, ConfigService } from '../../configuration';
 import { ComponentCreator, DragDropService } from '../../dynamic-views/drag-drop.service';
-import { TemplateNameDirective } from '../../utils';
+import { ModalComponent, SvgIconComponent, TemplateNameDirective, TooltipDirective } from '../../utils';
 import { PaletteOptions } from '../configurator.models';
+import { CommonModule } from '@angular/common';
+import { DndModule } from 'ngx-drag-drop';
 
 declare interface PaletteItem extends ComponentCreator {
   type: string;
@@ -33,6 +35,8 @@ export const defaultPaletteOptions: PaletteOptions = {
 
 @Component({
   selector: 'uib-palette',
+  standalone: true,
+  imports: [CommonModule, DndModule, TooltipDirective, SvgIconComponent, ModalComponent],
   templateUrl: './palette.component.html',
   styleUrls: ['./palette.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush

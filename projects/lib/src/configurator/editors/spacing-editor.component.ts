@@ -1,8 +1,13 @@
 import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, Input, OnChanges, QueryList, Renderer2, SimpleChanges, ViewChildren } from "@angular/core";
 import { ComponentConfig, ConfigService } from "../../configuration";
+import { TooltipDirective } from "../../utils";
+import { SvgIconComponent } from "../../utils/svg-icon/svg-icon.component";
+import { CommonModule } from "@angular/common";
 
 @Component({
   selector: 'uib-bs-spacing-editor',
+  standalone: true,
+  imports: [CommonModule, TooltipDirective, SvgIconComponent],
   template: `
   <details id="spacing-options" #details>
     <summary i18n>Spacing and borders</summary>

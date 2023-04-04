@@ -2,8 +2,9 @@ import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, EventEmi
 import { Modal } from "bootstrap";
 
 @Component({
-    selector: 'uib-modal',
-    template: `
+  selector: 'uib-modal',
+  standalone: true,
+  template: `
   <div class="modal fade" #modal tabindex="-1" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -43,11 +44,11 @@ export class ModalComponent implements AfterViewInit, OnChanges, OnDestroy {
   ngOnDestroy() {
     this.modal?.dispose();
   }
-    
+
   ngAfterViewInit() {
     this.el.nativeElement.addEventListener('hidden.bs.modal', () => this.onModalClose(false));
   }
-  
+
   onModalClose(success: boolean) {
     this.close.next(success);
     this.modal?.hide();

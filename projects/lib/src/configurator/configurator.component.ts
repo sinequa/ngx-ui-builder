@@ -15,9 +15,13 @@ import { Observable } from 'rxjs';
 import { Configurable, ConfigurableService } from '../configurable/configurable.service';
 import { ComponentConfig, ConfigService, ContainerConfig } from '../configuration';
 import { Mutable } from '../utils/typings';
-import { defaultPaletteOptions } from './palette/palette.component';
+import { PaletteComponent, defaultPaletteOptions } from './palette/palette.component';
 import { ConfiguratorContext, ConfiguratorOptions } from './configurator.models';
 import { TemplateNameDirective } from '../utils/directive/template-name.directive';
+import { CommonModule } from '@angular/common';
+import { SvgIconComponent, TooltipDirective } from '../utils';
+import { ClassEditorComponent, ConditionEditorComponent, FlexEditorComponent, HtmlEditorComponent, SpacingEditorComponent } from './editors';
+import { TreeComponent } from './public-api';
 
 export const defaultConfiguratorOptions: ConfiguratorOptions = {
   paletteOptions: defaultPaletteOptions,
@@ -32,6 +36,19 @@ export const defaultConfiguratorOptions: ConfiguratorOptions = {
 
 @Component({
   selector: 'uib-configurator',
+  standalone: true,
+  imports: [
+    CommonModule,
+    TooltipDirective,
+    SvgIconComponent,
+    TreeComponent,
+    HtmlEditorComponent,
+    FlexEditorComponent,
+    PaletteComponent,
+    ClassEditorComponent,
+    SpacingEditorComponent,
+    ConditionEditorComponent,
+  ],
   templateUrl: './configurator.component.html',
   styleUrls: ['./configurator.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,

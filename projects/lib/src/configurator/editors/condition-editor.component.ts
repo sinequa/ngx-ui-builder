@@ -1,9 +1,14 @@
 import { ChangeDetectionStrategy, Component, Input, OnChanges } from "@angular/core";
 import { Condition, ConditionsService, ConditionValue } from "../../conditions/conditions.service";
 import { ConfiguratorContext } from "../configurator.models";
+import { AutocompleteComponent } from "../../utils";
+import { FormsModule } from "@angular/forms";
+import { CommonModule } from "@angular/common";
 
 @Component({
   selector: 'uib-condition-editor',
+  standalone: true,
+  imports: [CommonModule, FormsModule, AutocompleteComponent],
   templateUrl: './condition-editor.component.html',
   styles: [`
   .condition-value .btn {
