@@ -31,7 +31,7 @@ export const defaultConfig:ComponentConfig[] = [
   {
     id: 'metas',
     type: '_container',
-    items: ['description', 'ability', 'weight', 'experience'],
+    items: ['pokename', 'description', 'ability', 'weight', 'experience'],
     classes: 'flex-column'
   },
   {

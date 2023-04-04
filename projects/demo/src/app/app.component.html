@@ -50,6 +50,7 @@
       <img *ngIf="data?.id" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/{{data?.id}}.png" [title]="data?.name"/>
     </ng-template>
 
+    <h3 *uib-template="'pokename';let data=data">{{ data?.name | titlecase }} #{{ data?.id }}</h3>
     <div *uib-template="'description';let config; let data=data" display="Description">
       {{data?.description}}
     </div>

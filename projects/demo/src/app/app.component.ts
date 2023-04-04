@@ -1,10 +1,20 @@
 import { Component, OnInit } from '@angular/core';
-import { ConfigurableService, ConfigService } from '@sinequa/ngx-ui-builder';
+import { ConfigurableService, ConfigService, UtilsModule, ConfiguratorModule, DynamicViewsModule } from '@sinequa/ngx-ui-builder';
 import { PokemonService } from "./pokemon.service";
 import { defaultConfig } from "./config";
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-root',
+  standalone: true,
+  imports: [
+    CommonModule,
+    FormsModule,
+    UtilsModule,
+    ConfiguratorModule,
+    DynamicViewsModule
+  ],
   templateUrl: './app.component.html'
 })
 export class AppComponent implements OnInit {
@@ -47,7 +57,7 @@ export class AppComponent implements OnInit {
     this.abilities = [];
     this.experience = undefined;
     this.weight = undefined;
-    this.search();
+    this.pokemonService.Reset();
   }
 
   // Utilities
