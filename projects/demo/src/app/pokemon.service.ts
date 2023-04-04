@@ -1,5 +1,6 @@
-import { Injectable } from "@angular/core";
-import { BehaviorSubject } from "rxjs";
+import { HttpClient } from "@angular/common/http";
+import { inject, Injectable } from "@angular/core";
+import { BehaviorSubject, firstValueFrom } from "rxjs";
 
 export interface Pokemon {
   name: string;
@@ -10,8 +11,11 @@ export interface Pokemon {
   experience: number;
 }
 
+
 @Injectable({providedIn: 'root'})
 export class PokemonService {
+
+  api:Record<string, any>;
 
   pokemons: Pokemon[] = [
     {
@@ -105,11 +109,67 @@ export class PokemonService {
       experience: 221,
     },
   ];
-  
-  pokemons$ = new BehaviorSubject<Pokemon[]>(this.pokemons);
+
+  pokemons$ = new BehaviorSubject<Pokemon[]>([]);
+
+  httpClient = inject(HttpClient);
+
+  constructor() {
+    // custom API Proxy
+    this.api = this.createApi("https://pokeapi.co/api/v2");
+    this.getPokemon();
+  }
+
+  async getPokemon() {
+    // retrieve 100 pokemon, and for each retrieve informations
+    const pokemon = await this.api.pokemon();
+    const pokemonPromises = pokemon.results.map(p => this.createPokemon(p));
+
+    // when all pokemon are created emit signal
+    Promise.all(pokemonPromises).then(values => {
+      this.pokemons = values;
+      this.pokemons$.next(values)
+    });
+  }
+
+  async createPokemon(p): Promise<Pokemon> {
+    // call: https://pokeapi.co/api/v2/pokemon/:name
+    const poke = await this.api.pokemon(p.name);
+
+    // call: https://pokeapi.co/api/v2/pokemon-species/:id
+    const desc = await this.api['pokemon-species'](poke.id);
+
+    // create a Pokemon object
+    return ({
+      id: poke.id,
+      name: p.name,
+      description: desc.flavor_text_entries.filter(({ language, version }) => language.name === "en" && version.name === "x")
+        .map(({ flavor_text }) => flavor_text)
+        .join()
+        .replaceAll("", " "),
+      abilities: poke.abilities.map(({ability}) => ability.name),
+      weight: poke.weight,
+      experience: poke.base_experience
+    });
+  }
+
+  private createApi = (url) => {
+    const http = this.httpClient;
+    return new Proxy({}, {
+      get(target, key:string) {
+        return async function (id = "") {
+          const response = await firstValueFrom(http.get(`${url}/${key}/${id}?limit=100`));
+          if (response) {
+            return response;
+          }
+          return Promise.resolve({error: "Malformed Request"})
+        }
+      }
+    })
+  }
 
   searchPokemons(search = "", abilities: string[] = [], weight?: number, experience?: number) {
-    return this.pokemons$.next(this.pokemons.filter(p => {
+    this.pokemons$.next(this.pokemons.filter(p => {
       if (abilities.length && !p.abilities.find(a => abilities.includes(a)))
         return false;
       if (weight && p.weight > weight) return false;
@@ -118,6 +178,10 @@ export class PokemonService {
       if (search && !p.name.includes(search)) return false;
       return true;
     }));
+  }
+
+  Reset() {
+    this.pokemons$.next(this.pokemons);
   }
 
   getAbilities(): string[] {
