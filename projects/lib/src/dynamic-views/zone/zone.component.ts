@@ -14,13 +14,17 @@ import {
 import { BehaviorSubject, Subscription } from 'rxjs';
 
 import { ConfigService } from '../../configuration/config.service';
-import { ConfigurableService } from '../../configurable';
+import { ConfigurableDirective, ConfigurableService } from '../../configurable';
 import { ZoneContextService } from './zone-context.service';
 import { TemplateNameDirective } from '../../utils';
+import { CommonModule } from '@angular/common';
+import { ItemComponent } from '../public-api';
 
 
 @Component({
   selector: 'uib-zone',
+  standalone: true,
+  imports: [CommonModule, ConfigurableDirective, ItemComponent],
   templateUrl: './zone.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [ZoneContextService]

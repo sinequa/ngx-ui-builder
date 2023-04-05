@@ -1,9 +1,12 @@
+import { CommonModule } from "@angular/common";
 import { Component, Input, OnInit, Output, EventEmitter, ContentChild, TemplateRef } from "@angular/core";
 import { fromEvent, merge, Observable, of } from "rxjs";
 import { filter, switchMap } from "rxjs/operators";
 
 @Component({
   selector: 'uib-autocomplete',
+  standalone: true,
+  imports: [CommonModule],
   template: `
 <div class="position-relative" *ngIf="suggests$ | async as suggests" (mousedown)="clickInProgress = true" (mouseup)="clickInProgress = false">
   <div class="card list-group list-group-flush position-absolute" *ngIf="suggests.length">

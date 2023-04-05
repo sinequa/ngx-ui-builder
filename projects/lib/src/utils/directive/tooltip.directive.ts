@@ -4,7 +4,8 @@ import { Tooltip } from "bootstrap";
 export type TooltipPlacement = 'auto' | 'top' | 'bottom' | 'left' | 'right';
 
 @Directive({
-  selector: '[uib-tooltip]'
+  selector: '[uib-tooltip]',
+  standalone: true
 })
 export class TooltipDirective implements OnChanges, OnDestroy {
   @Input('uib-tooltip') html: string;

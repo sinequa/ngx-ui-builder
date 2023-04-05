@@ -1,6 +1,8 @@
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { ComponentConfig, ConfigService } from '../../configuration';
-import { TooltipPlacement } from '../../utils';
+import { TooltipDirective, TooltipPlacement } from '../../utils';
+import { SvgIconComponent } from '../../utils/svg-icon/svg-icon.component';
+import { CommonModule } from '@angular/common';
 
 declare interface FlexOption {
   key: string;
@@ -11,6 +13,8 @@ declare interface FlexOption {
 
 @Component({
   selector: 'uib-flex-editor',
+  standalone: true,
+  imports: [CommonModule, TooltipDirective, SvgIconComponent],
   templateUrl: 'flex-editor.component.html',
   styleUrls: ['./flex-editor.component.scss'],
 })

@@ -16,6 +16,7 @@ import { Configurable, ConfigurableService } from './configurable.service';
 
 @Directive({
   selector: '[uib-configurable]',
+  standalone: true
 })
 export class ConfigurableDirective implements OnInit, OnDestroy {
   /**

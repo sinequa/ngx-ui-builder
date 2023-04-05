@@ -5,6 +5,7 @@ import { SVG_CONFIG, SVG_ICONS_CONFIG } from './types';
 
 @Component({
   selector: 'svg-icon',
+  standalone: true,
   template: '',
   host: {
     role: 'img',
@@ -16,7 +17,7 @@ import { SVG_CONFIG, SVG_ICONS_CONFIG } from './types';
         display: inline-block;
         fill: currentColor;
         font-size: 1rem;
-        
+
         transform: rotate(var(--rotate, 0deg));
         transition: transform 0.2s ease-in-out;
       }

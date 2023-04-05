@@ -10,16 +10,21 @@ import {
   OnInit,
   SimpleChanges,
 } from '@angular/core';
-import { DndDropEvent } from 'ngx-drag-drop';
+import { CommonModule } from '@angular/common';
 import { Subscription } from 'rxjs';
 
 import { ConditionsService } from '../../conditions/conditions.service';
 import { ComponentConfig, ConfigService } from '../../configuration';
 import { ZoneContextService } from '../zone/zone-context.service';
 import { ContainerIndex, DragDropService } from '../drag-drop.service';
+import { TooltipDirective } from '../../utils';
+import { ConfigurableDirective } from '../../configurable';
+import { DndDropEvent, DndModule } from 'ngx-drag-drop';
 
 @Component({
   selector: '[uib-item]',
+  standalone: true,
+  imports: [CommonModule, TooltipDirective, ConfigurableDirective, DndModule],
   templateUrl: './item.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })

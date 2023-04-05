@@ -1,8 +1,11 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { ConfiguratorContext } from '../configurator.models';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'uib-class-editor',
+  standalone: true,
+  imports: [FormsModule],
   template: `
   <label class="form-label" for="classes" i18n>CSS Classes</label>
   <textarea
