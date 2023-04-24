@@ -38,6 +38,7 @@
     "@angular/compiler-cli": "^14.1.0",
     "@angular/localize": "^14.1.0",
     "@compodoc/compodoc": "^1.1.19",
+    "@schematics/angular": "^14.2.11",
     "@types/bootstrap": "^5.2.0",
     "@types/jasmine": "~4.0.0",
     "@types/node": "^12.11.1",

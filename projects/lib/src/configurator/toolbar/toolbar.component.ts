@@ -4,11 +4,12 @@ import { ConfigurableService } from "../../configurable";
 import { ConfigService } from "../../configuration";
 import { SvgIconComponent } from "../../utils/svg-icon/svg-icon.component";
 import { CommonModule } from "@angular/common";
+import { TooltipDirective } from "../../utils";
 
 @Component({
   selector: 'uib-toolbar',
   standalone: true,
-  imports: [CommonModule, SvgIconComponent],
+  imports: [CommonModule, SvgIconComponent, TooltipDirective],
   templateUrl: './toolbar.component.html',
   styles: [
     `

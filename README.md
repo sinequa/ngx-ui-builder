@@ -23,16 +23,18 @@ ng add @sinequa/ngx-ui-builder
 
 (This command installs the library and its peer dependencies from npm)
 
-Import the 2 following modules in your `app.module.ts` (the first one to display configurable components in your app; the second one to display their configurator):
+Import the 2 following modules in your `app.module.ts`:
 
 ```ts
-import { DynamicViewsModule, ConfiguratorModule } from '@sinequa/ngx-ui-builder';
+import { StoreModule } from "@ngrx/store";
+import { ConfigModule } from '@sinequa/ngx-ui-builder';
 
 @NgModule({
     imports: [
         ...
-        DynamicViewsModule,
-        ConfiguratorModule
+        // Mandatory as we depends on NgRx to undo/redo actions
+        StoreModule.forRoot({}),
+        ConfigModule
     ]
 })
 ```
@@ -40,8 +42,8 @@ import { DynamicViewsModule, ConfiguratorModule } from '@sinequa/ngx-ui-builder'
 Import the Bootstrap utilities and UI Builder stylesheets in your project's stylesheet:
 
 ```scss
-@import "~bootstrap/dist/css/bootstrap-utilities.min"; // Unless you already use Bootstrap or Bootstrap utilities
-@import "~@sinequa/ngx-ui-builder/styles/ui-builder";
+@import "bootstrap/dist/css/bootstrap-utilities.min"; // Unless you already use Bootstrap or Bootstrap utilities
+@import "@sinequa/ngx-ui-builder/styles/ui-builder";
 ```
 
 (Note that the Bootstrap utilities should not affect the styling of your app: they only introduce convenience styling such as `display: flex` for the class name `d-flex`)
@@ -53,7 +55,7 @@ import { ConfigService } from '@sinequa/ngx-ui-builder';
 
 ...
 export class AppComponent {
-    
+
   constructor(
     public configService: ConfigService
   ){
@@ -78,15 +80,15 @@ Display the configurator and toolbar (wrapped under a `.uib-bootstrap` element, 
 <div class="uib-bootstrap">
 
     <uib-toolbar>
-        
+
     <!-- Inject custom toolbar buttons here -->
 
     </uib-toolbar>
 
     <uib-configurator>
-        
+
     <!-- Inject custom configurators here -->
-      
+
     </uib-configurator>
 
 </div>
@@ -136,18 +138,18 @@ A zone is defined like this:
     <ng-template uib-template="description" let-data="data">
         <p>{{data.description}}</p>
     </ng-template>
-    
+
     <!-- Product image -->
     <ng-template uib-template="image" let-data="data">
         <img [src]="data.image">
     </ng-template>
-    
+
     <!-- Product price -->
     <ng-template uib-template="price" let-data="data" let-config>
         <span>{{config.currency}} {{product.price}}</span>
         <button (click)="buy(product)">Add to basket</button>
     </ng-template>
-    
+
 </uib-zone>
 ```
 
@@ -172,7 +174,7 @@ zone "products"
   |_ template "price"
 ```
 
-Note that this structure can be hierachical, as containers can include other containers.
+Note that this structure can be hierarchical, as containers can include other containers.
 
 This arborescence of configuration is defined like this:
 
@@ -215,7 +217,7 @@ Like for the zones, the custom configurators are passed by transclusion.
 
 ```html
 <uib-configurator>
-    
+
     <ng-template uib-template="price" let-context>
         <!-- Currency selector -->
         <label for="currency">Currency</label>
@@ -254,7 +256,7 @@ A container is a built-in type of component that displays sub-components (whose 
 }
 ```
 
-Containers can contain other containers, which can contain other containers, and so on. This allows to create abritrarily complex layouts, with rows nested into columns, nested into rows, etc.
+Containers can contain other containers, which can contain other containers, and so on. This allows to create arbitrarily complex layouts, with rows nested into columns, nested into rows, etc.
 
 ![Containers](./docs/containers.png)
 
@@ -342,7 +344,7 @@ This means the library can be integrated in the host application with the follow
 
 ```html
 <div class="uib-bootstrap">
-  
+
     <uib-toolbar></uib-toolbar>
 
     <uib-configurator>
@@ -358,11 +360,11 @@ However, the host application still requires some additional styling and utiliti
 These styles can be integrated with the following lines:
 
 ```scss
-@import "~bootstrap/dist/css/bootstrap-utilities.min";
-@import "~ngx-ui-builder/styles/ui-builder";
+@import "bootstrap/dist/css/bootstrap-utilities.min";
+@import "ngx-ui-builder/styles/ui-builder";
 ```
 
-(Obviously, the first line can be ommited if you already use Bootstrap in your host application)
+(Obviously, the first line can be omitted if you already use Bootstrap in your host application)
 
 ### Static export
 

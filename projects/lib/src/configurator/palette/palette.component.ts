@@ -13,7 +13,7 @@ declare interface PaletteItem extends ComponentCreator {
   display?: string;
   iconClass?: string;
   title?: string;
-  removeable?: boolean;
+  removable?: boolean;
   createConfig: (id: string, creator?: ComponentCreator) => Observable<ComponentConfig|undefined>;
 }
 
@@ -127,7 +127,7 @@ export class PaletteComponent implements OnInit, OnChanges, OnDestroy {
           type: c.type,
           display: c.id,
           title: $localize `Type: ${this.context.templates?.[c.type]?.display || c.type}`,
-          removeable: !this.configService.isUsed(c.id),
+          removable: !this.configService.isUsed(c.id),
           createConfig: _ => of(c) // The config already exists
         })
     )

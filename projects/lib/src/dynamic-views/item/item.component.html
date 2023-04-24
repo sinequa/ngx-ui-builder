@@ -17,10 +17,10 @@
   ></div>
 </ng-container>
 
-<!-- mode editeur -->
+<!-- editor mode -->
 <ng-container *ngIf="config.type === '_container' && condition && configurable">
   <div
-    [ngClass]="config.classes"
+    [ngClass]="config.classes || ''"
     class="uib-dropzone"
 
     [dndDropzone]="[zone]"

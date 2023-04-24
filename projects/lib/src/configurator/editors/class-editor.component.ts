@@ -1,11 +1,12 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { ConfiguratorContext } from '../configurator.models';
 import { FormsModule } from '@angular/forms';
+import { NgModelChangeDebouncedDirective } from '../../utils';
 
 @Component({
   selector: 'uib-class-editor',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, NgModelChangeDebouncedDirective],
   template: `
   <label class="form-label" for="classes" i18n>CSS Classes</label>
   <textarea
@@ -23,5 +24,4 @@ import { FormsModule } from '@angular/forms';
 })
 export class ClassEditorComponent {
   @Input() context: ConfiguratorContext;
-
 }

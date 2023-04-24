@@ -6,7 +6,6 @@ import { AppComponent } from "./app/app.component";
 import { StoreModule } from '@ngrx/store';
 import { HttpClientModule } from '@angular/common/http';
 import { ConfigModule, SvgIconsModule, icons } from '@sinequa/ngx-ui-builder';
-import { DndModule } from 'ngx-drag-drop';
 
 if (environment.production) {
   enableProdMode();
@@ -18,7 +17,6 @@ bootstrapApplication(AppComponent, {
       HttpClientModule,
       SvgIconsModule.forRoot({icons: icons}),
       StoreModule.forRoot({}),
-      DndModule,
       ConfigModule
     ])
   ]

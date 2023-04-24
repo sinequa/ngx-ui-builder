@@ -71,7 +71,7 @@ export class ConfiguratorComponent implements OnInit {
 
   configuration: ComponentConfig[] = [];
 
-  _showTree: boolean;
+  isTree: boolean;
   ltr = false;
 
   constructor(
@@ -134,8 +134,20 @@ export class ConfiguratorComponent implements OnInit {
   }
 
   showTree(showTree = true) {
-    this._showTree = showTree;
+    this.isTree = showTree;
     this.offcanvasBodyEl.nativeElement.scroll(0, 0);
+  }
+
+  showGlobalConfiguration() {
+    const conf: Partial<Configurable> = {
+      id: "global",
+      parentId: "", // parentId would be required to duplicate or remove the component, which is not applicable here
+      zone: "",
+      removeSelected: () => {}, // These callbacks do nothing because this is not a real click on a configurable component
+      removeEdited: () => {}
+    };
+
+    this.configurableService.clickConfigurable(conf as Configurable);
   }
 
   resolveOptions(zone: string) {
