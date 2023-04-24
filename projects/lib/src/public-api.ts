@@ -14,3 +14,5 @@ export * from './utils';
 
 export * from './svg/svg-icons';
 export * from "./utils/svg-icon";
+
+export * from "./uib.module";
