@@ -45,7 +45,7 @@ export class SpacingEditorComponent implements AfterViewInit, OnChanges {
   state: {[type: string]: {index: number, direction: string|undefined, magnitude: string|undefined}};
 
   directions = {
-    name: "direction",
+    name: "direction" as const,
     title: $localize `Direction`,
     options: [
       {description: $localize `All around`, code: "", icon: "direction-left-right-top-bottom"},
@@ -59,7 +59,7 @@ export class SpacingEditorComponent implements AfterViewInit, OnChanges {
   };
 
   magnitudes = {
-    name: "magnitude",
+    name: "magnitude" as const,
     title: $localize `Space`,
     options: [
       {description: $localize `None`, code: "0", icon: "no-space"},
@@ -72,7 +72,7 @@ export class SpacingEditorComponent implements AfterViewInit, OnChanges {
   };
 
   borderDirections = {
-    name: "direction",
+    name: "direction" as const,
     title: $localize `Direction`,
     options: [
       {description: $localize `All around`, code: "", icon: "direction-left-right-top-bottom"},

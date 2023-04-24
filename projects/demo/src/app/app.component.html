@@ -1,7 +1,9 @@
 <!-- HEADER -->
 
 <uib-zone id="header">
-  <h1 *uib-template="'title';let config">{{ config.title }} - DEMO</h1>
+  <ng-container *uib-template="'title';let config">
+    <h1>{{ config.title }} - DEMO</h1>
+  </ng-container>
 
   <input *uib-template="'searchbar'" type="text" [(ngModel)]="searchText" (ngModelChange)="search()" placeholder="Search for a Pokemon..." autocomplete="off" spellcheck="false"/>
 
@@ -27,10 +29,10 @@
   <div class="p-1 filters">
     <h3>Filters</h3>
     <uib-zone id="filters">
-      <div *uib-template="'range';let config" display="Range filter">
+      <ng-container *uib-template="'range';let config" display="Range filter">
         <h4>{{ config.field | titlecase }}: {{ this[config.field] }}</h4>
         <input type="range" min="0"max="200" [(ngModel)]="this[config.field]" (ngModelChange)="search()"/>
-      </div>
+      </ng-container>
 
       <ng-container *uib-template="'abilities'" display="Ability filter">
         <h4>Abilities:</h4>
@@ -71,7 +73,11 @@
 <div class="uib-bootstrap">
   <!-- bootstrap classes are now allowed here -->
 
-  <uib-toolbar></uib-toolbar>
+  <uib-toolbar>
+    <button type="button" class="btn btn-primary" uib-tooltip="Download Configuration as JSON" (click)="configService.exportConfiguration()">
+      Download
+    </button>
+  </uib-toolbar>
 
   <!-- CONFIGURATOR -->
 

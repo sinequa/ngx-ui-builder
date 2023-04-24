@@ -33,18 +33,18 @@
 <ng-template #paletteItem let-item>
   <div
     [dndDraggable]="item.type"
-    [dndType]="context?.zone"
+    [dndType]="context.zone"
     (dndStart)="onDndStart(item)"
     (dndEnd)="onDndEnd()"
     [uib-tooltip]="item.title"
     container=".uib-bootstrap"
     placement="bottom"
     class="palette-item"
-    [ngClass]="{'uib-unused': item.removeable}">
+    [ngClass]="{'uib-unused': item.removable}">
     <svg-icon class="grip" key="grip" height="1em"></svg-icon>
     <span [ngClass]="item.iconClass"></span>
     {{item.display || item.type}}
-    <button *ngIf="item.removeable"
+    <button *ngIf="item.removable"
       type="button"
       class="btn-close"
       uib-tooltip="Remove this unused configuration"

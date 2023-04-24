@@ -35,12 +35,6 @@ export const defaultConfig:ComponentConfig[] = [
     classes: 'flex-column'
   },
   {
-    id: 'name',
-    type: 'metadata',
-    field: 'name',
-    hideField: true
-  },
-  {
     id: 'ability',
     type: 'metadata',
     field: 'abilities',

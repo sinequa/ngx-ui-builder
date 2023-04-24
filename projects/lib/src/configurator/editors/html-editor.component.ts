@@ -1,11 +1,12 @@
 import { Component, Input } from "@angular/core";
 import { ConfiguratorContext } from "../configurator.models";
 import { FormsModule } from "@angular/forms";
+import { NgModelChangeDebouncedDirective } from "../../utils";
 
 @Component({
   selector: 'uib-html-editor',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, NgModelChangeDebouncedDirective],
   template: `
   <label class="form-label" for="rawHtml" i18n>Raw HTML:</label>
   <textarea class="form-control" id="rawHtml"

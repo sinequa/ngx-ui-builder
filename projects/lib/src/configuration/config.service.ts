@@ -183,4 +183,15 @@ export class ConfigService {
       can => can && this.store.dispatch({type: "REDO"})
     );
   }
+
+  public exportConfiguration() {
+    const config = JSON.stringify(this.getAllConfig(), null, 2);
+    var element = document.createElement('a');
+    element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(config));
+    element.setAttribute('download', "config.json");
+    element.style.display = 'none';
+    document.body.appendChild(element);
+    element.click();
+    document.body.removeChild(element);
+  }
 }

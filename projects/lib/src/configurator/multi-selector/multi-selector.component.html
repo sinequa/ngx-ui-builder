@@ -1,0 +1,31 @@
+<div [dndDropzone]="[selectId]" *ngIf="enableReorder" (dndDrop)="onDrop($event)">
+  <div dndPlaceholderRef></div>
+  <div *ngFor="let option of _optionsSelected; let i=index"
+    [dndDraggable]="i"
+    [dndType]="selectId"
+    class="d-flex align-items-center dndDraggable">
+    <ng-container *ngIf="option !== null">
+      <i class="fas fa-grip-vertical fa-fw text-muted" title="Drag to reorder"></i>
+      <ng-container *ngTemplateOutlet="optionTpl; context:{$implicit: option, i: i}"></ng-container>
+    </ng-container>
+  </div>
+</div>
+
+<ng-container *ngFor="let option of _options; let i=index"
+  [ngTemplateOutlet]="optionTpl"
+  [ngTemplateOutletContext]="{$implicit: option, i: i+(_optionsSelected?.length||0)}">
+</ng-container>
+
+<ng-template #optionTpl let-option let-i="i">
+  <div class="form-check">
+    <input id="{{selectId}}-{{i}}"
+      type="checkbox"
+      class="form-check-input"
+      [checked]="isChecked(option)"
+      (change)="onChecked(option, $any($event).target.checked)"
+      (blur)="onTouched()"/>
+    <label class="form-check-label" for="{{selectId}}-{{i}}">
+      {{displayField? option[displayField] : option}}
+    </label>
+  </div>
+</ng-template>
