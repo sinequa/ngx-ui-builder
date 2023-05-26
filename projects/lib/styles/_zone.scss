@@ -5,9 +5,6 @@
   position: relative;
 
   /* box-model */
-  min-width: 32px;
-  min-height: 32px;
-
   /* visual */
   border-radius: 4px;
 
@@ -41,32 +38,33 @@
     z-index: 99;
   }
 
+  .uib-container {
+    display: flex;
+    min-width: 32px;
+    min-height: 32px;
+  }
+
+
   /* when hovering a zone or a zone's element */
   &:hover {
     outline: 1px dashed lightsteelblue;
-    margin: 4px;
+    // margin: var(--margin);
 
     [uib-configurable] {
       /* box-model */
-      margin: var(--margin);
-      padding: var(--padding);
 
       /* visual */
       border-radius: 2px;
 
       &:not(.uib-container, .highlight, .dndDragging, .uib-dropzone-content) {
         outline: 1px dashed yellowgreen;
+        outline-offset: -3px;
       }
 
       /* Deactivate clicks within templates in edit mode */
       & > *:not(.uib-dropzone) {
         pointer-events: none;
       }
-    }
-
-    .uib-container {
-      min-width: 32px;
-      min-height: 32px;
     }
 
     .uib-dropzone-content {
