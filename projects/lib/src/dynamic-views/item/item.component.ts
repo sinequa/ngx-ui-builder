@@ -122,7 +122,7 @@ export class ItemComponent implements OnInit, OnChanges, OnDestroy {
   private updateConfig(config: ComponentConfig) {
     this.config = config;
     this.updateCondition();
-    this.classes = this.config.classes;
+    this.classes = this.config.classes || '';
     if (config.type === '_container') {
       this.classes += ' uib-container';
       if (this.configurable) {
