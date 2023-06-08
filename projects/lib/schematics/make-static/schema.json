@@ -9,6 +9,16 @@
       "type": "string",
       "format": "path"
     },
+    "configPath": {
+      "description": "The path to the typescript configuration of the application (e.g: path/to/file/config.ts)",
+      "type": "string",
+      "format": "path"
+    },
+    "configIdentifier": {
+      "description": "The identifier name used to store de configuration",
+      "type": "string",
+      "default": ""
+    },
     "override": {
       "description": "If true, will override the source code of the HTML templated rather than generating alternate .static.html files.",
       "type": "boolean",
@@ -20,7 +30,7 @@
       "default": true
     },
     "commentScssImport": {
-      "description": "If true, comment out the import of the UI Builder stylesheet in the project's stylesheet",
+      "description": "If true, comment out the import of the UI Builder stylesheets in the project's stylesheets",
       "type": "boolean",
       "default": true
     },
@@ -30,7 +40,7 @@
       "format": "path"
     },
     "createBase64Images": {
-      "description": "Detect when the configration contains images encoded as base64 strings and transform them as files in the assets folder",
+      "description": "Detect when the configuration contains images encoded as base64 strings and transform them as files in the assets folder",
       "type": "boolean",
       "default": true
     },
