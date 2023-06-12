@@ -1,5 +1,5 @@
 import { Tree, Rule, SchematicsException } from "@angular-devkit/schematics";
-import ts, {factory} from "typescript";
+import ts, {Expression, factory} from "typescript";
 import { MakeStaticOptions } from "../schema";
 
 /**
@@ -8,7 +8,7 @@ import { MakeStaticOptions } from "../schema";
  * used in the `createProperty` and `createValue` functions to ensure that the
  * correct type of value is created for a given property assignment.
  */
-type LiteralValueType = string | number | boolean;
+type LiteralValueType = string | number | boolean | [];
 
 let CONFIG_IDENTIFIER = 'GLOBAL_CONFIG';
 
@@ -17,7 +17,7 @@ let CONFIG_IDENTIFIER = 'GLOBAL_CONFIG';
  * the configuration data read from a JSON file and to update an existing
  * TypeScript object literal expression or create a new one.
  */
-let configuration = {};
+let configuration = [];
 
 /**
  * This function reads a configuration file and updates a TypeScript source file
@@ -29,8 +29,9 @@ let configuration = {};
 export function addConfigObjectRule(options: MakeStaticOptions): Rule {
   return async (tree: Tree) => {
 
-    // exit when 'config-flag' is not provided
+    // exit when 'config-path' or 'config' flag are not provided
     if (!options?.configPath) return;
+    if (!options?.config) return;
 
     CONFIG_IDENTIFIER = options.configIdentifier || CONFIG_IDENTIFIER;
 
@@ -40,8 +41,6 @@ export function addConfigObjectRule(options: MakeStaticOptions): Rule {
     if (!Array.isArray(configuration)) {
       throw new SchematicsException(`Expected an array of configuration objects in ${options.config}: ${configuration}`);
     }
-    // keep only 'global' object and remove 'id' and 'type' useless
-    [configuration] = configuration.filter(c => c.type === "global");
 
     // create ts source file
     const code = tree.read(options.configPath)?.toString("utf-8");
@@ -67,27 +66,31 @@ export function addConfigObjectRule(options: MakeStaticOptions): Rule {
 }
 
 
+
 /**
- * This function updates an existing TypeScript object literal expression with new
- * properties.
+ * This function updates an existing TypeScript configuration object with
+ * additional properties.
  * @param context - The context parameter is an object that provides access to the
- * TypeScript compiler's API, including the factory for creating new AST nodes and
- * other utilities. It is used in the function to update an existing object literal
- * expression in the AST.
- * @returns The function `updateExistingConfigObject` returns a new function that
- * takes a TypeScript AST node as an argument and returns a modified version of
- * that node. The modified version updates an existing object literal expression by
- * adding properties from a `configuration` object.
+ * TypeScript compiler's API, including the factory object used to create new AST
+ * nodes. It is used to generate new AST nodes that will be used to update the
+ * existing configuration object.
+ * @returns The function `updateExistingConfigObject` returns a higher-order
+ * function that takes a TypeScript AST node as an argument and returns a
+ * transformed version of that node. The transformed node will have additional
+ * configuration objects appended to an array literal expression if the parent node
+ * is a variable declaration with a specific identifier.
  */
 const updateExistingConfigObject = (context) => (root) => {
   function visit(node: ts.Node): ts.VisitResult<ts.Node> {
-    if (ts.isObjectLiteralExpression(node)) {
+    if (ts.isArrayLiteralExpression(node)) {
       const { factory } = context;
       const parent: ts.VariableDeclaration = node.parent as ts.VariableDeclaration;
       if (parent.name && parent.name.getText() === CONFIG_IDENTIFIER) {
-        return factory.updateObjectLiteralExpression(node, [
-          ...node.properties,
-          ...Object.keys(configuration).map(k => createProperty(k, configuration[k]))
+        return factory.updateArrayLiteralExpression(node, [
+          ...node.elements,
+          ...configuration.map(c => ts.factory.createObjectLiteralExpression([
+            ...Object.keys(c).map(k => createProperty(k, c[k]))
+          ])),
         ])
       }
     }
@@ -97,22 +100,18 @@ const updateExistingConfigObject = (context) => (root) => {
 }
 
 /**
- * The function recursively visits nodes in a TypeScript AST and checks if a given
- * identifier is present in an object literal expression.
- * @param node - A TypeScript AST node that represents a part of a TypeScript
- * source code file.
+ * The function visits each node in a TypeScript AST and checks if it is an array
+ * literal expression with a specific identifier.
+ * @param node - A TypeScript Node object representing a node in the abstract
+ * syntax tree (AST) of a TypeScript program.
  * @param {string} identifier - The identifier parameter is a string that
- * represents the name of a variable declaration that we are searching for in the
+ * represents the name of a variable that we are searching for in the TypeScript
  * AST (Abstract Syntax Tree).
- * @returns The function is not returning anything explicitly in all cases. If the
- * condition `parent.name && parent.name.getText() === identifier` is true, then
- * the function returns `true`. Otherwise, the function is recursively calling
- * itself on each child node of the input `node`. The function does not return
- * anything in this case, but it could potentially return `undefined` if none of
- * the child nodes match the condition
+ * @returns The function does not have a return statement, so it will return
+ * `undefined` by default.
  */
 function visit(node: ts.Node, identifier: string) {
-  if (ts.isObjectLiteralExpression(node)) {
+  if (ts.isArrayLiteralExpression(node)) {
     const parent: ts.VariableDeclaration = node.parent as ts.VariableDeclaration;
     if (parent.name && parent.name.getText() === identifier) {
       return true;
@@ -121,11 +120,14 @@ function visit(node: ts.Node, identifier: string) {
   return node.forEachChild((child) => visit(child, identifier));
 }
 
+
 /**
- * This function creates a default configuration object using TypeScript syntax.
+ * This function creates a default configuration object in TypeScript.
  * @returns a TypeScript AST (Abstract Syntax Tree) node that represents a variable
- * statement for exporting a constant variable declaration with an empty object
- * literal as its value.
+ * statement. Specifically, it is creating a default configuration object by using
+ * the `factory` object to create a `VariableStatement` node that exports a `const`
+ * variable declaration with an array literal expression containing object literal
+ * expressions for each configuration object in the `configuration` array.
  */
 function createDefaultConfigObject() {
   return factory.createVariableStatement(
@@ -135,8 +137,10 @@ function createDefaultConfigObject() {
         factory.createIdentifier(CONFIG_IDENTIFIER),
         undefined,
         undefined,
-        factory.createObjectLiteralExpression(
-          [],
+        factory.createArrayLiteralExpression(
+          [...configuration.map(c => ts.factory.createObjectLiteralExpression([
+            ...Object.keys(c).map(k => createProperty(k, c[k]))
+          ]))],
           false
         )
       )],
@@ -177,15 +181,23 @@ function createProperty(identifier: string, value: LiteralValueType) {
  * is a boolean, it returns a boolean literal node using the TypeScript factory
  * method `create
  */
-function createValue(value: LiteralValueType ) {
+function createValue(value: LiteralValueType): Expression {
   switch (typeof(value)) {
     case "number":
       return factory.createNumericLiteral(value);
     case "boolean":
       return value ? factory.createTrue() : factory.createFalse()
+    case "object":
+      if (Array.isArray(value)) {
+        return factory.createArrayLiteralExpression([
+          ...value.map(v => createValue(v))
+        ])
+      }
+      return factory.createObjectLiteralExpression(
+        Object.keys(value).map(k => createProperty(k, value[k]))
+      )
 
     default:
       return factory.createStringLiteral(String(value));
-      break;
   }
 }
