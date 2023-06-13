@@ -24,10 +24,10 @@
     "noUnusedLocals": true,
     "strictFunctionTypes": true,
     "strictNullChecks": true,
-    "target": "es2020",
+    "target": "ES2022",
     "module": "ESNext",
     "lib": [
-      "es2020",
+      "ES2022",
       "dom"
     ]
   },
