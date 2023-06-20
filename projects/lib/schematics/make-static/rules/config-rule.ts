@@ -82,6 +82,21 @@ export function addConfigObjectRule(options: MakeStaticOptions): Rule {
  */
 const updateExistingConfigObject = (context) => (root) => {
   function visit(node: ts.Node): ts.VisitResult<ts.Node> {
+    if (ts.isVariableDeclaration(node)) {
+      if (node.name.getText() === CONFIG_IDENTIFIER && node.type === undefined) {
+        return factory.updateVariableDeclaration(node,
+          factory.createIdentifier(CONFIG_IDENTIFIER),
+          undefined,
+          undefined,
+          factory.createArrayLiteralExpression(
+            [...configuration.map(c => ts.factory.createObjectLiteralExpression([
+              ...Object.keys(c).map(k => createProperty(k, c[k]))
+            ]))],
+            false
+          )
+        )
+      }
+    }
     if (ts.isArrayLiteralExpression(node)) {
       const { factory } = context;
       const parent: ts.VariableDeclaration = node.parent as ts.VariableDeclaration;
@@ -111,9 +126,8 @@ const updateExistingConfigObject = (context) => (root) => {
  * `undefined` by default.
  */
 function visit(node: ts.Node, identifier: string) {
-  if (ts.isArrayLiteralExpression(node)) {
-    const parent: ts.VariableDeclaration = node.parent as ts.VariableDeclaration;
-    if (parent.name && parent.name.getText() === identifier) {
+  if (ts.isVariableDeclaration(node)) {
+    if (node.name.getText() === identifier) {
       return true;
     }
   }
@@ -136,7 +150,10 @@ function createDefaultConfigObject() {
       [factory.createVariableDeclaration(
         factory.createIdentifier(CONFIG_IDENTIFIER),
         undefined,
-        undefined,
+        factory.createArrayTypeNode(factory.createTypeReferenceNode(
+          factory.createIdentifier("ComponentConfig"),
+          undefined
+        )),
         factory.createArrayLiteralExpression(
           [...configuration.map(c => ts.factory.createObjectLiteralExpression([
             ...Object.keys(c).map(k => createProperty(k, c[k]))
