@@ -87,7 +87,10 @@ const updateExistingConfigObject = (context) => (root) => {
         return factory.updateVariableDeclaration(node,
           factory.createIdentifier(CONFIG_IDENTIFIER),
           undefined,
-          undefined,
+          factory.createArrayTypeNode(factory.createTypeReferenceNode(
+            factory.createIdentifier("ComponentConfig"),
+            undefined
+          )),
           factory.createArrayLiteralExpression(
             [...configuration.map(c => ts.factory.createObjectLiteralExpression([
               ...Object.keys(c).map(k => createProperty(k, c[k]))
