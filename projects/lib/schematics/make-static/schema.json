@@ -44,6 +44,11 @@
       "type": "boolean",
       "default": true
     },
+    "overrideTranslations": {
+      "description": "If true, will override the config locales with the ones updated in the translations configurator",
+      "type": "boolean",
+      "default": true
+    },
     "project": {
       "type": "string",
       "description": "The name of the project.",

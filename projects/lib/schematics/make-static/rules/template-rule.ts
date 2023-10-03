@@ -5,6 +5,7 @@ import { normalize, virtualFs, workspaces } from '@angular-devkit/core';
 import { makeStaticHtml } from '../utils/html-transformer';
 import { createHash } from 'crypto';
 import { MakeStaticOptions } from '../schema';
+import { ComponentConfig } from '@sinequa/ngx-ui-builder';
 
 export function updateHTML(options: MakeStaticOptions): Rule {
   return async (tree: Tree) => {
@@ -121,6 +122,11 @@ export function updateHTML(options: MakeStaticOptions): Rule {
       else {
         console.warn("Could not find a stylesheet in the project:", scssPath);
       }
+    }
+
+    // Overriding the translations with the config ones
+    if (options.overrideTranslations) {
+      await overrideTranslations(config, host, project);
     }
   }
 }
@@ -260,6 +266,27 @@ async function createBase64Images(config: any, tree: Tree, assets: string) {
         }
       }
     }
+  }
+}
+
+async function overrideTranslations(config: ComponentConfig[], host: workspaces.WorkspaceHost, project: workspaces.ProjectDefinition) {
+  const conf = config.find(c => c.id === 'translations');
+  if (conf) {
+    console.log('=> Overriding translations', conf);
+    // en
+    const enLocales = conf.translations.en;
+    const enPath = normalize(`${project.sourceRoot}/locales/config/en.json`);
+    host.writeFile(enPath, enLocales);
+
+    // fr
+    const frLocales = conf.translations.fr;
+    const frPath = normalize(`${project.sourceRoot}/locales/config/fr.json`);
+    host.writeFile(frPath, frLocales);
+
+    // de
+    const deLocales = conf.translations.de;
+    const dePath = normalize(`${project.sourceRoot}/locales/config/de.json`);
+    host.writeFile(dePath, deLocales);
   }
 }
 

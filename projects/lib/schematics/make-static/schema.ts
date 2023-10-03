@@ -49,6 +49,11 @@ export interface MakeStaticOptions {
   createBase64Images: boolean;
 
   /**
+   * If true, update the translations to include the overwritten ones
+   */
+  overrideTranslations: boolean;
+
+  /**
    * The name of the project.
    */
   project?: string;
