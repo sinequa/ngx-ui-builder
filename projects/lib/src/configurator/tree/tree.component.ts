@@ -1,23 +1,30 @@
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { ConfigurableService} from '../../configurable';
-import { ComponentConfig } from '../../configuration';
+import { ComponentConfig, ConfigService } from '../../configuration';
 import { CommonModule } from '@angular/common';
+import { SvgIconComponent } from "../../utils/svg-icon/svg-icon.component";
+import { ModalComponent } from '../../utils';
+import { FormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'uib-tree',
-  standalone: true,
-  imports: [CommonModule],
-  templateUrl: './tree.component.html',
-  styleUrls: ['tree.component.css'],
+    selector: 'uib-tree',
+    standalone: true,
+    templateUrl: './tree.component.html',
+    styleUrls: ['tree.component.css'],
+    imports: [CommonModule, SvgIconComponent, ModalComponent, FormsModule]
 })
 export class TreeComponent implements OnChanges {
   @Input() configuration: ComponentConfig[];
 
   root: Partial<ComponentConfig>[];
+  hoveredId?: string;
+  configToEdit?: {id: string, display: string};
+  displayName?: string;
 
   private configurationMap: Map<string, Partial<ComponentConfig>>;
 
-  constructor(public configurableService: ConfigurableService) {}
+  constructor(public configurableService: ConfigurableService,
+    public configService: ConfigService) { }
 
   ngOnChanges(changes: SimpleChanges) {
     // set our Map object,
@@ -56,6 +63,7 @@ export class TreeComponent implements OnChanges {
   }
 
   hover(id: string | undefined) {
+    this.hoveredId = id; // used to display and hide the edit icons
     const hoveredId = this.configurableService.hoveredId;
     if (hoveredId) {
       const prev = this.configurableService.configurableDirectiveMap.get(hoveredId);
@@ -69,5 +77,19 @@ export class TreeComponent implements OnChanges {
 
       el?.nativeElement.scrollIntoView({ behavior: 'smooth', inline: 'nearest', block: 'center' });
     }
+  }
+
+  editConfigDisplayName(context: {id: string, display: string}) {
+    this.configToEdit = context;
+    this.displayName = context.display ? String(context.display) : undefined;
+  }
+
+  onModalClose(validated: boolean) {
+    if (validated) {
+      const config = this.configService.getConfig(this.configToEdit!.id);
+      config.display = this.displayName;
+      this.configService.updateConfig(config);
+    }
+    this.configToEdit = undefined;
   }
 }

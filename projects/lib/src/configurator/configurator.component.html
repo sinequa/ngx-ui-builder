@@ -7,14 +7,14 @@
     </h5>
     <h5 class="offcanvas-title" *ngIf="isTree" i18n>Configuration Tree</h5>
 
-    <button id="right-to-left" type="button" [ngClass]="{'ltr': !ltr}" i18n-uib-tooltip uib-tooltip="Slide to {{ltr? 'right':'left'}}" class="btn btn-sm btn-link ms-auto" (click)="ltr = !ltr">
-      <svg-icon key="arrow_forward" width="22px" height="25px"></svg-icon>
+    <button id="right-to-left" type="button" i18n-uib-tooltip uib-tooltip="Slide to {{ltr? 'right':'left'}}" class="btn btn-sm btn-link ms-auto" (click)="ltr = !ltr">
+      <svg-icon key="right-left" width="22px" height="25px"></svg-icon>
+    </button>
+    <button *ngIf="!!parentId" class="btn btn-sm" i18n-uib-tooltip uib-tooltip="Go to the parent container" (click)="goToParent()">
+      <svg-icon key="folder" width="22px" height="25px"></svg-icon>
     </button>
     <button type="button" class="btn btn-sm" [ngClass]="isTree? 'btn-square btn-primary' : 'btn-link'" i18n-uib-tooltip uib-tooltip="{{isTree? 'Hide' : 'Show'}} configuration tree" (click)="showTree(!isTree)">
       <svg-icon key="tree" width="22px" height="25px"></svg-icon>
-    </button>
-    <button class="btn btn-sm" i18n-uib-tooltip uib-tooltip="Global configuration" (click)="showGlobalConfiguration()">
-      <svg-icon key="gear" width="22px" height="25px"></svg-icon>
     </button>
     <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close" i18n-aria-label></button>
   </div>

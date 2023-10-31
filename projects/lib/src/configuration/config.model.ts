@@ -19,6 +19,8 @@ export type ComponentConfig = {
   /** An optional condition to display the component only when
       some conditions are met */
   condition?: Condition,
+  /** Any custom display name */
+  display?: string,
 }
 
 /**
