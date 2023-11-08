@@ -8,7 +8,8 @@ import { NgModelChangeDebouncedDirective } from "../../utils";
   standalone: true,
   imports: [FormsModule, NgModelChangeDebouncedDirective],
   template: `
-  <label class="form-label" for="rawHtml" i18n>Raw HTML:</label>
+  <label class="form-label m-0" for="rawHtml" i18n>Raw HTML:</label>
+  <p class="small text-muted mb-1">Static HTML content (text, images). Does not support Angular component and syntax.</p>
   <textarea class="form-control" id="rawHtml"
     type="text"
     name="rawHtml"

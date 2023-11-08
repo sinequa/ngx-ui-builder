@@ -10,7 +10,7 @@
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
-  
+
   list-style-type: none;
   margin: 10px;
   position: relative;
@@ -91,6 +91,10 @@ ul.tree > li:first-child::after {
 .tree li a:focus + ul::before .tree li a:hover + ul ul::before,
 .tree li a:focus + ul ul::before {
   border-color: #000; /*connector color on hover*/
+}
+
+.tree li svg-icon {
+  cursor: pointer;
 }
 
 .section ul {

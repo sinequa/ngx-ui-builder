@@ -73,6 +73,7 @@ export class ConfiguratorComponent implements OnInit {
 
   isTree: boolean;
   ltr = false;
+  parentId: string;
 
   constructor(
     private cdr: ChangeDetectorRef,
@@ -84,6 +85,7 @@ export class ConfiguratorComponent implements OnInit {
     this.edited$ = this.configurableService.watchEdited().pipe(
       tap(() => this.offcanvas.show()),
       tap(() => this.showTree(false)),
+      tap((edited) => this.parentId = edited.parentId),
       switchMap((context) =>
         this.configService.watchConfig(context!.id).pipe(
           map(config => ({
@@ -138,18 +140,6 @@ export class ConfiguratorComponent implements OnInit {
     this.offcanvasBodyEl.nativeElement.scroll(0, 0);
   }
 
-  showGlobalConfiguration() {
-    const conf: Partial<Configurable> = {
-      id: "global",
-      parentId: "", // parentId would be required to duplicate or remove the component, which is not applicable here
-      zone: "",
-      removeSelected: () => {}, // These callbacks do nothing because this is not a real click on a configurable component
-      removeEdited: () => {}
-    };
-
-    this.configurableService.clickConfigurable(conf as Configurable);
-  }
-
   resolveOptions(zone: string) {
     // First set defaults, then the configurator options, then zone-specific options
     const options = Object.assign({}, defaultConfiguratorOptions, this.options, this.zoneOptions[zone] || {});
@@ -201,5 +191,11 @@ export class ConfiguratorComponent implements OnInit {
 
       this.configService.updateConfig([config, config2, container]);
     }
+  }
+
+  goToParent() {
+    const el = this.configurableService.configurableDirectiveMap.get(this.parentId);
+    el?.click(new MouseEvent("click"));
+    el?.nativeElement.scrollIntoView({behavior: 'smooth', inline: 'nearest', block: 'center'});
   }
 }

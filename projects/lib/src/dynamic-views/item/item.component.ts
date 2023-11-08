@@ -188,4 +188,9 @@ export class ItemComponent implements OnInit, OnChanges, OnDestroy {
     }
     return false;
   }
+
+  getItemTooltip(id: string): string {
+    const config = this.configService.getConfig(id);
+    return config.display || id;
+  }
 }

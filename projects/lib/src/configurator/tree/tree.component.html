@@ -5,24 +5,38 @@
   ></ng-container>
 </div>
 
-<ng-template #tree let-id let-root="root">
+<ng-template #tree let-context let-root="root">
   <ul [ngClass]="{ tree: root }">
-    <li *ngFor="let el of root || children(id)" [ngClass]="{ 'section': el.items }">
-      <ng-container [ngTemplateOutlet]="el.items ? parent : single" [ngTemplateOutletContext]="{ $implicit: el.id }"></ng-container>
+    <li *ngFor="let el of root || children(context.id)" [ngClass]="{ 'section': el.items }">
+      <ng-container [ngTemplateOutlet]="el.items ? parent : single" [ngTemplateOutletContext]="{ $implicit: {id: el.id, display: el.display} }"></ng-container>
     </li>
   </ul>
 </ng-template>
 
-<ng-template #single let-id>
-  <a (mouseover)="hover(id)" (mouseleave)="hover(undefined)" (click)="select(id)" [attr.data-id]="id" [ngClass]="{ 'selected': id === (configurableService.edited$ | async)?.id }" >{{ id }}</a>
+<ng-template #single let-context>
+  <div class="d-flex align-items-center" (mouseover)="hover(context.id)" (mouseleave)="hover(undefined)">
+    <a (click)="select(context.id)" [attr.data-id]="context.id" [ngClass]="{ 'selected': context.id === (configurableService.edited$ | async)?.id }" >{{ context.display || context.id }}</a>
+    <svg-icon [classList]="'ms-1 mb-1 h-100'" key="pencil" width="15px" height="19px" *ngIf="hoveredId === context.id" (click)="editConfigDisplayName(context)"></svg-icon>
+  </div>
 </ng-template>
 
-<ng-template #parent let-id>
-  <input type="checkbox" checked [id]="'menu-' + id">
-  <label [for]="'menu-' + id"></label>
-  <ng-container [ngTemplateOutlet]="single" [ngTemplateOutletContext]="{ $implicit: id || undefined }"></ng-container>
+<ng-template #parent let-context>
+  <input type="checkbox" checked [id]="'menu-' + context.id">
+  <label [for]="'menu-' + context.id"></label>
+  <ng-container [ngTemplateOutlet]="single" [ngTemplateOutletContext]="{ $implicit: context }"></ng-container>
   <ng-container
     [ngTemplateOutlet]="tree"
-    [ngTemplateOutletContext]="{ $implicit: id }"
+    [ngTemplateOutletContext]="{ $implicit: context }"
   ></ng-container>
 </ng-template>
+
+<!-- Modal -->
+<uib-modal [title]="'Update name for config id ' + configToEdit?.id" [show]="!!configToEdit" (close)="onModalClose($event)">
+  <label for="config-display" class="form-label">Display name</label>
+  <input type="text" *ngIf="configToEdit"
+    class="form-control"
+    id="config-display"
+    autocomplete="off"
+    spellcheck="off"
+    [(ngModel)]="displayName">
+</uib-modal>
