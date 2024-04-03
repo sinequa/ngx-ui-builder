@@ -1,10 +1,10 @@
-import { ChangeDetectionStrategy, Component, ContentChild, TemplateRef } from "@angular/core";
+import { ChangeDetectionStrategy, Component } from "@angular/core";
 
+import { CommonModule } from "@angular/common";
 import { ConfigurableService } from "../../configurable";
 import { ConfigService } from "../../configuration";
-import { SvgIconComponent } from "../../utils/svg-icon/svg-icon.component";
-import { CommonModule } from "@angular/common";
 import { TooltipDirective } from "../../utils";
+import { SvgIconComponent } from "../../utils/svg-icon/svg-icon.component";
 
 @Component({
   selector: 'uib-toolbar',
@@ -34,7 +34,6 @@ import { TooltipDirective } from "../../utils";
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ToolbarComponent {
-  @ContentChild(TemplateRef, {static: false}) template: TemplateRef<any>;
 
   constructor(
     public configService: ConfigService,

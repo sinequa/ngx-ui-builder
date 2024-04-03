@@ -1,6 +1,6 @@
 <div class="btn-group uib-toolbar uib-toolbar-anim" *ngIf="{enabled: configurableService.editorEnabled$ | async} as editor" >
   <ng-container *ngIf="editor.enabled">
-    <ng-container [ngTemplateOutlet]="template"></ng-container>
+    <ng-content></ng-content>
     <button class="btn btn-primary" (click)="configService.undo()" [ngClass]="{'disabled': !(configService.canUndo$()| async)}" uib-tooltip="Undo" i18n-uib-tooltip placement="top">
       <svg-icon key="undo"></svg-icon>
     </button>
