@@ -1,11 +1,17 @@
 {
-  "name": "@sinequa/ngx-ui-builder",
-  "version": "1.0.0",
-  "author": "Sinequa",
-  "repository": "github:sinequa/ngx-ui-builder",
-  "homepage": "https://sinequa.github.io/ngx-ui-builder/",
+  "name": "@gsaas/ngx-ui-builder",
+  "version": "1.0.1-beta.4",
   "description": "An Angular library for creating no-code tools & applications",
-  "keywords": ["no code", "angular", "angular2", "sinequa", "drag and drop", "point and click", "ui builder", "configurable"],
+  "keywords": [
+    "no code",
+    "angular",
+    "angular2",
+    "sinequa",
+    "drag and drop",
+    "point and click",
+    "ui builder",
+    "configurable"
+  ],
   "license": "MIT",
   "scripts": {
     "build": "tsc -p tsconfig.schematics.json",
@@ -16,13 +22,13 @@
     "save": "dependencies"
   },
   "peerDependencies": {
-    "@angular/common": "^14.1.0",
-    "@angular/core": "^14.1.0",
-    "@ngrx/store": "^14.3.2",
+    "@angular/common": "^15.0.0",
+    "@angular/core": "^15.0.0",
+    "@ngrx/store": "^15.0.0",
     "@popperjs/core": "^2.11.5",
     "bootstrap": "^5.2.0",
     "immer": "^9.0.16",
-    "ngrx-wieder": "^9.0.0",
+    "ngrx-wieder": "^10.0.2",
     "ngx-drag-drop": "^2.0.0"
   },
   "dependencies": {
@@ -30,7 +36,7 @@
   },
   "devDependencies": {
     "@types/bootstrap": "^5.1.6",
-    "@angular/localize": "^14.1.0",
+    "@angular/localize": "^15.2.0",
     "copyfiles": "file:../../node_modules/copyfiles",
     "typescript": "file:../../node_modules/typescript"
   }
