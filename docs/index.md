@@ -12,7 +12,7 @@
 Add the library to your application with:
 
 ```
-ng add @sinequa/ngx-ui-builder
+ng add @gsaas/ngx-ui-builder
 ```
 
 (This command installs the library and its peer dependencies from npm)
@@ -20,7 +20,7 @@ ng add @sinequa/ngx-ui-builder
 Import the 2 following modules in your `app.module.ts` (the first one to display configurable components in your app; the second one to display their configurator):
 
 ```ts
-import { DynamicViewsModule, ConfiguratorModule } from '@sinequa/ngx-ui-builder';
+import { DynamicViewsModule, ConfiguratorModule } from '@gsaas/ngx-ui-builder';
 
 @NgModule({
     imports: [
@@ -35,7 +35,7 @@ Import the Bootstrap utilities and UI Builder stylesheets in your project's styl
 
 ```scss
 @import "~bootstrap/dist/css/bootstrap-utilities.min"; // Unless you already use Bootstrap or Bootstrap utilities
-@import "~@sinequa/ngx-ui-builder/styles/ui-builder";
+@import "~@gsaas/ngx-ui-builder/styles/ui-builder";
 ```
 
 (Note that the Bootstrap utilities should not affect the styling of your app: they only introduce convenience styling such as `display: flex` for the class name `d-flex`)
@@ -43,7 +43,7 @@ Import the Bootstrap utilities and UI Builder stylesheets in your project's styl
 Initialize the configuration service with a blank configuration:
 
 ```ts
-import { ConfigService } from '@sinequa/ngx-ui-builder';
+import { ConfigService } from '@gsaas/ngx-ui-builder';
 
 ...
 export class AppComponent {

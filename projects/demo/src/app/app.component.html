@@ -1,114 +1,249 @@
-<!-- HEADER -->
+<div class="flex flex-column">
+  <div>
+    <uib-zone id="header">
+      <ng-template uib-template="nav-bar" let-config>
 
-<uib-zone id="header">
-  <ng-container *uib-template="'title';let config">
-    <h1>{{ config.title }} - DEMO</h1>
-  </ng-container>
-
-  <input *uib-template="'searchbar'" type="text" [(ngModel)]="searchText" (ngModelChange)="search()" placeholder="Search for a Pokemon..." autocomplete="off" spellcheck="false"/>
-
-  <ng-container *uib-template="'applied-filters'">
-    <span *ngFor="let ability of abilities" class="metadata">{{ ability }}</span>
-    <span *ngIf="weight" class="metadata">Weight &lt; {{ weight }}</span>
-    <span *ngIf="experience" class="metadata">XP &lt; {{ experience }}</span>
-  </ng-container>
-
-  <ng-container *ngIf="search || abilities.length || weight || experience">
-    <button *uib-template="'clear-filters'" (click)="clear()">
-      Clear search criteria
-    </button>
-  </ng-container>
-</uib-zone>
-
-<hr />
-
-<div class="main">
-
-  <!-- FILTERS -->
-
-  <div class="p-1 filters">
-    <h3>Filters</h3>
-    <uib-zone id="filters">
-      <ng-container *uib-template="'range';let config" display="Range filter">
-        <h4>{{ config.field | titlecase }}: {{ this[config.field] }}</h4>
-        <input type="range" min="0"max="200" [(ngModel)]="this[config.field]" (ngModelChange)="search()"/>
-      </ng-container>
-
-      <ng-container *uib-template="'abilities'" display="Ability filter">
-        <h4>Abilities:</h4>
-        <div *ngFor="let a of allAbilities">
-          <a *ngIf="!abilities.includes(a)" href="#" (click)="selectAbility(a)" class="metadata">{{ a }}</a>
+        <div class="bg-gray-900 shadow-2 flex relative lg:static" style="min-height: 84px;">
+          <div class="flex align-items-center justify-content-center px-5 bg-gray-800"><img
+            [src]="config.logo" alt="Image" height="40"></div>
+          <div class="flex flex-1 px-3"><span class="flex align-items-center"><i class="pi pi-search text-gray-500"></i></span><input
+            type="text" placeholder="Search for anything"
+            class="appearance-none border-none flex-auto bg-transparent outline-none p-component text-gray-500 pl-3">
+          </div>
+          <a pRipple pStyleClass="@next" enterClass="hidden" leaveToClass="hidden"
+             class="p-element cursor-pointer flex align-items-center justify-content-center lg:hidden text-white pr-5"><i
+            class="pi pi-bars text-4xl"></i><span class="p-ink"></span></a>
+          <div
+            class="lg:flex hidden absolute lg:static left-0 top-100 z-1 shadow-2 lg:shadow-none lg:pr-5 w-full lg:w-auto bg-gray-900">
+            <ul
+              class="list-none p-0 m-0 flex select-none flex-column lg:flex-row border-top-1 border-gray-800 lg:border-top-none">
+              <li><a pRipple
+                     class="p-element h-full flex px-6 py-3 lg:px-3 lg:py-0 align-items-center text-gray-500 hover:text-gray-400 hover:bg-gray-800 font-medium cursor-pointer transition-colors transition-duration-150"><i
+                class="pi pi-inbox text-base lg:text-2xl mr-2 lg:mr-0"></i><span i18n class="block lg:hidden font-medium">Inbox</span><span
+                class="p-ink"></span></a></li>
+              <li><a pRipple
+                     class="p-element h-full flex px-6 py-3 lg:px-3 lg:py-0 align-items-center text-gray-500 hover:text-gray-400 hover:bg-gray-800 font-medium cursor-pointer transition-colors transition-duration-150"><i
+                pBadge severity="danger"
+                class="p-element pi pi-bell text-base lg:text-2xl mr-2 lg:mr-0 p-overlay-badge"><span id="pr_id_3_badge"
+                                                                                                      class="p-badge p-component p-badge-danger p-badge-dot"></span></i><span i18n
+                                                                                                                                                                              class="block lg:hidden font-medium">Notifications</span><span class="p-ink"></span></a></li>
+              <li class="border-top-1 border-gray-800 lg:border-top-none"><a pRipple
+                                                                             class="p-element h-full flex px-6 py-3 lg:px-3 lg:py-0 align-items-center hover:bg-gray-800 font-medium cursor-pointer transition-colors transition-duration-150"><img
+                src="https://blocks.primeng.org/assets/images/blocks/avatars/circle/avatar-m-3.png" class="mr-3 lg:mr-0"
+                style="width: 28px; height: 28px;">
+                <div class="block lg:hidden">
+                  <div i18n class="text-gray-500 font-medium">Josephine Lillard</div>
+                  <span i18n class="text-gray-600 font-medium text-sm">Marketing Specialist</span></div>
+                <span class="p-ink"></span></a></li>
+            </ul>
+          </div>
         </div>
-      </ng-container>
+      </ng-template>
     </uib-zone>
+    <uib-zone id="body">
+      <ng-template uib-template="title">
+        <div class="ng-star-inserted">
+          <div class="relative p-8 overflow-hidden"><img
+            src="https://blocks.primeng.org/assets/images/blocks/hero/hero-2.jpg" alt="Image"
+            class="absolute top-0 left-0 w-auto h-full block md:w-full">
+            <div class="text-center my-6 relative">
+              <div i18n class="text-6xl text-white font-bold mb-1">The Platform For</div>
+              <div i18n class="text-6xl text-primary font-bold mb-4">Today's Generation</div>
+              <p i18n class="mt-0 mb-4 line-height-3 text-center mx-auto text-white" style="max-width: 500px;">Lorem ipsum
+                dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
+                aliqua.</p>
+              <button pbutton="" pripple="" label="Learn More" type="button"
+                      class="p-element p-ripple p-button p-component"><span i18n
+                                                                            class="p-button-label">Learn More</span><span class="p-ink"></span></button>
+              <p i18n class="text-sm mt-4 mb-4 line-height-3 text-white">Available for MacOS, Web and Google accounts
+                only</p>
+              <div class="flex justify-content-center align-items-center"><a href="https://www.apple.com"
+                                                                             class="text-white mr-3"><i
+                class="pi pi-apple text-2xl"></i></a><a href="https://play.google.com" class="text-white mr-3"><i
+                class="pi pi-android text-2xl"></i></a><a href="https://www.facebook.com" class="text-white"><i
+                class="pi pi-facebook text-2xl"></i></a></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="surface-ground px-4 py-8 md:px-6 lg:px-8">
+          <div class="text-900 font-bold text-6xl mb-4 text-center">Pricing Plans</div>
+          <div class="text-700 text-xl mb-6 text-center line-height-3">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Velit numquam eligendi quos.</div>
+
+          <div class="grid">
+            <div class="col-12 lg:col-4">
+              <div class="p-3 h-full">
+                <div class="shadow-2 p-3 h-full flex flex-column surface-card" style="border-radius: 6px">
+                  <div class="text-900 font-medium text-xl mb-2">Basic</div>
+                  <div class="text-600">Plan description</div>
+                  <hr class="my-3 mx-0 border-top-1 border-none surface-border" />
+                  <div class="flex align-items-center">
+                    <span class="font-bold text-2xl text-900">$9</span>
+                    <span class="ml-2 font-medium text-600">per month</span>
+                  </div>
+                  <hr class="my-3 mx-0 border-top-1 border-none surface-border" />
+                  <ul class="list-none p-0 m-0 flex-grow-1">
+                    <li class="flex align-items-center mb-3">
+                      <i class="pi pi-check-circle text-green-500 mr-2"></i>
+                      <span class="text-900">Arcu vitae elementum</span>
+                    </li>
+                    <li class="flex align-items-center mb-3">
+                      <i class="pi pi-check-circle text-green-500 mr-2"></i>
+                      <span class="text-900">Dui faucibus in ornare</span>
+                    </li>
+                    <li class="flex align-items-center mb-3">
+                      <i class="pi pi-check-circle text-green-500 mr-2"></i>
+                      <span class="text-900">Morbi tincidunt augue</span>
+                    </li>
+                  </ul>
+                  <hr class="mb-3 mx-0 border-top-1 border-none surface-border mt-auto" />
+                  <button pButton pRipple label="Buy Now" class="p-3 w-full mt-auto"></button>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-12 lg:col-4">
+              <div class="p-3 h-full">
+                <div class="shadow-2 p-3 h-full flex flex-column surface-card" style="border-radius: 6px">
+                  <div class="text-900 font-medium text-xl mb-2">Premium</div>
+                  <div class="text-600">Plan description</div>
+                  <hr class="my-3 mx-0 border-top-1 border-none surface-border" />
+                  <div class="flex align-items-center">
+                    <span class="font-bold text-2xl text-900">$29</span>
+                    <span class="ml-2 font-medium text-600">per month</span>
+                  </div>
+                  <hr class="my-3 mx-0 border-top-1 border-none surface-border" />
+                  <ul class="list-none p-0 m-0 flex-grow-1">
+                    <li class="flex align-items-center mb-3">
+                      <i class="pi pi-check-circle text-green-500 mr-2"></i>
+                      <span class="text-900">Arcu vitae elementum</span>
+                    </li>
+                    <li class="flex align-items-center mb-3">
+                      <i class="pi pi-check-circle text-green-500 mr-2"></i>
+                      <span class="text-900">Dui faucibus in ornare</span>
+                    </li>
+                    <li class="flex align-items-center mb-3">
+                      <i class="pi pi-check-circle text-green-500 mr-2"></i>
+                      <span class="text-900">Morbi tincidunt augue</span>
+                    </li>
+                    <li class="flex align-items-center mb-3">
+                      <i class="pi pi-check-circle text-green-500 mr-2"></i>
+                      <span class="text-900">Duis ultricies lacus sed</span>
+                    </li>
+                  </ul>
+                  <hr class="mb-3 mx-0 border-top-1 border-none surface-border" />
+                  <button pButton pRipple label="Buy Now" class="p-3 w-full"></button>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-12 lg:col-4">
+              <div class="p-3 h-full">
+                <div class="shadow-2 p-3 flex flex-column surface-card" style="border-radius: 6px">
+                  <div class="text-900 font-medium text-xl mb-2">Enterprise</div>
+                  <div class="text-600">Plan description</div>
+                  <hr class="my-3 mx-0 border-top-1 border-none surface-border" />
+                  <div class="flex align-items-center">
+                    <span class="font-bold text-2xl text-900">$49</span>
+                    <span class="ml-2 font-medium text-600">per month</span>
+                  </div>
+                  <hr class="my-3 mx-0 border-top-1 border-none surface-border" />
+                  <ul class="list-none p-0 m-0 flex-grow-1">
+                    <li class="flex align-items-center mb-3">
+                      <i class="pi pi-check-circle text-green-500 mr-2"></i>
+                      <span class="text-900">Arcu vitae elementum</span>
+                    </li>
+                    <li class="flex align-items-center mb-3">
+                      <i class="pi pi-check-circle text-green-500 mr-2"></i>
+                      <span class="text-900">Dui faucibus in ornare</span>
+                    </li>
+                    <li class="flex align-items-center mb-3">
+                      <i class="pi pi-check-circle text-green-500 mr-2"></i>
+                      <span class="text-900">Morbi tincidunt augue</span>
+                    </li>
+                    <li class="flex align-items-center mb-3">
+                      <i class="pi pi-check-circle text-green-500 mr-2"></i>
+                      <span class="text-900">Duis ultricies lacus sed</span>
+                    </li>
+                    <li class="flex align-items-center mb-3">
+                      <i class="pi pi-check-circle text-green-500 mr-2"></i>
+                      <span class="text-900">Imperdiet proin</span>
+                    </li>
+                    <li class="flex align-items-center mb-3">
+                      <i class="pi pi-check-circle text-green-500 mr-2"></i>
+                      <span class="text-900">Nisi scelerisque</span>
+                    </li>
+                  </ul>
+                  <hr class="mb-3 mx-0 border-top-1 border-none surface-border" />
+                  <button pButton pRipple label="Buy Now" class="p-3 w-full p-button-outlined"></button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+    </uib-zone>
+    <uib-zone id="footer">
+      <ng-template uib-template="title">
+        <div class="bg-gray-900 px-4 py-8 md:px-6 lg:px-8">
+          <div class="bg-gray-900">
+            <div class="grid">
+              <div class="col-12 md:col-3 flex flex-wrap justify-content-start md:mb-0 mb-3"><img
+                src="https://blocks.primeng.org/assets/images/blocks/footer/footer-2.png" alt="footer sections" width="50" height="50"
+                class="mr-3">
+                <div i18n class="text-gray-300 font-bold text-5xl">Bastion</div>
+              </div>
+              <div class="col-12 md:col-3">
+                <div i18n class="text-white text-lg mb-4 flex flex-wrap" style="max-width: 290px;">Jacob Obrechtstraat 5,
+                  1071 KC Amsterdam The Netherlands
+                </div>
+                <div class="text-white mb-3"><i class="pi pi-phone surface-800 border-round p-1 mr-2"></i>(31) 20 779
+                  8986
+                </div>
+                <div i18n class="text-white mb-3"><i class="pi pi-inbox surface-800 border-round p-1 mr-2"></i>hello@bastion.co
+                </div>
+              </div>
+              <div class="col-12 md:col-3 text-gray-200">
+                <div i18n class="text-white font-bold line-height-3 mb-3">Company</div>
+                <a i18n class="line-height-3 block cursor-pointer mb-2">About Us</a><a i18n
+                                                                                       class="line-height-3 block cursor-pointer mb-2">News</a><a i18n
+                                                                                                                                                  class="line-height-3 block cursor-pointer mb-2">Investor Relations</a><a i18n
+                                                                                                                                                                                                                           class="line-height-3 block cursor-pointer mb-2">Careers</a><a i18n
+                                                                                                                                                                                                                                                                                         class="line-height-3 block cursor-pointer">Media Kit</a></div>
+              <div class="col-12 md:col-3 text-gray-200">
+                <div i18n class="text-white font-bold line-height-3 mb-3">Resourses</div>
+                <a i18n class="line-height-3 block cursor-pointer mb-2">Get Started</a><a i18n
+                                                                                          class="line-height-3 block cursor-pointer mb-2">Learn</a><a i18n class="line-height-3 block cursor-pointer">Case
+                Studies</a></div>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+    </uib-zone>
+
+    <div class="uib-bootstrap">
+
+      <uib-toolbar>
+        <uib-toolbar>
+          <button i18n type="button" class="btn btn-primary" uib-tooltip="Download Configuration as JSON" (click)="configService.exportConfiguration()">
+            Download
+          </button>
+        </uib-toolbar>
+
+      </uib-toolbar>
+
+      <uib-configurator>
+
+        <ng-template uib-template="nav-bar" let-context>
+          <label i18n class="form-label" for="logo">Logo:</label>
+          <input class="form-control" id="logo"
+                 type="text"
+                 [(ngModel)]="context.config.logo"
+                 (ngModelChangeDebounced)="context.configChanged()"
+          />
+        </ng-template>
+
+      </uib-configurator>
+    </div>
   </div>
-
-
-  <!-- RESULTS -->
-
-  <uib-zone id="results" [data]="pokemonService.pokemons$ | async" class="flex-grow-1 d-flex flex-row flex-wrap justify-content-start align-items-start align-content-start">
-
-    <ng-template uib-template="image" display="Image" title="A component to display the picture of a Pokemon" let-data="data">
-      <img *ngIf="data?.id" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/{{data?.id}}.png" [title]="data?.name"/>
-    </ng-template>
-
-    <h3 *uib-template="'pokename';let data=data">{{ data?.name | titlecase }} #{{ data?.id }}</h3>
-    <div *uib-template="'description';let config; let data=data" display="Description">
-      {{data?.description}}
-    </div>
-
-    <div *uib-template="'metadata';let config; let data=data" display="Metadata">
-      <ng-container *ngIf="data">
-        <strong *ngIf="!config.hideField">{{ config.field }}: </strong>
-        <span *ngFor="let meta of asArray(data?.[config.field])" class="metadata">{{meta}}</span>
-      </ng-container>
-    </div>
-
-  </uib-zone>
-
 </div>
-
-<!-- EDITOR -->
-
-<div class="uib-bootstrap">
-  <!-- bootstrap classes are now allowed here -->
-
-  <uib-toolbar>
-    <button type="button" class="btn btn-primary" uib-tooltip="Download Configuration as JSON" (click)="configService.exportConfiguration()">
-      Download
-    </button>
-  </uib-toolbar>
-
-  <!-- CONFIGURATOR -->
-
-  <uib-configurator>
-    <ng-template uib-template="title" let-context>
-      <label class="form-label" for="title">Title</label>
-      <input class="form-control" id="title"
-        type="text"
-        [(ngModel)]="context.config.title"
-        (ngModelChangeDebounced)="context.configChanged()"
-      />
-    </ng-template>
-
-    <ng-template uib-template="metadata" let-context>
-      <div class="mb-3">
-        <label for="metadata" class="form-label">Metadata</label>
-        <select [(ngModel)]="context.config.field" id="metadata" class="form-select" (ngModelChange)="context.configChanged()">
-          <option value="name">Name</option>
-          <option value="weight">Weight</option>
-          <option value="experience">Experience</option>
-          <option value="abilities">Abilities</option>
-        </select>
-      </div>
-      <div class="form-check">
-        <input class="form-check-input" type="checkbox" id="hideField" [(ngModel)]="!!context.config.hideField" (ngModelChange)="context.configChanged()">
-        <label class="form-check-label" for="hideField">Hide field</label>
-      </div>
-    </ng-template>
-
-  </uib-configurator>
-
-  <uib-toast></uib-toast>
-</div>
-

@@ -5,8 +5,8 @@
     "outDir": "../../out-tsc/app",
     "types": [],
     "paths": {
-      "@sinequa/ngx-ui-builder": ["./projects/lib/src/public-api"],
-      "@sinequa/ngx-ui-builder/*": ["./projects/lib/src/*"]
+      "@gsaas/ngx-ui-builder": ["./projects/lib/src/public-api"],
+      "@gsaas/ngx-ui-builder/*": ["./projects/lib/src/*"]
     }
   },
   "files": [

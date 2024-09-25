@@ -1,69 +1,32 @@
-import { ComponentConfig } from "@sinequa/ngx-ui-builder";
+import { ComponentConfig } from "@gsaas/ngx-ui-builder";
 
 export const defaultConfig:ComponentConfig[] = [
   {
     id: 'header',
     type: '_container',
-    items: ['title', 'searchform'],
-    classes: 'flex-column'
+    items: ['nav-bar'],
+    classes: 'flex-column',
+  },
+  {
+    id: 'body',
+    type: '_container',
+    items: ['title'],
+    classes: 'flex-column',
+  },
+  {
+    id: 'footer',
+    type: '_container',
+    items: ['title'],
+    classes: 'flex-column',
   },
   {
     id: 'title',
     type: 'title',
-    title: 'Pokestore'
   },
   {
-    id: 'searchform',
-    type: '_container',
-    items: ['searchbar','applied-filters','clear-filters'],
-    classes: 'flex-row'
+    id: 'nav-bar',
+    type: 'nav-bar',
+    logo: 'https://blocks.primeng.org/assets/images/blocks/logos/bastion.svg',
   },
-  {
-    id: "searchbar",
-    type: "searchbar"
-  },
-  {
-    id: 'results',
-    type: '_container',
-    items: ['image','metas'],
-    classes: 'result-item flex-row mb-3 w-100'
-  },
-  {
-    id: 'metas',
-    type: '_container',
-    items: ['pokename', 'description', 'ability', 'weight', 'experience'],
-    classes: 'flex-column'
-  },
-  {
-    id: 'ability',
-    type: 'metadata',
-    field: 'abilities',
-  },
-  {
-    id: 'weight',
-    type: 'metadata',
-    field: 'weight',
-  },
-  {
-    id: 'experience',
-    type: 'metadata',
-    field: 'experience',
-  },
-
-  {
-    id: 'filters',
-    type: '_container',
-    items: ['abilities', 'weightFilter', 'xpFilter'],
-    classes: 'flex-column'
-  },
-  {
-    id: 'weightFilter',
-    type: 'range',
-    field: 'weight',
-  },
-  {
-    id: 'xpFilter',
-    type: 'range',
-    field: 'experience',
-  }
 ];
+

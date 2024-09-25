@@ -3,7 +3,7 @@ import { initialUndoRedoState, undoRedo, UndoRedoState } from "ngrx-wieder";
 import { addConfig, initConfig, removeConfig, setConfig, updateConfig } from "./config.actions";
 import { ComponentConfig } from "./config.model";
 
-interface ConfigState extends UndoRedoState {
+export interface ConfigState extends UndoRedoState {
   config: {[id: string]: ComponentConfig};
 }
 

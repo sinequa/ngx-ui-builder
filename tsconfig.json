@@ -9,7 +9,7 @@
     "noFallthroughCasesInSwitch": true,
     "sourceMap": true,
     "paths": {
-      "@sinequa/ngx-ui-builder": [
+      "@gsaas/ngx-ui-builder": [
         "dist/lib"
       ]
     },
