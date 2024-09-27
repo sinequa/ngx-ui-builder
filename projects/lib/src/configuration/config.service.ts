@@ -194,4 +194,8 @@ export class ConfigService {
     element.click();
     document.body.removeChild(element);
   }
+
+  public getAllConfiguration(): string {
+    return JSON.stringify(this.getAllConfig());
+  }
 }

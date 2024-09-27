@@ -1,5 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { ConfigurableService, ConfigService, ZoneComponent, ToolbarComponent, ConfiguratorComponent, ToastComponent, TemplateNameDirective, NgModelChangeDebouncedDirective, TooltipDirective } from '@gsaas/ngx-ui-builder';
+import {
+  ConfigurableService,
+  ConfigService,
+  ZoneComponent,
+  ToolbarComponent,
+  ConfiguratorComponent,
+  ToastComponent,
+  TemplateNameDirective,
+  NgModelChangeDebouncedDirective,
+  TooltipDirective,
+  ComponentConfig
+} from '@gsaas/ngx-ui-builder';
 import { defaultConfig } from "./config";
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -43,7 +54,16 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     // Initial state of the UI builder
-    this.configService.init(defaultConfig);
+    this.configService.init(this.getPageConfig());
+  }
+
+  save() {
+    localStorage.setItem('config', this.configService.getAllConfiguration());
+  }
+
+  getPageConfig(): ComponentConfig[] {
+    const localConfig = localStorage.getItem('config') ?? JSON.stringify(defaultConfig);
+    return JSON.parse(localConfig) as ComponentConfig[];
   }
 
 

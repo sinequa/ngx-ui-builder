@@ -225,11 +225,13 @@
 
       <uib-toolbar>
         <uib-toolbar>
-          <button i18n type="button" class="btn btn-primary" uib-tooltip="Download Configuration as JSON" (click)="configService.exportConfiguration()">
+          <button i18n type="button" class="btn btn-warning" uib-tooltip="Download Configuration as JSON" (click)="configService.exportConfiguration()">
             Download
           </button>
+          <button i18n type="button" class="btn btn-success" uib-tooltip="Save Configuration" (click)="save()">
+            Save
+          </button>
         </uib-toolbar>
-
       </uib-toolbar>
 
       <uib-configurator>
