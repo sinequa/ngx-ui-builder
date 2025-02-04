@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ConfigurableService, ConfigService, ZoneComponent, ToolbarComponent, ConfiguratorComponent, ToastComponent, TemplateNameDirective, NgModelChangeDebouncedDirective, TooltipDirective } from '@sinequa/ngx-ui-builder';
 import { PokemonService } from "./pokemon.service";
 import { defaultConfig } from "./config";
-import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
@@ -11,7 +11,6 @@ import { CommonModule } from '@angular/common';
   imports: [
     CommonModule,
     FormsModule,
-
     ZoneComponent,
     ToolbarComponent,
     ConfiguratorComponent,

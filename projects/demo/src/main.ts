@@ -4,8 +4,8 @@ import { bootstrapApplication } from '@angular/platform-browser';
 import { environment } from './environments/environment';
 import { AppComponent } from "./app/app.component";
 import { StoreModule } from '@ngrx/store';
-import { HttpClientModule } from '@angular/common/http';
 import { ConfigModule, SvgIconsModule, icons } from '@sinequa/ngx-ui-builder';
+import { provideHttpClient } from '@angular/common/http';
 
 if (environment.production) {
   enableProdMode();
@@ -13,8 +13,8 @@ if (environment.production) {
 
 bootstrapApplication(AppComponent, {
   providers: [
+    provideHttpClient(),
     importProvidersFrom([
-      HttpClientModule,
       SvgIconsModule.forRoot({icons: icons}),
       StoreModule.forRoot({}),
       ConfigModule

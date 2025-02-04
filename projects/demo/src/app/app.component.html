@@ -86,7 +86,7 @@
       <label class="form-label" for="title">Title</label>
       <input class="form-control" id="title"
         type="text"
-        [(ngModel)]="context.config.title"
+        [ngModel]="context.config.title"
         (ngModelChangeDebounced)="context.configChanged()"
       />
     </ng-template>
@@ -94,7 +94,7 @@
     <ng-template uib-template="metadata" let-context>
       <div class="mb-3">
         <label for="metadata" class="form-label">Metadata</label>
-        <select [(ngModel)]="context.config.field" id="metadata" class="form-select" (ngModelChange)="context.configChanged()">
+        <select [ngModel]="context.config.field" id="metadata" class="form-select" (ngModelChange)="context.configChanged()">
           <option value="name">Name</option>
           <option value="weight">Weight</option>
           <option value="experience">Experience</option>
@@ -102,7 +102,7 @@
         </select>
       </div>
       <div class="form-check">
-        <input class="form-check-input" type="checkbox" id="hideField" [(ngModel)]="!!context.config.hideField" (ngModelChange)="context.configChanged()">
+        <input class="form-check-input" type="checkbox" id="hideField" [ngModel]="!!context.config.hideField" (ngModelChange)="context.configChanged()">
         <label class="form-check-label" for="hideField">Hide field</label>
       </div>
     </ng-template>
