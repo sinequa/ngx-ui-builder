@@ -23,7 +23,6 @@
     "strictNullChecks": true,
     "target": "ES2022",
     "types": [
-      "jasmine",
       "node"
     ]
   },
