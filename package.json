@@ -8,9 +8,7 @@
     "build": "ng build",
     "build:lib": "ng build lib",
     "postbuild:lib": "copyfiles README.md dist/lib/ && cd projects/lib && npm run build",
-    "watch": "ng build --watch --configuration development",
-    "test": "ng test",
-    "compodoc:build": "compodoc -p ./projects/lib/tsconfig.doc.json -d ./docs/compodoc"
+    "watch": "ng build --watch --configuration development"
   },
   "private": false,
   "dependencies": {
@@ -33,24 +31,15 @@
     "zone.js": "~0.11.4"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^17.3.3",
+    "@angular-devkit/build-angular": "^14.2.13",
     "@angular/cli": "~14.1.0",
     "@angular/compiler-cli": "^14.1.0",
     "@angular/localize": "^14.1.0",
     "@compodoc/compodoc": "^1.1.19",
     "@schematics/angular": "^14.2.11",
     "@types/bootstrap": "^5.2.0",
-    "@types/jasmine": "~4.0.0",
     "@types/node": "^12.11.1",
-    "copyfiles": "^2.4.1",
     "html-prettify": "1.0.7",
-    "htmlparser": "1.7.7",
-    "jasmine-core": "~4.2.0",
-    "karma": "~6.4.0",
-    "karma-chrome-launcher": "~3.1.0",
-    "karma-coverage": "~2.0.3",
-    "karma-jasmine": "~5.1.0",
-    "karma-jasmine-html-reporter": "~2.0.0",
     "ng-packagr": "^14.1.0",
     "sanitize-html": "2.12.1",
     "typescript": "~4.7.2"
